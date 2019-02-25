@@ -1,0 +1,3 @@
+div class="jumbotron"
+  h2 = gettext("Welcome to %{name}!", name: "phoenix")
+  p(class="lead") "A productive web framework thatbr /does not compromise speed and maintainability."

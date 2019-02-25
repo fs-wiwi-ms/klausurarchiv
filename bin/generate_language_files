@@ -1,0 +1,4 @@
+#! /usr/bin/env sh
+
+"$(dirname "$0")/compose" exec app mix gettext.extract
+"$(dirname "$0")/compose" exec app mix gettext.merge priv/gettext

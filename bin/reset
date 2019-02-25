@@ -1,0 +1,5 @@
+#! /usr/bin/env sh
+
+"$(dirname "$0")/compose" stop app
+"$(dirname "$0")/compose" run app mix ecto.reset
+"$(dirname "$0")/compose" start app

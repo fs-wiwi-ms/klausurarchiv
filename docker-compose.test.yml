@@ -1,0 +1,29 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        ENV: test
+      target: app
+    command: sh -c "mix deps.get && mix ecto.migrate && mix test.watch --stale"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "psql://immobook_test:immobook@db/immobook_test"
+
+  # assets:
+  #   build:
+  #     context: .
+  #     target: assets
+  #     args:
+  #       ENV: dev
+  #   command: sh -c "yarn install && yarn run dev"
+
+  db:
+    image: postgres:10.3-alpine
+    environment:
+      POSTGRES_USER: immobook_test
+      POSTGRES_PASSWORD: immobook
+      POSTGRES_DB: immobook_test

@@ -1,0 +1,3 @@
+= for lecture <- @lectures do
+  a(href="#{lecture_path(@conn, :index)}")
+    p = lecture.name

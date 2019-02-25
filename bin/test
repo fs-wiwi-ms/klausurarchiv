@@ -1,0 +1,32 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+mode=${1:---watch}
+COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-immobook-test}
+
+function cleanup {
+  if [ "$mode" = "--watch" ]
+  then
+    docker-compose down
+  else
+    docker-compose down -v
+  fi
+}
+
+trap cleanup EXIT
+
+case $mode in
+  "--watch" )
+    export ENV=test
+
+    bin/compose up
+    ;;
+
+  "--ci-backend" )
+    export COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}-ci-backend
+    export COMPOSE_FILE="docker-compose.yml:docker-compose.test.yml"
+
+    docker-compose run app sh -c "mix do format --check-formatted, test"
+    ;;
+esac

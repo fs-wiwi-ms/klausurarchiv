@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+env=${ENV:-development}
+
+
+case $env in
+  "development" )
+    export COMPOSE_FILE="docker-compose.yml:docker-compose.sync.yml:docker-compose.development.yml"
+    if [ -f "docker-compose.user.yml" ]; then
+      export COMPOSE_FILE=${COMPOSE_FILE}:docker-compose.user.yml
+    fi
+    ;;
+
+  "test" )
+    export COMPOSE_PROJECT_NAME=immobook-test
+    export COMPOSE_FILE="docker-compose.yml:docker-compose.sync.yml:docker-compose.test.yml"
+    ;;
+esac
+
+
+docker-compose "$@"
