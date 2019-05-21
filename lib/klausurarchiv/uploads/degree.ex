@@ -22,6 +22,6 @@ defmodule Klausurarchiv.Uploads.Degree do
   def changeset(degree, attrs) do
     degree
     |> cast(attrs, [:name])
-    |> put_assoc(:lectures, attrs["lectures"] || degree.lectures)
+    |> cast_assoc(:lectures, attrs["lectures"] || degree.lectures)
   end
 end

@@ -10,7 +10,6 @@ defmodule KlausurarchivWeb.DegreeController do
   end
 
   def show(conn, %{"id" => degree_id}) do
-    IO.inspect(degree_id)
     degree = Uploads.get_degree(degree_id)
 
     lectures = Uploads.get_lectures_by_degree(degree)

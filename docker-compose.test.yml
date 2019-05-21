@@ -13,13 +13,13 @@ services:
     environment:
       DATABASE_URL: "psql://immobook_test:immobook@db/immobook_test"
 
-  # assets:
-  #   build:
-  #     context: .
-  #     target: assets
-  #     args:
-  #       ENV: dev
-  #   command: sh -c "yarn install && yarn run dev"
+  assets:
+    build:
+      context: .
+      target: assets
+      args:
+        ENV: dev
+    command: sh -c "yarn install && yarn run dev"
 
   db:
     image: postgres:10.3-alpine

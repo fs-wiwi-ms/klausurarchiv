@@ -1,10 +1,12 @@
 table
   tr
+    th Bezeichnung
     th Semester
     th Jahr
     th
   = for exam <- @lecture.exams do
     tr
+      td = @lecture.name
       td = exam.term.type
       td = exam.term.year
       td

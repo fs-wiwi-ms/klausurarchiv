@@ -1,3 +1,33 @@
-div class="jumbotron"
-  h2 = gettext("Welcome to %{name}!", name: "phoenix")
-  p(class="lead") "A productive web framework thatbr /does not compromise speed and maintainability."
+h1.title.is-3 Klausurarchiv
+/ p.subtitle.is-4 My first website with strong Bulma!
+
+
+h3.subtitle.is-5 Filtern nach Anfangsbuchstabe:
+div.buttons.has-addons
+  = for n <- ?a..?z do
+    = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+      = hidden_input filter_form, :capital, value: "#{<< n :: utf8 >>}"
+      p.control
+        button.button(type="submit")
+          span = << n :: utf8 >>
+
+p.subtitle.is-5 Filtern nach Studiengang:
+div.buttons.has-addons
+  = for {name, id} <- @degrees do
+    = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+      = hidden_input filter_form, :degree, value: "#{id}"
+      p.control
+        button.button(type="submit")
+          span = name
+
+p.subtitle.is-5 Erweiterter Filter:
+= form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+
+  div.column.is-one-quarter
+    h5.subtitle.is-6 =  gettext("Studiengang")
+    div.select
+      = select filter_form, :degree, @degrees ++ [{"all", "all"}]
+
+  div.column.is-one-quarter
+    h5.subtitle.is-6 = gettext("Volltextsuche")
+    = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"

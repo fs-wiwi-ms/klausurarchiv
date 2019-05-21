@@ -9,7 +9,6 @@ use Mix.Config
 config :klausurarchiv,
   ecto_repos: [Klausurarchiv.Repo]
 
-
 config :slime, :keep_lines, true
 
 # Configures the endpoint
@@ -26,8 +25,8 @@ config :logger, :console,
   metadata: [:user_id]
 
 config :phoenix, :template_engines,
-    slim: PhoenixSlime.Engine,
-    slime: PhoenixSlime.Engine
+  slim: PhoenixSlime.Engine,
+  slime: PhoenixSlime.Engine
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

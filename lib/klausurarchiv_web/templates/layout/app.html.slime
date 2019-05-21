@@ -10,15 +10,34 @@ html(lang="en")
     link(rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}")
 
   body
-    div class="container"
-      header class="header"
-        nav role="navigation"
+    nav.navbar.has-shadow.is-spaced.has-background-link role="navigation" aria-label="main navigation"
+      div.navbar-brand
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          img.image(src="#{static_path(@conn, "/images/Logo Fachschaft_Vektor.svg")}" alt="Klausurarchiv der Fachschaft WiWI Münster")
 
+        a.navbar-burger role="button" aria-label="menu" aria-expanded="false"
+          span aria-hidden="true"
+          span aria-hidden="true"
+          span aria-hidden="true"
 
-      p(class="alert alert-info" role="alert")= "#{get_flash(@conn, :info) }"
-      p(class="alert alert-danger" role="alert") = "#{get_flash(@conn, :error)}"
+    div.container
+      = if !is_nil get_flash(@conn, :info) do
+        section.section
+          article.message.is-success
+            div.message-header
+              p Success
+            div.message-body
+              p = "#{get_flash(@conn, :info) }"
 
-      main(role="main")
+      = if !is_nil get_flash(@conn, :error) do
+        section.section
+          article.message.is-danger
+            div.message-header
+              p Error
+            div.message-body
+              p = "#{get_flash(@conn, :error) }"
+
+      section.section
         = render @view_module, @view_template, assigns
 
     script(src="#{static_path(@conn, "/js/app.js")}")

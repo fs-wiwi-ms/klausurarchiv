@@ -5,9 +5,9 @@ services:
     volumes:
       - "app:/app:nocopy"
 
-  # assets:
-  #   volumes:
-  #     - "app:/app:nocopy"
+  assets:
+    volumes:
+      - "app:/app:nocopy"
 
   sync:
     image: eugenmayer/unison:2.51.2.1

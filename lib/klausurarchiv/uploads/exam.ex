@@ -17,7 +17,7 @@ defmodule Klausurarchiv.Uploads.Exam do
   @doc false
   def changeset(exam, attrs) do
     exam
-    |> cast(attrs, [:filename, :term, :lecture])
-    |> validate_required([:filename, :term, :lecture])
+    |> cast(attrs, [:filename, :term_id, :lecture_id])
+    |> validate_required([:filename, :term_id, :lecture_id])
   end
 end

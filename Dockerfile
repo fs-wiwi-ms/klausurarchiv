@@ -1,27 +1,27 @@
 ##
 # Assets
 
-# FROM node:9-slim AS assets
+FROM node:10-slim AS assets
 
-# RUN apt-get update && \
-#   apt-get install -y --no-install-recommends \
-#   inotify-tools \
-#   git \
-#   && \
-#   rm -rf /var/lib/apt/lists/*
+RUN set -xe; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      inotify-tools \
+      git \
+    ; \
+    rm -rf /var/lib/apt/lists/*
 
-# WORKDIR /app/assets
+WORKDIR /app/assets
 
-# RUN mkdir -p /app/priv/static /app/priv/gettext
+RUN mkdir -p /app/priv/static
 
-# COPY ./assets ./
-# COPY ./priv/gettext ../priv/gettext
+COPY ./assets /app/assets
 
-# ARG ENV=production
-# ENV NODE_ENV dev
+ARG ENV=production
+ENV NODE_ENV dev
 
-# RUN yarn install
-# RUN if [ "$ENV" = "production" ]; then yarn run build; fi
+RUN yarn install
+RUN if [ "$ENV" = "production" ]; then yarn run deploy; fi
 
 ##
 # App
@@ -44,8 +44,7 @@ RUN mix local.rebar --force && mix local.hex --force
 WORKDIR /app
 RUN mkdir -p priv/static
 
-# COPY --from=assets /app/priv/static/ ./priv/static/
-# COPY /app/priv/static/ ./priv/static/
+COPY --from=assets /app/priv/static/ ./priv/static/
 
 ARG ENV=production
 ENV MIX_ENV $ENV

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "lib": ["dom", "es2017", "es2015"],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "typeRoots": ["src/typings", "node_modules/@types"]
+  }
+}

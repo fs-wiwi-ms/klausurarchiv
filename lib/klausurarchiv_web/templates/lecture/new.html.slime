@@ -1,0 +1,18 @@
+h3.title.is-3 Neue Vorlesung erstellen
+div.box
+  = form_for @changeset, @action, fn lecture_form ->
+    div.columns.is-mobile
+      div.column
+        h5.title.is-5 Abschluss
+        div.select.is-multiple
+          = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees, &{&1.name, &1.id}), multiple: true, size: length(@degrees))
+
+    div.columns.is-mobile
+      div.column.is-three-quarters
+        h5.title.is-5 Name
+        = text_input(lecture_form, :name, class: "input", type: "text")
+
+    div.columns
+      div.column
+        = submit "Absenden", class: "button is-primary"
+
