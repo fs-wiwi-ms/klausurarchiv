@@ -25,6 +25,11 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.get(id)
   end
 
+  def get_term_by_year_and_type(year, type) do
+    Term
+    |> Repo.get_by(type: type, year: year)
+  end
+
   def create_term(term_params) do
     %Term{}
     |> Term.changeset(term_params)
@@ -96,9 +101,31 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def create_exam(exam_params) do
-    %Exam{}
-    |> Exam.changeset(exam_params)
-    |> Repo.insert()
+    {file_args, exam_params} = Map.pop(exam_params, "file")
+    {term_args, exam_params} = Map.pop(exam_params, "term")
+    {lecture_id, exam_params} = Map.pop(exam_params, "lecture_id")
+
+    term = get_term_by_year_and_type(term_args["year"], term_args["type"])
+    lecture = get_lecture(lecture_id)
+
+    case upload_file(term, lecture, file_args) do
+      {:ok, filename} ->
+        IO.inspect(filename)
+
+        exam_params =
+          exam_params
+          |> Map.put("lecture_id", lecture.id)
+          |> Map.put("term_id", term.id)
+          |> Map.put("filename", filename)
+
+        %Exam{}
+        |> Exam.changeset(exam_params)
+        |> Repo.insert()
+
+      {:error, error} ->
+        IO.inspect(error)
+        {:error, "file could not be uploaded"}
+    end
   end
 
   def update_exam(exam, exam_params) do
@@ -107,8 +134,41 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.update()
   end
 
+  def change_exam(exam \\ %Exam{}, attrs \\ %{}) do
+    exam
+    |> Exam.changeset(attrs)
+  end
+
   def delete_exam(exam) do
     Repo.delete(exam)
+  end
+
+  # -----------------------------------------------------------------
+  # -- Exam - File Uploader
+  # -----------------------------------------------------------------
+
+  @url "https://fsk.uni-muenster.de/"
+
+  defp upload_file(term, lecture, file) do
+    HTTPoison.start()
+
+    url = @url <> "klausuren/klausur_receiver.php"
+
+    form = [
+      {"jahr", "#{term.year}"},
+      {"semester", "#{term.type}"},
+      {"vorlesung", "#{lecture.name}"},
+      {"upload", "klausurupload"},
+      {:file, file.path}
+    ]
+
+    case HTTPoison.post(url, {:multipart, form}) do
+      {:ok, response} ->
+        {:ok, response.body}
+
+      {:error, exception} ->
+        {:error, HTTPoison.Error.message(exception)}
+    end
   end
 
   # -----------------------------------------------------------------
@@ -121,45 +181,37 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lectures(filter) do
-    full_text_search =
-    degree_id = filter["degree"]
-    capital_search = "#{filter["capital"]}%"
+    query =
+      Lecture
+      |> join(:inner, [l], ld in assoc(l, :degrees))
 
-    query = Lecture
-    |> join(:inner, [l], ld in assoc(l, :degrees))
+    query = Enum.reduce(filter, query, fn x, acc -> filter_lectures(acc, x) end)
 
-    query = Enum.reduce(filter, query, fn x, acc -> filter_lectures(acc, x) end) |> IO.inspect()
-    # |> where([l, ld], l.name == ^full_text_search)
-    # |> or_where([l, ld], l.name == ^capital_search)
-    # |> where([l, ld], ld.id == ^degree_id)
     Repo.all(query)
   end
 
-  def filter_lectures(query, {"degree", "all"}) do
+  defp filter_lectures(query, {"degree", "all"}) do
     query
   end
 
-  def filter_lectures(query, {"degree", degree_id}) do
+  defp filter_lectures(query, {"degree", degree_id}) do
     where(query, [l, ld], ld.id == ^degree_id)
   end
 
-  def filter_lectures(query, {"query", ""}), do: query
+  defp filter_lectures(query, {"query", ""}), do: query
 
-  def filter_lectures(query, {"query", full_text_search}) do
-    where(query, [l, ld], fragment("? ILIKE ?", l.name, ^"%#{full_text_search}%"))
+  defp filter_lectures(query, {"query", full_text_search}) do
+    where(
+      query,
+      [l, ld],
+      fragment("? ILIKE ?", l.name, ^"%#{full_text_search}%")
+    )
   end
 
-  def filter_lectures(query, {"capital", ""}), do: query
+  defp filter_lectures(query, {"capital", ""}), do: query
 
-  def filter_lectures(query, {"capital", capital_search}) do
+  defp filter_lectures(query, {"capital", capital_search}) do
     where(query, [l, ld], fragment("? ILIKE ?", l.name, ^"#{capital_search}%"))
-  end
-
-
-  def get_lectures(filters) do
-    Lecture
-    |> apply_filters(filters)
-    |> Repo.all()
   end
 
   def get_lectures_by_degree(%{id: degree_id}) do
@@ -203,11 +255,5 @@ defmodule Klausurarchiv.Uploads do
   def change_lecture(lecture \\ %Lecture{}, attrs \\ %{}) do
     lecture
     |> Lecture.changeset(attrs)
-  end
-
-  defp apply_filters(query, filters) do
-    Enum.reduce(filters, query, fn filter, acc ->
-      where(query, ^filter)
-    end)
   end
 end

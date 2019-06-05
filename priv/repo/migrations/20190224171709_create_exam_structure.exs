@@ -14,7 +14,6 @@ defmodule Klausurarchiv.Repo.Migrations.CreateExamStructure do
       add(
         :term_id,
         references(:terms, type: :uuid)
-
       )
 
       timestamps()
@@ -22,7 +21,11 @@ defmodule Klausurarchiv.Repo.Migrations.CreateExamStructure do
 
     create table(:degree_lectures, primary_key: false) do
       add(:degree_id, references(:degrees, type: :uuid, on_delete: :delete_all))
-      add(:lecture_id, references(:lectures, type: :uuid, on_delete: :delete_all))
+
+      add(
+        :lecture_id,
+        references(:lectures, type: :uuid, on_delete: :delete_all)
+      )
     end
   end
 end

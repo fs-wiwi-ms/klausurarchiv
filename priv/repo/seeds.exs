@@ -353,7 +353,6 @@ Enum.map(degree_lectures, fn {degree_name, lectures} ->
   end)
 end)
 
-
 Code.eval_file(
   __ENV__.file
   |> Path.dirname()

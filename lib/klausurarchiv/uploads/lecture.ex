@@ -24,7 +24,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
   def changeset(lecture, attrs) do
     lecture
     |> cast(attrs, [:name])
-    |> validate_required( [:name])
+    |> validate_required([:name])
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)
   end
 end

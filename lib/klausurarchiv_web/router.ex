@@ -26,10 +26,6 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through(:protected_browser)
 
-    get("/", PageController, :index)
-
-    # resources "/degrees", DegreeController, only: []
-
     resources("/lectures", LectureController, only: [:new, :create])
 
     resources("/exams", ExamController, only: [:new, :create])
@@ -44,8 +40,6 @@ defmodule KlausurarchivWeb.Router do
     resources("/degrees", DegreeController, only: [:index, :show])
 
     resources("/lectures", LectureController, only: [:index, :show])
-
-    resources("/exams", ExamController, only: [:index, :show])
   end
 
   # Other scopes may use custom stacks.

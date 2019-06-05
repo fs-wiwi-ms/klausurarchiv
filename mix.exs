@@ -20,7 +20,7 @@ defmodule Klausurarchiv.Mixfile do
   def application do
     [
       mod: {Klausurarchiv.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -43,7 +43,8 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:ecto_enum, "~> 1.2"}
+      {:ecto_enum, "~> 1.2"},
+      {:httpoison, "~> 1.4"}
     ]
   end
 
