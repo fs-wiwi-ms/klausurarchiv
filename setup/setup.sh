@@ -57,6 +57,6 @@ sudo usermod -aG docker ${GIT_PUSH_USER}
 sudo su -l -s /bin/bash -c "mkdir -p ~/${APP_NAME}; git init --bare ~/${APP_NAME}/" ${GIT_PUSH_USER}
 
 # install post-receive hook
-cat ./post-recieve | sudo su -l -s /bin/bash -c "cat > /home/${GIT_PUSH_USER}/${APP_NAME}/hooks/post-recieve" ${GIT_PUSH_USER}
-sudo chmod +x /home/${GIT_PUSH_USER}/${APP_NAME}/hooks/post-recieve
+cat ./post-receive | sudo su -l -s /bin/bash -c "cat > /home/${GIT_PUSH_USER}/${APP_NAME}/hooks/post-receive" ${GIT_PUSH_USER}
+sudo chmod +x /home/${GIT_PUSH_USER}/${APP_NAME}/hooks/post-receive
 
