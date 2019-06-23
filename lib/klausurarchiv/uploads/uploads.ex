@@ -91,11 +91,16 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def get_exams_by_lecture(%{id: lecture_id}) do
+  def get_exam(id) do
+    Exam
+    |> Repo.get(id)
+  end
+
+  def get_unplubished_exams() do
     from(
       e in Exam,
-      join: el in assoc(e, :exams),
-      where: el.id == ^lecture_id
+      where: e.published == false,
+      preload: [:lecture, :term]
     )
     |> Repo.all()
   end
@@ -110,13 +115,13 @@ defmodule Klausurarchiv.Uploads do
 
     case upload_file(term, lecture, file_args) do
       {:ok, filename} ->
-        IO.inspect(filename)
 
         exam_params =
           exam_params
           |> Map.put("lecture_id", lecture.id)
           |> Map.put("term_id", term.id)
           |> Map.put("filename", filename)
+          |> Map.put("published", false)
 
         %Exam{}
         |> Exam.changeset(exam_params)

@@ -12,6 +12,6 @@ table
       td
         div
           a(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-            p Preview 2
+            p Preview
           a(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
             p Download

@@ -7251,7 +7251,6 @@ exams =
       exam_name: "Wirtschaftsinformatik"
     }
   ]
-  |> IO.inspect()
 
 import Ecto.Query
 

@@ -44,7 +44,8 @@ defmodule Klausurarchiv.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ecto_enum, "~> 1.2"},
-      {:httpoison, "~> 1.4"}
+      {:httpoison, "~> 1.4"},
+      {:basic_auth, "~> 2.2.2"}
     ]
   end
 

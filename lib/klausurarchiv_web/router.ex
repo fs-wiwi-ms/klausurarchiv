@@ -15,7 +15,7 @@ defmodule KlausurarchivWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery, with: :clear_session)
     plug(:put_secure_browser_headers)
-    # plug(ImmobookWeb.Authentication, type: :browser)
+    plug(BasicAuth, use_config: {:klausurarchiv, :http_auth})
   end
 
   pipeline :api do
@@ -28,7 +28,8 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/lectures", LectureController, only: [:new, :create])
 
-    resources("/exams", ExamController, only: [:new, :create])
+    get("/exams/drafts", ExamController, :draft)
+    post("/exams/publish/:id", ExamController, :publish)
   end
 
   scope "/", KlausurarchivWeb do
@@ -37,13 +38,10 @@ defmodule KlausurarchivWeb.Router do
 
     get("/", PageController, :index)
 
+    resources("/exams", ExamController, only: [:new, :create])
+
     resources("/degrees", DegreeController, only: [:index, :show])
 
     resources("/lectures", LectureController, only: [:index, :show])
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", KlausurarchivWeb do
-  #   pipe_through :api
-  # end
 end

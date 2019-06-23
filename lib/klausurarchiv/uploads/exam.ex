@@ -7,9 +7,10 @@ defmodule Klausurarchiv.Uploads.Exam do
 
   schema "exams" do
     field(:filename, :string)
+    field(:published, :boolean, default: false)
 
     belongs_to(:term, Klausurarchiv.Uploads.Term)
-    belongs_to(:lecture, Klausurarchiv.Uploads.Term)
+    belongs_to(:lecture, Klausurarchiv.Uploads.Lecture)
 
     timestamps()
   end
@@ -17,7 +18,7 @@ defmodule Klausurarchiv.Uploads.Exam do
   @doc false
   def changeset(exam, attrs) do
     exam
-    |> cast(attrs, [:filename, :term_id, :lecture_id])
+    |> cast(attrs, [:filename, :term_id, :lecture_id, :published])
     |> validate_required([:filename, :term_id, :lecture_id])
   end
 end

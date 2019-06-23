@@ -353,12 +353,6 @@ Enum.map(degree_lectures, fn {degree_name, lectures} ->
   end)
 end)
 
-Code.eval_file(
-  __ENV__.file
-  |> Path.dirname()
-  |> Path.join("exams.exs")
-)
-
 if System.get_env("ENV_NAME") != "production" do
   Code.eval_file(
     __ENV__.file
@@ -366,3 +360,9 @@ if System.get_env("ENV_NAME") != "production" do
     |> Path.join("seeds_dev.exs")
   )
 end
+
+Code.eval_file(
+  __ENV__.file
+  |> Path.dirname()
+  |> Path.join("exams.exs")
+)

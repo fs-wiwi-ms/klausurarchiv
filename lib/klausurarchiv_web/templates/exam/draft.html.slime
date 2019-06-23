@@ -1,0 +1,20 @@
+h1.title.is-3 Unveröffentlichte Klausuren
+
+table
+  tr
+    th Bezeichnung
+    th Semester
+    th Jahr
+    th
+  = for exam <- @unplubished_exams do
+    tr
+      td = exam.lecture.name
+      td = exam.term.type
+      td = exam.term.year
+      td
+        div
+          a(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
+            p Preview
+          = form_for @conn, exam_path(@conn, :publish, exam.id), fn exam_form ->
+            = submit "Absenden", class: "button is-primary"
+

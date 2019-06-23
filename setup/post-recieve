@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+GIT_DIR="$(pwd)"
+TARGET="${GIT_DIR}_src"
+while read oldrev newrev ref; do
+  echo "Ref $ref received, deploying."
+  mkdir -p $TARGET
+  /usr/bin/git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f
+  cd $TARGET
+  docker-compose build
+  docker-compose up --detach --force-recreate
+done
