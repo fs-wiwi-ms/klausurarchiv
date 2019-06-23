@@ -46,7 +46,7 @@ RUN mkdir -p priv/static
 
 COPY --from=assets /app/priv/static/ ./priv/static/
 
-ARG ENV=production
+ARG ENV=prod
 ENV MIX_ENV $ENV
 
 # Install and compile dependencies
