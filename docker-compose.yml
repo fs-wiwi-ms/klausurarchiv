@@ -4,6 +4,9 @@ services:
   app:
     build:
       context: .
+    environment:
+      DATABASE_URL: "psql://immobook:immobook@db/immobook"
+      PORT: "4000"
 
 volumes:
   app:

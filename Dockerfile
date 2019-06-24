@@ -21,7 +21,7 @@ ARG ENV=prod
 ENV NODE_ENV dev
 
 RUN yarn install
-RUN if [ "$ENV" = "production" ]; then yarn run deploy; fi
+RUN if [ "$ENV" = "prod" ]; then yarn run deploy; fi
 
 ##
 # App
@@ -57,7 +57,7 @@ RUN mix deps.compile
 # Install and compile the rest of the app
 COPY . ./
 RUN mix compile --warning-as-errors
-RUN if [ "$ENV" = "production" ]; then mix do phx.digest, release --executable; fi
+RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, release --executable; fi
 
 ##
 # Run
@@ -70,17 +70,17 @@ RUN apt-get -qq update && \
   locales openssl && \
   rm -rf /var/lib/apt/lists/*
 
-## Set LOCALE to UTF8
-# RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-#   locale-gen en_US.UTF-8 && \
-#   dpkg-reconfigure locales && \
-#   /usr/sbin/update-locale LANG=en_US.UTF-8
+# Set LOCALE to UTF8
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+  locale-gen en_US.UTF-8 && \
+  dpkg-reconfigure locales && \
+  /usr/sbin/update-locale LANG=en_US.UTF-8
 
-# ENV LC_ALL en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 WORKDIR /app
 
-COPY --from=app /app/_build/production/rel/klausurarchiv ./
+COPY --from=app /app/_build/prod/rel/klausurarchiv ./
 
 ENTRYPOINT ["./bin/klausurarchiv"]
 CMD ["foreground"]
