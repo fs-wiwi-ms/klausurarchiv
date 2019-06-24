@@ -1,4 +1,10 @@
-h3.title.is-3 Neue Klausur hochladen
+div.level
+  a.button(href="#{page_path(@conn, :index)}")
+    span.icon
+      i.fas.fa-caret-left
+    span Back
+div.level
+  h2.title.is-2 Neue Klausur hochladen
 div.box
   = form_for @changeset, @action, [multipart: true],fn exam_form ->
     div.columns.is-mobile

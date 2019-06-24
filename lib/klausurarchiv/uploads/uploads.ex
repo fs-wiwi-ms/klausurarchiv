@@ -91,6 +91,18 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
+  def get_published_exams_for_lecture(lecture_id) do
+    from(
+      e in Exam,
+      join: t in assoc(e, :term),
+      where: e.lecture_id == ^lecture_id,
+      where: e.published == true,
+      order_by: [desc: t.year, desc: t.type],
+      preload: [:term]
+    )
+    |> Repo.all()
+  end
+
   def get_exam(id) do
     Exam
     |> Repo.get(id)

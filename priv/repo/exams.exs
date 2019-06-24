@@ -7284,7 +7284,8 @@ Enum.map(exams, fn %{
         |> Exam.changeset(%{
           "filename" => file,
           "lecture_id" => lecture.id,
-          "term_id" => term.id
+          "term_id" => term.id,
+          "published" => true
         })
         |> Repo.insert!()
 

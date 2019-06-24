@@ -1,3 +1,40 @@
-= for lecture <- @lectures do
-  a(href="#{lecture_path(@conn, :show, lecture.id)}")
-    p = lecture.name
+div.level
+  a.button(href="#{page_path(@conn, :index)}")
+    span.icon
+      i.fas.fa-caret-left
+    span Back
+div.level
+  h2.title.is-2 Vorlesungsübersicht
+
+div.box
+  p.subtitle.is-5 Filter:
+  = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+    div.columns
+      div.column.is-narrow
+        h5.subtitle.is-6 =  gettext("Studiengang")
+        div.select
+          = select filter_form, :degree, @degrees ++ [{"all", "all"}],  onchange: "submit()"
+      div.column.is-narrow
+        h5.subtitle.is-6 = gettext("Volltextsuche")
+        = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
+      div.column.is-narrow
+        h5.subtitle.is-6 = gettext("Anfangsbuchstabe")
+        = text_input filter_form, :capital, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
+
+div.box
+  = if length(@lectures) > 0 do
+    table.table
+      thead
+        tr
+          td Name
+      tbody
+        = for lecture <- @lectures do
+          tr
+            td
+              a(href="#{lecture_path(@conn, :show, lecture.id)}")
+                p.has-text-weight-semibold.has-text-black(style="padding:5") = lecture.name
+  - else
+    span.icon
+      i.fas.fa-exclamation
+    span Leider keine Klausuren vorhanden.
+

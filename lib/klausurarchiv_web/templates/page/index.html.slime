@@ -1,33 +1,76 @@
 h1.title.is-3 Klausurarchiv
 / p.subtitle.is-4 My first website with strong Bulma!
 
+div.columns
+  div.column.is-two-quarter
+    div.box
+      h3.subtitle.is-5 Filtern nach Anfangsbuchstabe:
+      div.buttons.has-addons
+        = for n <- ?a..?z do
+          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+            = hidden_input filter_form, :capital, value: "#{<< n :: utf8 >>}"
+            = hidden_input filter_form, :degree, value: "all"
+            p.control
+              button.button(type="submit")
+                span = << n :: utf8 >>
 
-h3.subtitle.is-5 Filtern nach Anfangsbuchstabe:
-div.buttons.has-addons
-  = for n <- ?a..?z do
-    = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-      = hidden_input filter_form, :capital, value: "#{<< n :: utf8 >>}"
-      p.control
-        button.button(type="submit")
-          span = << n :: utf8 >>
+    div.box
+      p.subtitle.is-5 Filtern nach Studiengang:
+      div.buttons.has-addons
+        = for {name, id} <- @degrees do
+          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+            = hidden_input filter_form, :degree, value: "#{id}"
+            p.control
+              button.button(type="submit")
+                span = name
 
-p.subtitle.is-5 Filtern nach Studiengang:
-div.buttons.has-addons
-  = for {name, id} <- @degrees do
-    = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-      = hidden_input filter_form, :degree, value: "#{id}"
-      p.control
-        button.button(type="submit")
-          span = name
+    div.box
+      p.subtitle.is-5 Erweiterter Filter:
+      = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
 
-p.subtitle.is-5 Erweiterter Filter:
-= form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+        div.column
+          h5.subtitle.is-6 =  gettext("Studiengang")
+          div.select
+            = select filter_form, :degree, @degrees ++ [{"all", "all"}]
 
-  div.column.is-one-quarter
-    h5.subtitle.is-6 =  gettext("Studiengang")
-    div.select
-      = select filter_form, :degree, @degrees ++ [{"all", "all"}]
+        div.column
+          h5.subtitle.is-6 = gettext("Volltextsuche")
+          = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
 
-  div.column.is-one-quarter
-    h5.subtitle.is-6 = gettext("Volltextsuche")
-    = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
+  div.column
+    div.box
+      h3.subtitle.is-5 Hinweise
+      span Bei Aufforderung bitte zur Authentifizierung die ZIV-Kennung
+      span.has-text-weight-semibold = "(ohne @uni-muenster.de)"
+      span und das ZIV-Passwort eingeben. Bei Problemen oder Anregungen wende dich bitte an unseren Klausurarchiv-Verantwortlichen:
+      span
+        a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
+
+      p Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an: webmaster@fachschaft-wiwi.ms. Bei Meldung von Fehlern bitte einen Screenshot und Beschreibung (wie Betriebssystem und Browser) anfügen.
+
+    div.box
+      h3.subtitle.is-5 Du vermisst eine Klausur?
+      div.columns
+        div.column.is-narrow
+          p Klicke hier, um eine neue Klausur zur Verfügung zu stellen.
+      div.columns
+        div.column.is-narrow
+          a.button.is-primary(href="#{exam_path(@conn, :new)}")
+            span.icon
+              i.fas.fa-file-upload
+            span Klausur hochladen
+    div.box
+      h3.subtitle.is-5 Admin-Ecke
+      div.level
+        p Dieser Bereich ist für dich nicht wichtig! Hier sind lediglich wichtige Funktionen für unseren Klausurarchiv-Verantwortlichen hinterlegt.
+      div.columns
+        div.column.is-narrow
+          a.button.is-danger.is-outlined(href="#{exam_path(@conn, :draft)}")
+            span.icon
+              i.fas.fa-file-upload
+            span Klausuren freischalten
+        div.column.is-narrow
+          a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :new)}")
+            span.icon
+              i.fas.fa-graduation-cap
+            span Vorlesung erstellen

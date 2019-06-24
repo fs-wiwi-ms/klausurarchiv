@@ -1,4 +1,10 @@
-h3.title.is-3 Neue Vorlesung erstellen
+div.level
+  a.button(href="#{page_path(@conn, :index)}")
+    span.icon
+      i.fas.fa-caret-left
+    span Back
+div.level
+  h2.title.is-2 Neue Vorlesung erstellen
 div.box
   = form_for @changeset, @action, fn lecture_form ->
     div.columns.is-mobile

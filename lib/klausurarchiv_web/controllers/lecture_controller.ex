@@ -5,18 +5,22 @@ defmodule KlausurarchivWeb.LectureController do
   alias Klausurarchiv.Uploads.Lecture
 
   def index(conn, %{"filter" => filter} = params) do
+    degrees = Uploads.get_degrees_for_select()
     lectures = Uploads.get_lectures(filter)
 
-    render(conn, "index.html", lectures: lectures)
+    render(conn, "index.html", lectures: lectures, degrees: degrees)
   end
 
   def show(conn, %{"id" => lecture_id}) do
     lecture =
       lecture_id
       |> Uploads.get_lecture()
-      |> Klausurarchiv.Repo.preload(exams: [:term])
 
-    render(conn, "show.html", lecture: lecture)
+    exams =
+    lecture_id
+      |> Uploads.get_published_exams_for_lecture()
+
+    render(conn, "show.html", lecture: lecture, exams: exams)
   end
 
   def new(conn, _params) do
