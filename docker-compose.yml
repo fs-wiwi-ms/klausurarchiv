@@ -7,6 +7,17 @@ services:
     environment:
       DATABASE_URL: "psql://immobook:immobook@db/immobook"
       PORT: "4000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10.3-alpine
+    environment:
+      POSTGRES_USER: immobook
+      POSTGRES_PASSWORD: immobook
+      POSTGRES_DB: immobook
+    ports:
+      - "15432:5432"
 
 volumes:
   app:
