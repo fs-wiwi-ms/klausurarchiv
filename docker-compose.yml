@@ -11,6 +11,7 @@ services:
       - db
     ports:
       - "4000:4000"
+    restart: always
 
   db:
     image: postgres:10.3-alpine
@@ -20,6 +21,7 @@ services:
       POSTGRES_DB: immobook
     ports:
       - "15432:5432"
+    restart: always
 
 volumes:
   app:
