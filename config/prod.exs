@@ -21,6 +21,18 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :klausurarchiv, KlausurarchivWeb.Endpoint,
+  secret_key_base:
+    "x8jhkC45UyuYsrTroJ+VGCQANza4vCSUUeAeTbG7Si+AQJV7WaQ9KjrpIpc8VVmG"
+
+# Configure your database
+config :klausurarchiv, Klausurarchiv.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "klausurarchiv_prod",
+  pool_size: 15
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
@@ -61,4 +73,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

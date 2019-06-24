@@ -80,7 +80,7 @@ RUN apt-get -qq update && \
 
 WORKDIR /app
 
-COPY --from=app /app/_build/production/rel/klausurarchiv .
+COPY --from=app /app/_build/production/rel/klausurarchiv ./
 
 ENTRYPOINT ["./bin/klausurarchiv"]
 CMD ["foreground"]
