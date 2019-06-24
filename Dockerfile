@@ -17,7 +17,7 @@ RUN mkdir -p /app/priv/static
 
 COPY ./assets /app/assets
 
-ARG ENV=production
+ARG ENV=prod
 ENV NODE_ENV dev
 
 RUN yarn install
