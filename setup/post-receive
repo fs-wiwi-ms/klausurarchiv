@@ -8,5 +8,5 @@ while read oldrev newrev ref; do
   /usr/bin/git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f
   cd $TARGET
   docker-compose build
-  docker-compose up --detach --force-recreate
+  docker-compose up -d --force-recreate
 done
