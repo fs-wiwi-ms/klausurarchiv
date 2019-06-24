@@ -9,6 +9,8 @@ services:
       PORT: "4000"
     depends_on:
       - db
+    ports:
+      - "4000:4000"
 
   db:
     image: postgres:10.3-alpine
