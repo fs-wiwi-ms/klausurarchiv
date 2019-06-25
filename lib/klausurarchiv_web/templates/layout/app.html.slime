@@ -6,14 +6,15 @@ html(lang="en")
     meta(name="description" content="")
     meta(name="author" content="")
 
-    title = "Hello Klausurarchiv!"
+    title = "Klausurarchiv"
     link(rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}")
+    link(rel="icon" href="#{static_path(@conn, "/favicon.png")}" type="image/png")
 
   body
-    nav.navbar.has-shadow.is-spaced.has-background-link(role="navigation" aria-label="main navigation")
+    nav.navbar.has-shadow.is-spaced.has-background-link.is-primary(role="navigation" aria-label="main navigation")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
-          img.image(src="#{static_path(@conn, "/images/Logo Fachschaft_Vektor.png")}" alt="Klausurarchiv der Fachschaft WiWI Münster" height="70")
+          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
         a.navbar-item.has-text-white.has-text-weight-bold(href="#{page_path(@conn, :index)}") Klausurarchiv der Fachschaft WiWi der Uni Münster
 
 

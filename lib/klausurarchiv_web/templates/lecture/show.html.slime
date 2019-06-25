@@ -7,13 +7,13 @@ div.level
 div.level
   h2.title.is-2 = @lecture.name
 
-table.table.is-bordered.is-hoverable
-  thead
-    th Semester
-    th Jahr
-    th Aktionen
-  tbody
-    = if length(@exams) > 0 do
+= if length(@exams) > 0 do
+  table.table.is-bordered.is-hoverable
+    thead
+      th Semester
+      th Jahr
+      th Aktionen
+    tbody
       = for exam <- @exams do
         tr
           td
@@ -26,8 +26,9 @@ table.table.is-bordered.is-hoverable
                 p Preview
               a.button.is-primary.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
                 p Download
-    - else
-      td(colspan="3")
-        span.icon
-          i.fas.fa-exclamation
-        span Leider keine Klausuren vorhanden.
+- else
+  div.box
+    td(colspan="3")
+      span.icon
+        i.fas.fa-exclamation
+      span Leider keine Klausuren vorhanden.

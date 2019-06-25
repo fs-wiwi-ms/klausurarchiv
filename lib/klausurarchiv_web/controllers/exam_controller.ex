@@ -19,7 +19,7 @@ defmodule KlausurarchivWeb.ExamController do
       {:ok, exam} ->
         conn
         |> put_flash(:info, "Erstellt")
-        |> redirect(to: lecture_path(conn, :show, exam.lecture_id))
+        |> redirect(to: page_path(conn, :index))
 
       {:error, "file could not be uploaded"} ->
         lectures = Uploads.get_lectures()

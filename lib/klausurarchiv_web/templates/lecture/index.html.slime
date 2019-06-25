@@ -36,5 +36,5 @@ div.box
   - else
     span.icon
       i.fas.fa-exclamation
-    span Leider keine Klausuren vorhanden.
+    span Leider keine Vorlesungen gefunden.
 
