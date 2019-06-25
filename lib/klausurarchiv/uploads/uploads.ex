@@ -202,9 +202,11 @@ defmodule Klausurarchiv.Uploads do
       Lecture
       |> join(:inner, [l], ld in assoc(l, :degrees))
 
-    query = Enum.reduce(filter, query, fn x, acc -> filter_lectures(acc, x) end)
-
-    Repo.all(query)
+    filter
+    |> Enum.reduce(query, fn x, acc -> filter_lectures(acc, x) end)
+    |> distinct([l], l.id)
+    |> order_by([l], asc: l.name)
+    |> Repo.all()
   end
 
   defp filter_lectures(query, {"degree", "all"}) do

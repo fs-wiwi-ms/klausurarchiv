@@ -15,7 +15,7 @@ html(lang="en")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
           img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
-        a.navbar-item.has-text-white.has-text-weight-bold(href="#{page_path(@conn, :index)}") Klausurarchiv der Fachschaft WiWi der Uni Münster
+          span.navbar-item.has-text-white.has-text-weight-bold Klausurarchiv
 
 
     div.container
@@ -39,4 +39,17 @@ html(lang="en")
         = render @view_module, @view_template, assigns
 
     script(src="#{static_path(@conn, "/js/app.js")}")
+
+    footer.footer
+      div.content
+        div.columns
+          div.column.is-narrow
+            a(href="https://fachschaft-wiwi.ms")
+              strong.has-text-white Fachschaft WiWi der Uni Münster
+          div.column.is-narrow
+            a(href="https://fachschaft-wiwi.ms/sonstiges/impressum")
+              p.has-text-white Impressum
+          div.column.is-narrow
+            a(href="https://fachschaft-wiwi.ms/datenschutzerklärung")
+              p.has-text-white Datenschutzerklärung
 

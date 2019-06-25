@@ -1,3 +1,0 @@
-= for degree <- @degrees do
-  a(href="#{degree_path(@conn, :show, degree.id)}")
-    p = degree.name

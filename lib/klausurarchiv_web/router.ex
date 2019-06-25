@@ -40,8 +40,6 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/exams", ExamController, only: [:new, :create])
 
-    resources("/degrees", DegreeController, only: [:index, :show])
-
     resources("/lectures", LectureController, only: [:index, :show])
   end
 end
