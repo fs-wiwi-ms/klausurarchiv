@@ -4,6 +4,8 @@ services:
   app:
     build:
       context: .
+      args:
+        ENV: prod
     environment:
       DATABASE_URL: "psql://immobook:immobook@db/immobook"
       PORT: "4000"
