@@ -17,7 +17,7 @@ div.box
       div.columns
         div.column
           h5.title.is-5 Name
-          = select(term_form, :type, TermTypeEnum.__enum_map__(), class: "input", type: "number")
+          = select(term_form, :type, %{"Wintersemester" => :winter_term, "Sommersemester" => :summer_term}, class: "input", type: "number")
 
       div.columns
         div.column

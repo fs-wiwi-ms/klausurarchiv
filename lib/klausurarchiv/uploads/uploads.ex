@@ -204,8 +204,8 @@ defmodule Klausurarchiv.Uploads do
 
     filter
     |> Enum.reduce(query, fn x, acc -> filter_lectures(acc, x) end)
-    |> distinct([l], l.id)
-    |> order_by([l], asc: l.name)
+    |> distinct(:true)
+    |> order_by([l, ld], asc: l.name)
     |> Repo.all()
   end
 
