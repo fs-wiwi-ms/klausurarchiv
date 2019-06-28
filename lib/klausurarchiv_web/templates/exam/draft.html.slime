@@ -22,7 +22,7 @@ div.level
           td
             span.tag = exam.term.year
           td
-            = form_for @conn, exam_path(@conn, :publish, exam.id), fn exam_form ->
+            = form_for @conn, exam_path(@conn, :publish, exam.id), fn _ ->
               a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") Preview
               = submit "Absenden", class: "button is-primary is-small"
 

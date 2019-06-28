@@ -4,26 +4,6 @@ services:
   app:
     build:
       context: .
-      args:
-        ENV: prod
-    environment:
-      DATABASE_URL: "psql://immobook:immobook@db/immobook"
-      PORT: "4000"
-    depends_on:
-      - db
-    ports:
-      - "4000:4000"
-    restart: always
-
-  db:
-    image: postgres:10.3-alpine
-    environment:
-      POSTGRES_USER: immobook
-      POSTGRES_PASSWORD: immobook
-      POSTGRES_DB: immobook
-    ports:
-      - "15432:5432"
-    restart: always
 
 volumes:
   app:

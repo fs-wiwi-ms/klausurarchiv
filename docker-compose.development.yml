@@ -13,6 +13,9 @@ services:
       - sync
     environment:
       DATABASE_URL: "psql://immobook:immobook@db/immobook"
+      SECRET_KEY_BASE: "12345667890"
+      USER: "admin"
+      PASSWORD: "admin"
     ports:
       - "4000:4000"
 

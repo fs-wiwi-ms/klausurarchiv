@@ -4,7 +4,7 @@ defmodule KlausurarchivWeb.LectureController do
   alias Klausurarchiv.Uploads
   alias Klausurarchiv.Uploads.Lecture
 
-  def index(conn, %{"filter" => filter} = params) do
+  def index(conn, %{"filter" => filter}) do
     degrees = Uploads.get_degrees_for_select()
     lectures = Uploads.get_lectures(filter)
 

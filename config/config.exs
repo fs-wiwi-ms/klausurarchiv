@@ -28,12 +28,21 @@ config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
   slime: PhoenixSlime.Engine
 
+config :klausurarchiv,
+  http_auth: [
+    username: System.get_env("USER"),
+    password: System.get_env("PASSWORD")
+  ]
+
+config :klausurarchiv, KlausurarchivWeb.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+# Configure your database
+config :klausurarchiv, Klausurarchiv.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  pool_size: 15
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :klausurarchiv,
-  http_auth: [
-    username: "admin",
-    password: "simple_password"
-  ]

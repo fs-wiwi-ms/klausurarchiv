@@ -8,27 +8,27 @@ div.level
   h2.title.is-2 = @lecture.name
 
 = if length(@exams) > 0 do
-  table.table.is-bordered.is-hoverable
-    thead
-      th Semester
-      th Jahr
-      th Aktionen
-    tbody
-      = for exam <- @exams do
-        tr
-          td
-            span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
-          td
-            span.tag = exam.term.year
-          td
-            div
-              a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-                p Preview
-              a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
-                p Download
+  div.box
+    table.table.is-hoverable
+      thead
+        th Semester
+        th Jahr
+        th Aktionen
+      tbody
+        = for exam <- @exams do
+          tr
+            td
+              span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
+            td
+              span.tag = exam.term.year
+            td
+              div
+                a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
+                  p Preview
+                a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
+                  p Download
 - else
   div.box
-    td(colspan="3")
-      span.icon
-        i.fas.fa-exclamation
-      span Leider keine Klausuren vorhanden.
+    span.icon
+      i.fas.fa-exclamation
+    span Leider keine Klausuren vorhanden.

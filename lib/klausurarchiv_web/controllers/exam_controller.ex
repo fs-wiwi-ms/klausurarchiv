@@ -3,7 +3,7 @@ defmodule KlausurarchivWeb.ExamController do
 
   alias Klausurarchiv.Uploads
 
-  def new(conn, params) do
+  def new(conn, _params) do
     lectures = Uploads.get_lectures()
     changeset = Uploads.change_exam()
 
@@ -16,7 +16,7 @@ defmodule KlausurarchivWeb.ExamController do
 
   def create(conn, %{"exam" => exam}) do
     case Uploads.create_exam(exam) do
-      {:ok, exam} ->
+      {:ok, _exam} ->
         conn
         |> put_flash(:info, "Erstellt")
         |> redirect(to: page_path(conn, :index))
@@ -54,7 +54,7 @@ defmodule KlausurarchivWeb.ExamController do
     |> redirect(to: exam_path(conn, :draft))
   end
 
-  def draft(conn, params) do
+  def draft(conn, _params) do
     unplubished_exams = Uploads.get_unplubished_exams()
 
     render(conn, "draft.html", unplubished_exams: unplubished_exams)
