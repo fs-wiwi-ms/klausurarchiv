@@ -3,15 +3,21 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta(name="description" content="")
-    meta(name="author" content="")
+    meta(name="description" content="Klausurarchiv der Fachschaft WiWi der Uni Münster")
+    meta(name="author" content="Fachschaft WiWi Uni Münster")
 
     title = "Klausurarchiv"
     link(rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}")
     link(rel="icon" href="#{static_path(@conn, "/favicon.png")}" type="image/png")
+    link(rel="manifest" href="#{static_path(@conn, "/manifest.json")}")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style" content="black")
+    meta(name="apple-mobile-web-app-title" content="Klausurarchiv")
+    link(rel="apple-touch-icon" href="/images/icons/192.png")
+    meta(name="theme-color" content="#092135")
 
-  body
-    nav.navbar.has-shadow.is-spaced.has-background-link.is-primary(role="navigation" aria-label="main navigation")
+  body.has-background-light
+    nav.navbar.has-shadow.is-spaced.has-background-primary(role="navigation" aria-label="main navigation")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
           img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")

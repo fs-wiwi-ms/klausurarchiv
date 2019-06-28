@@ -22,9 +22,9 @@ div.level
             span.tag = exam.term.year
           td
             div
-              a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
+              a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
                 p Preview
-              a.button.is-primary.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
+              a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
                 p Download
 - else
   div.box

@@ -11,7 +11,7 @@ defmodule KlausurarchivWeb.Endpoint do
     at: "/",
     from: :klausurarchiv,
     gzip: false,
-    only: ~w(css fonts images js favicon.png robots.txt)
+    only: ~w(css fonts images js favicon.png robots.txt manifest.json)
   )
 
   # Code reloading can be explicitly enabled under the
