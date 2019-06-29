@@ -28,15 +28,6 @@ config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
   slime: PhoenixSlime.Engine
 
-config :klausurarchiv,
-  http_auth: [
-    username: System.get_env("USER"),
-    password: System.get_env("PASSWORD")
-  ]
-
-config :klausurarchiv, KlausurarchivWeb.Endpoint,
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
-
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
   adapter: Ecto.Adapters.Postgres,
