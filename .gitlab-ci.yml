@@ -26,9 +26,7 @@ build-master:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - echo "$PROD_SECRET_EXS" > "/config/prod.secret.exs"
-    - ls -la config
-    - cat "config/prod.secret.exs"
+    - echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
   only:
