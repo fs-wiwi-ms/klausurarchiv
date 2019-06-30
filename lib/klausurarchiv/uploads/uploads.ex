@@ -140,7 +140,6 @@ defmodule Klausurarchiv.Uploads do
         |> Repo.insert()
 
       {:error, error} ->
-        IO.inspect(error)
         {:error, "file could not be uploaded"}
     end
   end

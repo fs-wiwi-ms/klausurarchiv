@@ -5,7 +5,7 @@ defmodule KlausurarchivWeb.LectureController do
   alias Klausurarchiv.Uploads.Lecture
 
   def index(conn, %{"filter" => filter}) do
-    Application.get_env(:klausurarchiv,:http_auth) |> IO.inspect()
+    Application.get_env(:klausurarchiv,:http_auth)
     degrees = Uploads.get_degrees_for_select()
     lectures = Uploads.get_lectures(filter)
 
