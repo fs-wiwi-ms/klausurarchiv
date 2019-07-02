@@ -17,6 +17,7 @@ defmodule KlausurarchivWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery, with: :clear_session)
     plug(:put_secure_browser_headers)
+    plug(PlugPreferredLocales, ignore_area: true)
     plug(:set_language)
     plug(BasicAuth, use_config: {:klausurarchiv, :http_auth})
   end
