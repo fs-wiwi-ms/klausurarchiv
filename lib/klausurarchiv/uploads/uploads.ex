@@ -139,7 +139,7 @@ defmodule Klausurarchiv.Uploads do
         |> Exam.changeset(exam_params)
         |> Repo.insert()
 
-      {:error, error} ->
+      {:error, _error} ->
         {:error, "file could not be uploaded"}
     end
   end

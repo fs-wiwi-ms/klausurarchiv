@@ -3,7 +3,7 @@ div.level
   a.button(href="#{page_path(@conn, :index)}")
     span.icon
       i.fas.fa-caret-left
-    span Back
+    span = gettext("Back")
 div.level
   h2.title.is-2 = @lecture.name
 
@@ -11,24 +11,24 @@ div.level
   div.box
     table.table.is-hoverable
       thead
-        th Semester
-        th Jahr
-        th Aktionen
+        th = gettext("Term")
+        th = gettext("Year")
+        th = gettext("Actions")
       tbody
         = for exam <- @exams do
           tr
             td
-              span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
+              span.tag = if exam.term.type == :winter_term do gettext("Winter term") else gettext("Summer term") end
             td
               span.tag = exam.term.year
             td
               div
                 a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-                  p Preview
+                  p = gettext("Preview")
                 a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
-                  p Download
+                  p = gettext("Download")
 - else
   div.box
     span.icon
       i.fas.fa-exclamation
-    span Leider keine Klausuren vorhanden.
+    span =gettext("No exams found.")

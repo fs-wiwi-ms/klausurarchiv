@@ -4,21 +4,21 @@ div.level
       i.fas.fa-caret-left
     span Back
 div.level
-  h2.title.is-2 Vorlesungsübersicht
+  h2.title.is-2 = gettext("Lecture overview")
 
 div.box
   p.subtitle.is-5 Filter:
   = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
     div.columns
       div.column.is-narrow
-        h5.subtitle.is-6 =  gettext("Studiengang")
+        h5.subtitle.is-6 =  gettext("Degree")
         div.select
           = select filter_form, :degree, @degrees ++ [{"all", "all"}],  onchange: "submit()"
       div.column.is-narrow
-        h5.subtitle.is-6 = gettext("Volltextsuche")
+        h5.subtitle.is-6 = gettext("Full text search")
         = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
       div.column.is-narrow
-        h5.subtitle.is-6 = gettext("Anfangsbuchstabe")
+        h5.subtitle.is-6 = gettext("Capital")
         = text_input filter_form, :capital, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
 
 div.box
@@ -36,5 +36,5 @@ div.box
   - else
     span.icon
       i.fas.fa-exclamation
-    span Leider keine Vorlesungen gefunden.
+    span = gettext("No lectures found.")
 

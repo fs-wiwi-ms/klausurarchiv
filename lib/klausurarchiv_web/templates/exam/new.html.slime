@@ -2,34 +2,34 @@ div.level
   a.button(href="#{page_path(@conn, :index)}")
     span.icon
       i.fas.fa-caret-left
-    span Back
+    span = gettext("Back")
 div.level
-  h2.title.is-2 Neue Klausur hochladen
+  h2.title.is-2 = gettext "Upload a new exam"
 div.box
   = form_for @changeset, @action, [multipart: true],fn exam_form ->
     div.columns
       div.column
-        h5.title.is-5 Abschluss
+        h5.title.is-5 = gettext "Degree"
         div.select.is-multiple
           = select(exam_form, :lecture_id, Enum.map(@lectures, &{&1.name, &1.id}))
 
     = inputs_for exam_form, :term, fn term_form ->
       div.columns
         div.column
-          h5.title.is-5 Name
-          = select(term_form, :type, %{"Wintersemester" => :winter_term, "Sommersemester" => :summer_term}, class: "input", type: "number")
+          h5.title.is-5 = gettext "Name"
+          = select(term_form, :type, %{gettext("Winter term") => :winter_term, gettext("Summer term") => :summer_term}, class: "input", type: "number")
 
       div.columns
         div.column
-          h5.title.is-5 Year
+          h5.title.is-5 = gettext "Year"
           = number_input(term_form, :year, class: "input", type: "number")
 
     div.columns
       div.column
-        h5.title.is-5 File
+        h5.title.is-5 = gettext "File"
         = file_input(exam_form, :file, class: "input", type: "file")
 
     div.columns
       div.column
-        = submit "Absenden", class: "button is-primary"
+        = submit gettext("Send"), class: "button is-primary"
 

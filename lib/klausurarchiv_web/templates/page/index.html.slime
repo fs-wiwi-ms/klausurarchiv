@@ -1,10 +1,9 @@
-h1.title.is-3 Klausurarchiv
-/ p.subtitle.is-4 My first website with strong Bulma!
+h1.title.is-3 =gettext("Examarchive")
 
 div.columns
   div.column.is-two-quarter
     div.box
-      h3.subtitle.is-5 Filtern nach Anfangsbuchstabe:
+      h3.subtitle.is-5 =gettext("Filter for Capital letter:")
       div.buttons.has-addons
         = for n <- ?a..?z do
           = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
@@ -15,7 +14,7 @@ div.columns
                 span = << n :: utf8 >>
 
     div.box
-      p.subtitle.is-5 Filtern nach Studiengang:
+      p.subtitle.is-5 =gettext("Filter for degree:")
       div.buttons.has-addons
         = for {name, id} <- @degrees do
           = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
@@ -25,52 +24,57 @@ div.columns
                 span = name
 
     div.box
-      p.subtitle.is-5 Erweiterter Filter:
+      p.subtitle.is-5 =gettext("Advanced filter:")
       = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
 
         div.column
-          h5.subtitle.is-6 =  gettext("Studiengang")
+          h5.subtitle.is-6 =  gettext("Degree")
           div.select
             = select filter_form, :degree, @degrees ++ [{"all", "all"}]
 
         div.column
-          h5.subtitle.is-6 = gettext("Volltextsuche")
+          h5.subtitle.is-6 = gettext("Fulltext search")
           = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
 
   div.column
     div.box
-      h3.subtitle.is-5 Hinweise
-      span Bei Aufforderung bitte zur Authentifizierung die ZIV-Kennung
-      span.has-text-weight-semibold = "(ohne @uni-muenster.de)"
-      span und das ZIV-Passwort eingeben. Bei Problemen oder Anregungen wende dich bitte an unseren Klausurarchiv-Verantwortlichen:
+      h3.subtitle.is-5 =gettext("Hint")
+      span = gettext("Please enter the ZIV ID")
+      span.has-text-weight-semibold = gettext"(without @uni-muenster.de)"
+      span =gettext("and the ZIV password when prompted for authentication. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
       span
         a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
-
-      p Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an: webmaster@fachschaft-wiwi.ms. Bei Meldung von Fehlern bitte einen Screenshot und Beschreibung (wie Betriebssystem und Browser) anfügen.
+      span .
+      br
+      br
+      span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
+      span
+        a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") webmaster@fachschaft-wiwi.ms
+      span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
 
     div.box
-      h3.subtitle.is-5 Du vermisst eine Klausur?
+      h3.subtitle.is-5 =gettext("Do you miss an exam?")
       div.columns
         div.column.is-narrow
-          p Klicke hier, um eine neue Klausur zur Verfügung zu stellen.
+          p =gettext("Click here to make a new exam available.")
       div.columns
         div.column.is-narrow
           a.button.is-primary(href="#{exam_path(@conn, :new)}")
             span.icon
               i.fas.fa-file-upload
-            span Klausur hochladen
+            span =gettext("Upload exam")
     div.box
-      h3.subtitle.is-5 Admin-Ecke
+      h3.subtitle.is-5 =gettext("Admin-Corner")
       div.level
-        p Dieser Bereich ist für dich nicht wichtig! Hier sind lediglich wichtige Funktionen für unseren Klausurarchiv-Verantwortlichen hinterlegt.
+        p =gettext("This area is not important for you! Only important functions for our exam archive manager are stored here.")
       div.columns
         div.column.is-narrow
           a.button.is-danger.is-outlined(href="#{exam_path(@conn, :draft)}")
             span.icon
               i.fas.fa-file-upload
-            span Klausuren freischalten
+            span =gettext("Publish exams")
         div.column.is-narrow
           a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :new)}")
             span.icon
               i.fas.fa-graduation-cap
-            span Vorlesung erstellen
+            span =gettext("Create lecture")

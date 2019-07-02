@@ -7,6 +7,8 @@ defmodule KlausurarchivWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(PlugPreferredLocales, ignore_area: true)
+    plug(:set_language)
   end
 
   pipeline :protected_browser do
@@ -15,11 +17,32 @@ defmodule KlausurarchivWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery, with: :clear_session)
     plug(:put_secure_browser_headers)
+    plug(:set_language)
     plug(BasicAuth, use_config: {:klausurarchiv, :http_auth})
   end
 
   pipeline :api do
     plug(:accepts, ["json"])
+  end
+
+  def set_language(conn, _opts) do
+    preferred_languages = MapSet.new(conn.private.plug_preferred_locales)
+
+    available_languages =
+      KlausurarchivWeb.Gettext
+      |> Gettext.known_locales()
+      |> MapSet.new()
+
+    intersection = MapSet.intersection(preferred_languages, available_languages)
+
+    if MapSet.size(intersection) > 0 do
+      intersection
+      |> MapSet.to_list()
+      |> List.first()
+      |> Gettext.put_locale()
+    end
+
+    conn
   end
 
   scope "/", KlausurarchivWeb do
@@ -37,6 +60,7 @@ defmodule KlausurarchivWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get("/privacy", PageController, :privacy)
 
     resources("/exams", ExamController, only: [:new, :create])
 

@@ -3,10 +3,10 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta(name="description" content="Klausurarchiv der Fachschaft WiWi der Uni Münster")
-    meta(name="author" content="Fachschaft WiWi Uni Münster")
+    meta(name="description" content="#{gettext("Examarchive of student's council of business school of university of münster")}")
+    meta(name="author" content="#{gettext("Student's council of business school of university of münster")}")
 
-    title = "Klausurarchiv"
+    title = gettext("Examarchive")
     link(rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}")
     link(rel="icon" href="#{static_path(@conn, "/favicon.png")}" type="image/png")
     link(rel="manifest" href="#{static_path(@conn, "/manifest.json")}")
@@ -21,7 +21,7 @@ html(lang="en")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
           img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
-          span.navbar-item.has-text-white.has-text-weight-bold Klausurarchiv
+          span.navbar-item.has-text-white.has-text-weight-bold = gettext("Examarchive")
 
 
     div.container
@@ -29,7 +29,7 @@ html(lang="en")
         section.section
           article.message.is-success
             div.message-header
-              p Success
+              p = gettext("Success")
             div.message-body
               p = "#{get_flash(@conn, :info) }"
 
@@ -37,7 +37,7 @@ html(lang="en")
         section.section
           article.message.is-danger
             div.message-header
-              p Error
+              p = gettext("Error")
             div.message-body
               p = "#{get_flash(@conn, :error) }"
 
@@ -51,11 +51,11 @@ html(lang="en")
         div.columns
           div.column.is-narrow
             a(href="https://fachschaft-wiwi.ms")
-              strong.has-text-white Fachschaft WiWi der Uni Münster
+              strong.has-text-white = gettext("Student's council of business school of university of münster")
           div.column.is-narrow
             a(href="https://fachschaft-wiwi.ms/sonstiges/impressum")
-              p.has-text-white Impressum
+              p.has-text-white = gettext("Legal")
           div.column.is-narrow
-            a(href="https://fachschaft-wiwi.ms/datenschutzerklärung")
-              p.has-text-white Datenschutzerklärung
+            a(href="#{page_path(@conn, :privacy)}")
+              p.has-text-white = gettext("Privacy")
 

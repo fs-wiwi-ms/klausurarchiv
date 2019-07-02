@@ -2,17 +2,17 @@ div.level
   a.button(href="#{page_path(@conn, :index)}")
     span.icon
       i.fas.fa-caret-left
-    span Back
+    span = gettext "Back"
 div.level
-  h2.title.is-2 Unveröffentlichte Klausuren
+  h2.title.is-2 =gettext "Not published Exams"
 
 = if length(@unplubished_exams) > 0 do
   table.table.is-bordered.is-hoverable
     thead
-      th Bezeichnung
-      th Semester
-      th Jahr
-      th Aktionen
+      th = gettext "Name"
+      th = gettext "Term"
+      th = gettext "Year"
+      th = gettext "Actions"
     tbody
       = for exam <- @unplubished_exams do
         tr
@@ -23,8 +23,8 @@ div.level
             span.tag = exam.term.year
           td
             = form_for @conn, exam_path(@conn, :publish, exam.id), fn _ ->
-              a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") Preview
-              = submit "Absenden", class: "button is-primary is-small"
+              a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") = gettext("Preview")
+              = submit gettext("Send"), class: "button is-primary is-small"
 
 
 - else
@@ -32,4 +32,4 @@ div.level
     td(colspan="3")
       span.icon
         i.fas.fa-exclamation
-      span Leider keine Klausuren vorhanden.
+      span = gettext "No unplubished exams found."
