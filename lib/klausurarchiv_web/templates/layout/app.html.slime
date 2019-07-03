@@ -46,6 +46,14 @@ html(lang="en")
 
     script(src="#{static_path(@conn, "/js/app.js")}")
 
+    script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-87690156-2');
+
     footer.footer
       div.content
         div.columns
