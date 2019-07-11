@@ -3,7 +3,7 @@ h1.title.is-3 =gettext("Examarchive")
 div.columns
   div.column.is-two-quarter
     div.box
-      a(href="https://www.facebook.com/events/819210935129275/")
+      a(href="http://bit.ly/2G8OqP7")
         img.image(src="#{static_path(@conn, "/images/KlausurarchivNeonparty.png")}" alt="")
 
     div.box
