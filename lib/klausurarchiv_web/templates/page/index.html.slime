@@ -3,10 +3,6 @@ h1.title.is-3 =gettext("Examarchive")
 div.columns
   div.column.is-two-quarter
     div.box
-      a(href="http://bit.ly/2G8OqP7")
-        img.image(src="#{static_path(@conn, "/images/KlausurarchivNeonparty.png")}" alt="")
-
-    div.box
       h3.subtitle.is-5 =gettext("Filter for Capital letter:")
       div.buttons.has-addons
         = for n <- ?a..?z do
