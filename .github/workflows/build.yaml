@@ -8,4 +8,4 @@ jobs:
     steps:
     - name: install_docker
       uses: actions/docker/cli@master
-      steps: docker build --pull -t "Klausurarchiv" .
+      run: docker build --pull -t "Klausurarchiv" .
