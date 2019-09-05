@@ -1,4 +1,4 @@
-name: build
+name: publish-image
 on: push
 
 jobs:
@@ -6,17 +6,23 @@ jobs:
     name: build
     runs-on: ubuntu-18.04
     steps:
-    - name: push_docker_container
+    - name: login-github-packages
       uses: actions/docker/login@master
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_REGISTRY_URL: "docker.pkg.github.com"
-    - uses: actions/checkout@master
+    - name: checkout-repo
+      uses: actions/checkout@master
     - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
-    - name: build_docker_container
+    - name: build-image
       uses: actions/docker/cli@master
       with:
-        args: build --pull -t tbho/klausurarchiv .
+        args: build --pull -t docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv .
+    - name: push-image
+      uses: actions/docker/cli@master
+      with:
+        args: push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
+
