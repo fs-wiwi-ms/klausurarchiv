@@ -1,0 +1,11 @@
+name: build
+on: push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-18.04
+    steps:
+    - name: install_docker
+      uses: actions/docker/cli@master
+      steps: docker build --pull -t "Klausurarchiv" .
