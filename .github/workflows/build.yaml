@@ -7,15 +7,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
-    - name: check_dir
-      run: |
-        pwd
-        ls -lah ../
-        ls -lah ../../
-        ls -lah /home/runner
-        ls -lah /home/runner/work
-        ls -lah /
-    - name: install_docker
+    - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
+      env:
+        PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
+    - name: build_docker_container
       uses: actions/docker/cli@master
       with:
         args: build --pull -t tbho/klausurarchiv .
