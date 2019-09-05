@@ -6,6 +6,12 @@ jobs:
     name: build
     runs-on: ubuntu-18.04
     steps:
+    - name: push_docker_container
+      uses: actions/docker/login@master
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REGISTRY_URL: "docker.pkg.github.com"
     - uses: actions/checkout@master
     - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
       env:
