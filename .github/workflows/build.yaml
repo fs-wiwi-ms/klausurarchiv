@@ -9,3 +9,5 @@ jobs:
     - name: install_docker
       # run: docker build --pull -t Klausurarchiv .
       uses: actions/docker/cli@master
+      with:
+        args: build --pull -t Klausurarchiv .
