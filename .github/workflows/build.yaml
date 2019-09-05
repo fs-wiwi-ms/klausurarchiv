@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - name: install_docker
-      run: docker build --pull -t Klausurarchiv .
+      # run: docker build --pull -t Klausurarchiv .
       uses: actions/docker/cli@master
