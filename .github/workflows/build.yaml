@@ -7,22 +7,18 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - name: login-github-packages
-      uses: actions/docker/login@master
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_REGISTRY_URL: "docker.pkg.github.com"
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
     - name: checkout-repo
       uses: actions/checkout@master
     - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
     - name: build-image
-      uses: actions/docker/cli@master
-      with:
-        args: build --pull -t docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv .
+      run: docker build --pull -t docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv .
     - name: push-image
-      uses: actions/docker/cli@master
-      with:
-        args: push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
+      run: push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
 
