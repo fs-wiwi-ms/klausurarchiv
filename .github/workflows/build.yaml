@@ -20,5 +20,5 @@ jobs:
     - name: build-image
       run: docker build --pull -t docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv .
     - name: push-image
-      run: push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
+      run: docker push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
 
