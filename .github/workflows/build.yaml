@@ -22,8 +22,3 @@ jobs:
     - name: push-image-master
       run: docker push docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv
       if: github.ref == 'refs/heads/master'
-    - name: push-image-non-master
-      run: docker push docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv:$GITHUB_SHA
-      if: github.ref != 'refs/heads/master'
-      env:
-        GITHUB_SHA: ${{ github.sha }}
