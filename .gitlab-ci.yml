@@ -1,21 +1,3 @@
-# image: trenpixster/elixir:latest
-
-# services:
-#   - postgres:latest
-
-# variables:
-#   DATABASE_URL: "psql://postgres:postgres@postgres/test_test"
-#   MIX_ENV: "test"
-
-# before_script:
-#   - apt-get update && apt-get -y install postgresql-client
-#   - mix deps.get
-#   - mix ecto.create
-#   - mix ecto.migrate
-
-# mix:
-#   script:
-#   - mix test
 
 build-master:
   # Official docker image.
@@ -30,18 +12,4 @@ build-master:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
   only:
-    - master
-
-build:
-  # Official docker image.
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-  except:
     - master

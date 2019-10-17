@@ -41,7 +41,7 @@ msgid "Download"
 msgstr "Download"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:40
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:39
 msgid "Error"
 msgstr "Fehler"
 
@@ -107,7 +107,7 @@ msgid "Send"
 msgstr "Abschicken"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:32
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:31
 msgid "Success"
 msgstr "Erfolg"
 
@@ -185,7 +185,7 @@ msgid "If you have any suggestions, errors or other problems regarding the displ
 msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:57
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:64
 msgid "Legal"
 msgstr "Impressum"
 
@@ -195,7 +195,7 @@ msgid "Please enter the ZIV ID"
 msgstr "Bei Aufforderung bitte zur Authentifizierung die ZIV-Kennung"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:60
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:67
 msgid "Privacy"
 msgstr "Datenschutz"
 
@@ -206,7 +206,7 @@ msgstr "Klausuren freischalten"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:54
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:61
 msgid "Student's council of business school of university of münster"
 msgstr "Fachschaft WiWi der Universität Münster"
 
@@ -246,3 +246,8 @@ msgstr "Eine neue Klausur hochladen"
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:20
 msgid "Winter term"
 msgstr "Wintersemester"
+
+#, elixir-format
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:72
+msgid "Source Code"
+msgstr ""
