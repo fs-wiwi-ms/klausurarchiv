@@ -18,6 +18,6 @@ jobs:
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
     - name: build-image
-      run: docker build --pull -t docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv .
+      run: docker build --pull -t docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv .
     - name: push-image
-      run: docker push docker.pkg.github.com/tbho/klausurarchiv/klausurarchiv
+      run: docker push docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv
