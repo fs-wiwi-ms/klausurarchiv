@@ -1,15 +1,52 @@
 # Klausurarchiv
 
-To start your Phoenix server:
+## Architecture
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+We have one Dockerfile which consists of three
+[stages](https://docs.docker.com/develop/develop-images/multistage-build/):
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+1. A Elixir app which compiles, fetches dependencies, ...
+2. A node.js app which compiles the assets. It uses libraries from the Elixir app.
+3. A production stage which copies the results from (1) and (2) and runs them.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+In development we split the Dockerfile up into two separate containers (using
+the `target` directive) to continously re-compile the app and its assets.
+
+Both containers share a volume with docker-sync to perfomantly access changed
+files as well as for the Elixir app to deliver the compiled assets.
+
+Developers can mount more Containers into the stack with a custom `docker-compose.user.yml` file.
+It can look like this:
+
+```yaml
+  version: "3.4"
+
+  services:
+      adminer:
+          image: adminer
+          ports:
+            - 8080:8080
+          environment:
+            ADMINER_DEFAULT_SERVER: db
+            ADMINER_DESIGN: pepa-linha
+```
+
+## Setup
+
+- Run `bin/dev`, it will run the three containers specified below. You can access the website by visiting `http://localhost:4000`.
+- Run `bin/seed` to seed the database.
+
+After the initial start things might be wonky. Just restart the app and you should be fine. There are two cases where you need to interact with Docker directly:
+  * In some cases the containers won't stop after <kbd>ctrl</kbd> + <kbd>c</kbd> and keep running in the background (`docker ps`). If so you need to run `docker-compose down` manually. The same goes for the tests.
+
+### Testing
+If you like you can run `bin/test --watch`, which will start a separate stack which continuously runs tests agains a test database.
+
+## Hosting and Deployment
+
+* Production URL: [klausurarchiv.fachschaft-wiwi.ms](https://klausurarchiv.fachschaft-wiwi.ms/)
+* GitHub builds containers for each commit. Master commits will be pushed to Docker Packages.
+* Server listens with watchtower for changes and restarts app container.
 
 ## Learn more
 
@@ -18,3 +55,22 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+## License
+
+Klausurarchiv
+
+Copyright (C) 2019  Fachschaft WiWi Uni Münster
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
