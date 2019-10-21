@@ -12,7 +12,7 @@ services:
       - db
       - sync
     environment:
-      DATABASE_URL: "psql://immobook:immobook@db/immobook"
+      DATABASE_URL: "psql://klausurarchiv:klausurarchiv@db/klausurarchiv"
     ports:
       - "4000:4000"
 
@@ -31,8 +31,8 @@ services:
   db:
     image: postgres:10.3-alpine
     environment:
-      POSTGRES_USER: immobook
-      POSTGRES_PASSWORD: immobook
-      POSTGRES_DB: immobook
+      POSTGRES_USER: klausurarchiv
+      POSTGRES_PASSWORD: klausurarchiv
+      POSTGRES_DB: klausurarchiv
     ports:
       - "15432:5432"
