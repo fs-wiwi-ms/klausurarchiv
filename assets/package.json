@@ -6,7 +6,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "bulma": "^0.7.4",
     "phoenix": "^1.4.3",
     "phoenix_html": "^2.13.2"
