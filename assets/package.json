@@ -31,7 +31,7 @@
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.6.4",
     "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack": "^4.29.6",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.0"
   }
 }
