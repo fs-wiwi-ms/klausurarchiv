@@ -66,7 +66,7 @@ html(lang="en")
             a.button.is-primary(href="#{page_path(@conn, :privacy)}")
               p.has-text-white = gettext("Privacy")
           div.column.is-narrow
-            a.button.is-primary(href="https://github.com/tbho/klausurarchiv")
+            a.button.is-primary(href="https://github.com/fs-wiwi-ms/klausurarchiv")
               span.icon.has-text-white
                 i.fab.fa-github
               span.has-text-white = gettext("Source Code")

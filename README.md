@@ -1,5 +1,8 @@
 # Klausurarchiv
 
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=fs-wiwi-ms/klausurarchiv)](https://dependabot.com)
+[![Actions Status](https://github.com/fs-wiwi-ms/klausurarchiv/workflows/build/badge.svg)](https://github.com/fs-wiwi-ms/klausurarchiv/actions)
+
 ## Architecture
 
 We have one Dockerfile which consists of three
@@ -33,6 +36,13 @@ It can look like this:
 
 ## Setup
 
+### Prerequisites
+
+Install:
+* Docker
+* Docker-Compose
+
+### Development
 - Run `bin/dev`, it will run the three containers specified below. You can access the website by visiting `http://localhost:4000`.
 - Run `bin/seed` to seed the database.
 
@@ -48,10 +58,9 @@ If you like you can run `bin/test --watch`, which will start a separate stack wh
 * GitHub builds containers for each commit. Master commits will be pushed to Docker Packages.
 * Server listens with watchtower for changes and restarts app container.
 
-## Learn more
-
+## Learn more about Phoenix
   * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
+  * Guides: https://hexdocs.pm/phoenix/overview.html
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
