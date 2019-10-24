@@ -1,5 +1,8 @@
 # Klausurarchiv
 
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=fs-wiwi-ms/klausurarchiv)](https://dependabot.com)
+<a href="https://github.com/fs-wiwi-ms/klausurarchiv/actions"><img alt="GitHub Actions status" src="https://github.com/fs-wiwi-ms/klausurarchiv/workflows/global-variables/badge.svg"></a>
+
 ## Architecture
 
 We have one Dockerfile which consists of three
