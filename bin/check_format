@@ -3,4 +3,4 @@
 
 set -euo pipefail
 
-"$(dirname "$0")/run" app mix format --check-formatted
+"$(dirname "$0")/compose run" app mix format --check-formatted
