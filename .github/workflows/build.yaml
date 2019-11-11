@@ -17,6 +17,8 @@ jobs:
     - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
+    - name: check-file-format
+      run: bin/check_format
     - name: build-image
       run: docker build --pull -t docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv .
     - name: push-image-master
