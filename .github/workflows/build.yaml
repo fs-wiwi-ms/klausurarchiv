@@ -18,8 +18,8 @@ jobs:
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
     - run: ls -lah bin
-    - name: check-file-format
-      run: bin/compose run app mix format --check-formatted
+    # - name: check-file-format
+    #   run: bin/compose run app mix format --check-formatted
     - name: build-image
       run: docker build --pull -t docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv .
     - name: push-image-master
