@@ -17,7 +17,7 @@ jobs:
     - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
       env:
         PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
-    - run: ls -lah
+    - run: ls -lah bin
     - name: check-file-format
       run: ./bin/check_format
     - name: build-image
