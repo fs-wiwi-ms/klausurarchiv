@@ -7,10 +7,10 @@
 |> Path.wildcard()
 |> Enum.map(&Code.eval_file(&1))
 
-use Distillery.Releases.Config,
-    # This sets the default release built by `mix distillery.release`
+use Mix.Releases.Config,
+    # This sets the default release built by `mix release`
     default_release: :default,
-    # This sets the default environment used by `mix distillery.release`
+    # This sets the default environment used by `mix release`
     default_environment: Mix.env()
 
 # For a full list of config options for both releases
@@ -38,14 +38,14 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"!1ku[t(CIL%e=aCF>/VMWjaLM)*X07XLqx*|(u2zbEEDu%rlck9f]h;.^%[a_/Kj"
-  set vm_args: "rel/vm.args"
+  # set vm_args: "rel/vm.args"
 
   set(pre_start_hooks: "rel/hooks/pre_start")
 end
 
 # You may define one or more releases in this file.
 # If you have not set a default release, or selected one
-# when running `mix distillery.release`, the first release in the file
+# when running `mix release`, the first release in the file
 # will be used by default
 
 release :klausurarchiv do
@@ -61,3 +61,4 @@ release :klausurarchiv do
     ]
   )
 end
+

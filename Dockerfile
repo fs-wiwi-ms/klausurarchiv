@@ -57,7 +57,7 @@ RUN mix deps.compile
 # Install and compile the rest of the app
 COPY . ./
 RUN mix compile --warning-as-errors
-RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, release --executable; fi
+RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, distillery.release --executable; fi
 
 ##
 # Run
