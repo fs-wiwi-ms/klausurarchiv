@@ -127,7 +127,6 @@ defmodule Klausurarchiv.Uploads do
 
     case upload_file(term, lecture, file_args) do
       {:ok, filename} ->
-
         exam_params =
           exam_params
           |> Map.put("lecture_id", lecture.id)
@@ -203,7 +202,7 @@ defmodule Klausurarchiv.Uploads do
 
     filter
     |> Enum.reduce(query, fn x, acc -> filter_lectures(acc, x) end)
-    |> distinct(:true)
+    |> distinct(true)
     |> order_by([l, ld], asc: l.name)
     |> Repo.all()
   end

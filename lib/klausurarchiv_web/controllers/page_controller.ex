@@ -8,7 +8,7 @@ defmodule KlausurarchivWeb.PageController do
     render(conn, "index.html", degrees: degrees)
   end
 
-    def privacy(conn, _params) do
+  def privacy(conn, _params) do
     render(conn, "privacy.html")
   end
 end

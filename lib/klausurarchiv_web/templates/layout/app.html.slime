@@ -17,11 +17,17 @@ html(lang="en")
     meta(name="theme-color" content="#092135")
 
   body.has-background-light
-    nav.navbar.has-shadow.is-spaced.has-background-primary(role="navigation" aria-label="main navigation")
+    nav.navbar.has-shadow.is-spaced.is-transparent.has-background-primary(role="navigation" aria-label="main navigation")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
           img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
           span.navbar-item.has-text-white.has-text-weight-bold = gettext("Examarchive")
+
+      div.navbar-menu.navbar-end
+        a.navbar-item(href="https://fachschaft-wiwi.ms")
+          span.icon.has-text-white
+            i.fas.fa-home
+          span.navbar-item.has-text-white.has-text-weight-bold = gettext("Back to Homepage")
 
     div.container
       = if !is_nil get_flash(@conn, :info) do
@@ -70,4 +76,3 @@ html(lang="en")
               span.icon.has-text-white
                 i.fab.fa-github
               span.has-text-white = gettext("Source Code")
-

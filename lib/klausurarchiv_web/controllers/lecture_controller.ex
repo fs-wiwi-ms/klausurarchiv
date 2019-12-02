@@ -17,7 +17,7 @@ defmodule KlausurarchivWeb.LectureController do
       |> Uploads.get_lecture()
 
     exams =
-    lecture_id
+      lecture_id
       |> Uploads.get_published_exams_for_lecture()
 
     render(conn, "show.html", lecture: lecture, exams: exams)
