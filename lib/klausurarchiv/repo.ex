@@ -1,5 +1,7 @@
 defmodule Klausurarchiv.Repo do
-  use Ecto.Repo, otp_app: :klausurarchiv
+  use Ecto.Repo,
+    otp_app: :klausurarchiv,
+    adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the
