@@ -37,7 +37,6 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_slime, "~> 0.10.0"},
       {:phoenix_ecto, "~> 4.1"},
-      {:ecto_sql, "~> 3.1"},
       {:plug_cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:distillery, "~> 2.0"},
