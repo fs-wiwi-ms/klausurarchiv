@@ -46,7 +46,7 @@ defmodule Klausurarchiv.Mixfile do
       {:cowboy, "~> 2.7.0"},
       {:ecto_enum, "~> 1.2"},
       {:httpoison, "~> 1.4"},
-      {:poison, "~> 4.0.1"},
+      {:jason, "~> 1.1"},
       {:basic_auth, "~> 2.2.2"},
       {:plug_preferred_locales, "~> 0.1.0"}
     ]
