@@ -62,7 +62,7 @@ RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, distillery.release --executa
 ##
 # Run
 
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update && \
