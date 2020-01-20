@@ -28,7 +28,7 @@ config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
   slime: PhoenixSlime.Engine
 
-config :phoenix, :json_library, Poison
+config :phoenix, :json_library, Jason
 
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,

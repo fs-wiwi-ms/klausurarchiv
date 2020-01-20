@@ -3,21 +3,24 @@ version: "3.4"
 services:
   app:
     volumes:
-      - "app:/app:nocopy"
+      - "app:/app"
 
   assets:
     volumes:
-      - "app:/app:nocopy"
+      - "app:/app"
 
   sync:
-    image: eugenmayer/unison:2.51.2.1
-    environment:
-      HOST_VOLUME: "/host_sync"
-      APP_VOLUME: "/app_sync"
-      UNISON_SRC: "/host_sync"
-      UNISON_DEST: "/app_sync"
-      UNISON_ARGS: "-ignore='Name .git' -ignore='Name _build' -ignore='Name deps' -ignore='Name node_modules' -ignore='Name .elixir_ls' -ignore='Name .idea' -ignore='Name .vscode' -ignore='Name .docker-sync' -prefer /host_sync -numericids -auto -batch"
-      UNISON_WATCH_ARGS: "-repeat watch"
+    image: cweagans/bg-sync
     volumes:
-      - ".:/host_sync"
-      - "app:/app_sync"
+      - ".:/source"
+      - "app:/destination"
+    environment:
+      SYNC_EXTRA_UNISON_PROFILE_OPTS: |
+        ignore = Path assets/node_modules/*
+        ignore = Path _build/*
+        ignore = Path deps/*
+        ignore = Path .elixir_ls/*
+        ignore = Path .vscode/*
+
+volumes:
+  app:
