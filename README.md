@@ -39,18 +39,34 @@ It can look like this:
 ### Prerequisites
 
 Install:
+
 * Docker
 * Docker-Compose
 
 ### Development
-- Run `bin/dev`, it will run the three containers specified below. You can access the website by visiting `http://localhost:4000`.
-- Run `bin/seed` to seed the database.
+
+* Run `bin/dev`, it will run the three containers specified below. You can access the website by visiting `http://localhost:4000`.
+* Run `bin/seed` to seed the database.
 
 After the initial start things might be wonky. Just restart the app and you should be fine. There are two cases where you need to interact with Docker directly:
-  * In some cases the containers won't stop after <kbd>ctrl</kbd> + <kbd>c</kbd> and keep running in the background (`docker ps`). If so you need to run `docker-compose down` manually. The same goes for the tests.
+
+* In some cases the containers won't stop after <kbd>ctrl</kbd> + <kbd>c</kbd> and keep running in the background (`docker ps`). If so you need to run `docker-compose down` manually. The same goes for the tests.
 
 ### Testing
+
 If you like you can run `bin/test --watch`, which will start a separate stack which continuously runs tests agains a test database.
+
+## Update
+
+### Elixir
+
+* Run `bin/compose run app mix deps.update --all`
+* Check app for errors before commiting
+
+### Yarn
+
+* Run `bin/compose run assets yarn ugrade`
+* Check app for errors before commiting
 
 ## Hosting and Deployment
 
@@ -59,11 +75,12 @@ If you like you can run `bin/test --watch`, which will start a separate stack wh
 * Server listens with watchtower for changes and restarts app container.
 
 ## Learn more about Phoenix
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+
+* [Official website](http://www.phoenixframework.org/)
+* [Guides](https://hexdocs.pm/phoenix/overview.html)
+* [Docs](https://hexdocs.pm/phoenix)
+* [Mailing list](http://groups.google.com/group/phoenix-talk)
+* [Source](https://github.com/phoenixframework/phoenix)
 
 ## License
 

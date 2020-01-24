@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  app:
+    image: klausurarchiv
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+    restart: always
+    env_file: ./app.env
+
+  db:
+    image: postgres:10.3-alpine
+    ports:
+      - "15432:5432"
+    restart: always
+    env_file: ./db.env
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 30
+
+volumes:
+  app:
