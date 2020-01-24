@@ -38,7 +38,7 @@ sudo apt-get install -y \
 
 sudo service nginx stop
 
-sudo certbot certonly --standalone -d klausurarchiv.fachschaft-wiwi.ms --agree-tos -m tbho@tbho.de
+sudo certbot certonly --standalone -d name.tld --agree-tos -m klausurarchiv@example.com
 
 sudo service nginx start
 
