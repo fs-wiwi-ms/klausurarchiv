@@ -8,7 +8,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "bulma": "^0.8.0",
-    "phoenix": "^1.4.10",
+    "phoenix": "^1.4.13",
     "phoenix_html": "^2.13.2"
   },
   "devDependencies": {
