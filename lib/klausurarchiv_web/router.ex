@@ -19,7 +19,7 @@ defmodule KlausurarchivWeb.Router do
     plug(:put_secure_browser_headers)
     plug(PlugPreferredLocales, ignore_area: true)
     plug(:set_language)
-    plug(BasicAuth, use_config: {:klausurarchiv, :http_auth})
+    plug(BasicAuth, callback: &KlausurarchivWeb.Authentification.auth_user/3)
   end
 
   pipeline :api do
