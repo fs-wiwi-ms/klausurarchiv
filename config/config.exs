@@ -40,8 +40,8 @@ config :gettext, :default_locale, "de"
 
 config :klausurarchiv,
   http_auth: [
-    username: System.get_env("USERNAME"),
-    password: System.get_env("PASSWORD")
+    username: {:system, "USERNAME"},
+    password: {:system, "PASSWORD"}
   ]
 
 # Import environment specific config. This must remain at the bottom
