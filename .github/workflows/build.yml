@@ -9,7 +9,7 @@ jobs:
     - name: login-github-packages
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_REGISTRY_URL: "docker.pkg.github.com"
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
     - name: checkout-repo

@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   app:
-    image: klausurarchiv
+    image: docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv:master
     depends_on:
       - db
     ports:
