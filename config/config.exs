@@ -13,11 +13,12 @@ config :slime, :keep_lines, true
 
 # Configures the endpoint
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
-  url: [host: "localhost"],
   secret_key_base:
     "SshedBcjDQiBjPm5Yy8QS/hC9TgbkkOeVI1YyDhrZENoiXmxlxcigR9wxBu4AUA7",
   render_errors: [view: KlausurarchivWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Klausurarchiv.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Klausurarchiv.PubSub, adapter: Phoenix.PubSub.PG2],
+  http: [:inet6, port: System.get_env("PORT") || 4000],
+  url: [host: "localhost", port: System.get_env("PORT")]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -36,6 +37,12 @@ config :klausurarchiv, Klausurarchiv.Repo,
   pool_size: 15
 
 config :gettext, :default_locale, "de"
+
+config :klausurarchiv,
+  http_auth: [
+    username: System.get_env("USERNAME"),
+    password: System.get_env("PASSWORD")
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

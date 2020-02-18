@@ -13,6 +13,9 @@ services:
       - sync
     environment:
       DATABASE_URL: "psql://klausurarchiv:klausurarchiv@db/klausurarchiv"
+      SECRET_KEY_BASE: 9Ypg26368B+rkZa+4kbQLInexEmaXyG/JUxVPKttdXV8ytBycLWG9WjDPGNYekLP
+      USERNAME: "admin"
+      PASSWORD: "pass"
     ports:
       - "4000:4000"
 

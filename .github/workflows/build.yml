@@ -14,9 +14,6 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
     - name: checkout-repo
       uses: actions/checkout@master
-    - run: echo "$PROD_SECRET_EXS" > "config/prod.secret.exs"
-      env:
-        PROD_SECRET_EXS: ${{ secrets.PROD_SECRET_EXS }}
     - name: build-image
       run: docker build --pull -t docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv:${GITHUB_REF##*/} .
     - name: push-image-master
