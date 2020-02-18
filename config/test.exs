@@ -12,8 +12,4 @@ config :logger, level: :warn
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "klausurarchiv_test",
-  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

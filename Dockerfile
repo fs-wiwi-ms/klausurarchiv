@@ -15,10 +15,10 @@ WORKDIR /app/assets
 
 RUN mkdir -p /app/priv/static
 
-COPY ./assets /app/assets
+COPY ./assets ./
 
 ARG ENV=prod
-ENV NODE_ENV dev
+ENV NODE_ENV $ENV
 
 RUN yarn install
 RUN if [ "$ENV" = "prod" ]; then yarn run deploy; fi
@@ -50,7 +50,7 @@ ARG ENV=prod
 ENV MIX_ENV $ENV
 
 # Install and compile dependencies
-COPY mix.exs mix.lock /app/
+COPY mix.* ./
 RUN mix deps.get
 RUN mix deps.compile
 

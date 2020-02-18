@@ -11,8 +11,10 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: "psql://immobook_test:immobook@db/immobook_test"
-
+      DATABASE_URL: "psql://klausurarchiv_test:klausurarchiv@db/klausurarchiv_test"
+      SECRET_KEY_BASE: vCYwlWedpDhj5OEFaMqhnNDzO+rT/AQwRRTu7NwidjASFI4js35VYYF0x5ARb+Uc
+      USERNAME: admin
+      PASSWORD: pass
   assets:
     build:
       context: .
@@ -24,6 +26,6 @@ services:
   db:
     image: postgres:10.3-alpine
     environment:
-      POSTGRES_USER: immobook_test
-      POSTGRES_PASSWORD: immobook
-      POSTGRES_DB: immobook_test
+      POSTGRES_USER: klausurarchiv_test
+      POSTGRES_PASSWORD: klausurarchiv
+      POSTGRES_DB: klausurarchiv_test

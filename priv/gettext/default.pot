@@ -51,7 +51,7 @@ msgid "Download"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:47
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:45
 msgid "Error"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgid "Send"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:39
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:37
 msgid "Success"
 msgstr ""
 
@@ -163,6 +163,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:6
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:6
 msgid "Examarchive of student's council of business school of university of münster"
 msgstr ""
 
@@ -192,7 +193,7 @@ msgid "If you have any suggestions, errors or other problems regarding the displ
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:72
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:70
 msgid "Legal"
 msgstr ""
 
@@ -202,7 +203,7 @@ msgid "Please enter the ZIV ID"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:75
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:73
 msgid "Privacy"
 msgstr ""
 
@@ -213,7 +214,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:69
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:7 lib/klausurarchiv_web/templates/layout/app.html.slime:67
 msgid "Student's council of business school of university of münster"
 msgstr ""
 
@@ -255,7 +256,7 @@ msgid "Winter term"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:80
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:78
 msgid "Source Code"
 msgstr ""
 

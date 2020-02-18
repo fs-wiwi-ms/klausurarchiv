@@ -33,7 +33,7 @@ defmodule Klausurarchiv.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.11"},
+      {:phoenix, "~> 1.4.13"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_slime, "~> 0.13.0"},
       {:phoenix_ecto, "~> 4.1.0"},

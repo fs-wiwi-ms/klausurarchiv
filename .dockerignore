@@ -7,3 +7,4 @@ Makefile
 README*
 test/
 priv/static/
+hosting/
