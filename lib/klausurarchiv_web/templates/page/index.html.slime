@@ -2,9 +2,9 @@ h1.title.is-3 =gettext("Examarchive")
 
 div.columns
   div.column.is-two-quarter
-    div.box
-      a(href="http://bit.ly/38pzJD0")
-        img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+    / div.box
+    /   a(href="http://bit.ly/38pzJD0")
+    /     img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
 
     div.box
       h3.subtitle.is-5 =gettext("Filter for Capital letter:")
