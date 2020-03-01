@@ -16,7 +16,7 @@ html(lang="en")
     link(rel="apple-touch-icon" href="/images/icons/192.png")
     meta(name="theme-color" content="#092135")
 
-  body.has-background-light
+  body.has-background-light.Site
     nav.navbar.has-shadow.is-spaced.is-transparent.has-background-primary(role="navigation" aria-label="main navigation")
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
@@ -29,35 +29,28 @@ html(lang="en")
             i.fas.fa-home
           span.navbar-item.has-text-white.has-text-weight-bold = gettext("Back to Homepage")
 
-    div.container
+
       = if !is_nil get_flash(@conn, :info) do
-        section.section
-          article.message.is-success
-            div.message-header
-              p = gettext("Success")
-            div.message-body
-              p = "#{get_flash(@conn, :info) }"
+        div.container
+          section.section
+            article.message.is-success
+              div.message-header
+                p = gettext("Success")
+              div.message-body
+                p = "#{get_flash(@conn, :info) }"
 
       = if !is_nil get_flash(@conn, :error) do
-        section.section
-          article.message.is-danger
-            div.message-header
-              p = gettext("Error")
-            div.message-body
-              p = "#{get_flash(@conn, :error) }"
+        div.container
+          section.section
+            article.message.is-danger
+              div.message-header
+                p = gettext("Error")
+              div.message-body
+                p = "#{get_flash(@conn, :error) }"
 
-      section.section
+    div.section.Site-content
+      div.container
         = render @view_module, @view_template, assigns
-
-    script(src="#{static_path(@conn, "/js/app.js")}")
-
-    script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
-    javascript:
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-87690156-2');
 
     footer.footer
       div.content
@@ -76,3 +69,13 @@ html(lang="en")
               span.icon.has-text-white
                 i.fab.fa-github
               span.has-text-white = gettext("Source Code")
+
+    script(src="#{static_path(@conn, "/js/app.js")}")
+
+    script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-87690156-2');
