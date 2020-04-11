@@ -17,7 +17,7 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
   cache_static_manifest: "priv/static/manifest.json",
   server: true,
   version: Application.spec(:klausurarchiv, :vsn),
-  load_from_system_env: true,
+  load_from_system_env: true
 
 # Do not print debug messages in production
 config :logger, level: :info
