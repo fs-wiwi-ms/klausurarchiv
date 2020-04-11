@@ -17,7 +17,7 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
     "SshedBcjDQiBjPm5Yy8QS/hC9TgbkkOeVI1YyDhrZENoiXmxlxcigR9wxBu4AUA7",
   render_errors: [view: KlausurarchivWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Klausurarchiv.PubSub, adapter: Phoenix.PubSub.PG2],
-  http: [:inet6, port: System.get_env("PORT") || 4000],
+  http: [:inet6, port: 4000],
   url: [host: "localhost", port: System.get_env("PORT")]
 
 # Configures Elixir's Logger

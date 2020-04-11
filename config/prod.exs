@@ -17,7 +17,7 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
   cache_static_manifest: "priv/static/manifest.json",
   server: true,
   version: Application.spec(:klausurarchiv, :vsn),
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  load_from_system_env: true,
 
 # Do not print debug messages in production
 config :logger, level: :info

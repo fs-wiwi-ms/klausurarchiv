@@ -50,11 +50,16 @@ defmodule KlausurarchivWeb.Endpoint do
   """
   def init(_key, config) do
     if config[:load_from_system_env] do
-      port =
-        System.get_env("PORT") ||
-          raise "expected the PORT environment variable to be set"
 
-      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+      secret_key_base =
+        System.get_env("SECRET_KEY_BASE") ||
+          raise("expected the SECRET_KEY_BASE environment variable to be set")
+
+      config =
+        config
+        |> Keyword.put(:secret_key_base, secret_key_base)
+
+      {:ok, config}
     else
       {:ok, config}
     end
