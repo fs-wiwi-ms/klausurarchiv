@@ -43,7 +43,7 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 2.7.0"},
+      {:cowboy, "~> 2.8.0"},
       {:ecto_enum, "~> 1.2"},
       {:httpoison, "~> 1.4"},
       {:jason, "~> 1.1"},
