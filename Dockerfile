@@ -1,7 +1,7 @@
 ##
 # Assets
 
-FROM node:13.6.0-slim AS assets
+FROM node:13.7.0-slim AS assets
 
 RUN set -xe; \
     apt-get update; \

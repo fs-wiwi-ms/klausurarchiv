@@ -78,11 +78,12 @@ module.exports = (env, options) => ({
     new MiniCssExtractPlugin({
       filename: "./css/[name].css",
     }),
-    new CopyWebpackPlugin([
-      {
-        from: "../static/",
-        to: "./",
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "../static/", to: "./",
+        },
+      ]
+    }),
   ],
 });

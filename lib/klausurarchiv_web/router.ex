@@ -12,14 +12,7 @@ defmodule KlausurarchivWeb.Router do
   end
 
   pipeline :protected_browser do
-    plug(:accepts, ["html"])
-    plug(:fetch_session)
-    plug(:fetch_flash)
-    plug(:protect_from_forgery, with: :clear_session)
-    plug(:put_secure_browser_headers)
-    plug(PlugPreferredLocales, ignore_area: true)
-    plug(:set_language)
-    plug(BasicAuth, callback: &KlausurarchivWeb.Authentification.auth_user/3)
+    plug(KlausurarchivWeb.Authentification)
   end
 
   pipeline :api do
@@ -48,7 +41,7 @@ defmodule KlausurarchivWeb.Router do
 
   scope "/", KlausurarchivWeb do
     # Use the browser stack with user authentification
-    pipe_through(:protected_browser)
+    pipe_through([:browser, :protected_browser])
 
     resources("/lectures", LectureController, only: [:new, :create])
 
