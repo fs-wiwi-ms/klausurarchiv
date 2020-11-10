@@ -50,7 +50,7 @@ html(lang="en")
 
     div.section.Site-content
       div.container
-        = render @view_module, @view_template, assigns
+        = @inner_content
 
     footer.footer
       div.content

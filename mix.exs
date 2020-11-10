@@ -5,7 +5,7 @@ defmodule Klausurarchiv.Mixfile do
     [
       app: :klausurarchiv,
       version: "0.0.1",
-      elixir: "~> 1.9.4",
+      elixir: "~> 1.10.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -46,6 +46,7 @@ defmodule Klausurarchiv.Mixfile do
       {:cowboy, "~> 2.8.0"},
       {:ecto_enum, "~> 1.2"},
       {:httpoison, "~> 1.7"},
+      {:sentry, "~> 8.0"},
       {:jason, "~> 1.2"},
       {:plug_preferred_locales, "~> 0.1.0"}
     ]

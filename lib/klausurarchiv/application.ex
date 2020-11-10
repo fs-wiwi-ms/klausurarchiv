@@ -4,16 +4,15 @@ defmodule Klausurarchiv.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
-    import Supervisor.Spec
 
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Klausurarchiv.PubSub},
       # Start the Ecto repository
-      supervisor(Klausurarchiv.Repo, []),
+      Klausurarchiv.Repo,
       # Start the endpoint when the application starts
-      supervisor(KlausurarchivWeb.Endpoint, [])
-      # Start your own worker by calling: Klausurarchiv.Worker.start_link(arg1, arg2, arg3)
-      # worker(Klausurarchiv.Worker, [arg1, arg2, arg3]),
+      KlausurarchivWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

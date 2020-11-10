@@ -1,5 +1,6 @@
 defmodule KlausurarchivWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :klausurarchiv
+  use Sentry.PlugCapture
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -25,8 +26,10 @@ defmodule KlausurarchivWeb.Endpoint do
   plug(Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Jason
+    json_decoder: Phoenix.json_library()
   )
+
+  plug Sentry.PlugContext
 
   plug(Plug.MethodOverride)
   plug(Plug.Head)
