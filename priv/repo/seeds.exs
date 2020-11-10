@@ -359,10 +359,10 @@ if System.get_env("ENV_NAME") != "production" do
     |> Path.dirname()
     |> Path.join("seeds_dev.exs")
   )
-end
 
-Code.eval_file(
-  __ENV__.file
-  |> Path.dirname()
-  |> Path.join("exams.exs")
-)
+  Code.eval_file(
+    __ENV__.file
+    |> Path.dirname()
+    |> Path.join("exams.exs")
+  )
+end

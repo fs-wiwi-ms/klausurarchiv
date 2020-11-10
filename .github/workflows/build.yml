@@ -6,19 +6,7 @@ jobs:
     name: build
     runs-on: ubuntu-18.04
     steps:
-    - name: login-github-packages
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        DOCKER_REGISTRY_URL: "docker.pkg.github.com"
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
     - name: checkout-repo
       uses: actions/checkout@master
-    - name: build-image
-      run: docker build --pull -t docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv:${GITHUB_REF##*/} .
-    - name: push-image-master
-      run: docker push docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv
-      if: github.ref == 'refs/heads/master'
-    - name: push-image-staging
-      run: docker push docker.pkg.github.com/fs-wiwi-ms/klausurarchiv/klausurarchiv:staging
-      if: github.ref == 'refs/heads/staging'
+    - name: test-image
+      run: bin/ci
