@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@creativebulma/bulma-tagsinput": "^1.0.2",
-    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "@yaireo/tagify": "^3.16.3",
     "bulma": "^0.9.0",
     "bulma-checkradio": "^1.1.1",
