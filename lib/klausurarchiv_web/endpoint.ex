@@ -52,19 +52,6 @@ defmodule KlausurarchivWeb.Endpoint do
   configuration should be loaded from the system environment.
   """
   def init(_key, config) do
-    if config[:load_from_system_env] do
-
-      secret_key_base =
-        System.get_env("SECRET_KEY_BASE") ||
-          raise("expected the SECRET_KEY_BASE environment variable to be set")
-
-      config =
-        config
-        |> Keyword.put(:secret_key_base, secret_key_base)
-
-      {:ok, config}
-    else
-      {:ok, config}
-    end
+    {:ok, config}
   end
 end

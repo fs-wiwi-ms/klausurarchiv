@@ -8,6 +8,13 @@ defmodule Klausurarchiv.Repo do
   DATABASE_URL environment variable.
   """
   def init(_, opts) do
-    {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
+    database_url =
+    System.get_env("DATABASE_URL") ||
+      raise """
+      environment variable DATABASE_URL is missing.
+      For example: ecto://USER:PASS@HOST/DATABASE
+      """
+
+    {:ok, Keyword.put(opts, :url, database_url)}
   end
 end

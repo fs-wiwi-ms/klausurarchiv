@@ -18,35 +18,47 @@ html(lang="en")
 
   body.has-background-light.Site
     nav.navbar.has-shadow.is-spaced.is-transparent.has-background-primary(role="navigation" aria-label="main navigation")
+
       div.navbar-brand
-        a.navbar-item(href="#{page_path(@conn, :index)}")
-          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
-          span.navbar-item.has-text-white.has-text-weight-bold = gettext("Examarchive")
+        div.navbar-item
+          a.button.is-primary(href="#{page_path(@conn, :index)}")
+            img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
+            span.navbar-item.has-text-white.has-text-weight-bold = gettext("Examarchive")
 
-      div.navbar-menu.navbar-end
-        a.navbar-item(href="https://fachschaft-wiwi.ms")
-          span.icon.has-text-white
-            i.fas.fa-home
-          span.navbar-item.has-text-white.has-text-weight-bold = gettext("Back to Homepage")
+        div.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="navMenu")
+          span.has-background-white
+          span.has-background-white
+          span.has-background-white
+
+      div.navbar-menu(id="navMenu")
+        div.navbar-end
+          div.navbar-item
+            a.button.has-text-weight-bold.is-primary(href="https://fachschaft-wiwi.ms")
+              span.icon
+                i.fas.fa-home
+              span = gettext("Back to Homepage")
 
 
-      = if !is_nil get_flash(@conn, :info) do
-        div.container
-          section.section
-            article.message.is-success
-              div.message-header
-                p = gettext("Success")
-              div.message-body
-                p = "#{get_flash(@conn, :info) }"
+    = if !is_nil get_flash(@conn, :info) do
+      section.hero.is-success
+        div.hero-body
+          div.container
+            h1.title.has-text-white = gettext("Success")
+            h2.subtitle.has-text-white = "#{get_flash(@conn, :info) }"
 
-      = if !is_nil get_flash(@conn, :error) do
-        div.container
-          section.section
-            article.message.is-danger
-              div.message-header
-                p = gettext("Error")
-              div.message-body
-                p = "#{get_flash(@conn, :error) }"
+    = if !is_nil get_flash(@conn, :warning) do
+      section.hero.is-warning
+        div.hero-body
+          div.container
+            h1.title.has-text-white = gettext("Warning")
+            h2.subtitle.has-text-white = "#{get_flash(@conn, :warning) }"
+
+    = if !is_nil get_flash(@conn, :error) do
+      section.hero.is-danger
+        div.hero-body
+          div.container
+            h1.title.is-3.has-text-white = gettext("Error")
+            h2.subtitle.has-text-white = "#{get_flash(@conn, :error) }"
 
     div.section.Site-content
       div.container
