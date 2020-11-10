@@ -41,6 +41,23 @@ defmodule KlausurarchivWeb do
       import KlausurarchivWeb.Router.Helpers
       import KlausurarchivWeb.ErrorHelpers
       import KlausurarchivWeb.Gettext
+
+      def error_label(changeset, field) do
+        errors =
+          Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+            Enum.reduce(opts, msg, fn {key, value}, acc ->
+              String.replace(acc, "%{#{key}}", to_string(value))
+            end)
+          end)
+
+        case Enum.find(errors, fn {key, value} -> key == field end) do
+          {field, errors} ->
+            content_tag(:p, Enum.join(errors, ", "), class: "help is-danger")
+
+          nil ->
+            nil
+        end
+      end
     end
   end
 

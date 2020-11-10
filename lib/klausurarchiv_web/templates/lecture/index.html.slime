@@ -26,15 +26,24 @@ div.box
     table.table
       thead
         tr
+          td Module number
           td Name
+          td Shorts
       tbody
         = for lecture <- @lectures do
           tr
             td
               a(href="#{lecture_path(@conn, :show, lecture.id)}")
+                p.has-text-weight-semibold.has-text-black(style="padding:5") = lecture.module_number
+            td
+              a(href="#{lecture_path(@conn, :show, lecture.id)}")
                 p.has-text-weight-semibold.has-text-black(style="padding:5") = lecture.name
+            td
+              = if lecture.shorts do
+                div.tags
+                  = for short <- lecture.shorts do
+                    span.tag.is-primary = short.short
   - else
     span.icon
       i.fas.fa-exclamation
     span = gettext("No lectures found.")
-

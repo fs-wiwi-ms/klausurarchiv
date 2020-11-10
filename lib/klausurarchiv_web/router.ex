@@ -43,7 +43,8 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through([:browser, :protected_browser])
 
-    resources("/lectures", LectureController, only: [:new, :create])
+    get("/lectures/:id/edit_shorts", LectureController, :edit_shorts)
+    resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
 
     get("/exams/drafts", ExamController, :draft)
     post("/exams/publish/:id", ExamController, :publish)

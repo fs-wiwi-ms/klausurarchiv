@@ -7,18 +7,4 @@ div.level
   h2.title.is-2 = gettext("Create new lecture")
 
 div.box
-  = form_for @changeset, @action, fn lecture_form ->
-    div.columns
-      div.column
-        h5.title.is-5 = gettext("Degree")
-        div.select.is-multiple
-          = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees, &{&1.name, &1.id}), multiple: true, size: length(@degrees))
-
-    div.columns
-      div.column
-        h5.title.is-5 = gettext("Name")
-        = text_input(lecture_form, :name, class: "input", type: "text")
-
-    div.columns
-      div.column
-        = submit gettext("Create"), class: "button is-primary"
+  = render "_form.html", assigns

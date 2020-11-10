@@ -240,9 +240,10 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def get_lecture(id) do
+  def get_lecture(id, preload \\ []) do
     Lecture
     |> Repo.get(id)
+    |> Repo.preload(preload)
   end
 
   def create_lecture(lecture_params) do
@@ -260,6 +261,27 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def update_lecture(lecture, lecture_params) do
+    shorts = if lecture_params["shorts"] do
+      lecture_params["shorts"]
+      |> String.split(",")
+      |> Enum.map(& %{short: &1, published: false})
+    else
+      []
+    end
+
+    shorts
+    |> IO.inspect
+    |> Enum.concat(lecture.shorts)
+
+    degrees = Enum.map(lecture_params["degree_ids"] || Enum.map(lecture.degrees,& &1.id), &get_degree(&1))
+
+    lecture_params =
+      lecture_params
+      |> Map.drop(["degree_ids"])
+      |> Map.drop(["shorts"])
+      |> Map.put("degrees", degrees)
+      |> Map.put("shorts", shorts)
+
     lecture
     |> Lecture.changeset(lecture_params)
     |> Repo.update()
