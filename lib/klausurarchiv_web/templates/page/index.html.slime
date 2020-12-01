@@ -1,4 +1,4 @@
-h1.title.is-3 =gettext("Examarchive")
+h1.title.is-3.has-text-white =gettext("Examarchive")
 
 div.columns
   div.column.is-two-quarter

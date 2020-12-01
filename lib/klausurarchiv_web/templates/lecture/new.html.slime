@@ -4,7 +4,7 @@ div.level
       i.fas.fa-caret-left
     span =gettext("Back")
 div.level
-  h2.title.is-2 = gettext("Create new lecture")
+  h2.title.is-2.has-text-white = gettext("Create new lecture")
 
 div.box
   = form_for @changeset, @action, fn lecture_form ->

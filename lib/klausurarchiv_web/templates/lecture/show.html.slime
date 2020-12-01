@@ -5,7 +5,7 @@ div.level
       i.fas.fa-caret-left
     span = gettext("Back")
 div.level
-  h2.title.is-2 = @lecture.name
+  h2.title.is-2.has-text-white = @lecture.name
 
 = if length(@exams) > 0 do
   div.box
@@ -24,9 +24,9 @@ div.level
             td
               div
                 a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-                  p = gettext("Preview")
-                a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
                   p = gettext("Download")
+                / a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
+                /   p = gettext("Download")
 - else
   div.box
     span.icon

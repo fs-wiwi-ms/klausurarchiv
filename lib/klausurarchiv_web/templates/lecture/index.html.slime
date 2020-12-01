@@ -4,7 +4,7 @@ div.level
       i.fas.fa-caret-left
     span Back
 div.level
-  h2.title.is-2 = gettext("Lecture overview")
+  h2.title.is-2.has-text-white = gettext("Lecture overview")
 
 div.box
   p.subtitle.is-5 Filter:
@@ -37,4 +37,3 @@ div.box
     span.icon
       i.fas.fa-exclamation
     span = gettext("No lectures found.")
-

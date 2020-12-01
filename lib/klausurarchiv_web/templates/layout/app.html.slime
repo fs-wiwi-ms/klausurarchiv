@@ -16,27 +16,28 @@ html(lang="en")
     link(rel="apple-touch-icon" href="/images/icons/192.png")
     meta(name="theme-color" content="#092135")
 
-  body.has-background-light.Site
-    nav.navbar.has-shadow.is-spaced.is-transparent.has-background-primary(role="navigation" aria-label="main navigation")
+  body.has-background-primary.Site
+    nav.navbar.has-shadow.is-spaced.is-transparent(role="navigation" aria-label="main navigation")
 
       div.navbar-brand
-        div.navbar-item
-          a.button.is-primary(href="#{page_path(@conn, :index)}")
-            img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Vektor.png")}" alt="" height="70")
-            span.navbar-item.has-text-white.has-text-weight-bold = gettext("Examarchive")
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Blue.png")}" alt="" height="70")
+
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          span.has-text-weight-bold.has-text-primary = gettext("Examarchive")
 
         div.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="navMenu")
-          span.has-background-white
-          span.has-background-white
-          span.has-background-white
+          span
+          span
+          span
 
       div.navbar-menu(id="navMenu")
         div.navbar-end
           div.navbar-item
-            a.button.has-text-weight-bold.is-primary(href="https://fachschaft-wiwi.ms")
+            a.has-text-weight-bold.has-text-primary(href="https://fachschaft-wiwi.ms")
               span.icon
                 i.fas.fa-home
-              span = gettext("Back to Homepage")
+              span.is = gettext("Back to Homepage")
 
 
     = if !is_nil get_flash(@conn, :info) do
@@ -83,6 +84,7 @@ html(lang="en")
               span.has-text-white = gettext("Source Code")
 
     script(src="#{static_path(@conn, "/js/app.js")}")
+    script(src="#{static_path(@conn, "/js/snow.js")}")
 
     script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
     javascript:
