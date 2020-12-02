@@ -4,7 +4,7 @@ div.level
       i.fas.fa-caret-left
     span = gettext("Back")
 div.level
-  h2.title.is-2 = gettext "Upload a new exam"
+  h2.title.is-2.has-text-white = gettext "Upload a new exam"
 div.box
   = form_for @changeset, @action, [multipart: true],fn exam_form ->
     div.field

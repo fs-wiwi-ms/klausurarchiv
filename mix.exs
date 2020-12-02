@@ -36,7 +36,7 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix, "~> 1.5"},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_slime, "~> 0.13.0"},
-      {:phoenix_ecto, "~> 4.1.0"},
+      {:phoenix_ecto, "~> 4.2.0"},
       {:plug_cowboy, "~> 2.3"},
       {:postgrex, "~> 0.15"},
       {:distillery, "~> 2.0"},
@@ -62,7 +62,8 @@ defmodule Klausurarchiv.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      ci: ["deps.get", "test"]
     ]
   end
 end

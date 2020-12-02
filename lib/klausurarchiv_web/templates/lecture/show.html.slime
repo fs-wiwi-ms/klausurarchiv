@@ -8,7 +8,7 @@ div.level
 div.level
   div.level-left
     span.level-item
-      h2.title.is-2 = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
+      h2.title.is-2.has-text-white = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
   div.level-right
     span.level-item
       a.button(href="#{lecture_path(@conn, :edit, @lecture.id)}")
@@ -55,9 +55,9 @@ div.modal
             td
               div
                 a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-                  p = gettext("Preview")
-                a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
                   p = gettext("Download")
+                / a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
+                /   p = gettext("Download")
 - else
   div.box
     span.icon

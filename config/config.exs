@@ -15,8 +15,6 @@ config :klausurarchiv, Klausurarchiv.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   log: false
 
-config :slime, :keep_lines, true
-
 # Configures the endpoint
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT")],

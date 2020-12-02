@@ -1,29 +1,28 @@
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 module.exports = (env, options) => ({
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false,
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
+  entry: {
+    app: "./app/index.ts"
   },
   context: path.resolve(__dirname, "src"),
-  entry: {
-    app: "./app/index.ts",
-  },
   output: {
     filename: "./js/[name].js",
     path: path.resolve(__dirname, "../priv/static/"),
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: { compress: { unused: true, dead_code: true } },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
   resolve: {
     extensions: [".ts", ".js", ".json"],
@@ -80,10 +79,8 @@ module.exports = (env, options) => ({
     }),
     new CopyWebpackPlugin({
       patterns: [
-        {
-          from: "../static/", to: "./",
-        },
-      ]
+        {from: "../static/", to: "./"}
+      ],
     }),
   ],
 });

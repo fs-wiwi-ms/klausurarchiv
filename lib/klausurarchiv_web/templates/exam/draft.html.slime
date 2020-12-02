@@ -4,7 +4,7 @@ div.level
       i.fas.fa-caret-left
     span = gettext "Back"
 div.level
-  h2.title.is-2 =gettext "Not published Exams"
+  h2.title.is-2.has-text-white =gettext "Not published Exams"
 
 = if length(@unplubished_exams) > 0 do
   table.table.is-bordered.is-hoverable

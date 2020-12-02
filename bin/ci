@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+function cleanup {
+  ENV=test "$(dirname "$0")/compose" down
+}
+
+trap cleanup SIGHUP SIGINT
+
+ENV=test "$(dirname "$0")/compose" run app mix ci
