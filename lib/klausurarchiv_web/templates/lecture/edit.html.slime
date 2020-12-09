@@ -1,10 +1,10 @@
-/ div.level
-/   a.button(href="#{page_path(@conn, :index)}")
-/     span.icon
-/       i.fas.fa-caret-left
-/     span =gettext("Back")
-/ div.level
-/   h2.title.is-2 = gettext("Edit lecture")
+div.level
+  a.button(href="#{page_path(@conn, :index)}")
+    span.icon
+      i.fas.fa-caret-left
+    span =gettext("Back")
+div.level
+  h2.title.is-2.has-text-white = gettext("Edit lecture")
 
-/ div.box
-/   = render "_form.html", assigns
+div.box
+  = render "_form.html", assigns

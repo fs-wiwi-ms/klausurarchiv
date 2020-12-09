@@ -48,7 +48,9 @@ defmodule Klausurarchiv.Mixfile do
       {:httpoison, "~> 1.7"},
       {:sentry, "~> 8.0"},
       {:jason, "~> 1.2"},
-      {:plug_preferred_locales, "~> 0.1.0"}
+      {:plug_preferred_locales, "~> 0.1.0"},
+      {:phoenix_live_view, "~> 0.14.6"},
+      {:floki, ">= 0.27.0", only: :test}
     ]
   end
 

@@ -4,9 +4,11 @@ defmodule KlausurarchivWeb.Router do
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
-    plug(:fetch_flash)
+    plug(:fetch_live_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    # plug(:put_layout, {KlausurarchivWeb.LayoutView, :root})
+    # plug(:put_root_layout, {KlausurarchivWeb.LayoutView, :root})
     plug(PlugPreferredLocales, ignore_area: true)
     plug(:set_language)
   end
@@ -43,11 +45,14 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through([:browser, :protected_browser])
 
-    get("/lectures/:id/edit_shorts", LectureController, :edit_shorts)
+    get("/lectures/:id/edit_shortcuts", LectureController, :edit_shortcuts)
     resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
 
     get("/exams/drafts", ExamController, :draft)
     post("/exams/publish/:id", ExamController, :publish)
+    post("/exams/archive/:id", ExamController, :archive)
+
+    get("/lectures/shortcuts", LectureController, :shortcuts)
   end
 
   scope "/", KlausurarchivWeb do
@@ -59,6 +64,8 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/exams", ExamController, only: [:new, :create])
 
-    resources("/lectures", LectureController, only: [:index, :show])
+    resources("/lectures", LectureController, only: [:show, :index]) do
+      resources("/shortcuts", ShortcutController, only: [:create])
+    end
   end
 end

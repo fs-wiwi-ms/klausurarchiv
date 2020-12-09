@@ -5,25 +5,29 @@ defmodule KlausurarchivWeb.LectureController do
   alias Klausurarchiv.Uploads.Lecture
 
   def index(conn, %{"filter" => filter}) do
-    degrees = Uploads.get_degrees_for_select()
-    lectures = Uploads.get_lectures(filter)
+    live_render(conn, KlausurarchivWeb.LectureLive,
+      session: %{
+        "filter" => filter
+      }
+    )
+  end
 
-    render(conn, "index.html", lectures: lectures, degrees: degrees)
+  def index(conn, _params), do: index(conn, %{"filter" => %{}})
+
+  def shortcuts(conn, _params) do
+    live_render(conn, KlausurarchivWeb.ShortcutLive)
   end
 
   def show(conn, %{"id" => lecture_id}) do
     lecture =
       lecture_id
-      |> Uploads.get_lecture()
+      |> Uploads.get_lecture([:shortcuts, :degrees])
 
     exams =
       lecture_id
       |> Uploads.get_published_exams_for_lecture()
 
-    lecture_changeset =
-      lecture_id
-      |> Uploads.get_lecture([:degrees])
-      |> Uploads.change_lecture(%{})
+    lecture_changeset = Uploads.change_lecture(lecture, %{})
 
     render(conn, "show.html",
       lecture: lecture,
@@ -48,7 +52,7 @@ defmodule KlausurarchivWeb.LectureController do
   end
 
   def edit(conn, %{"id" => lecture_id}) do
-    lecture = Uploads.get_lecture(lecture_id, [:degrees])
+    lecture = Uploads.get_lecture(lecture_id, [:degrees, :shortcuts])
 
     lecture_changeset = Uploads.change_lecture(lecture, %{})
 
@@ -85,7 +89,7 @@ defmodule KlausurarchivWeb.LectureController do
   end
 
   def update(conn, %{"id" => lecture_id, "lecture" => lecture_params}) do
-    lecture = Uploads.get_lecture(lecture_id, [:degrees])
+    lecture = Uploads.get_lecture(lecture_id, [:degrees, :shortcuts])
 
     case Uploads.update_lecture(lecture, lecture_params) do
       {:ok, lecture} ->

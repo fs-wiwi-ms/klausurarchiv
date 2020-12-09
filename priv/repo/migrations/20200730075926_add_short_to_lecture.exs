@@ -1,9 +1,17 @@
-# defmodule Klausurarchiv.Repo.Migrations.AddShortToLecture do
-#   use Ecto.Migration
+defmodule Klausurarchiv.Repo.Migrations.AddShortToLecture do
+  use Ecto.Migration
 
-#   def change do
-#     alter table :lectures do
-#       add :shorts, {:array, :map}
-#     end
-#   end
-# end
+  def change do
+    create table("shortcuts", primary_key: false) do
+      add(:id, :binary_id, primary_key: true)
+      add(:name, :string)
+
+      add(
+        :lecture_id,
+        references(:lectures, type: :uuid)
+      )
+
+      timestamps()
+    end
+  end
+end

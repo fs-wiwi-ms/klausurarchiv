@@ -1,22 +1,22 @@
-/ = form_for @changeset, @action, fn lecture_form ->
-/   div.field
-/     label.label = gettext("Degree")
-/     div.control
-/       div.select.is-multiple
-/         = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees, &{&1.name, &1.id}), multiple: true, size: length(@degrees), selected: Enum.map(@lecture.degrees, & &1.id))
-/     = error_label(@changeset, :degree_ids)
+= form_for @changeset, @action, fn lecture_form ->
+  div.field
+    label.label = gettext("Degree")
+    div.control
+      div.select.is-multiple
+        = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees, &{&1.name, &1.id}), multiple: true, size: length(@degrees), selected: Enum.map(@lecture.degrees, & &1.id))
+    = error_label(@changeset, :degree_ids)
 
-/   div.field
-/     label.label = gettext("Module number")
-/     div.control
-/       = text_input(lecture_form, :module_number, class: "input", type: "text")
-/     = error_label(@changeset, :module_number)
+  div.field
+    label.label = gettext("Module number")
+    div.control
+      = text_input(lecture_form, :module_number, class: "input", type: "text")
+    = error_label(@changeset, :module_number)
 
-/   div.field
-/     label.label = gettext("Name")
-/     div.control
-/       = text_input(lecture_form, :name, class: "input", type: "text")
-/     = error_label(@changeset, :name)
+  div.field
+    label.label = gettext("Name")
+    div.control
+      = text_input(lecture_form, :name, class: "input", type: "text")
+    = error_label(@changeset, :name)
 
-/   div.field
-/     = submit gettext("Create"), class: "button is-primary"
+  div.field
+    = submit gettext("Create"), class: "button is-primary"

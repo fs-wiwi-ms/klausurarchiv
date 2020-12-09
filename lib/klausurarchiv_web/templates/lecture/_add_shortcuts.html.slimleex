@@ -1,0 +1,19 @@
+= form_for :lecture, lecture_path(@socket, :update, @lecture.id), [phx_submit: "submit"], fn shortcut_form ->
+  div.field
+    label.label = gettext("Shortcuts")
+    div.control
+      = text_input(shortcut_form, :shortcuts, placeholder: "Choose Tags", class: "input")
+
+  div.field
+    = submit gettext("Create"), class: "button is-primary"
+
+
+div.field.is-grouped.is-grouped-multiline
+  = for shortcut <- @lecture.shortcuts do
+    div.control
+      div.tags.has-addons
+        = if shortcut.published do
+          span.tag.is-success = shortcut.name
+        - else
+          span.tag.is-warning = shortcut.name
+          span.tag.is-lite = gettext("Under review")

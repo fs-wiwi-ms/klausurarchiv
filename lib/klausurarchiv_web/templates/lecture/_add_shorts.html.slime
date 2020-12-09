@@ -1,9 +1,0 @@
-/ = form_for @changeset, @action, fn lecture_form ->
-/   div.field
-/     label.label = gettext("Shorts")
-/     div.control
-/       = text_input(lecture_form, :shorts, type: "tags",placeholder: "Choose Tags", value: "")
-/     = error_label(@changeset, :short)
-
-/   div.field
-/     = submit gettext("Create"), class: "button is-primary"

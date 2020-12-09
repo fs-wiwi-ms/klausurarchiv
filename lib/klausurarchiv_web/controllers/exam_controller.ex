@@ -54,6 +54,15 @@ defmodule KlausurarchivWeb.ExamController do
     |> redirect(to: exam_path(conn, :draft))
   end
 
+  def archive(conn, %{"id" => exam_id}) do
+    exam = Uploads.get_exam(exam_id, [:lecture])
+    Uploads.update_exam(exam, %{published: false})
+
+    conn
+    |> put_flash(:info, "Archived")
+    |> redirect(to: lecture_path(conn, :show, exam.lecture_id))
+  end
+
   def draft(conn, _params) do
     unplubished_exams = Uploads.get_unplubished_exams()
 

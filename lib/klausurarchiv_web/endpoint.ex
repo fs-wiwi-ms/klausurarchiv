@@ -2,6 +2,12 @@ defmodule KlausurarchivWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :klausurarchiv
   use Sentry.PlugCapture
 
+  @session_options [
+    store: :cookie,
+    key: "_my_app_key",
+    signing_salt: "5W54z+xr"
+  ]
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
@@ -37,13 +43,13 @@ defmodule KlausurarchivWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug(Plug.Session,
-    store: :cookie,
-    key: "_klausurarchiv_key",
-    signing_salt: "5W54z+xr"
-  )
+  plug(Plug.Session,@session_options)
 
   plug(KlausurarchivWeb.Router)
+
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

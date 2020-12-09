@@ -6,7 +6,8 @@ defmodule Klausurarchiv.Uploads do
     Term,
     Degree,
     Lecture,
-    Exam
+    Exam,
+    Shortcut
   }
 
   require Logger
@@ -103,9 +104,10 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def get_exam(id) do
+  def get_exam(id, preload \\ []) do
     Exam
     |> Repo.get(id)
+    |> Repo.preload(preload)
   end
 
   def get_unplubished_exams() do
@@ -190,34 +192,36 @@ defmodule Klausurarchiv.Uploads do
   # -- Lecture
   # -----------------------------------------------------------------
 
-  def get_lectures() do
+  def get_lectures(preload \\ []) do
     Lecture
+    |> preload(^preload)
     |> Repo.all()
   end
 
-  def get_lectures(filter) do
+  def filter_lectures(filter, preload \\ []) do
     query =
       Lecture
       |> join(:inner, [l], ld in assoc(l, :degrees))
 
     filter
-    |> Enum.reduce(query, fn x, acc -> filter_lectures(acc, x) end)
+    |> Enum.reduce(query, fn x, acc -> build_lecture_filter(acc, x) end)
     |> distinct(true)
     |> order_by([l, ld], asc: l.name)
+    |> preload(^preload)
     |> Repo.all()
   end
 
-  defp filter_lectures(query, {"degree", "all"}) do
+  defp build_lecture_filter(query, {"degree", "all"}) do
     query
   end
 
-  defp filter_lectures(query, {"degree", degree_id}) do
+  defp build_lecture_filter(query, {"degree", degree_id}) do
     where(query, [l, ld], ld.id == ^degree_id)
   end
 
-  defp filter_lectures(query, {"query", ""}), do: query
+  defp build_lecture_filter(query, {"query", ""}), do: query
 
-  defp filter_lectures(query, {"query", full_text_search}) do
+  defp build_lecture_filter(query, {"query", full_text_search}) do
     where(
       query,
       [l, ld],
@@ -225,9 +229,9 @@ defmodule Klausurarchiv.Uploads do
     )
   end
 
-  defp filter_lectures(query, {"capital", ""}), do: query
+  defp build_lecture_filter(query, {"capital", ""}), do: query
 
-  defp filter_lectures(query, {"capital", capital_search}) do
+  defp build_lecture_filter(query, {"capital", capital_search}) do
     where(query, [l, ld], fragment("? ILIKE ?", l.name, ^"#{capital_search}%"))
   end
 
@@ -261,30 +265,34 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def update_lecture(lecture, lecture_params) do
-    shorts = if lecture_params["shorts"] do
-      lecture_params["shorts"]
+    shortcuts = if lecture_params["shortcuts"] do
+      lecture_params["shortcuts"]
       |> String.split(",")
-      |> Enum.map(& %{short: &1, published: false})
+      |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
+      |> Enum.map(& %{name: &1, published: false})
     else
       []
     end
-
-    shorts
     |> IO.inspect
-    |> Enum.concat(lecture.shorts)
+
+    shortcuts = lecture.shortcuts
+    |> Enum.concat(shortcuts)
+    |> Enum.uniq(fn %{name: short} -> String.downcase(short) end)
 
     degrees = Enum.map(lecture_params["degree_ids"] || Enum.map(lecture.degrees,& &1.id), &get_degree(&1))
 
     lecture_params =
       lecture_params
       |> Map.drop(["degree_ids"])
-      |> Map.drop(["shorts"])
+      |> Map.drop(["shortcuts"])
       |> Map.put("degrees", degrees)
-      |> Map.put("shorts", shorts)
+      |> Map.put("shortcuts", shortcuts)
+      |> IO.inspect
 
     lecture
     |> Lecture.changeset(lecture_params)
     |> Repo.update()
+    |> IO.inspect
   end
 
   def delete_lecture(lecture) do
@@ -294,5 +302,24 @@ defmodule Klausurarchiv.Uploads do
   def change_lecture(lecture \\ %Lecture{}, attrs \\ %{}) do
     lecture
     |> Lecture.changeset(attrs)
+  end
+
+  # -----------------------------------------------------------------
+  # -- Shortcuts
+  # -----------------------------------------------------------------
+
+  def get_shortcut(id, preload \\ []) do
+    Shortcut
+    |> Repo.get(id)
+    |> Repo.preload(preload)
+  end
+
+
+  def update_shortcut_state(shortcut_id, state) do
+    short = get_shortcut(shortcut_id, [:lecture])
+
+    short
+    |> Shortcut.changeset(%{"published" => state})
+    |> Repo.update()
   end
 end

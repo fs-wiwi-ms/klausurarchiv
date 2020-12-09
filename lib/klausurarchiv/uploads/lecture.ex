@@ -11,10 +11,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
 
-    embeds_many :shorts, Short, on_replace: :delete do
-      field :short, :string
-      field :published, :boolean
-    end
+    has_many(:shortcuts, Klausurarchiv.Uploads.Shortcut, [on_replace: :delete])
 
     many_to_many(
       :degrees,
@@ -31,7 +28,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
     lecture
     |> cast(attrs, [:name, :module_number])
     |> validate_required([:name])
-    |> put_embed(:shorts, attrs["shorts"] || lecture.shorts)
+    |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)
   end
 end

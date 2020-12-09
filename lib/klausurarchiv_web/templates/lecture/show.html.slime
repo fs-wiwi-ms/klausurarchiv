@@ -1,42 +1,49 @@
 div.level
-  a.button(href="#{page_path(@conn, :index)}")
-    span.icon
-      i.fas.fa-caret-left
-    span = gettext("Back")
+  div.level-left
+    div.level-item
+      a.button(href="#{page_path(@conn, :index)}")
+        span.icon
+          i.fas.fa-caret-left
+        span = gettext("Back")
 
 
 div.level
   div.level-left
-    span.level-item
-      h2.title.is-2.has-text-white = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
+    div.level-item
+      h1.title.is-6.has-text-white = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
   div.level-right
-    span.level-item
+    div.level-item
       a.button(href="#{lecture_path(@conn, :edit, @lecture.id)}")
         span.icon.is-small
           i.fas.fa-edit
         span =gettext("Edit")
 
 div.level
-  div.level-left
-    = if @lecture.shorts do
-      div.tags
-        = for short <- @lecture.shorts do
-          span.tag.is-primary = short.short
+  = if @lecture.shortcuts do
+    div.level-left
+      div.level-item
+        div.tags
+          = for short <- @lecture.shortcuts do
+            = if short.published do
+              span.tag.is-info = short.name
   div.level-right
-    button.button#open-modal
-      span.icon.is-small
-        i.fas.fa-plus-square
-      span Add
+    div.level-item
+      button.button#open-modal
+        span.icon.is-small
+          i.fas.fa-plus-square
+        span Add
 
-div.modal
-  div.modal-background
-  div.modal-card
-    header.modal-card-head
-      p.modal-card-title Modal title
-      button.delete#close-modal
-    section.modal-card-body
-      = render "_add_shorts.html", assigns
-    footer.modal-card-foot
+div.container
+  div.modal
+    div.modal-background
+    div.modal-card
+      header.modal-card-head
+        p.modal-card-title Modal title
+        button.delete#close-modal
+      section.modal-card-body
+        / = render "_add_shortcuts.html", assigns
+        = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id})
+      footer.modal-card-foot
 
 = if length(@exams) > 0 do
   div.box
@@ -53,9 +60,11 @@ div.modal
             td
               span.tag = exam.term.year
             td
-              div
+              div.buttons
                 a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
                   p = gettext("Download")
+                = form_for @conn, exam_path(@conn, :archive, exam.id), [style: "margin: auto"], fn _ ->
+                  = submit gettext("Hide"), class: "button is-danger is-small"
                 / a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
                 /   p = gettext("Download")
 - else

@@ -15,6 +15,7 @@ html(lang="en")
     meta(name="apple-mobile-web-app-title" content="Klausurarchiv")
     link(rel="apple-touch-icon" href="/images/icons/192.png")
     meta(name="theme-color" content="#092135")
+    = csrf_meta_tag()
 
   body.has-background-primary.Site
     nav.navbar.has-shadow.is-spaced.is-transparent(role="navigation" aria-label="main navigation")
@@ -41,17 +42,24 @@ html(lang="en")
 
 
     = if !is_nil get_flash(@conn, :info) do
+      section.hero.is-info
+        div.hero-body
+          div.container
+            h1.title.is-3.has-text-white = gettext("Info")
+            h2.subtitle.has-text-white = "#{get_flash(@conn, :info) }"
+
+    = if !is_nil get_flash(@conn, :success) do
       section.hero.is-success
         div.hero-body
           div.container
-            h1.title.has-text-white = gettext("Success")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :info) }"
+            h1.title.is-3.has-text-white = gettext("Success")
+            h2.subtitle.has-text-white = "#{get_flash(@conn, :success) }"
 
     = if !is_nil get_flash(@conn, :warning) do
       section.hero.is-warning
         div.hero-body
           div.container
-            h1.title.has-text-white = gettext("Warning")
+            h1.title.is-3.has-text-white = gettext("Warning")
             h2.subtitle.has-text-white = "#{get_flash(@conn, :warning) }"
 
     = if !is_nil get_flash(@conn, :error) do
@@ -61,9 +69,8 @@ html(lang="en")
             h1.title.is-3.has-text-white = gettext("Error")
             h2.subtitle.has-text-white = "#{get_flash(@conn, :error) }"
 
-    div.section.Site-content
-      div.container
-        = @inner_content
+    section.section.Site-content
+      = @inner_content
 
     footer.footer
       div.content
@@ -84,7 +91,6 @@ html(lang="en")
               span.has-text-white = gettext("Source Code")
 
     script(src="#{static_path(@conn, "/js/app.js")}")
-    script(src="#{static_path(@conn, "/js/snow.js")}")
 
     script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
     javascript:
