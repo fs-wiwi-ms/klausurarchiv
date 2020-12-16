@@ -13,8 +13,7 @@ defmodule KlausurarchivWeb.LectureShortcutsLive do
   end
 
   def handle_event("submit", %{"lecture" => lecture}, socket) do
-    IO.inspect(lecture)
-    {:ok, lecture} = Uploads.update_lecture(socket.assigns.lecture, lecture) |> IO.inspect
+    {:ok, lecture} = Uploads.update_lecture(socket.assigns.lecture, lecture)
     {:noreply, assign(socket, lecture: lecture)}
   end
 end

@@ -1,0 +1,21 @@
+div.container
+  h2.title = gettext("Change password")
+
+  = form_for @changeset, @action, fn user_form ->
+		div.field
+			label.label = gettext("Password")
+			div.control.has-icons-left
+				= password_input(user_form, :password, class: "input", type: "password")
+				span.icon.is-left
+					i.fas.fa-asterisk
+				= error_label(@changeset, :password)
+		div.field
+			label.label = gettext("Repeat password")
+			div.control.has-icons-left
+				= password_input(user_form, :password_confirmation, class: "input", type: "password")
+				span.icon.is-left
+					i.fas.fa-asterisk
+				= error_label(@changeset, :password_confirmation)
+
+		div.field
+			= submit gettext("Reset password"), class: "button is-link", style: "padding=0"

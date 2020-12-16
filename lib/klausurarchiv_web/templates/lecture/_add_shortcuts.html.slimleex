@@ -1,12 +1,12 @@
 = form_for :lecture, lecture_path(@socket, :update, @lecture.id), [phx_submit: "submit"], fn shortcut_form ->
   div.field
-    label.label = gettext("Shortcuts")
     div.control
-      = text_input(shortcut_form, :shortcuts, placeholder: "Choose Tags", class: "input")
+      = text_input(shortcut_form, :shortcuts, placeholder: "#{gettext("Type in shortcut...")}", class: "input")
 
   div.field
-    = submit gettext("Create"), class: "button is-primary"
+    = submit gettext("Submit"), class: "button is-primary"
 
+div.is-divider
 
 div.field.is-grouped.is-grouped-multiline
   = for shortcut <- @lecture.shortcuts do

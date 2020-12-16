@@ -3,7 +3,7 @@
     label.label = gettext("Degree")
     div.control
       div.select.is-multiple
-        = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees, &{&1.name, &1.id}), multiple: true, size: length(@degrees), selected: Enum.map(@lecture.degrees, & &1.id))
+        = multiple_select(lecture_form, :degree_ids, Enum.map(@degrees , &{&1.name, &1.id}), [multiple: true, size: length(@degrees)] ++ get_selected_degrees(@changeset))
     = error_label(@changeset, :degree_ids)
 
   div.field

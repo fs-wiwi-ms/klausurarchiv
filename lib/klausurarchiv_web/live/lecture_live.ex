@@ -3,17 +3,37 @@ defmodule KlausurarchivWeb.LectureLive do
   alias Klausurarchiv.Uploads
 
   def mount(_params, %{"filter" => filter}, socket) do
-    lectures = Uploads.filter_lectures(filter, [:shortcuts])
     degrees = Uploads.get_degrees_for_select()
+
+    lectures = if empty_filter?(filter) do
+      []
+    else
+      Uploads.filter_lectures(filter, [:shortcuts])
+    end
+
     {:ok, assign(socket, lectures: lectures, degrees: degrees, filter: filter)}
   end
 
   def render(assigns) do
-    KlausurarchivWeb.LectureView.render("index.html", assigns)
+    KlausurarchivWeb.LectureView.render("_search.html", assigns)
   end
 
   def handle_event("full_text", %{"filter" => filter}, socket) do
-    lectures = Uploads.filter_lectures(filter, [:shortcuts])
+    lectures = if empty_filter?(filter) do
+      []
+    else
+      Uploads.filter_lectures(filter, [:shortcuts])
+    end
+
     {:noreply, assign(socket, lectures: lectures, filter: filter)}
+  end
+
+  defp empty_filter?(filter) when filter == %{}, do: true
+  defp empty_filter?(filter) do
+    if filter["query"] == "" && filter["degree"] == "all" do
+      true
+    else
+      false
+    end
   end
 end

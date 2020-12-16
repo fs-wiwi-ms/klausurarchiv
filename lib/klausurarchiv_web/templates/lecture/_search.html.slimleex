@@ -1,0 +1,47 @@
+- current_user = get_user(@socket)
+= form_for :filter, page_path(@socket, :index), [{:as, :filter}, {:method, :get}, phx_change: "full_text", phx_submit: "full_text", csrf_token: ""], fn (filter_form) ->
+
+  div.field.is-horizontal
+    div.field-body
+      div.field
+        label.label Volltextsuche
+        div.control.is-expanded
+          = text_input filter_form, :query, class: "input", type: "text", placeholder: "#{gettext("Full text search")}", value: @filter["query"]
+
+      div.field
+        label.label Studiengangsuche
+        div.control.is-expanded
+          div.select.is-fullwidth
+            - degrees = [{"#{gettext("All")}", "all"}] ++ @degrees
+            = select filter_form, :degree, degrees, selected: get_selected_degree(degrees, @filter)
+
+= if length(@lectures) > 0 or current_user.role == :admin do
+  = for lecture <- @lectures do
+    div.p-2
+      div.card.has-background-light
+        header.card-header
+          a.card-header-title(href="#{lecture_path(@socket, :show, lecture.id)}")
+            span.card-header-title = "#{lecture.module_number}#{if lecture.module_number do " - " end}#{lecture.name}"
+      = if length(lecture.shortcuts) > 0 do
+        div.card-content.p-3.has-background-light
+          div.level.is-mobile
+            div.level-left
+              div.level-item
+                div.tags
+                  = for short <- lecture.shortcuts do
+                    = if short.published do
+                      span.tag.is-primary = short.name
+            div.level-right
+              div.level-item
+                a.icon.has-text-primary(href="#{lecture_path(@socket, :edit, lecture.id)}")
+                  i.fas.fa-pencil-alt
+                a.icon.has-text-primary(href="#{lecture_path(@socket, :show, lecture.id)}")
+                  i.fas.fa-arrow-alt-circle-right
+
+- else
+  span.icon
+    i.fas.fa-exclamation
+  = if empty_filter?(@filter) do
+    span = gettext("Please specify a filter to search for a lecture.")
+  - else
+    span = gettext("No lectures found.")

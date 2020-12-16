@@ -257,6 +257,7 @@ defmodule Klausurarchiv.Uploads do
       lecture_params
       |> Map.drop(["degree_ids"])
       |> Map.put("degrees", degrees)
+      |> Map.put("shortcuts", [])
 
     %Lecture{}
     |> Repo.preload(:degrees)
@@ -273,7 +274,6 @@ defmodule Klausurarchiv.Uploads do
     else
       []
     end
-    |> IO.inspect
 
     shortcuts = lecture.shortcuts
     |> Enum.concat(shortcuts)
@@ -287,12 +287,10 @@ defmodule Klausurarchiv.Uploads do
       |> Map.drop(["shortcuts"])
       |> Map.put("degrees", degrees)
       |> Map.put("shortcuts", shortcuts)
-      |> IO.inspect
 
     lecture
     |> Lecture.changeset(lecture_params)
     |> Repo.update()
-    |> IO.inspect
   end
 
   def delete_lecture(lecture) do

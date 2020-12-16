@@ -1,0 +1,62 @@
+h1.title.is-3.has-text-white = gettext("Register new user")
+
+div.box
+  = form_for @changeset, @action, fn user_form ->
+    div.field.is-horizontal
+      div.field-body
+        div.field
+          label.label = gettext("Fore name (complete)")
+          div.control.has-icons-left
+            = text_input(user_form, :fore_name, class: "input", type: "text")
+              span.icon.is-left
+                i.fas.fa-user
+            = error_label(@changeset, :fore_name)
+
+        div.field
+          label.label = gettext("Last name")
+          div.control.has-icons-left
+            = text_input(user_form, :last_name, class: "input", type: "text")
+              span.icon.is-left
+                i.fas.fa-user
+            = error_label(@changeset, :last_name)
+
+
+    div.field
+      label.label = gettext("Email")
+      div.control.has-icons-left
+        = text_input(user_form, :email, class: "input", type: "email", placeholder: "test@example.com")
+        span.icon.is-left
+            i.fas.fa-envelope
+        = error_label(@changeset, :email)
+
+    div.field
+      label.label = gettext("Matriculation number")
+      div.control.has-icons-left
+        = text_input(user_form, :matriculation_number, class: "input", type: "text")
+        span.icon.is-left
+            i.fas.fa-university
+        = error_label(@changeset, :matriculation_number)
+
+    div.field.is-horizontal
+      div.field-body
+        div.field
+          label.label = gettext("Password")
+          div.control.has-icons-left
+            = password_input(user_form, :password, class: "input", type: "password")
+            span.icon.is-left
+              i.fas.fa-asterisk
+            = error_label(@changeset, :password)
+        div.field
+          label.label = gettext("Repeat password")
+          div.control.has-icons-left
+            = password_input(user_form, :password_confirmation, class: "input", type: "password")
+            span.icon.is-left
+              i.fas.fa-asterisk
+            = error_label(@changeset, :password_confirmation)
+
+    div.field
+      = submit gettext("Create Account"), class: "button is-link", style: "padding=0"
+    / div.columns
+    /   div.column
+    /     p.has-text-info.has-text-weight-semibold.label = gettext("Already have an account? Login instead!")
+    /     a.button.is-info.is-outlined(href="#{public_session_path(@conn, :new)}") Login

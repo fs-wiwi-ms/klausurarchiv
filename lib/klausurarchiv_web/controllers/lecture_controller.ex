@@ -4,16 +4,6 @@ defmodule KlausurarchivWeb.LectureController do
   alias Klausurarchiv.Uploads
   alias Klausurarchiv.Uploads.Lecture
 
-  def index(conn, %{"filter" => filter}) do
-    live_render(conn, KlausurarchivWeb.LectureLive,
-      session: %{
-        "filter" => filter
-      }
-    )
-  end
-
-  def index(conn, _params), do: index(conn, %{"filter" => %{}})
-
   def shortcuts(conn, _params) do
     live_render(conn, KlausurarchivWeb.ShortcutLive)
   end

@@ -36,6 +36,7 @@ RUN apt-get update && \
   gcc \
   libssl1.1 \
   ca-certificates \
+  build-essential \
   && \
   rm -rf /var/lib/apt/lists/*
 

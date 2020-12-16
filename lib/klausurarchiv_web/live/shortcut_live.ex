@@ -12,14 +12,12 @@ defmodule KlausurarchivWeb.ShortcutLive do
   end
 
   def handle_event("approve", %{"lecture_id" => lecture_id, "short_id" => short_id}, socket) do
-    IO.inspect(" + APPROVE")
     Uploads.update_shortcut_state(short_id, true)
     lectures = Uploads.get_lectures([:shortcuts])
     {:noreply, assign(socket, lectures: lectures)}
   end
 
   def handle_event("reject", %{"lecture_id" => lecture_id, "short_id" => short_id}, socket) do
-    IO.inspect(" - REJECT")
     Uploads.update_shortcut_state(short_id, false)
     lectures = Uploads.get_lectures([:shortcuts])
     {:noreply, assign(socket, lectures: lectures)}

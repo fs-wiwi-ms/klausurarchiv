@@ -1,20 +1,27 @@
 defmodule KlausurarchivWeb.Router do
   use KlausurarchivWeb, :router
 
-  pipeline :browser do
-    plug(:accepts, ["html"])
-    plug(:fetch_session)
-    plug(:fetch_live_flash)
-    plug(:protect_from_forgery)
-    plug(:put_secure_browser_headers)
-    # plug(:put_layout, {KlausurarchivWeb.LayoutView, :root})
-    # plug(:put_root_layout, {KlausurarchivWeb.LayoutView, :root})
+  pipeline :unsecure_browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
     plug(PlugPreferredLocales, ignore_area: true)
     plug(:set_language)
   end
 
+  pipeline :browser do
+    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: false)
+  end
+
   pipeline :protected_browser do
-    plug(KlausurarchivWeb.Authentification)
+    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: true)
+  end
+
+  pipeline :admins_only do
+    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: true)
+    plug(KlausurarchivWeb.AdminOnly)
   end
 
   pipeline :api do
@@ -41,31 +48,43 @@ defmodule KlausurarchivWeb.Router do
     conn
   end
 
+  scope "/public", KlausurarchivWeb, as: :public do
+    pipe_through([:unsecure_browser, :browser])
+
+    resources("/users", UserController, only: [:new, :create])
+    resources("/sessions", SessionController, only: [:new, :create])
+
+    resources(
+      "/password_reset_tokens",
+      PasswordResetTokenController,
+      only: [:new, :create, :show, :update]
+    )
+  end
+
   scope "/", KlausurarchivWeb do
     # Use the browser stack with user authentification
-    pipe_through([:browser, :protected_browser])
+    pipe_through([:unsecure_browser, :protected_browser])
 
-    get("/lectures/:id/edit_shortcuts", LectureController, :edit_shortcuts)
     resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
 
     get("/exams/drafts", ExamController, :draft)
-    post("/exams/publish/:id", ExamController, :publish)
-    post("/exams/archive/:id", ExamController, :archive)
+    get("/exams/publish/:id", ExamController, :publish)
+    get("/exams/archive/:id", ExamController, :archive)
 
     get("/lectures/shortcuts", LectureController, :shortcuts)
+
+    resources "/sessions", SessionController, only: [:delete]
   end
 
   scope "/", KlausurarchivWeb do
     # Use the browser stack without authentification
-    pipe_through(:browser)
+    pipe_through([:unsecure_browser, :browser])
 
     get("/", PageController, :index)
     get("/privacy", PageController, :privacy)
 
     resources("/exams", ExamController, only: [:new, :create])
 
-    resources("/lectures", LectureController, only: [:show, :index]) do
-      resources("/shortcuts", ShortcutController, only: [:create])
-    end
+    resources("/lectures", LectureController, only: [:show])
   end
 end

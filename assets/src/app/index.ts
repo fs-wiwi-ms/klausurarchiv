@@ -1,14 +1,16 @@
+declare global {
+  interface Window { liveSocket: any; }
+}
+
 import "@fortawesome/fontawesome-free/js/all.js";
-import {Socket} from "phoenix"
+import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken } })
 
 // Connect if there are any LiveViews on the page
 liveSocket.connect()
-
-console.log(liveSocket)
 
 // Expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
@@ -44,7 +46,7 @@ function initModals() {
 }
 
 function initNavBarBurger() {
-    // Get all "navbar-burger" elements
+  // Get all "navbar-burger" elements
   const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
   // Check if there are any navbar burgers
   if (navbarBurgers.length > 0) {
@@ -63,7 +65,7 @@ function initNavBarBurger() {
   }
 }
 
-function initComponents () {
+function initComponents() {
   initNavBarBurger();
   initModals();
 }

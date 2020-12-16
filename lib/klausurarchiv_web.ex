@@ -48,7 +48,9 @@ defmodule KlausurarchivWeb do
         errors =
           Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
             Enum.reduce(opts, msg, fn {key, value}, acc ->
-              String.replace(acc, "%{#{key}}", to_string(value))
+              if key == :validation do
+                String.replace(acc, "%{#{key}}", to_string(value))
+              end
             end)
           end)
 
@@ -58,6 +60,16 @@ defmodule KlausurarchivWeb do
 
           nil ->
             nil
+        end
+      end
+
+      def get_user(conn) do
+        case conn.assigns[:session] do
+          nil ->
+            nil
+
+          session ->
+            Klausurarchiv.User.get_user(session.user_id)
         end
       end
     end

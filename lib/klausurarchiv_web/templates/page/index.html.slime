@@ -1,44 +1,29 @@
 h1.title.is-3.has-text-white =gettext("Examarchive")
 
+/ div.box
+/   a(href="http://bit.ly/38pzJD0")
+/     img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+
+/ div.box
+/   p.subtitle.is-5 =gettext("Fulltext search")
+/   = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+/     = hidden_input filter_form, :degree, value: "all"
+/     = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
+
+/ div.box
+/   p.subtitle.is-5 =gettext("Filter for degree")
+/   div.buttons.has-addons
+/     = for {name, id} <- @degrees do
+/       = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+/         = hidden_input filter_form, :degree, value: "#{id}"
+/         p.control.p-1
+/           button.button(type="submit")
+/             span = name
+
 div.columns
-  div.column.is-two-quarter
-    / div.box
-    /   a(href="http://bit.ly/38pzJD0")
-    /     img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
-
+  div.column
     div.box
-      h3.subtitle.is-5 =gettext("Filter for Capital letter:")
-      div.buttons.has-addons
-        = for n <- ?a..?z do
-          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-            = hidden_input filter_form, :capital, value: "#{<< n :: utf8 >>}"
-            = hidden_input filter_form, :degree, value: "all"
-            p.control
-              button.button(type="submit")
-                span = << n :: utf8 >>
-
-    div.box
-      p.subtitle.is-5 =gettext("Filter for degree:")
-      div.buttons.has-addons
-        = for {name, id} <- @degrees do
-          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-            = hidden_input filter_form, :degree, value: "#{id}"
-            p.control
-              button.button(type="submit")
-                span = name
-
-    div.box
-      p.subtitle.is-5 =gettext("Advanced filter:")
-      = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-
-        div.column
-          h5.subtitle.is-6 =  gettext("Degree")
-          div.select
-            = select filter_form, :degree, @degrees ++ [{"all", "all"}]
-
-        div.column
-          h5.subtitle.is-6 = gettext("Fulltext search")
-          = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
+      = live_render(@conn, KlausurarchivWeb.LectureLive, session: %{"filter" => %{}})
 
   div.column
     div.box
