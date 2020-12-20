@@ -3,6 +3,8 @@ defmodule KlausurarchivWeb.AdminOnly do
 
   alias Klausurarchiv.User
   import Plug.Conn
+  import KlausurarchivWeb.Gettext
+  import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
 
   @doc false
   def init(opts), do: opts
@@ -20,8 +22,8 @@ defmodule KlausurarchivWeb.AdminOnly do
 
       :user ->
         conn
-        |> put_status(:unauthorized)
-        |> halt()
+        |> put_flash(:error, gettext("This action is permitted!"))
+        |> redirect(to: KlausurarchivWeb.Router.Helpers.page_path(conn, :index))
     end
   end
 end

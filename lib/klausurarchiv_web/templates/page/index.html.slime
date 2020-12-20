@@ -23,7 +23,7 @@ h1.title.is-3.has-text-white =gettext("Examarchive")
 div.columns
   div.column
     div.box
-      = live_render(@conn, KlausurarchivWeb.LectureLive, session: %{"filter" => %{}})
+      = live_render(@conn, KlausurarchivWeb.LectureLive, session: %{"filter" => %{}, "user" => get_user(@conn)})
 
   div.column
     div.box
@@ -67,3 +67,8 @@ div.columns
             span.icon
               i.fas.fa-graduation-cap
             span =gettext("Create lecture")
+        div.column.is-narrow
+          a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts)}")
+            span.icon
+              i.fas.fa-link
+            span =gettext("Manage shortcuts")

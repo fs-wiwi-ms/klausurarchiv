@@ -2,9 +2,9 @@ defmodule KlausurarchivWeb.ShortcutLive do
   use Phoenix.LiveView
   alias Klausurarchiv.Uploads
 
-  def mount(_params, session, socket) do
+  def mount(_params, %{"user" => user}, socket) do
     lectures = Uploads.get_lectures([:shortcuts])
-    {:ok, assign(socket, lectures: lectures)}
+    {:ok, assign(socket, lectures: lectures, user: user)}
   end
 
   def render(assigns) do

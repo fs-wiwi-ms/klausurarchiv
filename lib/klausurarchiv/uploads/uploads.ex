@@ -202,6 +202,7 @@ defmodule Klausurarchiv.Uploads do
     query =
       Lecture
       |> join(:inner, [l], ld in assoc(l, :degrees))
+      |> join(:left, [l, d], s in assoc(l, :shortcuts))
 
     filter
     |> Enum.reduce(query, fn x, acc -> build_lecture_filter(acc, x) end)
@@ -216,23 +217,27 @@ defmodule Klausurarchiv.Uploads do
   end
 
   defp build_lecture_filter(query, {"degree", degree_id}) do
-    where(query, [l, ld], ld.id == ^degree_id)
+    where(query, [l, ld, s], ld.id == ^degree_id)
   end
 
   defp build_lecture_filter(query, {"query", ""}), do: query
 
   defp build_lecture_filter(query, {"query", full_text_search}) do
-    where(
-      query,
-      [l, ld],
+    query
+    |> where(
+      [l, ld, s],
       fragment("? ILIKE ?", l.name, ^"%#{full_text_search}%")
+    )
+    |> or_where(
+      [l, ld, s],
+      fragment("? ILIKE ?", s.name, ^"%#{full_text_search}%")
     )
   end
 
   defp build_lecture_filter(query, {"capital", ""}), do: query
 
   defp build_lecture_filter(query, {"capital", capital_search}) do
-    where(query, [l, ld], fragment("? ILIKE ?", l.name, ^"#{capital_search}%"))
+    where(query, [l, ld, s], fragment("? ILIKE ?", l.name, ^"#{capital_search}%"))
   end
 
   def get_lectures_by_degree(%{id: degree_id}) do

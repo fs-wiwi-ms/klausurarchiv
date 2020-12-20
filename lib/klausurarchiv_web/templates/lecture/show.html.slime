@@ -24,7 +24,7 @@ div.container
         button.delete#close-modal
       section.modal-card-body
         / = render "_add_shortcuts.html", assigns
-        = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id})
+        = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id,  "user" => get_user(@conn)})
       / footer.modal-card-foot
 
 = if length(@exams) > 0 do

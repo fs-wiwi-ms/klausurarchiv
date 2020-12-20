@@ -48,7 +48,28 @@ defmodule KlausurarchivWeb.Router do
     conn
   end
 
+  scope "/", KlausurarchivWeb do
+    # Use the browser stack with user authentification
+    pipe_through([:unsecure_browser, :admins_only])
+
+    resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
+
+    get("/exams/drafts", ExamController, :draft)
+    get("/exams/publish/:id", ExamController, :publish)
+    get("/exams/archive/:id", ExamController, :archive)
+
+    get("/lectures/shortcuts", LectureController, :shortcuts)
+  end
+
+  scope "/", KlausurarchivWeb do
+    # Use the browser stack with user authentification
+    pipe_through([:unsecure_browser, :protected_browser])
+
+    resources "/sessions", SessionController, only: [:delete]
+  end
+
   scope "/public", KlausurarchivWeb, as: :public do
+    # Use the browser stack without authentification
     pipe_through([:unsecure_browser, :browser])
 
     resources("/users", UserController, only: [:new, :create])
@@ -59,21 +80,6 @@ defmodule KlausurarchivWeb.Router do
       PasswordResetTokenController,
       only: [:new, :create, :show, :update]
     )
-  end
-
-  scope "/", KlausurarchivWeb do
-    # Use the browser stack with user authentification
-    pipe_through([:unsecure_browser, :protected_browser])
-
-    resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
-
-    get("/exams/drafts", ExamController, :draft)
-    get("/exams/publish/:id", ExamController, :publish)
-    get("/exams/archive/:id", ExamController, :archive)
-
-    get("/lectures/shortcuts", LectureController, :shortcuts)
-
-    resources "/sessions", SessionController, only: [:delete]
   end
 
   scope "/", KlausurarchivWeb do
