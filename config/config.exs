@@ -11,14 +11,13 @@ config :klausurarchiv,
 
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
-  adapter: Ecto.Adapters.Postgres,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   log: false
 
 # Configures the endpoint
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT")],
-  url: [host: "localhost", port: System.get_env("PORT")],
+  http: [:inet6, port: 4000],
+  url: [host: "localhost"],
   render_errors: [view: KlausurarchivWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: Klausurarchiv.PubSub
 

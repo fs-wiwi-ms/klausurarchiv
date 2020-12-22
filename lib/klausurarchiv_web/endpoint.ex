@@ -54,10 +54,31 @@ defmodule KlausurarchivWeb.Endpoint do
   @doc """
   Callback invoked for dynamically configuring the endpoint.
 
-  It receives the endpoint configuration and checks if
-  configuration should be loaded from the system environment.
+  It receives the endpoint configuration.
   """
+  @spec init(atom, Keyword.t()) :: {:ok, Keyword.t()} | no_return
   def init(_key, config) do
+    secret_key_base =
+      System.get_env("SECRET_KEY_BASE") ||
+        raise """
+        environment variable SECRET_KEY_BASE is missing.
+        You can generate one by calling: mix phx.gen.secret
+        """
+
+    live_view_signing_salt =
+      System.get_env("LIVE_VIEW_SALT") ||
+        raise """
+        environment variable LIVE_VIEW_SALT is missing.
+        You can generate one by calling: mix phx.gen.secret
+        """
+
+    config =
+      config
+      |> Keyword.put(:secret_key_base, secret_key_base)
+      |> Keyword.put(:live_view,
+        signing_salt: live_view_signing_salt
+      )
+
     {:ok, config}
   end
 end
