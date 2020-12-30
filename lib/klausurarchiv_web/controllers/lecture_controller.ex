@@ -14,6 +14,19 @@ defmodule KlausurarchivWeb.LectureController do
     live_render(conn, KlausurarchivWeb.ShortcutLive, session: %{"user" => user})
   end
 
+  def shortcuts(conn, %{"id" => lecture_id}) do
+    user =
+      conn
+      |> get_session(:user_id)
+      |> User.get_user()
+
+    lecture =
+      lecture_id
+      |> Uploads.get_lecture([:shortcuts, :degrees])
+
+    live_render(conn, KlausurarchivWeb.ShortcutLive, session: %{"user" => user, "lecture" => lecture})
+  end
+
   def show(conn, %{"id" => lecture_id}) do
     lecture =
       lecture_id
@@ -106,5 +119,23 @@ defmodule KlausurarchivWeb.LectureController do
           action: lecture_path(conn, :update, lecture_id)
         )
     end
+  end
+
+  def publish(conn, %{"id" => lecture_id}) do
+    lecture = Uploads.get_lecture(lecture_id, [:degrees, :shortcuts])
+    Uploads.update_lecture(lecture, %{"published" => true})
+
+    conn
+    |> put_flash(:info, "Published")
+    |> redirect(to: lecture_path(conn, :show, lecture.id))
+  end
+
+  def archive(conn, %{"id" => lecture_id}) do
+    lecture = Uploads.get_lecture(lecture_id, [:degrees, :shortcuts])
+    Uploads.update_lecture(lecture, %{"published" => false})
+
+    conn
+    |> put_flash(:info, "Archived")
+    |> redirect(to: lecture_path(conn, :show, lecture.id))
   end
 end

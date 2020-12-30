@@ -54,11 +54,16 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
 
+    resources("/exams", ExamController, only: [:edit, :update])
+
     get("/exams/drafts", ExamController, :draft)
-    get("/exams/publish/:id", ExamController, :publish)
-    get("/exams/archive/:id", ExamController, :archive)
+    get("/exams/:id/publish", ExamController, :publish)
+    get("/exams/:id/archive", ExamController, :archive)
 
     get("/lectures/shortcuts", LectureController, :shortcuts)
+    get("/lectures/:id/shortcuts", LectureController, :shortcuts)
+    get("/lectures/:id/publish", LectureController, :publish)
+    get("/lectures/:id/archive", LectureController, :archive)
   end
 
   scope "/", KlausurarchivWeb do

@@ -61,23 +61,4 @@ defmodule KlausurarchivWeb.Authentication do
         call(conn, type: :browser, forward_to_login: forward_to_login)
     end
   end
-
-  # def call(conn, type: :graphql) do
-  #   with ["Bearer " <> access_token] <- get_req_header(conn, "authorization"),
-  #        {:ok, session} <- Accounts.verify_session(access_token, nil) do
-  #     Absinthe.Plug.put_options(conn, context: %{current_session: session})
-  #   else
-  #     other ->
-  #       other
-  #       conn
-  #   end
-  # end
-
-  # def call(%Absinthe.Resolution{context: %{current_session: _}} = resolution, _) do
-  #   resolution
-  # end
-
-  # def call(resolution, _) do
-  #   Absinthe.Resolution.put_result(resolution, {:error, "unauthorized"})
-  # end
 end

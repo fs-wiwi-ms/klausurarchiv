@@ -25,9 +25,7 @@ div.box
     div.field
       a.button.is-outlined.is-warning(href="#{ public_password_reset_token_path(@conn, :new) }") = gettext("Forgot Password")
 
-
   div.is-divider
-
 
   p.has-text-weight-semibold.label = gettext("You don't have an account yet? Register now!")
   a.button.is-link.is-outlined(href="#{public_user_path(@conn, :new)}") = gettext("Create Account")

@@ -3,13 +3,13 @@ defmodule KlausurarchivWeb.LectureView do
   alias Ecto.Changeset
 
   def format_shortcuts(shortcuts) do
-    Enum.map(shortcuts, & %{"value": &1.id,"text": &1.short})
+    Enum.map(shortcuts, & %{value: &1.id,text: &1.short})
   end
 
-  def get_selected_degree(degrees, filter) when filter == %{}, do: "all"
+  def get_selected_degree(_degrees, filter) when filter == %{}, do: "all"
 
   def get_selected_degree(degrees, filter) do
-    {value, key} = Enum.find(degrees, fn {_v, key} ->
+    {_value, key} = Enum.find(degrees, fn {_v, key} ->
       key == filter["degree"]
     end)
 

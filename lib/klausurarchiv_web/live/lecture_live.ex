@@ -18,7 +18,7 @@ defmodule KlausurarchivWeb.LectureLive do
     KlausurarchivWeb.LectureView.render("_search.html", assigns)
   end
 
-  def handle_event("full_text", %{"filter" => filter}, socket) do
+  def handle_event("submit", %{"filter" => filter}, socket) do
     lectures = if empty_filter?(filter) do
       []
     else
@@ -26,6 +26,10 @@ defmodule KlausurarchivWeb.LectureLive do
     end
 
     {:noreply, assign(socket, lectures: lectures, filter: filter)}
+  end
+
+  def terminate(reason, socket) do
+    {:noreply, socket}
   end
 
   defp empty_filter?(filter) when filter == %{}, do: true

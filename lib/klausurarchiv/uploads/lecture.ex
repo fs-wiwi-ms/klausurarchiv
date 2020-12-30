@@ -8,6 +8,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
   schema "lectures" do
     field(:module_number, :string)
     field(:name, :string)
+    field(:published, :boolean, default: true)
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
 
@@ -26,7 +27,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
   @doc false
   def changeset(lecture, attrs) do
     lecture
-    |> cast(attrs, [:name, :module_number])
+    |> cast(attrs, [:name, :module_number, :published])
     |> validate_required([:name])
     |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)

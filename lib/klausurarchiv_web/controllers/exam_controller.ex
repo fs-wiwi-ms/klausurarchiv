@@ -14,6 +14,22 @@ defmodule KlausurarchivWeb.ExamController do
     )
   end
 
+  def edit(conn, %{"id" => exam_id}) do
+    exam = Uploads.get_exam(exam_id, [:term, :lecture])
+
+    exam_changeset = Uploads.change_exam(exam, %{})
+    lectures = Uploads.get_lectures()
+    terms = Uploads.get_terms()
+
+    render(conn, "edit.html",
+      terms: terms,
+      lectures: lectures,
+      changeset: exam_changeset,
+      exam: exam,
+      action: exam_path(conn, :update, exam_id)
+    )
+  end
+
   def create(conn, %{"exam" => exam}) do
     case Uploads.create_exam(exam) do
       {:ok, _exam} ->
@@ -45,13 +61,32 @@ defmodule KlausurarchivWeb.ExamController do
     end
   end
 
+  def update(conn, %{"id" => exam_id, "exam" => exam_params}) do
+    exam = Uploads.get_exam(exam_id, [:term, :lecture])
+
+    case Uploads.update_exam(exam, exam_params) do
+      {:ok, exam} ->
+        conn
+        |> put_flash(:info, "Updated")
+        |> redirect(to: lecture_path(conn, :show, exam.lecture_id))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Fehler beim Erstellen")
+        |> render("edit.html",
+          changeset: changeset,
+          exam: exam,
+          action: lecture_path(conn, :update, exam_id)
+        )
+    end
+  end
+
   def publish(conn, %{"id" => exam_id}) do
     exam = Uploads.get_exam(exam_id)
     Uploads.update_exam(exam, %{published: true})
 
     conn
     |> put_flash(:info, "Published")
-    |> redirect(to: exam_path(conn, :draft))
+    |> redirect(to: lecture_path(conn, :show, exam.lecture_id))
   end
 
   def archive(conn, %{"id" => exam_id}) do

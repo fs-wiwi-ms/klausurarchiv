@@ -6,42 +6,4 @@ div.level
 div.level
   h2.title.is-2.has-text-white = gettext "Upload a new exam"
 div.box
-  = form_for @changeset, @action, [multipart: true],fn exam_form ->
-    div.field
-      label.label = gettext("Degree")
-      div.control.has-icons-left
-        = select(exam_form, :lecture_id, Enum.map(@lectures, &{&1.name, &1.id}), class: "input")
-        span.icon.is-left
-            i.fas.fa-link
-        = error_label(@changeset, :short)
-
-    = inputs_for exam_form, :term, fn term_form ->
-      div.field
-        label.label = gettext "Name"
-        div.control.has-icons-left
-          = select(term_form, :type, %{gettext("Winter term") => :winter_term, gettext("Summer term") => :summer_term}, class: "input")
-          span.icon.is-left
-            i.fas.fa-link
-        = error_label(@changeset, :short)
-
-      div.field
-        label.label = gettext "Year"
-        div.control.has-icons-left
-          = number_input(term_form, :year, class: "input", type: "number")
-            span.icon.is-left
-              i.fas.fa-link
-        = error_label(@changeset, :short)
-
-      div.field
-        div.file.has-name
-          label.file-label
-            = file_input(exam_form, :file, class: "file-input", type: "file", id: "file-input")
-            span.file-cta
-              span.file-icon
-                i.fas.fa-upload
-              span.file-label = gettext "File"
-            span.file-name#file-input
-        = error_label(@changeset, :short)
-
-      div.field
-        = submit gettext("Send"), class: "button is-primary"
+  = render "_form.html", assigns

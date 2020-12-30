@@ -1,4 +1,4 @@
-= form_for :filter, page_path(@socket, :index), [{:as, :filter}, {:method, :get}, phx_change: "full_text", phx_submit: "full_text", csrf_token: ""], fn (filter_form) ->
+= form_for :filter, page_path(@socket, :index), [{:as, :filter}, {:method, :get}, phx_change: "submit", phx_submit: "submit", csrf_token: ""], fn (filter_form) ->
 
   div.field.is-horizontal
     div.field-body
@@ -17,26 +17,28 @@
 = if length(@lectures) > 0 do
   = for lecture <- @lectures do
     div.p-2
-      div.card-content.p-3.has-background-light
-        div.level.is-mobile
-          div.level-left
-            div.level-item
-              a.subtitle.is-6(href="#{lecture_path(@socket, :show, lecture.id)}")
-                span.card-header-title = "#{lecture.module_number}#{if lecture.module_number do " - " end}#{lecture.name}"
-            div.level-item
-              div.tags
-                = for short <- lecture.shortcuts do
-                  = if short.published do
-                    span.tag.is-primary = short.name
-            div.level-item
+      div.card
+        div.card-content.p-3.has-background-light
+          h6.subtitle.is-6.has-text-weight-bold
+            a(href="#{lecture_path(@socket, :show, lecture.id)}")
+              =if !lecture.published do
+                span.icon.has-text-danger
+                  i.fas.fa-eye-slash
+              span.has-text-primary = "#{lecture.module_number}#{if lecture.module_number do " - " end}#{lecture.name}"
 
-          div.level-right
-            div.level-item
-              = if !is_nil(@user) and @user.role == :admin do
-                a.icon.has-text-primary(href="#{lecture_path(@socket, :edit, lecture.id)}")
-                  i.fas.fa-pencil-alt
-              a.icon.has-text-primary(href="#{lecture_path(@socket, :show, lecture.id)}")
-                i.fas.fa-arrow-alt-circle-right
+          = if length(lecture.shortcuts) > 0 do
+            div.level
+              div.level-left
+                div.level-item
+                  h6.subtitle.is-6
+                    span = gettext("Shortcuts")
+                    span :
+              div.level-right
+                div.level-item
+                  div.tags
+                    = for short <- lecture.shortcuts do
+                      = if short.published do
+                        span.tag.is-primary = short.name
 
 - else
   span.icon

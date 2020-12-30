@@ -97,7 +97,7 @@ defmodule Klausurarchiv.Uploads do
       e in Exam,
       join: t in assoc(e, :term),
       where: e.lecture_id == ^lecture_id,
-      where: e.published == true,
+      # where: e.published == true,
       order_by: [desc: t.year, desc: t.type],
       preload: [:term]
     )
@@ -231,6 +231,10 @@ defmodule Klausurarchiv.Uploads do
     |> or_where(
       [l, ld, s],
       fragment("? ILIKE ?", s.name, ^"%#{full_text_search}%")
+    )
+    |> or_where(
+      [l, ld, s],
+      fragment("? ILIKE ?", l.module_number, ^"%#{full_text_search}%")
     )
   end
 
