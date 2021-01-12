@@ -1,0 +1,10 @@
+div.container
+  div.level
+    div.level-item
+      p.title.has-text-white.has-text-weight-semibold.is-family-secondary	 401 - Not authorized
+  div.level
+    div.level-item
+      img(src="#{static_path(@conn, "/images/vader.png")}" style="height:50vh;")
+  div.level
+    div.level-item
+      p.title.has-text-white You underestimate the power of our authentification system.

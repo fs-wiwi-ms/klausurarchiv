@@ -1,0 +1,10 @@
+div.container
+  div.level
+    div.level-item
+      p.title.has-text-white.has-text-weight-semibold.is-family-secondary	 404 - Not found
+  div.level
+    div.level-item
+      img(src="#{static_path(@conn, "/images/yoda.png")}" style="height:50vh;")
+  div.level
+    div.level-item
+      div.title.has-text-white Found, page could not be

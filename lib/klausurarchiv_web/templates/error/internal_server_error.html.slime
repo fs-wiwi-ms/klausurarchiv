@@ -1,0 +1,13 @@
+div.container
+  div.level
+    div.level-item
+      p.title.has-text-white.has-text-weight-semibold.is-family-secondary	 503 - Internal Server Error
+  div.level
+    div.level-item
+      img(src="#{static_path(@conn, "/images/obiwan.png")}" style="height:50vh;")
+  div.level
+    div.level-item
+      p.title.has-text-white.has-text-centered
+        span Impossible!
+        br
+        span Perhabs the servers are incomplete.

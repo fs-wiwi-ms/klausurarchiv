@@ -13,4 +13,16 @@ defmodule KlausurarchivWeb.ErrorView do
   def template_not_found(template, _assigns) do
     Phoenix.Controller.status_message_from_template(template)
   end
+
+  def render("401.html", assigns) do
+    render("unauthorized.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+  end
+
+  def render("503.html", assigns) do
+    render("internal_server_error.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+  end
+
+  def render("404.html", assigns) do
+    render("not_found.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+  end
 end

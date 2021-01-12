@@ -18,7 +18,7 @@ div.container
               i.fas.fa-asterisk
 
       div.field
-        = checkbox(user_form, :remember_me, class: "is-checkradio is-primary")
+        = checkbox(user_form, :remember_me, class: "is-checkradio is-link")
           = label(user_form, :remember_me, gettext("Remember me"))
 
       div.field

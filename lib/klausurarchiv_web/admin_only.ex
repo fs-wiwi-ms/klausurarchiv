@@ -4,7 +4,7 @@ defmodule KlausurarchivWeb.AdminOnly do
   alias Klausurarchiv.User
   import Plug.Conn
   import KlausurarchivWeb.Gettext
-  import Phoenix.Controller, only: [put_flash: 3, render: 3]
+  import Phoenix.Controller, only: [put_flash: 3, put_layout: 2,render: 2, render: 3, put_view: 2]
 
   @doc false
   def init(opts), do: opts
@@ -21,14 +21,20 @@ defmodule KlausurarchivWeb.AdminOnly do
           conn
           |> put_flash(:error, gettext("This action is permitted!"))
           |> put_status(:unauthorized)
-          |> render(KlausurarchivWeb.ErrorView, "401.html")
+          |> put_layout({KlausurarchivWeb.LayoutView, "error.html"})
+          |> put_view(KlausurarchivWeb.ErrorView)
+          |> render("401.html")
+          |> halt()
       end
     else
       nil ->
         conn
         |> put_flash(:error, gettext("This action is permitted!"))
         |> put_status(:unauthorized)
-        |> render(KlausurarchivWeb.ErrorView, "401.html")
+        |> put_layout({KlausurarchivWeb.LayoutView, "error.html"})
+        |> put_view(KlausurarchivWeb.ErrorView)
+        |> render("401.html")
+        |> halt()
     end
   end
 end

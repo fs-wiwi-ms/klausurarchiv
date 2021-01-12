@@ -24,7 +24,7 @@ module.exports = (env, options) => ({
     path: path.resolve(__dirname, "../priv/static/"),
   },
   resolve: {
-    extensions: [".ts", ".js", ".json"],
+    extensions: [".ts", ".js"],
   },
   devtool: "inline-source-map",
   module: {
@@ -58,6 +58,18 @@ module.exports = (env, options) => ({
         use: [MiniCssExtractPlugin.loader,
           "css-loader",
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "../static/fonts/",
+              publicPath: "/fonts/",
+            },
+          },
         ],
       },
       {
