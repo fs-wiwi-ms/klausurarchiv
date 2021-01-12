@@ -20,6 +20,7 @@ defmodule Klausurarchiv.User do
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
     field(:role, UserRole, default: :user)
+    field(:filter_data, :map, default: %{})
 
     has_many(:sessions, Klausurarchiv.User.Session)
     has_many(:password_reset_tokens, Klausurarchiv.User.PasswordResetToken)
@@ -36,7 +37,8 @@ defmodule Klausurarchiv.User do
       :last_name,
       :matriculation_number,
       :password,
-      :role
+      :role,
+      :filter_data
     ])
   end
 
@@ -93,6 +95,12 @@ defmodule Klausurarchiv.User do
     %User{}
     |> changeset_create(user_params)
     |> Repo.insert()
+  end
+
+  def update_user(user, user_params) do
+    user
+    |> changeset(user_params)
+    |> Repo.update()
   end
 
   def change_user(user \\ %User{}, user_params \\ %{}) do

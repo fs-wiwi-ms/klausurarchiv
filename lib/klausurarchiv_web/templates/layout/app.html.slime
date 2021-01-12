@@ -18,6 +18,7 @@ html(lang="en")
     = csrf_meta_tag()
 
   body.has-background-primary.Site
+    - user = get_user(@conn)
     nav.navbar.has-shadow.is-spaced.is-transparent(role="navigation" aria-label="main navigation")
 
       div.navbar-brand
@@ -35,39 +36,45 @@ html(lang="en")
       div.navbar-menu(id="navMenu")
         div.navbar-end
           div.navbar-item
-            a.has-text-weight-bold.has-text-primary(href="https://fachschaft-wiwi.ms")
+           = if @conn.assigns[:session] do
+            div.has-text-primary = "Logged in as #{@conn.assigns[:session].user.fore_name} #{@conn.assigns[:session].user.last_name}"
+          div.navbar-item
+            = if @conn.assigns[:session] do
+              = form_for @conn, session_path(@conn, :delete, @conn.assigns[:session]), [method: :delete, class: "m-0"], fn _form ->
+                = submit("Logout", class: "button has-text-weight-bold is-outlined is-primary")
+            - else
+              a.button.has-text-weight-bold.is-primary.is-outlined(href="#{public_session_path(@conn, :new)}") Login
+          div.navbar-item
+            button.button.has-text-weight-bold.is-primary.is-outlined(href="https://fachschaft-wiwi.ms")
               span.icon
                 i.fas.fa-home
               span.is = gettext("Back to Homepage")
 
-
     = if !is_nil get_flash(@conn, :info) do
-      section.hero.is-info
-        div.hero-body
-          div.container
-            h1.title.is-3.has-text-white = gettext("Info")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :info) }"
+      div.snackbar.notification.is-link(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Info")
+        div = get_flash(@conn, :info)
 
     = if !is_nil get_flash(@conn, :success) do
-      section.hero.is-success
-        div.hero-body
-          div.container
-            h1.title.is-3.has-text-white = gettext("Success")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :success) }"
+      div.snackbar.notification.is-success(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Success")
+        div = get_flash(@conn, :success)
+
 
     = if !is_nil get_flash(@conn, :warning) do
-      section.hero.is-warning
-        div.hero-body
-          div.container
-            h1.title.is-3.has-text-white = gettext("Warning")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :warning) }"
+      div.snackbar.notification.is-warning(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Warning")
+        div = get_flash(@conn, :warning)
+
 
     = if !is_nil get_flash(@conn, :error) do
-      section.hero.is-danger
-        div.hero-body
-          div.container
-            h1.title.is-3.has-text-white = gettext("Error")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :error) }"
+      div.snackbar.notification.is-danger(style="position: fixed;")
+        button.delete
+        span.has-text-weight-bold.is-size5 = gettext("Error") <> ": "
+        span = get_flash(@conn, :error)
 
     section.section.Site-content
       = @inner_content

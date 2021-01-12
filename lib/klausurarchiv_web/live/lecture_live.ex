@@ -1,6 +1,6 @@
 defmodule KlausurarchivWeb.LectureLive do
   use Phoenix.LiveView
-  alias Klausurarchiv.Uploads
+  alias Klausurarchiv.{User, Uploads}
 
   def mount(_params, %{"filter" => filter, "user" => user}, socket) do
     degrees = Uploads.get_degrees_for_select()
@@ -18,11 +18,14 @@ defmodule KlausurarchivWeb.LectureLive do
     KlausurarchivWeb.LectureView.render("_search.html", assigns)
   end
 
-  def handle_event("submit", %{"filter" => filter}, socket) do
+  def handle_event("submit", %{"filter" => filter}, %{assigns: %{user: user}} = socket) do
     lectures = if empty_filter?(filter) do
       []
     else
       Uploads.filter_lectures(filter, [:shortcuts])
+    end
+    if not is_nil user do
+      user = User.update_user(user, %{filter_data: filter}) |> IO.inspect
     end
 
     {:noreply, assign(socket, lectures: lectures, filter: filter)}

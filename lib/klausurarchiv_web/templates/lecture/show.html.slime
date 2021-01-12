@@ -1,30 +1,37 @@
+- user = get_user(@conn)
 div.container
   h1.title.is-3.has-text-white
     = if !@lecture.published do
       span.has-text-danger = "[#{gettext("Hidden")}] "
     span = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
 
-  div.box.has-background-danger-light
-    h5.subtitle.is-5.has-text-danger.has-text-weight-semibold = gettext("Admin-Corner")
-    div.buttons
-      a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts, @lecture.id)}")
-        span.icon
-          i.fas.fa-link
-        span =gettext("Manage shortcuts")
-      a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :edit, @lecture.id)}")
-        span.icon
-          i.fas.fa-pen-square
-        span =gettext("Edit lecture")
-      = if @lecture.published do
-        a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :archive, @lecture.id)}")
-          span.icon
-            i.fas.fa-eye-slash
-          span =gettext("Hide lecture")
-      - else
-        a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :publish, @lecture.id)}")
-          span.icon
-            i.fas.fa-eye
-          span =gettext("Publish lecture")
+
+  = if user do
+    - IO.inspect(user)
+    = case(user.role) do
+      - :admin ->
+        div.box.has-background-danger-light
+          h5.subtitle.is-5.has-text-danger.has-text-weight-semibold = gettext("Admin-Corner")
+          div.buttons
+            a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts, @lecture.id)}")
+              span.icon
+                i.fas.fa-link
+              span =gettext("Manage shortcuts")
+            a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :edit, @lecture.id)}")
+              span.icon
+                i.fas.fa-pen-square
+              span =gettext("Edit lecture")
+            = if @lecture.published do
+              a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :archive, @lecture.id)}")
+                span.icon
+                  i.fas.fa-eye-slash
+                span =gettext("Hide lecture")
+            - else
+              a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :publish, @lecture.id)}")
+                span.icon
+                  i.fas.fa-eye
+                span =gettext("Publish lecture")
+      - _ ->
 
   div.level
     = if @lecture.shortcuts do
@@ -49,7 +56,7 @@ div.container
           p.modal-card-title = gettext("Add Shortcuts")
           button.delete#close-modal
         section.modal-card-body
-          = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id,  "user" => get_user(@conn)})
+          = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id,  "user" => user})
 
   = if length(@exams) > 0 do
     = for exam <- @exams do
@@ -65,22 +72,25 @@ div.container
               span.icon
                 i.fas.fa-download
               span = gettext("Download")
-            a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :edit, exam.id)}")
-              span.icon
-                i.fas.fa-pen-square
-              span = gettext("Edit exam")
+              = if user do
+                = case(user.role) do
+                  - :admin ->
+                    a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :edit, exam.id)}")
+                      span.icon
+                        i.fas.fa-pen-square
+                      span = gettext("Edit exam")
 
-            = if exam.published do
-              a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :archive, exam.id)}")
-                span.icon
-                  i.fas.fa-eye-slash
-                span = gettext("Hide exam")
-            - else
-              a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :publish, exam.id)}")
-                span.icon
-                  i.fas.fa-eye
-                span = gettext("Publish exam")
-
+                    = if exam.published do
+                      a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :archive, exam.id)}")
+                        span.icon
+                          i.fas.fa-eye-slash
+                        span = gettext("Hide exam")
+                    - else
+                      a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :publish, exam.id)}")
+                        span.icon
+                          i.fas.fa-eye
+                        span = gettext("Publish exam")
+                  - _ ->
 
   - else
     div.box
