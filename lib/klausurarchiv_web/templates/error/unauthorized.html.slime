@@ -1,10 +1,7 @@
 div.container
+  p.title.has-text-white.has-text-weight-semibold.is-family-secondary.has-text-centered.is-size-3-mobile 401 - Not authorized
   div.level
     div.level-item
-      p.title.has-text-white.has-text-weight-semibold.is-family-secondary	 401 - Not authorized
-  div.level
-    div.level-item
-      img(src="#{static_path(@conn, "/images/vader.png")}" style="height:50vh;")
-  div.level
-    div.level-item
-      p.title.has-text-white You underestimate the power of our authentification system.
+      img(src="#{static_path(@conn, "/images/vader.png")}" style="max-height:50vh;")
+
+  p.title.has-text-white.has-text-centered You underestimate the power of our authentification system.
