@@ -53,7 +53,7 @@ config :sentry,
 # SMTP_SERVER=smtp.example.com
 # SMTP_USERNAME=username
 
-config :klausurarchiv, DeepMrt.Mailer,
+config :klausurarchiv, Klausurarchiv.Mailer,
   adapter: Bamboo.SMTPAdapter,
   tls: :always,
   allowed_tls_versions: [:tlsv1, :"tlsv1.1", :"tlsv1.2"],
