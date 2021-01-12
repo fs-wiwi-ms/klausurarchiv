@@ -13,7 +13,7 @@ defmodule KlausurarchivWeb.ShortcutLive do
 
   def handle_event(
         "approve",
-        %{"lecture_id" => lecture_id, "short_id" => short_id},
+        %{"short_id" => short_id},
         socket
       ) do
     Uploads.update_shortcut_state(short_id, true)
@@ -23,7 +23,7 @@ defmodule KlausurarchivWeb.ShortcutLive do
 
   def handle_event(
         "reject",
-        %{"lecture_id" => lecture_id, "short_id" => short_id},
+        %{"short_id" => short_id},
         socket
       ) do
     Uploads.update_shortcut_state(short_id, false)

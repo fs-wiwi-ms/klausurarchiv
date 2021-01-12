@@ -18,7 +18,6 @@ html(lang="en")
     = csrf_meta_tag()
 
   body.has-background-primary.Site
-    - user = get_user(@conn)
     nav.navbar.has-shadow.is-spaced.is-transparent(role="navigation" aria-label="main navigation")
 
       div.navbar-brand

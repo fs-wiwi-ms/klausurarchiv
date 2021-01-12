@@ -292,7 +292,7 @@ defmodule Klausurarchiv.Uploads do
     shortcuts =
       lecture.shortcuts
       |> Enum.concat(shortcuts)
-      |> Enum.uniq(fn %{name: short} -> String.downcase(short) end)
+      |> Enum.uniq_by(fn %{name: short} -> String.downcase(short) end)
 
     degrees =
       Enum.map(

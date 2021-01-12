@@ -4,7 +4,7 @@ defmodule KlausurarchivWeb.AdminOnly do
   alias Klausurarchiv.User
   import Plug.Conn
   import KlausurarchivWeb.Gettext
-  import Phoenix.Controller, only: [put_flash: 3, redirect: 2, render: 3]
+  import Phoenix.Controller, only: [put_flash: 3, render: 3]
 
   @doc false
   def init(opts), do: opts
