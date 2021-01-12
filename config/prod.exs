@@ -26,7 +26,8 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
   server: true,
   url: [
     port: 443,
-    scheme: "https"
+    scheme: "https",
+    host: System.get_env("HOST")
   ],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")]
