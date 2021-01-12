@@ -7,4 +7,4 @@
           i.fas.fa-envelope
 
   div.field
-    = submit gettext("Sent email"), class: "button is-link", style: "padding=0"
+    = submit gettext("Sent email"), class: "button is-primary", style: "padding=0"

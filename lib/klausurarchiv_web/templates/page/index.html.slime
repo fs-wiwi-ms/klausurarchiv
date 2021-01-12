@@ -50,9 +50,6 @@ div.container
           div.media-content
             span = gettext("Live search!")
 
-
-
-
       div.box
         h5.subtitle.is-5 =gettext("Hint")
         h6.is-6

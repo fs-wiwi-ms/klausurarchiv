@@ -1,31 +1,32 @@
-h1.title.is-3.has-text-white = gettext("Login")
+div.container
+  h1.title.is-3.has-text-white = gettext("Login")
 
-div.box
-  = form_for @conn, @action, fn user_form ->
-    div.field
-      label.label = gettext("Email")
-      div.control.has-icons-left
-        = text_input(user_form, :email, class: "input", type: "email", placeholder: "test@example.com")
-        span.icon.is-left
-            i.fas.fa-envelope
+  div.box
+    = form_for @conn, @action, fn user_form ->
+      div.field
+        label.label = gettext("Email")
+        div.control.has-icons-left
+          = text_input(user_form, :email, class: "input", type: "email", placeholder: "test@example.com")
+          span.icon.is-left
+              i.fas.fa-envelope
 
-    div.field
-      label.label = gettext("Password")
-      div.control.has-icons-left
-        = password_input(user_form, :password, class: "input", type: "password")
-        span.icon.is-left
-            i.fas.fa-asterisk
+      div.field
+        label.label = gettext("Password")
+        div.control.has-icons-left
+          = password_input(user_form, :password, class: "input", type: "password")
+          span.icon.is-left
+              i.fas.fa-asterisk
 
-    div.field
-      = checkbox(user_form, :remember_me, class: "is-checkradio is-link")
-        = label(user_form, :remember_me, gettext("Remember me"))
+      div.field
+        = checkbox(user_form, :remember_me, class: "is-checkradio is-primary")
+          = label(user_form, :remember_me, gettext("Remember me"))
 
-    div.field
-      = submit gettext("Login"), class: "button is-link"
-    div.field
-      a.button.is-outlined.is-warning(href="#{ public_password_reset_token_path(@conn, :new) }") = gettext("Forgot Password")
+      div.field
+        = submit gettext("Login"), class: "button is-primary"
+      div.field
+        a.button.is-outlined.is-warning(href="#{ public_password_reset_token_path(@conn, :new) }") = gettext("Forgot Password")
 
-  div.is-divider
+    div.is-divider
 
-  p.has-text-weight-semibold.label = gettext("You don't have an account yet? Register now!")
-  a.button.is-link.is-outlined(href="#{public_user_path(@conn, :new)}") = gettext("Create Account")
+    p.has-text-weight-semibold.label = gettext("You don't have an account yet? Register now!")
+    a.button.is-primary.is-outlined(href="#{public_user_path(@conn, :new)}") = gettext("Create Account")
