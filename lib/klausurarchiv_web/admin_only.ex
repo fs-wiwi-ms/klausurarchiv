@@ -21,7 +21,6 @@ defmodule KlausurarchivWeb.AdminOnly do
           conn
           |> put_flash(:error, gettext("This action is permitted!"))
           |> put_status(:unauthorized)
-          |> put_layout({KlausurarchivWeb.LayoutView, "error.html"})
           |> put_view(KlausurarchivWeb.ErrorView)
           |> render("401.html")
           |> halt()
@@ -31,7 +30,6 @@ defmodule KlausurarchivWeb.AdminOnly do
         conn
         |> put_flash(:error, gettext("This action is permitted!"))
         |> put_status(:unauthorized)
-        |> put_layout({KlausurarchivWeb.LayoutView, "error.html"})
         |> put_view(KlausurarchivWeb.ErrorView)
         |> render("401.html")
         |> halt()
