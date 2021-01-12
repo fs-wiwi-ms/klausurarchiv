@@ -12,15 +12,25 @@ defmodule KlausurarchivWeb.Router do
   end
 
   pipeline :browser do
-    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: false)
+    plug(KlausurarchivWeb.Authentication,
+      type: :api_or_browser,
+      forward_to_login: false
+    )
   end
 
   pipeline :protected_browser do
-    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: true)
+    plug(KlausurarchivWeb.Authentication,
+      type: :api_or_browser,
+      forward_to_login: true
+    )
   end
 
   pipeline :admins_only do
-    plug(KlausurarchivWeb.Authentication, type: :api_or_browser, forward_to_login: true)
+    plug(KlausurarchivWeb.Authentication,
+      type: :api_or_browser,
+      forward_to_login: true
+    )
+
     plug(KlausurarchivWeb.AdminOnly)
   end
 
@@ -52,7 +62,9 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through([:unsecure_browser, :admins_only])
 
-    resources("/lectures", LectureController, only: [:new, :create,:edit, :update])
+    resources("/lectures", LectureController,
+      only: [:new, :create, :edit, :update]
+    )
 
     resources("/exams", ExamController, only: [:edit, :update])
 

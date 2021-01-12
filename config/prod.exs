@@ -61,6 +61,5 @@ config :klausurarchiv, DeepMrt.Mailer,
   no_mx_lookups: false,
   auth: :always
 
-
 config :logger,
   backends: [:console, Sentry.LoggerBackend]

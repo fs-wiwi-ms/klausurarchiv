@@ -241,7 +241,11 @@ defmodule Klausurarchiv.Uploads do
   defp build_lecture_filter(query, {"capital", ""}), do: query
 
   defp build_lecture_filter(query, {"capital", capital_search}) do
-    where(query, [l, ld, s], fragment("? ILIKE ?", l.name, ^"#{capital_search}%"))
+    where(
+      query,
+      [l, ld, s],
+      fragment("? ILIKE ?", l.name, ^"#{capital_search}%")
+    )
   end
 
   def get_lectures_by_degree(%{id: degree_id}) do
@@ -275,20 +279,26 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def update_lecture(lecture, lecture_params) do
-    shortcuts = if lecture_params["shortcuts"] do
-      lecture_params["shortcuts"]
-      |> String.split(",")
-      |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
-      |> Enum.map(& %{name: &1, published: false})
-    else
-      []
-    end
+    shortcuts =
+      if lecture_params["shortcuts"] do
+        lecture_params["shortcuts"]
+        |> String.split(",")
+        |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
+        |> Enum.map(&%{name: &1, published: false})
+      else
+        []
+      end
 
-    shortcuts = lecture.shortcuts
-    |> Enum.concat(shortcuts)
-    |> Enum.uniq(fn %{name: short} -> String.downcase(short) end)
+    shortcuts =
+      lecture.shortcuts
+      |> Enum.concat(shortcuts)
+      |> Enum.uniq(fn %{name: short} -> String.downcase(short) end)
 
-    degrees = Enum.map(lecture_params["degree_ids"] || Enum.map(lecture.degrees,& &1.id), &get_degree(&1))
+    degrees =
+      Enum.map(
+        lecture_params["degree_ids"] || Enum.map(lecture.degrees, & &1.id),
+        &get_degree(&1)
+      )
 
     lecture_params =
       lecture_params
@@ -320,7 +330,6 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.get(id)
     |> Repo.preload(preload)
   end
-
 
   def update_shortcut_state(shortcut_id, state) do
     short = get_shortcut(shortcut_id, [:lecture])

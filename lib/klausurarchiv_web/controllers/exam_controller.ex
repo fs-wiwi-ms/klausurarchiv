@@ -69,6 +69,7 @@ defmodule KlausurarchivWeb.ExamController do
         conn
         |> put_flash(:info, "Updated")
         |> redirect(to: lecture_path(conn, :show, exam.lecture_id))
+
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Fehler beim Erstellen")

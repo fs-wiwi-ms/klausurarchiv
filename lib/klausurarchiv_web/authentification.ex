@@ -32,7 +32,9 @@ defmodule KlausurarchivWeb.Authentication do
           conn
           |> put_session(:redirect_url, conn.request_path)
           |> put_flash(:info, "Please login to continue.")
-          |> redirect(to: KlausurarchivWeb.Router.Helpers.public_session_path(conn, :new))
+          |> redirect(
+            to: KlausurarchivWeb.Router.Helpers.public_session_path(conn, :new)
+          )
           |> halt()
         else
           conn

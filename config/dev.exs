@@ -25,7 +25,8 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
       ~r{lib/klausurarchiv_web/templates/.*(eex|slim|slime)$}
     ]
   ],
-  secret_key_base: "5HjSFjyGix751ubR/igyrzbfby3NsOc2Dn4DxldR4hpoqKIa3YEosx3psppajJRw",
+  secret_key_base:
+    "5HjSFjyGix751ubR/igyrzbfby3NsOc2Dn4DxldR4hpoqKIa3YEosx3psppajJRw",
   live_view: [signing_salt: "pwCwZuECFRuIQKmFS1mblLgc68jg5dOw"]
 
 config :slime, :keep_lines, true

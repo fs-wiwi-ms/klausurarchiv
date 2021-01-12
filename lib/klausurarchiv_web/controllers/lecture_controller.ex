@@ -24,7 +24,9 @@ defmodule KlausurarchivWeb.LectureController do
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
 
-    live_render(conn, KlausurarchivWeb.ShortcutLive, session: %{"user" => user, "lecture" => lecture})
+    live_render(conn, KlausurarchivWeb.ShortcutLive,
+      session: %{"user" => user, "lecture" => lecture}
+    )
   end
 
   def show(conn, %{"id" => lecture_id}) do
@@ -107,6 +109,7 @@ defmodule KlausurarchivWeb.LectureController do
         conn
         |> put_flash(:info, "Updated")
         |> redirect(to: lecture_path(conn, :show, lecture.id))
+
       {:error, changeset} ->
         degrees = Uploads.get_degrees()
 

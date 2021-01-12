@@ -12,7 +12,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
 
-    has_many(:shortcuts, Klausurarchiv.Uploads.Shortcut, [on_replace: :delete])
+    has_many(:shortcuts, Klausurarchiv.Uploads.Shortcut, on_replace: :delete)
 
     many_to_many(
       :degrees,

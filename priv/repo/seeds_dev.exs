@@ -10,7 +10,6 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-
 alias Klausurarchiv.Repo
 alias Klausurarchiv.User
 import Ecto.Query, warn: false
@@ -22,12 +21,19 @@ user =
 
 case user do
   nil ->
-    User.create_user(%{"fore_name" => "Tobias", "last_name" => "Hoge", "user_name" => "tbho", "email" => "tbho@tbho.de", "password" => "Test123!", "password_confirmation" => "Test123!", "role" => "user"})
+    User.create_user(%{
+      "fore_name" => "Tobias",
+      "last_name" => "Hoge",
+      "user_name" => "tbho",
+      "email" => "tbho@tbho.de",
+      "password" => "Test123!",
+      "password_confirmation" => "Test123!",
+      "role" => "user"
+    })
 
   user ->
     user
 end
-
 
 admin =
   User
@@ -36,7 +42,15 @@ admin =
 
 case admin do
   nil ->
-    User.create_user(%{"fore_name" => "Admin", "last_name" => "Account", "user_name" => "admin", "email" => "tbho+admin@tbho.de", "password" => "Test123!", "password_confirmation" => "Test123!", "role" => "admin"})
+    User.create_user(%{
+      "fore_name" => "Admin",
+      "last_name" => "Account",
+      "user_name" => "admin",
+      "email" => "tbho+admin@tbho.de",
+      "password" => "Test123!",
+      "password_confirmation" => "Test123!",
+      "role" => "admin"
+    })
 
   admin ->
     admin
