@@ -9,4 +9,4 @@ div.container
   p.title.has-text-white.has-text-centered.is-size-4-mobile
     span Impossible!
     br
-    span Perhabs the servers are incomplete.
+    span Perhaps the servers are incomplete.
