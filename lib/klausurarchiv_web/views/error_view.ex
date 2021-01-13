@@ -25,4 +25,8 @@ defmodule KlausurarchivWeb.ErrorView do
   def render("404.html", assigns) do
     render(__MODULE__, "not_found.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
   end
+
+  def render("400.html", assigns) do
+    render(__MODULE__, "bad_request.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+  end
 end
