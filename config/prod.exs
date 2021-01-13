@@ -42,7 +42,7 @@ config :sentry,
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
   tags: %{
-    env: System.get_env("SENTRY_ENV") || "prod"
+    env: System.get_env("SENTRY_ENV") || "production"
   },
   included_environments: [:prod, :staging]
 
