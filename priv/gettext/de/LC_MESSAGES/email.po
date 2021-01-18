@@ -14,4 +14,4 @@ msgstr ""
 #, elixir-format
 #: lib/klausurarchiv/user/email.ex:17
 msgid "reset_password"
-msgstr ""
+msgstr "Klausurarchiv: Passwort zurücksetzen"

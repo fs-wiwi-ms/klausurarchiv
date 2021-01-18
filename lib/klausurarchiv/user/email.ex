@@ -15,7 +15,7 @@ defmodule Klausurarchiv.User.Email do
     |> to(user.email)
     |> from(System.get_env("SMTP_FROM_ADDRESS"))
     |> subject(dgettext("email", "reset_password"))
-    |> html_body(System.get_env("HOST") <> password_reset_url)
-    |> text_body(System.get_env("HOST") <> password_reset_url)
+    |> html_body("https://" <> System.get_env("HOST") <> password_reset_url)
+    |> text_body("https://" <> System.get_env("HOST") <> password_reset_url)
   end
 end
