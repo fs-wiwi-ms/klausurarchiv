@@ -105,6 +105,7 @@ defmodule KlausurarchivWeb.Router do
 
     get("/", PageController, :index)
     get("/privacy", PageController, :privacy)
+    get("/legal", PageController, :legal)
 
     resources("/exams", ExamController, only: [:new, :create])
 

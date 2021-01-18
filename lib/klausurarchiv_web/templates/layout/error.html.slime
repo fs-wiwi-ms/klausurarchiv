@@ -37,7 +37,7 @@ html(lang="en")
             a.button.has-background-grey-darker.is-outlined(href="https://fachschaft-wiwi.ms")
               strong.has-text-white = gettext("Student's council of business school of university of münster")
           div.column.is-narrow
-            a.button.has-background-grey-darker.is-outlined(href="https://fachschaft-wiwi.ms/sonstiges/impressum")
+            a.button.has-background-grey-darker.is-outlined(href="#{page_path(@conn, :legal)}")
               p.has-text-white = gettext("Legal")
           div.column.is-narrow
             a.button.has-background-grey-darker.is-outlined(href="#{page_path(@conn, :privacy)}")

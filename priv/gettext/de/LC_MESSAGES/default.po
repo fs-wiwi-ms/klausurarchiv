@@ -24,7 +24,7 @@ msgid "Download"
 msgstr "Download"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:74
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:69
 msgid "Error"
 msgstr "Fehler"
 
@@ -83,7 +83,7 @@ msgid "Send"
 msgstr "Abschicken"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:60
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:55
 msgid "Success"
 msgstr "Erfolg"
 
@@ -141,7 +141,7 @@ msgid "If you have any suggestions, errors or other problems regarding the displ
 msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:88
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:83
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
 msgid "Legal"
 msgstr "Impressum"
@@ -152,7 +152,7 @@ msgid "Please enter the ZIV ID"
 msgstr "Bei Aufforderung bitte zur Authentifizierung die ZIV-Kennung"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:91
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:86
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:44
 msgid "Privacy"
 msgstr "Datenschutz"
@@ -164,7 +164,7 @@ msgstr "Klausuren freischalten"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:85 lib/klausurarchiv_web/templates/layout/error.html.slime:7
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:80 lib/klausurarchiv_web/templates/layout/error.html.slime:7
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:38
 msgid "Student's council of business school of university of münster"
 msgstr "Fachschaft WiWi der Universität Münster"
@@ -197,14 +197,9 @@ msgid "Winter term"
 msgstr "Wintersemester"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:96
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:91
 msgid "Source Code"
 msgstr ""
-
-#, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:49
-msgid "Back to Homepage"
-msgstr "Zurück zur Homepage"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:54
@@ -270,7 +265,7 @@ msgid "Forgot password"
 msgstr "Passwort vergessen"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:54
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:49
 msgid "Info"
 msgstr "Info"
 
@@ -310,7 +305,7 @@ msgstr "Abkürzungen verwalten"
 #, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:36
 msgid "Matriculation number"
-msgstr ""
+msgstr "Matrikelnummer"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_form.html.slime:10
@@ -326,7 +321,7 @@ msgstr "Keine Shortcuts gefunden."
 #: lib/klausurarchiv_web/templates/password_reset_token/show.html.slime:7
 #: lib/klausurarchiv_web/templates/session/new.html.slime:14 lib/klausurarchiv_web/templates/user/new.html.slime:47
 msgid "Password"
-msgstr "Password"
+msgstr "Passwort"
 
 #, elixir-format
 #: lib/klausurarchiv_web/controllers/password_reset_controller.ex:47
@@ -395,7 +390,7 @@ msgid "Under review"
 msgstr "Noch nicht freigegeben"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:67
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:62
 msgid "Warning"
 msgstr "Warnung"
 

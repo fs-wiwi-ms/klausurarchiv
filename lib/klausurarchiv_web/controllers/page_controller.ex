@@ -11,4 +11,8 @@ defmodule KlausurarchivWeb.PageController do
   def privacy(conn, _params) do
     render(conn, "privacy.html")
   end
+
+  def legal(conn, _params) do
+    render(conn, "legal.html")
+  end
 end

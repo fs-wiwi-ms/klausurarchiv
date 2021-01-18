@@ -24,7 +24,7 @@ msgid "Download"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:74
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:69
 msgid "Error"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Send"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:60
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:55
 msgid "Success"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgid "If you have any suggestions, errors or other problems regarding the displ
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:88
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:83
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
 msgid "Legal"
 msgstr ""
@@ -152,7 +152,7 @@ msgid "Please enter the ZIV ID"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:91
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:86
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:44
 msgid "Privacy"
 msgstr ""
@@ -164,7 +164,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:85 lib/klausurarchiv_web/templates/layout/error.html.slime:7
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:80 lib/klausurarchiv_web/templates/layout/error.html.slime:7
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:38
 msgid "Student's council of business school of university of münster"
 msgstr ""
@@ -197,13 +197,8 @@ msgid "Winter term"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:96
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:91
 msgid "Source Code"
-msgstr ""
-
-#, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:49
-msgid "Back to Homepage"
 msgstr ""
 
 #, elixir-format
@@ -270,7 +265,7 @@ msgid "Forgot password"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:54
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:49
 msgid "Info"
 msgstr ""
 
@@ -395,7 +390,7 @@ msgid "Under review"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:67
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:62
 msgid "Warning"
 msgstr ""
 
