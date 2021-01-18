@@ -46,6 +46,7 @@ defmodule Klausurarchiv.User do
     user
     |> changeset(attrs)
     |> validate_password
+    |> validate_required([:email, :fore_name, :last_name])
     |> unique_constraint(:email)
   end
 

@@ -30,22 +30,37 @@ defmodule KlausurarchivWeb.LectureController do
   end
 
   def show(conn, %{"id" => lecture_id}) do
+    user =
+      conn
+      |> get_session(:user_id)
+      |> User.get_user()
+
     lecture =
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
 
-    exams =
-      lecture_id
-      |> Uploads.get_published_exams_for_lecture()
+    case {user.role, lecture.published} do
+      {role, published} when role == :admin or role == :user and published == true ->
+        exams =
+          lecture_id
+          |> Uploads.get_exams_for_lecture(user)
 
-    lecture_changeset = Uploads.change_lecture(lecture, %{})
+        lecture_changeset = Uploads.change_lecture(lecture, %{})
 
-    render(conn, "show.html",
-      lecture: lecture,
-      exams: exams,
-      changeset: lecture_changeset,
-      action: lecture_path(conn, :update, lecture_id)
-    )
+        render(conn, "show.html",
+          lecture: lecture,
+          exams: exams,
+          changeset: lecture_changeset,
+          action: lecture_path(conn, :update, lecture_id)
+        )
+
+      {:user, false} ->
+        conn
+        |> put_layout(false)
+        |> put_status(:unauthorized)
+        |> render(KlausurarchivWeb.ErrorView, :"401")
+        |> halt()
+    end
   end
 
   def new(conn, _params) do

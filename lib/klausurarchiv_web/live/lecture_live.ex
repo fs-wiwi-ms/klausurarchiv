@@ -9,7 +9,7 @@ defmodule KlausurarchivWeb.LectureLive do
       if empty_filter?(filter) do
         []
       else
-        Uploads.filter_lectures(filter, [:shortcuts])
+        Uploads.filter_lectures(filter, user, [:shortcuts])
       end
 
     {:ok,
@@ -34,7 +34,7 @@ defmodule KlausurarchivWeb.LectureLive do
       if empty_filter?(filter) do
         []
       else
-        Uploads.filter_lectures(filter, [:shortcuts])
+        Uploads.filter_lectures(filter, user, [:shortcuts])
       end
 
     if not is_nil(user) do

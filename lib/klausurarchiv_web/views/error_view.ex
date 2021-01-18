@@ -18,7 +18,7 @@ defmodule KlausurarchivWeb.ErrorView do
     render(
       __MODULE__,
       "unauthorized.html",
-      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
     )
   end
 
@@ -26,7 +26,7 @@ defmodule KlausurarchivWeb.ErrorView do
     render(
       __MODULE__,
       "internal_server_error.html",
-      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
     )
   end
 
@@ -34,7 +34,7 @@ defmodule KlausurarchivWeb.ErrorView do
     render(
       __MODULE__,
       "not_found.html",
-      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
     )
   end
 
@@ -42,7 +42,7 @@ defmodule KlausurarchivWeb.ErrorView do
     render(
       __MODULE__,
       "bad_request.html",
-      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
     )
   end
 end
