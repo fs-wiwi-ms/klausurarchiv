@@ -2,38 +2,29 @@
     div.field
       label.label = gettext("Lecture")
       div.control.has-icons-left
-        = select(exam_form, :lecture_id, Enum.map(@lectures, &{&1.name, &1.id}), class: "input")
+        = select(exam_form, :lecture_id, Enum.map(@lectures, &{"#{&1.module_number} - #{&1.name}", &1.id}), class: "input")
         span.icon.is-left
             i.fas.fa-link
         = error_label(@changeset, :lecture_id)
 
-    = inputs_for exam_form, :term, fn term_form ->
-      div.field
-        label.label = gettext "Term"
-        div.control.has-icons-left
-          = select(term_form, :type, %{gettext("Winter term") => :winter_term, gettext("Summer term") => :summer_term}, class: "input")
-          span.icon.is-left
+    div.field
+      label.label = gettext("Term")
+      div.control.has-icons-left
+        = select(exam_form, :term_id, Enum.map(@terms, &{"#{if &1.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{&1.year}", &1.id}), class: "input")
+        span.icon.is-left
             i.fas.fa-link
-        = error_label(@changeset, :type)
+        = error_label(@changeset, :term_id)
 
-      div.field
-        label.label = gettext "Year"
-        div.control.has-icons-left
-          = number_input(term_form, :year, class: "input", type: "number")
-            span.icon.is-left
-              i.fas.fa-link
-        = error_label(@changeset, :year)
+    div.field
+      div.file.has-name
+        label.file-label
+          = file_input(exam_form, :file, class: "file-input", type: "file", id: "file-input")
+          span.file-cta
+            span.file-icon
+              i.fas.fa-upload
+            span.file-label = gettext "File"
+          span.file-name#file-input = gettext("No file choosen....")
+      = error_label(@changeset, :file)
 
-      div.field
-        div.file.has-name
-          label.file-label
-            = file_input(exam_form, :file, class: "file-input", type: "file", id: "file-input")
-            span.file-cta
-              span.file-icon
-                i.fas.fa-upload
-              span.file-label = gettext "File"
-            span.file-name#file-input
-        = error_label(@changeset, :file)
-
-      div.field
-        = submit gettext("Send"), class: "button is-primary"
+    div.field
+      = submit gettext("Send"), class: "button is-primary"

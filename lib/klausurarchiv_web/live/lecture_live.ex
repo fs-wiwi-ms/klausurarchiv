@@ -38,7 +38,7 @@ defmodule KlausurarchivWeb.LectureLive do
       end
 
     if not is_nil(user) do
-      User.update_user(user, %{filter_data: filter}) |> IO.inspect()
+      User.update_user(user, %{filter_data: filter})
     end
 
     {:noreply, assign(socket, lectures: lectures, filter: filter)}

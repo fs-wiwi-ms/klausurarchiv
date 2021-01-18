@@ -15,18 +15,34 @@ defmodule KlausurarchivWeb.ErrorView do
   end
 
   def render("401.html", assigns) do
-    render(__MODULE__, "unauthorized.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+    render(
+      __MODULE__,
+      "unauthorized.html",
+      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+    )
   end
 
   def render("503.html", assigns) do
-    render(__MODULE__, "internal_server_error.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+    render(
+      __MODULE__,
+      "internal_server_error.html",
+      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+    )
   end
 
   def render("404.html", assigns) do
-    render(__MODULE__, "not_found.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+    render(
+      __MODULE__,
+      "not_found.html",
+      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+    )
   end
 
   def render("400.html", assigns) do
-    render(__MODULE__, "bad_request.html", Dict.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"}))
+    render(
+      __MODULE__,
+      "bad_request.html",
+      Map.merge(assigns, layout: {KlausurarchivWeb.LayoutView, "error.html"})
+    )
   end
 end

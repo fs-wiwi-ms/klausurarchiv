@@ -75,11 +75,26 @@ function initNotifications() {
     });
 }
 
+function initFileInput() {
+  const fileInput = document.querySelector('#file-input');
+  if (fileInput != null) {
+    fileInput.addEventListener('change', (e) => {
+      const fileInput = e.target as HTMLInputElement;
+      if (fileInput.files.length > 0) {
+        const fileName = document.querySelector('.file-name');
+        fileName.textContent = fileInput.files[0].name;
+      }
+    });
+  }
+}
+
+
 
 function initComponents() {
   initNavBarBurger();
   initModals();
   initNotifications();
+  initFileInput();
 }
 
 if (document.readyState !== "loading") {

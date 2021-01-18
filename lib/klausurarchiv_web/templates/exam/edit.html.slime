@@ -1,22 +1,23 @@
-div.level
-  h2.title.is-2.has-text-white = gettext "Edit exam"
-div.box
-  = form_for @changeset, @action, fn exam_form ->
-    div.field
-      label.label = gettext("Lecture")
-      div.control.has-icons-left
-        = select(exam_form, :lecture_id, Enum.map(@lectures, &{"#{&1.module_number} - #{&1.name}", &1.id}), class: "input")
-        span.icon.is-left
-            i.fas.fa-link
-        = error_label(@changeset, :lecture_id)
+div.container
+  h1.title.is-3.has-text-white = gettext "Edit exam"
 
-    div.field
-      label.label = gettext("Term")
-      div.control.has-icons-left
-        = select(exam_form, :term_id, Enum.map(@terms, &{"#{if &1.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{&1.year}", &1.id}), class: "input")
-        span.icon.is-left
-            i.fas.fa-link
-        = error_label(@changeset, :term_id)
+  div.box
+    = form_for @changeset, @action, fn exam_form ->
+      div.field
+        label.label = gettext("Lecture")
+        div.control.has-icons-left
+          = select(exam_form, :lecture_id, Enum.map(@lectures, &{"#{&1.module_number} - #{&1.name}", &1.id}), class: "input")
+          span.icon.is-left
+              i.fas.fa-link
+          = error_label(@changeset, :lecture_id)
 
-    div.field
-      = submit gettext("Send"), class: "button is-primary"
+      div.field
+        label.label = gettext("Term")
+        div.control.has-icons-left
+          = select(exam_form, :term_id, Enum.map(@terms, &{"#{if &1.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{&1.year}", &1.id}), class: "input")
+          span.icon.is-left
+              i.fas.fa-link
+          = error_label(@changeset, :term_id)
+
+      div.field
+        = submit gettext("Send"), class: "button is-primary"

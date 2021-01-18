@@ -5,10 +5,12 @@ defmodule KlausurarchivWeb.ExamController do
 
   def new(conn, _params) do
     lectures = Uploads.get_lectures()
+    terms = Uploads.get_terms()
     changeset = Uploads.change_exam()
 
     render(conn, "new.html",
       lectures: lectures,
+      terms: terms,
       changeset: changeset,
       action: exam_path(conn, :create)
     )
@@ -50,11 +52,13 @@ defmodule KlausurarchivWeb.ExamController do
 
       {:error, changeset} ->
         lectures = Uploads.get_lectures()
+        terms = Uploads.get_terms()
 
         conn
         |> put_flash(:error, "Fehler beim Erstellen")
         |> render("new.html",
           lectures: lectures,
+          terms: terms,
           changeset: changeset,
           action: exam_path(conn, :create)
         )

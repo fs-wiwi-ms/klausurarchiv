@@ -1,5 +1,6 @@
 defmodule Klausurarchiv.Uploads do
   import Ecto.Query, warn: false
+  import Ecto.Changeset, only: [add_error: 4]
   alias Klausurarchiv.Repo
 
   alias Klausurarchiv.Uploads.{
@@ -24,11 +25,6 @@ defmodule Klausurarchiv.Uploads do
   def get_term(id) do
     Term
     |> Repo.get(id)
-  end
-
-  def get_term_by_year_and_type(year, type) do
-    Term
-    |> Repo.get_by(type: type, year: year)
   end
 
   def create_term(term_params) do
@@ -97,7 +93,7 @@ defmodule Klausurarchiv.Uploads do
       e in Exam,
       join: t in assoc(e, :term),
       where: e.lecture_id == ^lecture_id,
-      # where: e.published == true,
+      where: e.published == true,
       order_by: [desc: t.year, desc: t.type],
       preload: [:term]
     )
@@ -119,20 +115,18 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def create_exam(exam_params) do
-    {file_args, exam_params} = Map.pop(exam_params, "file")
-    {term_args, exam_params} = Map.pop(exam_params, "term")
-    {lecture_id, exam_params} = Map.pop(exam_params, "lecture_id")
-
-    term = get_term_by_year_and_type(term_args["year"], term_args["type"])
+  def create_exam(
+        %{"file" => file, "term_id" => term_id, "lecture_id" => lecture_id} =
+          exam_params
+      ) do
+    term = get_term(term_id)
     lecture = get_lecture(lecture_id)
 
-    case upload_file(term, lecture, file_args) do
+    case upload_file(term, lecture, file) do
       {:ok, filename} ->
         exam_params =
           exam_params
-          |> Map.put("lecture_id", lecture.id)
-          |> Map.put("term_id", term.id)
+          |> Map.drop(["file"])
           |> Map.put("filename", filename)
           |> Map.put("published", false)
 
@@ -143,6 +137,16 @@ defmodule Klausurarchiv.Uploads do
       {:error, _error} ->
         {:error, "file could not be uploaded"}
     end
+  end
+
+  def create_exam(exam_params) do
+    # no file upload contained in params
+    changeset =
+      %Exam{}
+      |> Exam.changeset(exam_params)
+      |> add_error(:file, "cannot be empty", [])
+
+    {:error, changeset}
   end
 
   def update_exam(exam, exam_params) do

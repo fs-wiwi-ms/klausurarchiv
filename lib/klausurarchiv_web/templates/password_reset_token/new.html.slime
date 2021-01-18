@@ -2,4 +2,4 @@ div.container
   h1.title.is-3.has-text-white = gettext("Forgot password")
 
   div.box
-    = render "form.html", Map.put(assigns, :action, public_password_reset_token_path(@conn, :create))
+    = render "_form.html", Map.put(assigns, :action, public_password_reset_token_path(@conn, :create))

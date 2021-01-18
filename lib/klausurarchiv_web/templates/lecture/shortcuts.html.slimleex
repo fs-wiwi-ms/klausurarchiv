@@ -1,12 +1,5 @@
 div.container
-  div.level
-    a.button(href="#{page_path(@socket, :index)}")
-      span.icon
-        i.fas.fa-caret-left
-      span = gettext "Back"
-  div.level
-    h2.title.is-2.has-text-white =gettext "Shortcuts"
-
+  h1.title.is-3.has-text-white =gettext "Shortcuts"
 
   - unreviewed_shortcut_lectures = get_unreviewed_shortcuts(@lectures)
   = if length(unreviewed_shortcut_lectures) > 0 do

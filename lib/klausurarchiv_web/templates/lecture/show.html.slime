@@ -7,7 +7,6 @@ div.container
 
 
   = if user do
-    - IO.inspect(user)
     = case(user.role) do
       - :admin ->
         div.box.has-background-danger-light
@@ -60,7 +59,7 @@ div.container
 
   = if length(@exams) > 0 do
     = for exam <- @exams do
-      div.p-2
+      div.py-2
         div.card.has-background-light
           div.card-header
             p.card-header-title.has-text-primary
