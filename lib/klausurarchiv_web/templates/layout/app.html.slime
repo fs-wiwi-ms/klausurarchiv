@@ -37,12 +37,16 @@ html(lang="en")
           div.navbar-item
            = if @conn.assigns[:session] do
             div.has-text-primary = "Logged in as #{@conn.assigns[:session].user.fore_name} #{@conn.assigns[:session].user.last_name}"
-          div.navbar-item
-            = if @conn.assigns[:session] do
+          = if @conn.assigns[:session] do
+            div.navbar-item
               = form_for @conn, session_path(@conn, :delete, @conn.assigns[:session]), [method: :delete, class: "m-0"], fn _form ->
                 = submit("Logout", class: "button has-text-weight-bold is-outlined is-primary")
-            - else
-              a.button.has-text-weight-bold.is-primary.is-outlined(href="#{public_session_path(@conn, :new)}") Login
+          - else
+            div.navbar-item
+              a.button.has-text-weight-bold.is-primary(href="#{public_session_path(@conn, :new)}") = gettext("Login")
+            div.navbar-item
+              a.button.has-text-weight-bold.is-primary.is-outlined(href="#{public_user_path(@conn, :new)}") = gettext("Register")
+
 
     = if !is_nil get_flash(@conn, :info) do
       div.snackbar.notification.is-link(style="position: fixed;")

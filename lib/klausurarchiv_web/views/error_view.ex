@@ -22,7 +22,7 @@ defmodule KlausurarchivWeb.ErrorView do
     )
   end
 
-  def render("503.html", assigns) do
+  def render("500.html", assigns) do
     render(
       __MODULE__,
       "internal_server_error.html",

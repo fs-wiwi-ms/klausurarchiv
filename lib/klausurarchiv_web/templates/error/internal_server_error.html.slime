@@ -1,7 +1,7 @@
 div.container
   div.level
     div.level-item
-      p.title.has-text-white.has-text-weight-semibold.is-family-secondary.is-size-4-mobile.has-text-centered 503 - Internal Server Error
+      p.title.has-text-white.has-text-weight-semibold.is-family-secondary.is-size-4-mobile.has-text-centered 500 - Internal Server Error
   div.level
     div.level-item
       img(src="#{static_path(@conn, "/images/obiwan.png")}" style="max-height:50vh;")
