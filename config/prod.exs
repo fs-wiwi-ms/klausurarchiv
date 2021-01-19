@@ -38,11 +38,11 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
 
 config :sentry,
   dsn: {:system, "SENTRY_DSN"},
-  environment_name: String.to_atom(System.get_env("SENTRY_ENV")) || :prod,
+  environment_name: String.to_atom(System.get_env("SENTRY_ENV")),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
   tags: %{
-    env: System.get_env("SENTRY_ENV") || "production"
+    env: System.get_env("SENTRY_ENV")
   },
   included_environments: [:prod, :staging]
 
