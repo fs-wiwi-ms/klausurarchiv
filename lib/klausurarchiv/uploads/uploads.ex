@@ -135,7 +135,7 @@ defmodule Klausurarchiv.Uploads do
           |> Map.put("published", false)
 
         %Exam{}
-        |> Exam.changeset(exam_params)
+        |> Exam.changeset_create(exam_params)
         |> Repo.insert()
 
       {:error, _error} ->
@@ -147,7 +147,7 @@ defmodule Klausurarchiv.Uploads do
     # no file upload contained in params
     changeset =
       %Exam{}
-      |> Exam.changeset(exam_params)
+      |> Exam.changeset_create(exam_params)
       |> add_error(:file, "cannot be empty", [])
 
     {:error, changeset}
@@ -155,7 +155,7 @@ defmodule Klausurarchiv.Uploads do
 
   def update_exam(exam, exam_params) do
     exam
-    |> Exam.changeset(exam_params)
+    |> Exam.changeset_create(exam_params)
     |> Repo.update()
   end
 

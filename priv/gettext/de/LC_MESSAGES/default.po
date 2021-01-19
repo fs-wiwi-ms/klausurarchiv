@@ -341,7 +341,7 @@ msgstr "Benutzer registrieren"
 #, elixir-format
 #: lib/klausurarchiv_web/controllers/user_controller.ex:19
 msgid "Registration successful! Please login."
-msgstr "Registration erfolgreich. Bitten einloggen."
+msgstr "Registration erfolgreich. Bitte einloggen."
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/session/new.html.slime:22
