@@ -23,6 +23,7 @@ defmodule KlausurarchivWeb do
       import Plug.Conn
       import KlausurarchivWeb.Router.Helpers
       import KlausurarchivWeb.Gettext
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -34,6 +35,7 @@ defmodule KlausurarchivWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.LiveView.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -41,6 +43,35 @@ defmodule KlausurarchivWeb do
       import KlausurarchivWeb.Router.Helpers
       import KlausurarchivWeb.ErrorHelpers
       import KlausurarchivWeb.Gettext
+
+      def error_label(changeset, field) do
+        errors =
+          Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+            Enum.reduce(opts, msg, fn {key, value}, acc ->
+              if key == :validation do
+                String.replace(acc, "%{#{key}}", to_string(value))
+              end
+            end)
+          end)
+
+        case Enum.find(errors, fn {key, value} -> key == field end) do
+          {field, errors} ->
+            content_tag(:p, Enum.join(errors, ", "), class: "help is-danger")
+
+          nil ->
+            nil
+        end
+      end
+
+      def get_user(conn) do
+        case conn.assigns[:session] do
+          nil ->
+            nil
+
+          session ->
+            Klausurarchiv.User.get_user(session.user_id)
+        end
+      end
     end
   end
 
@@ -49,6 +80,7 @@ defmodule KlausurarchivWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

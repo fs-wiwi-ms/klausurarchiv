@@ -38,6 +38,8 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_slime, "~> 0.13.0"},
       {:phoenix_ecto, "~> 4.2.0"},
       {:plug_cowboy, "~> 2.3"},
+      {:argon2_elixir, "~> 2.0"},
+      {:comeonin, "~> 5.3.0"},
       {:postgrex, "~> 0.15"},
       {:distillery, "~> 2.0"},
       {:phoenix_html, "~> 2.14"},
@@ -48,7 +50,13 @@ defmodule Klausurarchiv.Mixfile do
       {:httpoison, "~> 1.7"},
       {:sentry, "~> 8.0"},
       {:jason, "~> 1.2"},
-      {:plug_preferred_locales, "~> 0.1.0"}
+      {:bamboo, "~> 1.5"},
+      {:bamboo_smtp, "~> 3.0"},
+      {:timex, "~> 3.0"},
+      {:number, "~> 1.0.1"},
+      {:plug_preferred_locales, "~> 0.1.0"},
+      {:phoenix_live_view, "~> 0.14.6"},
+      {:floki, ">= 0.27.0", only: :test}
     ]
   end
 

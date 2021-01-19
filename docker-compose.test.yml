@@ -13,8 +13,7 @@ services:
     environment:
       DATABASE_URL: "psql://klausurarchiv_test:klausurarchiv@db/klausurarchiv_test"
       SECRET_KEY_BASE: vCYwlWedpDhj5OEFaMqhnNDzO+rT/AQwRRTu7NwidjASFI4js35VYYF0x5ARb+Uc
-      USERNAME: admin
-      PASSWORD: pass
+      LIVE_VIEW_SALT: pwCwZuECFRuIQKmFS1mblLgc68jg5dOw
   assets:
     build:
       context: .

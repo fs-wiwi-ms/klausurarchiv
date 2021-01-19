@@ -4,7 +4,6 @@ defmodule Klausurarchiv.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
-
     # Define workers and child supervisors to be supervised
     children = [
       # Start the PubSub system

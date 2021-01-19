@@ -25,7 +25,8 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
       ~r{lib/klausurarchiv_web/templates/.*(eex|slim|slime)$}
     ]
   ],
-  secret_key_base: "5HjSFjyGix751ubR/igyrzbfby3NsOc2Dn4DxldR4hpoqKIa3YEosx3psppajJRw",
+  secret_key_base:
+    "5HjSFjyGix751ubR/igyrzbfby3NsOc2Dn4DxldR4hpoqKIa3YEosx3psppajJRw",
   live_view: [signing_salt: "pwCwZuECFRuIQKmFS1mblLgc68jg5dOw"]
 
 config :slime, :keep_lines, true
@@ -36,6 +37,8 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+config :klausurarchiv, Klausurarchiv.Mailer, adapter: Bamboo.LocalAdapter
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

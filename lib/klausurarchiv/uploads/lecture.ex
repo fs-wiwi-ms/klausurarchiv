@@ -6,9 +6,13 @@ defmodule Klausurarchiv.Uploads.Lecture do
   @foreign_key_type :binary_id
 
   schema "lectures" do
+    field(:module_number, :string)
     field(:name, :string)
+    field(:published, :boolean, default: true)
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
+
+    has_many(:shortcuts, Klausurarchiv.Uploads.Shortcut, on_replace: :delete)
 
     many_to_many(
       :degrees,
@@ -23,8 +27,9 @@ defmodule Klausurarchiv.Uploads.Lecture do
   @doc false
   def changeset(lecture, attrs) do
     lecture
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :module_number, :published])
     |> validate_required([:name])
+    |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)
   end
 end

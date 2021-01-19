@@ -1,0 +1,54 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="description" content="#{gettext("Examarchive of student's council of business school of university of münster")}")
+    meta(name="author" content="#{gettext("Student's council of business school of university of münster")}")
+
+    title = gettext("Examarchive")
+    link(rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}")
+    link(rel="icon" href="#{static_path(@conn, "/favicon.png")}" type="image/png")
+    link(rel="manifest" href="#{static_path(@conn, "/manifest.json")}")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style" content="black")
+    meta(name="apple-mobile-web-app-title" content="Klausurarchiv")
+    link(rel="apple-touch-icon" href="/images/icons/192.png")
+    meta(name="theme-color" content="#092135")
+    = csrf_meta_tag()
+
+  body.Site.has-background-grey-darker
+    nav.navbar.is-spaced.has-background-grey-darker(role="navigation" aria-label="main navigation")
+
+      div.navbar-brand
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_White.png")}" alt="" height="70")
+
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          span.has-text-weight-bold.has-text-white = gettext("Examarchive")
+
+    section.section.Site-content
+      = @inner_content
+
+    footer.footer.has-background-grey-darker
+      div.content
+        div.columns
+          div.column.is-narrow
+            a.button.has-background-grey-darker.is-outlined(href="https://fachschaft-wiwi.ms")
+              strong.has-text-white = gettext("Student's council of business school of university of münster")
+          div.column.is-narrow
+            a.button.has-background-grey-darker.is-outlined(href="#{page_path(@conn, :legal)}")
+              p.has-text-white = gettext("Legal")
+          div.column.is-narrow
+            a.button.has-background-grey-darker.is-outlined(href="#{page_path(@conn, :privacy)}")
+              p.has-text-white = gettext("Privacy")
+
+    script(src="#{static_path(@conn, "/js/app.js")}")
+
+    script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-87690156-2');

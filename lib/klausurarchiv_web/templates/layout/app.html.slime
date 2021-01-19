@@ -15,6 +15,7 @@ html(lang="en")
     meta(name="apple-mobile-web-app-title" content="Klausurarchiv")
     link(rel="apple-touch-icon" href="/images/icons/192.png")
     meta(name="theme-color" content="#092135")
+    = csrf_meta_tag()
 
   body.has-background-primary.Site
     nav.navbar.has-shadow.is-spaced.is-transparent(role="navigation" aria-label="main navigation")
@@ -34,36 +35,47 @@ html(lang="en")
       div.navbar-menu(id="navMenu")
         div.navbar-end
           div.navbar-item
-            a.has-text-weight-bold.has-text-primary(href="https://fachschaft-wiwi.ms")
-              span.icon
-                i.fas.fa-home
-              span.is = gettext("Back to Homepage")
+           = if @conn.assigns[:session] do
+            div.has-text-primary = "Logged in as #{@conn.assigns[:session].user.fore_name} #{@conn.assigns[:session].user.last_name}"
+          = if @conn.assigns[:session] do
+            div.navbar-item
+              = form_for @conn, session_path(@conn, :delete, @conn.assigns[:session]), [method: :delete, class: "m-0"], fn _form ->
+                = submit("Logout", class: "button has-text-weight-bold is-outlined is-primary")
+          - else
+            div.navbar-item
+              a.button.has-text-weight-bold.is-primary(href="#{public_session_path(@conn, :new)}") = gettext("Login")
+            div.navbar-item
+              a.button.has-text-weight-bold.is-primary.is-outlined(href="#{public_user_path(@conn, :new)}") = gettext("Register")
 
 
     = if !is_nil get_flash(@conn, :info) do
-      section.hero.is-success
-        div.hero-body
-          div.container
-            h1.title.has-text-white = gettext("Success")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :info) }"
+      div.snackbar.notification.is-link(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Info")
+        div = get_flash(@conn, :info)
+
+    = if !is_nil get_flash(@conn, :success) do
+      div.snackbar.notification.is-success(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Success")
+        div = get_flash(@conn, :success)
+
 
     = if !is_nil get_flash(@conn, :warning) do
-      section.hero.is-warning
-        div.hero-body
-          div.container
-            h1.title.has-text-white = gettext("Warning")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :warning) }"
+      div.snackbar.notification.is-warning(style="position: fixed;")
+        button.delete
+        div.has-text-weight-bold.is-size5 = gettext("Warning")
+        div = get_flash(@conn, :warning)
+
 
     = if !is_nil get_flash(@conn, :error) do
-      section.hero.is-danger
-        div.hero-body
-          div.container
-            h1.title.is-3.has-text-white = gettext("Error")
-            h2.subtitle.has-text-white = "#{get_flash(@conn, :error) }"
+      div.snackbar.notification.is-danger(style="position: fixed;")
+        button.delete
+        span.has-text-weight-bold.is-size5 = gettext("Error") <> ": "
+        span = get_flash(@conn, :error)
 
-    div.section.Site-content
-      div.container
-        = @inner_content
+    section.section.Site-content
+      = @inner_content
 
     footer.footer
       div.content
@@ -72,10 +84,10 @@ html(lang="en")
             a.button.is-primary(href="https://fachschaft-wiwi.ms")
               strong.has-text-white = gettext("Student's council of business school of university of münster")
           div.column.is-narrow
-            a.button.is-primary(href="https://fachschaft-wiwi.ms/sonstiges/impressum")
+            a.button.is-primary.is-outlined(href="#{page_path(@conn, :legal)}")
               p.has-text-white = gettext("Legal")
           div.column.is-narrow
-            a.button.is-primary(href="#{page_path(@conn, :privacy)}")
+            a.button.is-primary.is-outlined(href="#{page_path(@conn, :privacy)}")
               p.has-text-white = gettext("Privacy")
           div.column.is-narrow
             a.button.is-primary(href="https://github.com/fs-wiwi-ms/klausurarchiv")
@@ -84,7 +96,6 @@ html(lang="en")
               span.has-text-white = gettext("Source Code")
 
     script(src="#{static_path(@conn, "/js/app.js")}")
-    script(src="#{static_path(@conn, "/js/snow.js")}")
 
     script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
     javascript:

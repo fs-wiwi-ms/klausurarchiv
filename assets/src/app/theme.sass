@@ -1,12 +1,11 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss'
-@import '@yaireo/tagify/src/tagify.scss'
 
 // Set your brand colors
 $fsblue: #10375B;
-$fslightblue: #6777EF
-$fsred: #EE7764
-$fsyellow: #FFDE58
-$fsgreen: #8FD51D
+$fslightblue: #447AC5
+$fsred: #E92048
+$fsyellow: #FFDA0A
+$fsgreen: #6BE23C
 
 // Update Bulma's global variables
 $primary: $fsblue
@@ -17,6 +16,35 @@ $info: $fsyellow
 
 $footer-padding: 1rem 1.5rem 1rem
 $footer-background-color: $fsblue
+
+@font-face
+  font-family: StarJedi
+  src: url('fonts/starjedi.ttf') format('truetype');
+
+$family-secondary: StarJedi
+
+// The snackbar - position it at the bottom and in the middle of the screen
+.snackbar
+  z-index: 100; // Add a z-index if needed
+  left: 50%;
+  transform: translateX(-50%);
+  // Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  // However, delay the fade out process for 2.5 seconds
+  -webkit-animation: fadein 0.5s
+  animation: fadein 0.5s
+  top: 2vh
+  padding-left: 5rem !important
+  padding-right: 5rem !important
+
+// Animations to fade the snackbar in and out
+@-webkit-keyframes fadein
+  from {top: 0; opacity: 0;}
+  to {top: 2vh; opacity: 1;}
+
+@keyframes fadein
+  from {top: 0; opacity: 0;}
+  to {top: 2vh; opacity: 1;}
+
 
 .Site
 	display: flex

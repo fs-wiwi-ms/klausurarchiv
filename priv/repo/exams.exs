@@ -3,7 +3,6 @@ exams = [
     file_name: "__ffentliche_Betriebe_SS_2014-2015_1457030424_0.pdf",
     term: :summer_term,
     year: 2014,
-    term: :winter_term,
     exam_name: "Öffentliche Betriebe"
   },
   %{
@@ -7241,26 +7240,29 @@ Enum.map(exams, fn %{
     case Repo.get_by(Lecture, name: exam_name) do
       nil ->
         %Lecture{}
-        |> Lecture.changeset(%{"name" => exam_name, "degrees" => []})
+        |> Lecture.changeset(%{
+          "name" => exam_name,
+          "degrees" => [],
+          "shortcuts" => []
+        })
         |> Repo.insert!()
 
       %Lecture{} = lecture ->
         lecture
     end
 
-  exam =
-    case Repo.get_by(Exam, filename: file) do
-      nil ->
-        %Exam{}
-        |> Exam.changeset(%{
-          "filename" => file,
-          "lecture_id" => lecture.id,
-          "term_id" => term.id,
-          "published" => true
-        })
-        |> Repo.insert!()
+  case Repo.get_by(Exam, filename: file) do
+    nil ->
+      %Exam{}
+      |> Exam.changeset(%{
+        "filename" => file,
+        "lecture_id" => lecture.id,
+        "term_id" => term.id,
+        "published" => true
+      })
+      |> Repo.insert!()
 
-      %Exam{} = exam ->
-        exam
-    end
+    %Exam{} = exam ->
+      exam
+  end
 end)

@@ -1,34 +1,5 @@
-div.level
-  a.button(href="#{page_path(@conn, :index)}")
-    span.icon
-      i.fas.fa-caret-left
-    span = gettext("Back")
-div.level
-  h2.title.is-2.has-text-white = gettext "Upload a new exam"
-div.box
-  = form_for @changeset, @action, [multipart: true],fn exam_form ->
-    div.columns
-      div.column
-        h5.title.is-5 = gettext "Degree"
-        div.select.is-multiple
-          = select(exam_form, :lecture_id, Enum.map(@lectures, &{&1.name, &1.id}))
+div.container
+  h1.title.is-3.has-text-white = gettext "Upload a new exam"
 
-    = inputs_for exam_form, :term, fn term_form ->
-      div.columns
-        div.column
-          h5.title.is-5 = gettext "Name"
-          = select(term_form, :type, %{gettext("Winter term") => :winter_term, gettext("Summer term") => :summer_term}, class: "input", type: "number")
-
-      div.columns
-        div.column
-          h5.title.is-5 = gettext "Year"
-          = number_input(term_form, :year, class: "input", type: "number")
-
-    div.columns
-      div.column
-        h5.title.is-5 = gettext "File"
-        = file_input(exam_form, :file, class: "input", type: "file")
-
-    div.columns
-      div.column
-        = submit gettext("Send"), class: "button is-primary"
+  div.box
+    = render "_form.html", assigns

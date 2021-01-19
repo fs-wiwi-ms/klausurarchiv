@@ -1,0 +1,5 @@
+div.container
+  h1.title.is-3.has-text-white = gettext("Edit lecture")
+
+  div.box
+    = render "_form.html", assigns

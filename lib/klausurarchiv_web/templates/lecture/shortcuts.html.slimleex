@@ -1,0 +1,34 @@
+div.container
+  h1.title.is-3.has-text-white =gettext "Shortcuts"
+
+  - unreviewed_shortcut_lectures = get_unreviewed_shortcuts(@lectures)
+  = if length(unreviewed_shortcut_lectures) > 0 do
+    div.box
+      = for lecture <- unreviewed_shortcut_lectures do
+        div.columns
+          div.column
+            span = lecture.name
+          div.column
+            div.buttons
+              = for shortcut <- lecture.shortcuts do
+                = if shortcut.published do
+                  button.button.is-success(phx-click="reject" phx-value-lecture_id="#{lecture.id}" phx-value-short_id="#{shortcut.id}")
+                    span.icon.is-small
+                      i.fas.fa-check
+                    span = shortcut.name
+          div.column
+            div.buttons
+              = for shortcut <- lecture.shortcuts do
+                = if !shortcut.published do
+                  button.button.is-warning(phx-click="approve" phx-value-lecture_id="#{lecture.id}" phx-value-short_id="#{shortcut.id}")
+                    span.icon.is-small
+                      i.fas.fa-times
+                    span = shortcut.name
+
+
+  - else
+    div.box
+      td(colspan="3")
+        span.icon
+          i.fas.fa-exclamation
+        span = gettext "No unreviewed shortcuts found."

@@ -1,84 +1,75 @@
-h1.title.is-3.has-text-white =gettext("Examarchive")
+- user = get_user(@conn)
+div.container
+  h1.title.is-3.has-text-white =gettext("Examarchive")
 
-div.columns
-  div.column.is-two-quarter
-    / div.box
-    /   a(href="http://bit.ly/38pzJD0")
-    /     img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+  div.columns
+    div.column.is-two-thirds
+      div.box
+        - filter = if not is_nil user do user.filter_data else %{} end
+        = live_render(@conn, KlausurarchivWeb.LectureLive, session: %{"filter" => filter, "user" => user})
 
-    div.box
-      h3.subtitle.is-5 =gettext("Filter for Capital letter:")
-      div.buttons.has-addons
-        = for n <- ?a..?z do
-          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-            = hidden_input filter_form, :capital, value: "#{<< n :: utf8 >>}"
-            = hidden_input filter_form, :degree, value: "all"
-            p.control
-              button.button(type="submit")
-                span = << n :: utf8 >>
+    div.column
+      = if user do
+        = case(user.role) do
+          - :admin ->
+            div.box.has-background-danger-light
+              h5.subtitle.is-5.has-text-danger.has-text-weight-semibold = gettext("Admin-Corner")
+              div.buttons
+                a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :new)}")
+                  span.icon
+                    i.fas.fa-graduation-cap
+                  span =gettext("Create lecture")
+                a.button.is-danger.is-outlined(href="#{exam_path(@conn, :draft)}")
+                  span.icon
+                    i.fas.fa-file-upload
+                  span =gettext("Publish exams")
+                a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts)}")
+                  span.icon
+                    i.fas.fa-link
+                  span =gettext("Manage shortcuts")
+          - _ ->
 
-    div.box
-      p.subtitle.is-5 =gettext("Filter for degree:")
-      div.buttons.has-addons
-        = for {name, id} <- @degrees do
-          = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
-            = hidden_input filter_form, :degree, value: "#{id}"
-            p.control
-              button.button(type="submit")
-                span = name
+      div.box
+        h5.subtitle.is-5 =gettext("New features:")
+        article.media
+          figure.media-left
+            p.image.is-24x24
+              img src="#{static_path(@conn, "/images/party-popper.png")}"
+          div.media-content
+            span = gettext("You can create a account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
+        article.media
+          figure.media-left
+            p.image.is-24x24
+              img src="#{static_path(@conn, "/images/clipboard.png")}"
+          div.media-content
+            span = gettext("Shortcuts and modules numbers are added to exams, you can now search for them as well.")
+        article.media
+          figure.media-left
+            p.image.is-24x24
+              img src="#{static_path(@conn, "/images/magnifying-glass-tilted-right.png")}"
+          div.media-content
+            span = gettext("Live search!")
 
-    div.box
-      p.subtitle.is-5 =gettext("Advanced filter:")
-      = form_for @conn, lecture_path(@conn, :index), [{:as, :filter}, {:method, :get}], fn (filter_form) ->
+      div.box
+        h5.subtitle.is-5 =gettext("Hint")
+        h6.is-6
+          span = gettext("Please enter the ZIV ID")
+          span.has-text-weight-semibold = gettext"(without @uni-muenster.de)"
+          span = gettext("and the ZIV password when you download a exam. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
+          span
+            a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
+          span .
+          br
+          br
+          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
+          span
+            a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") webmaster@fachschaft-wiwi.ms
+          span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
 
-        div.column
-          h5.subtitle.is-6 =  gettext("Degree")
-          div.select
-            = select filter_form, :degree, @degrees ++ [{"all", "all"}]
-
-        div.column
-          h5.subtitle.is-6 = gettext("Fulltext search")
-          = text_input filter_form, :query, class: "input", type: "text", placeholder: "Name", onchange: "submit()"
-
-  div.column
-    div.box
-      h3.subtitle.is-5 =gettext("Hint")
-      span = gettext("Please enter the ZIV ID")
-      span.has-text-weight-semibold = gettext"(without @uni-muenster.de)"
-      span =gettext("and the ZIV password when prompted for authentication. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
-      span
-        a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
-      span .
-      br
-      br
-      span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
-      span
-        a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") webmaster@fachschaft-wiwi.ms
-      span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
-
-    div.box
-      h3.subtitle.is-5 =gettext("Do you miss an exam?")
-      div.columns
-        div.column.is-narrow
-          p =gettext("Click here to make a new exam available.")
-      div.columns
-        div.column.is-narrow
-          a.button.is-primary(href="#{exam_path(@conn, :new)}")
-            span.icon
-              i.fas.fa-file-upload
-            span =gettext("Upload exam")
-    div.box
-      h3.subtitle.is-5 =gettext("Admin-Corner")
-      div.level
-        p =gettext("This area is not important for you! Only important functions for our exam archive manager are stored here.")
-      div.columns
-        div.column.is-narrow
-          a.button.is-danger.is-outlined(href="#{exam_path(@conn, :draft)}")
-            span.icon
-              i.fas.fa-file-upload
-            span =gettext("Publish exams")
-        div.column.is-narrow
-          a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :new)}")
-            span.icon
-              i.fas.fa-graduation-cap
-            span =gettext("Create lecture")
+      div.box
+        h5.subtitle.is-5 = gettext("Do you miss an exam?")
+        h6.subtitle.is-6 = gettext("Click here to make a new exam available.")
+        a.button.is-primary(href="#{exam_path(@conn, :new)}")
+          span.icon
+            i.fas.fa-file-upload
+          span =gettext("Upload exam")

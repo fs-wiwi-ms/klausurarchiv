@@ -5,7 +5,8 @@ use Mix.Config
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
   http: [port: 4001],
   server: false,
-  secret_key_base: "UrwGy41yrDwJsejSAcTrlVTIbyAUDZzIT5LQheRbcE6tltjuHKSnONcHvlX9+BwY"
+  secret_key_base:
+    "UrwGy41yrDwJsejSAcTrlVTIbyAUDZzIT5LQheRbcE6tltjuHKSnONcHvlX9+BwY"
 
 # Print only warnings and errors during test
 config :logger, level: :warn

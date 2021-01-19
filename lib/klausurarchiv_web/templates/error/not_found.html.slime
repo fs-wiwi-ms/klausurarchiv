@@ -1,0 +1,6 @@
+div.container
+  p.title.has-text-white.has-text-weight-semibold.is-family-secondary.has-text-centered.is-size-4-mobile	 404 - Not found
+  div.level
+    div.level-item
+      img(src="#{static_path(@conn, "/images/yoda.png")}" style="max-height:50vh;")
+  div.title.has-text-white.has-text-centered.is-size-4-mobile Found, page could not be

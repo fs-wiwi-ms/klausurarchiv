@@ -14,8 +14,8 @@ services:
     environment:
       DATABASE_URL: "psql://klausurarchiv:klausurarchiv@db/klausurarchiv"
       SECRET_KEY_BASE: 9Ypg26368B+rkZa+4kbQLInexEmaXyG/JUxVPKttdXV8ytBycLWG9WjDPGNYekLP
-      USERNAME: "admin"
-      PASSWORD: "pass"
+      LIVE_VIEW_SALT: "pwCwZuECFRuIQKmFS1mblLgc68jg5dOw"
+      HOST: "http://localhost:4000"
     ports:
       - "4000:4000"
 

@@ -1,0 +1,12 @@
+div.container
+  div.level
+    div.level-item
+      p.title.has-text-white.has-text-weight-semibold.is-family-secondary.is-size-4-mobile.has-text-centered 400 - Bad Request
+  div.level
+    div.level-item
+      img(src="#{static_path(@conn, "/images/anakin.png")}" style="max-height:50vh;")
+
+  p.title.has-text-white.has-text-centered.is-size-4-mobile
+    span It's all Obi-Wan's fault!
+    br
+    span He's jealous. He's making wrong requests.

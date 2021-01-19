@@ -13,4 +13,36 @@ defmodule KlausurarchivWeb.ErrorView do
   def template_not_found(template, _assigns) do
     Phoenix.Controller.status_message_from_template(template)
   end
+
+  def render("401.html", assigns) do
+    render(
+      __MODULE__,
+      "unauthorized.html",
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
+    )
+  end
+
+  def render("500.html", assigns) do
+    render(
+      __MODULE__,
+      "internal_server_error.html",
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
+    )
+  end
+
+  def render("404.html", assigns) do
+    render(
+      __MODULE__,
+      "not_found.html",
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
+    )
+  end
+
+  def render("400.html", assigns) do
+    render(
+      __MODULE__,
+      "bad_request.html",
+      Map.put(assigns, :layout, {KlausurarchivWeb.LayoutView, "error.html"})
+    )
+  end
 end

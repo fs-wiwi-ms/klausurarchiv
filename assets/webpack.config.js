@@ -7,25 +7,24 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 module.exports = (env, options) => ({
-  entry: {
-    app: "./app/index.ts"
-  },
-  context: path.resolve(__dirname, "src"),
-  output: {
-    filename: "./js/[name].js",
-    path: path.resolve(__dirname, "../priv/static/"),
-  },
   optimization: {
     minimizer: [
       new TerserPlugin({
-        parallel: true,
-        terserOptions: { compress: { unused: true, dead_code: true } },
+        parallel: true
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
   },
+  context: path.resolve(__dirname, "src"),
+  entry: {
+    app: "./app/index.ts"
+  },
+  output: {
+    filename: "./js/[name].js",
+    path: path.resolve(__dirname, "../priv/static/"),
+  },
   resolve: {
-    extensions: [".ts", ".js", ".json"],
+    extensions: [".ts", ".js"],
   },
   devtool: "inline-source-map",
   module: {
@@ -55,8 +54,23 @@ module.exports = (env, options) => ({
         ],
       },
       {
-        test: /\.(s[ac]|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\.(sa|c)ss$/,
+        use: [MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "../static/fonts/",
+              publicPath: "/fonts/",
+            },
+          },
+        ],
       },
       {
         test: /\.png$/,

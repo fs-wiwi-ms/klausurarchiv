@@ -1,35 +1,29 @@
-div.level
-  a.button(href="#{page_path(@conn, :index)}")
-    span.icon
-      i.fas.fa-caret-left
-    span = gettext "Back"
-div.level
-  h2.title.is-2.has-text-white =gettext "Not published Exams"
+div.container
+  h1.title.is-3.has-text-white =gettext "Not published Exams"
 
-= if length(@unplubished_exams) > 0 do
-  table.table.is-bordered.is-hoverable
-    thead
-      th = gettext "Name"
-      th = gettext "Term"
-      th = gettext "Year"
-      th = gettext "Actions"
-    tbody
-      = for exam <- @unplubished_exams do
-        tr
-          td = exam.lecture.name
-          td
-            span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
-          td
-            span.tag = exam.term.year
-          td
-            = form_for @conn, exam_path(@conn, :publish, exam.id), fn _ ->
-              a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") = gettext("Preview")
-              = submit gettext("Send"), class: "button is-primary is-small"
+  = if length(@unplubished_exams) > 0 do
+    div.box
+      table.table.is-bordered.is-hoverable
+        thead
+          th = gettext "Name"
+          th = gettext "Term"
+          th = gettext "Year"
+          th = gettext "Actions"
+        tbody
+          = for exam <- @unplubished_exams do
+            tr
+              td = exam.lecture.name
+              td
+                span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
+              td
+                span.tag = exam.term.year
+              td
+                = form_for @conn, exam_path(@conn, :publish, exam.id), fn _ ->
+                  a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") = gettext("Preview")
+                  = submit gettext("Send"), class: "button is-primary is-small"
 
-
-- else
-  div.box
-    td(colspan="3")
+  - else
+    div.box
       span.icon
         i.fas.fa-exclamation
       span = gettext "No unplubished exams found."

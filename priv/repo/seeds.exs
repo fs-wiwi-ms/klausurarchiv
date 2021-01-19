@@ -13,7 +13,6 @@
 import Ecto.Query
 
 alias Klausurarchiv.Repo
-alias Klausurarchiv.Uploads
 alias Klausurarchiv.Uploads.{Degree, Lecture, Term}
 
 degrees = [
@@ -330,12 +329,17 @@ Enum.map(degree_lectures, fn {degree_name, lectures} ->
   Enum.map(lectures, fn x ->
     degree = Repo.get_by(Degree, name: degree_name)
 
-    lecture = Repo.get_by(Lecture, name: x) |> Repo.preload(:degrees)
+    lecture =
+      Repo.get_by(Lecture, name: x) |> Repo.preload([:degrees, :shortcuts])
 
     case lecture do
       nil ->
         %Lecture{}
-        |> Lecture.changeset(%{"name" => x, "degrees" => [degree]})
+        |> Lecture.changeset(%{
+          "name" => x,
+          "degrees" => [degree],
+          "shortcuts" => []
+        })
         |> Repo.insert!()
 
       lecture ->
@@ -347,7 +351,7 @@ Enum.map(degree_lectures, fn {degree_name, lectures} ->
           )
 
         lecture
-        |> Lecture.changeset(%{"degrees" => degrees})
+        |> Lecture.changeset(%{"degrees" => degrees, "shortcuts" => []})
         |> Repo.update!()
     end
   end)

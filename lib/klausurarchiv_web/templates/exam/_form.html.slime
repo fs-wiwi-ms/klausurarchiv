@@ -1,0 +1,30 @@
+= form_for @changeset, @action, [multipart: true],fn exam_form ->
+    div.field
+      label.label = gettext("Lecture")
+      div.control.has-icons-left
+        = select(exam_form, :lecture_id, Enum.map(@lectures, &{"#{&1.module_number} - #{&1.name}", &1.id}), class: "input")
+        span.icon.is-left
+            i.fas.fa-link
+        = error_label(@changeset, :lecture_id)
+
+    div.field
+      label.label = gettext("Term")
+      div.control.has-icons-left
+        = select(exam_form, :term_id, Enum.map(@terms, &{"#{if &1.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{&1.year}", &1.id}), class: "input")
+        span.icon.is-left
+            i.fas.fa-link
+        = error_label(@changeset, :term_id)
+
+    div.field
+      div.file.has-name
+        label.file-label
+          = file_input(exam_form, :file, class: "file-input", type: "file", id: "file-input")
+          span.file-cta
+            span.file-icon
+              i.fas.fa-upload
+            span.file-label = gettext "File"
+          span.file-name#file-input = gettext("No file choosen....")
+      = error_label(@changeset, :file)
+
+    div.field
+      = submit gettext("Send"), class: "button is-primary"

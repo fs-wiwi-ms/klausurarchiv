@@ -1,34 +1,98 @@
+- user = get_user(@conn)
+div.container
+  h1.title.is-3.has-text-white
+    = if !@lecture.published do
+      span.has-text-danger = "[#{gettext("Hidden")}] "
+    span = "#{@lecture.module_number}#{if @lecture.module_number do " - " end}#{@lecture.name}"
 
-div.level
-  a.button(href="#{page_path(@conn, :index)}")
-    span.icon
-      i.fas.fa-caret-left
-    span = gettext("Back")
-div.level
-  h2.title.is-2.has-text-white = @lecture.name
 
-= if length(@exams) > 0 do
-  div.box
-    table.table.is-hoverable
-      thead
-        th = gettext("Term")
-        th = gettext("Year")
-        th = gettext("Actions")
-      tbody
-        = for exam <- @exams do
-          tr
-            td
-              span.tag = if exam.term.type == :winter_term do gettext("Winter term") else gettext("Summer term") end
-            td
-              span.tag = exam.term.year
-            td
-              div
-                a.button.is-info.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
-                  p = gettext("Download")
-                / a.button.is-link.is-small(href="https://fsk.uni-muenster.de/ziv_security.php?task=drupal_download&save_as_name=#{@lecture.name}_#{exam.term.type}_#{exam.term.year}&file=#{exam.filename}")
-                /   p = gettext("Download")
-- else
-  div.box
-    span.icon
-      i.fas.fa-exclamation
-    span =gettext("No exams found.")
+  = if user do
+    = case(user.role) do
+      - :admin ->
+        div.box.has-background-danger-light
+          h5.subtitle.is-5.has-text-danger.has-text-weight-semibold = gettext("Admin-Corner")
+          div.buttons
+            a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts, @lecture.id)}")
+              span.icon
+                i.fas.fa-link
+              span =gettext("Manage shortcuts")
+            a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :edit, @lecture.id)}")
+              span.icon
+                i.fas.fa-pen-square
+              span =gettext("Edit lecture")
+            = if @lecture.published do
+              a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :archive, @lecture.id)}")
+                span.icon
+                  i.fas.fa-eye-slash
+                span =gettext("Hide lecture")
+            - else
+              a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :publish, @lecture.id)}")
+                span.icon
+                  i.fas.fa-eye
+                span =gettext("Publish lecture")
+      - _ ->
+
+  div.level
+    = if @lecture.shortcuts do
+      div.level-left
+        div.level-item
+          div.tags.are-medium
+            = for short <- @lecture.shortcuts do
+              = if short.published do
+                span.tag.is-info = short.name
+    div.level-right
+      div.level-item
+        button.button#open-modal
+          span.icon.is-small
+            i.fas.fa-plus-square
+          span = gettext("Add shortcut")
+
+  div.container
+    div.modal
+      div.modal-background
+      div.modal-card
+        header.modal-card-head
+          p.modal-card-title = gettext("Add Shortcuts")
+          button.delete#close-modal
+        section.modal-card-body
+          = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id,  "user" => user})
+
+  = if length(@exams) > 0 do
+    = for exam <- @exams do
+      div.py-2
+        div.card.has-background-light
+          div.card-header
+            p.card-header-title.has-text-primary
+              = if !exam.published do
+                span.has-text-danger = "[#{gettext("Hidden")}] "
+              span = "#{if exam.term.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{exam.term.year}"
+          footer.card-footer
+            a.card-footer-item.has-text-primary(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
+              span.icon
+                i.fas.fa-download
+              span = gettext("Download")
+              = if user do
+                = case(user.role) do
+                  - :admin ->
+                    a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :edit, exam.id)}")
+                      span.icon
+                        i.fas.fa-pen-square
+                      span = gettext("Edit exam")
+
+                    = if exam.published do
+                      a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :archive, exam.id)}")
+                        span.icon
+                          i.fas.fa-eye-slash
+                        span = gettext("Hide exam")
+                    - else
+                      a.card-footer-item.has-background-danger-light.has-text-danger(href="#{exam_path(@conn, :publish, exam.id)}")
+                        span.icon
+                          i.fas.fa-eye
+                        span = gettext("Publish exam")
+                  - _ ->
+
+  - else
+    div.box
+      span.icon
+        i.fas.fa-exclamation
+      span =gettext("No exams found.")

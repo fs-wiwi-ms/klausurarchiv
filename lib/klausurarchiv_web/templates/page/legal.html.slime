@@ -1,0 +1,43 @@
+div.container
+  h1.title.is-3.has-text-white Impressum
+
+  div.box
+
+    div.column
+      p Die redaktionelle Verantwortung liegt bei der Fachschaft Wirtschaftswissenschaften der Universität Münster.
+      p Eine Haftung für Schäden, die durch die Nutzung dieser Webseiten entstehen, wird grundsätzlich ausgeschlossen. Für prüfungsrechtliche Informationen gibt allein das Prüfungsamt Wirtschaftswissenschaften rechtsverbindliche Auskünfte.
+
+
+    div.column
+      h3.subtitle.is-5  Kontakt
+      p Fachschaft WiWi
+      p Universitätsstrasse 14-16
+      p 48143 Münster
+      p E-Mail: fachschaft@wiwi.uni-muenster.de
+      p Telefon: 0251-83-22079
+
+
+    div.column
+      h3.subtitle.is-5  Fachschaftsleiter:
+      p Jonas Reinhard
+
+
+    div.column
+      h3.subtitle.is-5  V.i.S.d.P.:
+      p Fachschaftsrat der Fachschaft WiWi
+      p Kontakt über Caroline Berge (Öffentlichkeitsreferent)
+      p E-Mail: fachschaft@wiwi.uni-muenster.de
+
+
+    div.column
+      h3.subtitle.is-5  Online-Redaktion + Technische Umsetzung:
+      p WI-AG der Fachschaft WiWi
+      p E-Mail: fachschaft@wi.uni-muenster.de
+
+
+    div.column
+      p Disclaimer
+
+      p Bei direkten oder indirekten Verweisen auf fremde Internetseiten („Links“) waren diese zum Zeitpunkt der Linksetzung frei von illegalen Inhalten. Die Fachschaft Wirtschaftswissenschaften hat keinerlei Einfluss auf die aktuelle und zukünftige Gestaltung und auf die Inhalte der gelinkten / verknüpften Seiten. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten / verknüpften Seiten, die nach der Linksetzung verändert wurden.
+
+      p Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.
