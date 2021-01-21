@@ -2,8 +2,8 @@
 div.container
   h1.title.is-3.has-text-white =gettext("Examarchive")
 
-  div.columns
-    div.column.is-two-thirds
+  div.columns.is-desktop
+    div.column.is-two-thirds-desktop
       div.box
         - filter = if not is_nil user do user.filter_data else %{} end
         = live_render(@conn, KlausurarchivWeb.LectureLive, session: %{"filter" => filter, "user" => user})
