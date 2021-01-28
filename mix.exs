@@ -55,7 +55,7 @@ defmodule Klausurarchiv.Mixfile do
       {:timex, "~> 3.0"},
       {:number, "~> 1.0.1"},
       {:plug_preferred_locales, "~> 0.1.0"},
-      {:phoenix_live_view, "~> 0.14.6"},
+      {:phoenix_live_view, "~> 0.15.4"},
       {:floki, ">= 0.27.0", only: :test}
     ]
   end
