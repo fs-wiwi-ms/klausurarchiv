@@ -18,9 +18,8 @@ div.container
               td
                 span.tag = exam.term.year
               td
-                = form_for @conn, exam_path(@conn, :publish, exam.id), fn _ ->
-                  a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") = gettext("Preview")
-                  = submit gettext("Send"), class: "button is-primary is-small"
+                a.button.is-warning.is-small(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}") = gettext("Preview")
+                a.button.is-primary.is-small(href="#{exam_path(@conn, :publish, exam.id)}") = gettext("Publish")
 
   - else
     div.box
