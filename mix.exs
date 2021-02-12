@@ -44,6 +44,7 @@ defmodule Klausurarchiv.Mixfile do
       {:distillery, "~> 2.0"},
       {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, "~> 0.15.0"},
       {:gettext, "~> 0.18"},
       {:cowboy, "~> 2.8.0"},
       {:ecto_enum, "~> 1.2"},
@@ -55,7 +56,6 @@ defmodule Klausurarchiv.Mixfile do
       {:timex, "~> 3.0"},
       {:number, "~> 1.0.1"},
       {:plug_preferred_locales, "~> 0.1.0"},
-      {:phoenix_live_view, "~> 0.14.6"},
       {:floki, ">= 0.27.0", only: :test}
     ]
   end
