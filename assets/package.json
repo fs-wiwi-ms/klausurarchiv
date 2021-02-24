@@ -14,7 +14,7 @@
     "bulma-switch": "^2.0.0",
     "bulma-tooltip": "^3.0.2",
     "flatpickr": "^4.6.3",
-    "phoenix": "^1.4.15",
+    "phoenix": "^1.5.8",
     "phoenix_html": "^2.13.2",
     "phoenix_live_view": "^0.15.0"
   },
