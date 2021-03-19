@@ -36,7 +36,7 @@ msgid "Download"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:69
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:73
 msgid "Error"
 msgstr ""
 
@@ -69,12 +69,12 @@ msgid "No exams found."
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:45
+#: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:43
 msgid "No lectures found."
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:28
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:27
 msgid "No unplubished exams found."
 msgstr ""
 
@@ -84,18 +84,18 @@ msgid "Not published Exams"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:22
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:21
 msgid "Preview"
 msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:30
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:23 lib/klausurarchiv_web/templates/exam/edit.html.slime:23
+#: lib/klausurarchiv_web/templates/exam/edit.html.slime:23
 msgid "Send"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:55
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:59
 msgid "Success"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgid "If you have any suggestions, errors or other problems regarding the displ
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:83
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:87
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
 msgid "Legal"
 msgstr ""
@@ -164,7 +164,7 @@ msgid "Please enter the ZIV ID"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:86
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:90
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:44
 msgid "Privacy"
 msgstr ""
@@ -176,7 +176,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:80 lib/klausurarchiv_web/templates/layout/error.html.slime:7
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:84 lib/klausurarchiv_web/templates/layout/error.html.slime:7
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:38
 msgid "Student's council of business school of university of münster"
 msgstr ""
@@ -209,7 +209,7 @@ msgid "Winter term"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:91
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:95
 msgid "Source Code"
 msgstr ""
 
@@ -277,7 +277,7 @@ msgid "Forgot password"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:49
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:53
 msgid "Info"
 msgstr ""
 
@@ -303,8 +303,8 @@ msgid "Logged out!"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/session/new.html.slime:2
-#: lib/klausurarchiv_web/templates/session/new.html.slime:25
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:45
+#: lib/klausurarchiv_web/templates/session/new.html.slime:2 lib/klausurarchiv_web/templates/session/new.html.slime:25
 msgid "Login"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgid "Password changed succesful"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:44
+#: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:42
 msgid "Please specify a filter to search for a lecture."
 msgstr ""
 
@@ -402,7 +402,7 @@ msgid "Under review"
 msgstr ""
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:62
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:66
 msgid "Warning"
 msgstr ""
 
@@ -497,4 +497,14 @@ msgstr ""
 #, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:53
 msgid "Password must have min. 8 characters and contain min. one lower- and uppercase, symbol and number."
+msgstr ""
+
+#, elixir-format
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:22
+msgid "Publish"
+msgstr ""
+
+#, elixir-format
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:47
+msgid "Register"
 msgstr ""

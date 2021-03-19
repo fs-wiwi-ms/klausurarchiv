@@ -84,6 +84,7 @@ defmodule Klausurarchiv.User do
   end
 
   def get_user(nil), do: nil
+
   def get_user(id) do
     User
     |> Repo.get(id)

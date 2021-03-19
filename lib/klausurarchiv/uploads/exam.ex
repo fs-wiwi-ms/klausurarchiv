@@ -21,10 +21,10 @@ defmodule Klausurarchiv.Uploads.Exam do
     |> cast(attrs, [:filename, :term_id, :lecture_id, :published])
   end
 
-    @doc false
-    def changeset_create(exam, attrs) do
-      exam
-      |> changeset(attrs)
-      |> validate_required([:filename, :term_id, :lecture_id])
-    end
+  @doc false
+  def changeset_create(exam, attrs) do
+    exam
+    |> changeset(attrs)
+    |> validate_required([:filename, :term_id, :lecture_id])
+  end
 end

@@ -91,17 +91,17 @@ defmodule Klausurarchiv.Uploads do
   def get_exams_for_lecture(lecture_id, user) do
     Exam
     |> join(:inner, [e], t in assoc(e, :term))
-    |> where([e,t], e.lecture_id == ^lecture_id)
+    |> where([e, t], e.lecture_id == ^lecture_id)
     |> filter_exams_for_user(user)
-    |> order_by([e,t], [desc: t.year, desc: t.type])
-    |> preload([e,t], [:term])
+    |> order_by([e, t], desc: t.year, desc: t.type)
+    |> preload([e, t], [:term])
     |> Repo.all()
   end
 
   def filter_exams_for_user(query, %{role: :admin}), do: query
 
   def filter_exams_for_user(query, _user) do
-    where(query, [e,t], e.published == true)
+    where(query, [e, t], e.published == true)
   end
 
   def get_exam(id, preload \\ []) do
@@ -206,7 +206,7 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def filter_lectures(filter, user ,preload \\ []) do
+  def filter_lectures(filter, user, preload \\ []) do
     query =
       Lecture
       |> join(:inner, [l], ld in assoc(l, :degrees))
@@ -226,7 +226,6 @@ defmodule Klausurarchiv.Uploads do
   def filter_lectures_for_user(query, _user) do
     where(query, [l, ld], l.published == true)
   end
-
 
   defp build_lecture_filter(query, {"degree", "all"}) do
     query

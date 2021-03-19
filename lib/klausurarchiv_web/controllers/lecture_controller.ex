@@ -39,7 +39,7 @@ defmodule KlausurarchivWeb.LectureController do
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
 
-    if lecture.published or not is_nil(user) and user.role == :admin do
+    if lecture.published or (not is_nil(user) and user.role == :admin) do
       exams =
         lecture_id
         |> Uploads.get_exams_for_lecture(user)
