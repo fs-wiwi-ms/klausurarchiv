@@ -65,7 +65,7 @@ If you like you can run `bin/test --watch`, which will start a separate stack wh
 
 ### Yarn
 
-* Run `bin/compose run assets yarn ugrade`
+* Run `bin/compose run assets yarn upgrade`
 * Check app for errors before commiting
 
 ## Hosting and Deployment
