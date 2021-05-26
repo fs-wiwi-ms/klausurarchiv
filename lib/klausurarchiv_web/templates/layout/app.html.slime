@@ -104,3 +104,5 @@ html(lang="en")
       gtag('js', new Date());
 
       gtag('config', 'UA-87690156-2');
+
+    script(async="true" defer="true" data-domain="klausurarchiv.fachschaft-wiwi.ms" src="https://plausible.io/js/plausible.js")
