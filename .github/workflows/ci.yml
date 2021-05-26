@@ -27,3 +27,4 @@ jobs:
       with:
         git_remote_url: ${{ secrets.GIT_REMOTE_URL }}
         ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
+      if: github.ref == 'refs/heads/production'
