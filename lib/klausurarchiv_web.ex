@@ -35,7 +35,6 @@ defmodule KlausurarchivWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
-      import Phoenix.LiveView.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -43,6 +42,7 @@ defmodule KlausurarchivWeb do
       import KlausurarchivWeb.Router.Helpers
       import KlausurarchivWeb.ErrorHelpers
       import KlausurarchivWeb.Gettext
+      import Phoenix.LiveView.Helpers
 
       def error_label(changeset, field) do
         errors =

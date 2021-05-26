@@ -1,0 +1,29 @@
+name: CI/CD pipeline
+on: push
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-18.04
+    steps:
+    - name: checkout-repo
+      uses: actions/checkout@master
+    - name: test-image
+      run: bin/ci
+
+  push:
+    name: Push to production server
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: checkout-repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    -
+      name: Push to dokku
+      uses: dokku/github-action@v1.0.1
+      with:
+        git_remote_url: ${{ secrets.GIT_REMOTE_URL }}
+        ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
