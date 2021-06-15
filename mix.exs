@@ -46,7 +46,7 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.15.0"},
       {:gettext, "~> 0.18"},
-      {:cowboy, "~> 2.8.0"},
+      {:cowboy, "~> 2.9.0"},
       {:ecto_enum, "~> 1.2"},
       {:httpoison, "~> 1.7"},
       {:sentry, "~> 8.0"},
