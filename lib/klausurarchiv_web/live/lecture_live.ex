@@ -1,5 +1,6 @@
 defmodule KlausurarchivWeb.LectureLive do
   use Phoenix.LiveView
+  import Appsignal.Phoenix.LiveView, only: [instrument: 4]
   alias Klausurarchiv.{User, Uploads}
 
   def mount(_params, %{"filter" => filter, "user" => user}, socket) do
@@ -12,13 +13,15 @@ defmodule KlausurarchivWeb.LectureLive do
         Uploads.filter_lectures(filter, user, [:shortcuts])
       end
 
-    {:ok,
-     assign(socket,
-       lectures: lectures,
-       degrees: degrees,
-       filter: filter,
-       user: user
-     )}
+    instrument(__MODULE__, "mount", socket, fn ->
+      {:ok,
+      assign(socket,
+        lectures: lectures,
+        degrees: degrees,
+        filter: filter,
+        user: user
+      )}
+    end)
   end
 
   def render(assigns) do
@@ -41,7 +44,9 @@ defmodule KlausurarchivWeb.LectureLive do
       User.update_user(user, %{filter_data: filter})
     end
 
-    {:noreply, assign(socket, lectures: lectures, filter: filter)}
+    instrument(__MODULE__, "submit", socket, fn ->
+      {:noreply, assign(socket, lectures: lectures, filter: filter)}
+    end)
   end
 
   def terminate(_reason, socket) do

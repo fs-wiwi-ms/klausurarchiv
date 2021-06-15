@@ -48,6 +48,17 @@ config :sentry,
 
 # Please config your environment variables as following:
 
+# APPSIGNAL_PUSH_API_KEY = 123456789
+
+config :appsignal, :config,
+  otp_app: :klausurarchiv,
+  name: "Klausurarchiv",
+  push_api_key: System.get_env("APPSIGNAL_PUSH_API_KEY"),
+  env: Mix.env,
+  active: true
+
+# Please config your environment variables as following:
+
 # SMTP_PASSWORD=password
 # SMTP_PORT=587
 # SMTP_SERVER=smtp.example.com
