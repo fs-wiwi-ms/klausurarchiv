@@ -1,6 +1,7 @@
 defmodule KlausurarchivWeb.Endpoint do
   use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :klausurarchiv
+  use Appsignal.Phoenix
 
   @session_options [
     store: :cookie,

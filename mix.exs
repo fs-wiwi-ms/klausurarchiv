@@ -56,7 +56,9 @@ defmodule Klausurarchiv.Mixfile do
       {:timex, "~> 3.0"},
       {:number, "~> 1.0.1"},
       {:plug_preferred_locales, "~> 0.1.0"},
-      {:floki, ">= 0.27.0", only: :test}
+      {:floki, ">= 0.27.0", only: :test},
+      {:appsignal, "~> 2.0"},
+      {:appsignal_phoenix, "~> 2.0.0"}
     ]
   end
 
