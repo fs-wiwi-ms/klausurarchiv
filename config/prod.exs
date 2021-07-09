@@ -43,7 +43,7 @@ config :sentry,
 config :appsignal, :config,
   otp_app: :klausurarchiv,
   name: "Klausurarchiv",
-  env: Mix.env,
+  env: Mix.env(),
   active: true
 
 config :logger,

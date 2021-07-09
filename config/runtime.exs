@@ -6,8 +6,7 @@ config :sentry,
   },
   environment_name: String.to_atom(System.get_env("SENTRY_ENV", "development"))
 
-config :klausurarchiv, Klausurarchiv.Repo,
-  url: System.get_env("DATABASE_URL")
+config :klausurarchiv, Klausurarchiv.Repo, url: System.get_env("DATABASE_URL")
 
 if config_env() == :prod do
   config :klausurarchiv, KlausurarchivWeb.Endpoint,

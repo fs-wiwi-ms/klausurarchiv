@@ -15,12 +15,12 @@ defmodule KlausurarchivWeb.LectureLive do
 
     instrument(__MODULE__, "mount", socket, fn ->
       {:ok,
-      assign(socket,
-        lectures: lectures,
-        degrees: degrees,
-        filter: filter,
-        user: user
-      )}
+       assign(socket,
+         lectures: lectures,
+         degrees: degrees,
+         filter: filter,
+         user: user
+       )}
     end)
   end
 

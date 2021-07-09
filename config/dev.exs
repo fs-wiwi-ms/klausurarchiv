@@ -26,17 +26,16 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
     ]
   ]
 
-  # Do not include metadata nor timestamps in development logs
-  config :logger, :console, format: "[$level] $message\n"
+# Do not include metadata nor timestamps in development logs
+config :logger, :console, format: "[$level] $message\n"
 
-  # Set a higher stacktrace during development. Avoid configuring such
-  # in production as building large stacktraces may be expensive.
-  config :phoenix, :stacktrace_depth, 20
+# Set a higher stacktrace during development. Avoid configuring such
+# in production as building large stacktraces may be expensive.
+config :phoenix, :stacktrace_depth, 20
 
-  # Initialize plugs at runtime for faster development compilation
-  config :phoenix, :plug_init_mode, :runtime
+# Initialize plugs at runtime for faster development compilation
+config :phoenix, :plug_init_mode, :runtime
 
-  config :klausurarchiv, Klausurarchiv.Mailer, adapter: Bamboo.LocalAdapter
+config :klausurarchiv, Klausurarchiv.Mailer, adapter: Bamboo.LocalAdapter
 
-
-  config :slime, :keep_lines, true
+config :slime, :keep_lines, true
