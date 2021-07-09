@@ -16,7 +16,9 @@ if config_env() == :prod do
       scheme: "https",
       host: System.get_env("HOST")
     ],
-    http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")]
+    http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
+    secret_key_base: System.get_env("SECRET_KEY_BASE"),
+    live_view: [signing_salt: System.get_env("LIVE_VIEW_SALT")]
 
   config :klausurarchiv, Klausurarchiv.Repo,
     ssl: System.get_env("POSTGRES_SSL") != "false",
