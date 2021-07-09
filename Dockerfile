@@ -26,7 +26,7 @@ RUN if [ "$ENV" = "prod" ]; then yarn run deploy; fi
 ##
 # App
 
-FROM elixir:1.10-slim AS app
+FROM elixir:1.11-slim AS app
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -40,31 +40,36 @@ RUN apt-get update && \
   && \
   rm -rf /var/lib/apt/lists/*
 
-RUN mix local.rebar --force && mix local.hex --force
-
-WORKDIR /app
-RUN mkdir -p priv/static
-
-COPY --from=assets /app/priv/static/ ./priv/static/
-
+# Set environment variables for building the application
 ARG ENV=prod
 ENV MIX_ENV $ENV
+ENV LANG=C.UTF-8
+
+# Install hex and rebar
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+# Create the application build directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Copy generated assets from asset container
+RUN mkdir -p priv/static
+COPY --from=assets /app/priv/static/ ./priv/static/
 
 # Install and compile dependencies
 COPY mix.* ./
 RUN mix deps.get
 RUN mix deps.compile
 
-# Install and compile the rest of the app
+# Fetch the application dependencies and build the application
 COPY . ./
 RUN mix compile --warning-as-errors
-RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, distillery.release --executable; fi
+RUN if [ "$ENV" = "prod" ]; then mix do phx.digest, release klausurarchiv; fi
 
 ##
 # Run
-
 FROM debian:buster-slim
-
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update && \
   apt-get install -y --no-install-recommends \
@@ -79,9 +84,10 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 
 ENV LC_ALL en_US.UTF-8
 
+# Copy over the build artifact from the previous step and create a non root user
 WORKDIR /app
-
 COPY --from=app /app/_build/prod/rel/klausurarchiv ./
+COPY Procfile ./
 
 ENTRYPOINT ["./bin/klausurarchiv"]
-CMD ["foreground"]
+CMD ["start"]

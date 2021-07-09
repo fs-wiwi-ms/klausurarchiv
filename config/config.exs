@@ -11,15 +11,16 @@ config :klausurarchiv,
 
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   log: false
 
 # Configures the endpoint
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
-  http: [:inet6, port: 4000],
   url: [host: "localhost"],
   render_errors: [view: KlausurarchivWeb.ErrorView, accepts: ~w(html json)],
-  pubsub_server: Klausurarchiv.PubSub
+  pubsub_server: Klausurarchiv.PubSub,
+  secret_key_base:
+    "5HjSFjyGix751ubR/igyrzbfby3NsOc2Dn4DxldR4hpoqKIa3YEosx3psppajJRw",
+  live_view: [signing_salt: "pwCwZuECFRuIQKmFS1mblLgc68jg5dOw"]
 
 # Configures Elixir's Logger
 config :logger, :console,

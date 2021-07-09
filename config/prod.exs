@@ -22,15 +22,9 @@ use Mix.Config
 # SECRET_KEY_BASE=<salt> (You can generate one by calling: mix phx.gen.secret)
 
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
-  cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
-  url: [
-    port: 443,
-    scheme: "https",
-    host: System.get_env("HOST")
-  ],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")]
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Please config your environment variables as following:
 
@@ -38,12 +32,8 @@ config :klausurarchiv, KlausurarchivWeb.Endpoint,
 
 config :sentry,
   dsn: {:system, "SENTRY_DSN"},
-  environment_name: String.to_atom(System.get_env("SENTRY_ENV")),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
-  tags: %{
-    env: System.get_env("SENTRY_ENV")
-  },
   included_environments: [:prod, :staging]
 
 # Please config your environment variables as following:
@@ -53,30 +43,8 @@ config :sentry,
 config :appsignal, :config,
   otp_app: :klausurarchiv,
   name: "Klausurarchiv",
-  push_api_key: System.get_env("APPSIGNAL_PUSH_API_KEY"),
   env: Mix.env,
   active: true
-
-# Please config your environment variables as following:
-
-# SMTP_PASSWORD=password
-# SMTP_PORT=587
-# SMTP_SERVER=smtp.example.com
-# SMTP_USERNAME=username
-
-config :klausurarchiv, Klausurarchiv.Mailer,
-  adapter: Bamboo.SMTPAdapter,
-  server: System.get_env("SMTP_SERVER"),
-  hostname: System.get_env("HOST"),
-  port: System.get_env("SMTP_PORT"),
-  username: System.get_env("SMTP_USERNAME"),
-  password: System.get_env("SMTP_PASSWORD"),
-  tls: :always,
-  allowed_tls_versions: [:tlsv1, :"tlsv1.1", :"tlsv1.2"],
-  ssl: false,
-  retries: 1,
-  no_mx_lookups: false,
-  auth: :always
 
 config :logger,
   backends: [:console, Sentry.LoggerBackend]

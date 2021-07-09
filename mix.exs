@@ -5,12 +5,18 @@ defmodule Klausurarchiv.Mixfile do
     [
       app: :klausurarchiv,
       version: "0.0.1",
-      elixir: "~> 1.10.0",
+      elixir: "~> 1.11.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        klausurarchiv: [
+          include_executables_for: [:unix],
+          applications: [runtime_tools: :permanent]
+        ]
+      ]
     ]
   end
 
@@ -36,7 +42,7 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix, "~> 1.5"},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_slime, "~> 0.13.0"},
-      {:phoenix_ecto, "~> 4.2.0"},
+      {:phoenix_ecto, "~> 4.3.0"},
       {:plug_cowboy, "~> 2.3"},
       {:argon2_elixir, "~> 2.0"},
       {:comeonin, "~> 5.3.0"},
@@ -46,13 +52,13 @@ defmodule Klausurarchiv.Mixfile do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.15.0"},
       {:gettext, "~> 0.18"},
-      {:cowboy, "~> 2.8.0"},
+      {:cowboy, "~> 2.0"},
       {:ecto_enum, "~> 1.2"},
       {:httpoison, "~> 1.7"},
       {:sentry, "~> 8.0"},
       {:jason, "~> 1.2"},
-      {:bamboo, "~> 1.5"},
-      {:bamboo_smtp, "~> 3.0"},
+      {:bamboo, "~> 2.0"},
+      {:bamboo_smtp, "~> 4.0"},
       {:timex, "~> 3.0"},
       {:number, "~> 1.0.1"},
       {:plug_preferred_locales, "~> 0.1.0"},
