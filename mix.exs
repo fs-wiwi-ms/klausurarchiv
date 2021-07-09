@@ -39,7 +39,7 @@ defmodule Klausurarchiv.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:appsignal_phoenix, "~> 2.0.0"}
+      {:appsignal_phoenix, "~> 2.0.0"},
       {:appsignal, "~> 2.0"},
       {:argon2_elixir, "~> 2.0"},
       {:bamboo_smtp, "~> 4.0"},
@@ -63,7 +63,7 @@ defmodule Klausurarchiv.Mixfile do
       {:sentry, "~> 8.0"},
       {:timex, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:floki, ">= 0.27.0", only: :test},
+      {:floki, ">= 0.27.0", only: :test}
     ]
   end
 
