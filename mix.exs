@@ -39,32 +39,31 @@ defmodule Klausurarchiv.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5"},
-      {:phoenix_pubsub, "~> 2.0"},
-      {:phoenix_slime, "~> 0.13.0"},
-      {:phoenix_ecto, "~> 4.3.0"},
-      {:plug_cowboy, "~> 2.3"},
+      {:appsignal_phoenix, "~> 2.0.0"}
+      {:appsignal, "~> 2.0"},
       {:argon2_elixir, "~> 2.0"},
+      {:bamboo_smtp, "~> 4.0"},
+      {:bamboo, "~> 2.0"},
       {:comeonin, "~> 5.3.0"},
-      {:postgrex, "~> 0.15"},
-      {:distillery, "~> 2.0"},
-      {:phoenix_html, "~> 2.14"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.15.0"},
-      {:gettext, "~> 0.18"},
       {:cowboy, "~> 2.0"},
       {:ecto_enum, "~> 1.2"},
+      {:gettext, "~> 0.18"},
       {:httpoison, "~> 1.7"},
-      {:sentry, "~> 8.0"},
       {:jason, "~> 1.2"},
-      {:bamboo, "~> 2.0"},
-      {:bamboo_smtp, "~> 4.0"},
-      {:timex, "~> 3.0"},
       {:number, "~> 1.0.1"},
+      {:phoenix_ecto, "~> 4.3.0"},
+      {:phoenix_html, "~> 2.14"},
+      {:phoenix_live_view, "~> 0.15.0"},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:phoenix_slime, "~> 0.13.0"},
+      {:phoenix, "~> 1.5"},
+      {:plug_cowboy, "~> 2.3"},
       {:plug_preferred_locales, "~> 0.1.0"},
+      {:postgrex, "~> 0.15"},
+      {:sentry, "~> 8.0"},
+      {:timex, "~> 3.0"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:floki, ">= 0.27.0", only: :test},
-      {:appsignal, "~> 2.0"},
-      {:appsignal_phoenix, "~> 2.0.0"}
     ]
   end
 

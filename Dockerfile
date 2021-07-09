@@ -62,6 +62,9 @@ RUN mix deps.compile
 RUN mkdir -p priv/static
 COPY --from=assets /app/priv/static/ ./priv/static/
 
+# workaround until docker or someone else gets his shit together
+RUN true
+
 # Fetch the application dependencies and build the application
 COPY . ./
 RUN mix compile --warning-as-errors
