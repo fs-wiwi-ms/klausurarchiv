@@ -97,12 +97,4 @@ html(lang="en")
 
     script(src="#{static_path(@conn, "/js/app.js")}")
 
-    script(src="https://www.googletagmanager.com/gtag/js?id=UA-87690156-2" async="true")
-    javascript:
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-87690156-2');
-
-    script(async="true" defer="true" data-domain="klausurarchiv.fachschaft-wiwi.ms" src="https://plausible.io/js/plausible.js")
+    script(async="true" defer="true" data-domain="klausurarchiv.fachschaft-wiwi.ms" src="https://plausible.fachschaft-wiwi.ms/js/plausible.js")
