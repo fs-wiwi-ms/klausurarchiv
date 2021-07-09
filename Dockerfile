@@ -53,14 +53,14 @@ RUN mix local.hex --force && \
 RUN mkdir -p /app
 WORKDIR /app
 
-# Copy generated assets from asset container
-RUN mkdir -p priv/static
-COPY --from=assets /app/priv/static/ ./priv/static/
-
 # Install and compile dependencies
 COPY mix.* ./
 RUN mix deps.get
 RUN mix deps.compile
+
+# Copy generated assets from asset container
+RUN mkdir -p priv/static
+COPY --from=assets /app/priv/static/ ./priv/static/
 
 # Fetch the application dependencies and build the application
 COPY . ./
