@@ -11,7 +11,8 @@ config :klausurarchiv,
 
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
-  log: false
+  log: false,
+  start_apps_before_migration: [:ssl]
 
 # Configures the endpoint
 config :klausurarchiv, KlausurarchivWeb.Endpoint,
