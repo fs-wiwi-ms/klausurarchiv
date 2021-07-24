@@ -36,7 +36,7 @@ div.container
             p.image.is-24x24
               img src="#{static_path(@conn, "/images/party-popper.png")}"
           div.media-content
-            span = gettext("You can create a account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
+            span = gettext("You can create an account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
         article.media
           figure.media-left
             p.image.is-24x24
@@ -53,15 +53,15 @@ div.container
       div.box
         h5.subtitle.is-5 =gettext("Hint")
         h6.is-6
-          span = gettext("Please enter the ZIV ID")
+          span = gettext("Please enter the ZIV ID ")
           span.has-text-weight-semibold = gettext"(without @uni-muenster.de)"
-          span = gettext("and the ZIV password when you download a exam. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
+          span = gettext("and the ZIV password when you download an exam. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
           span
             a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
           span .
           br
           br
-          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
+          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact: ")
           span
             a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") webmaster@fachschaft-wiwi.ms
           span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
