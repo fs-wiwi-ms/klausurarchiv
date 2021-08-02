@@ -1,7 +1,7 @@
 defmodule Klausurarchiv.Uploads do
   import Ecto.Query, warn: false
   import Ecto.Changeset, only: [add_error: 4]
-  alias Klausurarchiv.Repo
+  alias Klausurarchiv.{Repo, Attachment}
 
   alias Klausurarchiv.Uploads.{
     Term,
@@ -94,7 +94,7 @@ defmodule Klausurarchiv.Uploads do
     |> where([e, t], e.lecture_id == ^lecture_id)
     |> filter_exams_for_user(user)
     |> order_by([e, t], desc: t.year, desc: t.type)
-    |> preload([e, t], [:term])
+    |> preload([e, t], [:term, :attachment])
     |> Repo.all()
   end
 
@@ -114,7 +114,7 @@ defmodule Klausurarchiv.Uploads do
     from(
       e in Exam,
       where: e.published == false,
-      preload: [:lecture, :term]
+      preload: [:lecture, :term, :attachment]
     )
     |> Repo.all()
   end
@@ -126,21 +126,20 @@ defmodule Klausurarchiv.Uploads do
     term = get_term(term_id)
     lecture = get_lecture(lecture_id)
 
-    case upload_file(term, lecture, file) do
-      {:ok, filename} ->
-        exam_params =
-          exam_params
-          |> Map.drop(["file"])
-          |> Map.put("filename", filename)
-          |> Map.put("published", false)
+    {:ok, attachment} = Attachment.create_attachment(%{
+      "upload" => file
+    })
 
-        %Exam{}
-        |> Exam.changeset_create(exam_params)
-        |> Repo.insert()
+    exam_params =
+      exam_params
+      |> Map.drop(["file"])
+      |> Map.put("attachment", attachment)
+      |> Map.put("published", false)
 
-      {:error, _error} ->
-        {:error, "file could not be uploaded"}
-    end
+    %Exam{}
+    |> Repo.preload([:attachment])
+    |> Exam.changeset(exam_params)
+    |> Repo.insert()
   end
 
   def create_exam(exam_params) do
@@ -161,6 +160,7 @@ defmodule Klausurarchiv.Uploads do
 
   def change_exam(exam \\ %Exam{}, attrs \\ %{}) do
     exam
+    |> Repo.preload([:attachment])
     |> Exam.changeset(attrs)
   end
 

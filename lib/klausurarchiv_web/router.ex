@@ -110,5 +110,7 @@ defmodule KlausurarchivWeb.Router do
     resources("/exams", ExamController, only: [:new, :create])
 
     resources("/lectures", LectureController, only: [:show])
+
+    get("/attachments/:id", AttachmentController, :download)
   end
 end

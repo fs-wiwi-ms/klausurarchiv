@@ -29,26 +29,26 @@ div.container
                   span =gettext("Manage shortcuts")
           - _ ->
 
-      div.box
-        h5.subtitle.is-5 =gettext("New features:")
-        article.media
-          figure.media-left
-            p.image.is-24x24
-              img src="#{static_path(@conn, "/images/party-popper.png")}"
-          div.media-content
-            span = gettext("You can create a account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
-        article.media
-          figure.media-left
-            p.image.is-24x24
-              img src="#{static_path(@conn, "/images/clipboard.png")}"
-          div.media-content
-            span = gettext("Shortcuts and modules numbers are added to exams, you can now search for them as well.")
-        article.media
-          figure.media-left
-            p.image.is-24x24
-              img src="#{static_path(@conn, "/images/magnifying-glass-tilted-right.png")}"
-          div.media-content
-            span = gettext("Live search!")
+      / div.box
+      /   h5.subtitle.is-5 =gettext("New features:")
+      /   article.media
+      /     figure.media-left
+      /       p.image.is-24x24
+      /         img src="#{static_path(@conn, "/images/party-popper.png")}"
+      /     div.media-content
+      /       span = gettext("You can create a account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
+      /   article.media
+      /     figure.media-left
+      /       p.image.is-24x24
+      /         img src="#{static_path(@conn, "/images/clipboard.png")}"
+      /     div.media-content
+      /       span = gettext("Shortcuts and modules numbers are added to exams, you can now search for them as well.")
+      /   article.media
+      /     figure.media-left
+      /       p.image.is-24x24
+      /         img src="#{static_path(@conn, "/images/magnifying-glass-tilted-right.png")}"
+      /     div.media-content
+      /       span = gettext("Live search!")
 
       div.box
         h5.subtitle.is-5 =gettext("Hint")

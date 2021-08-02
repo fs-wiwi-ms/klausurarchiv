@@ -13,6 +13,9 @@ services:
       - sync
     environment:
       DATABASE_URL: "psql://klausurarchiv:klausurarchiv@db/klausurarchiv"
+      S3_BUCKET: "exam-files"
+      AWS_ACCESS_KEY_ID: "accesskey"
+      AWS_SECRET_ACCESS_KEY: "secretkey"
     ports:
       - "4000:4000"
 
@@ -36,3 +39,13 @@ services:
       POSTGRES_DB: klausurarchiv
     ports:
       - "15432:5432"
+
+  minio:
+    image: minio/minio:RELEASE.2021-06-17T00-10-46Z
+    entrypoint: "sh"
+    command: "-c 'mkdir -p /data/exam-files && minio server /data'"
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: accesskey
+      MINIO_SECRET_KEY: secretkey

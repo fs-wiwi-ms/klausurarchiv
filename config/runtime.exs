@@ -36,6 +36,14 @@ if config_env() == :prod do
     retries: 1,
     no_mx_lookups: false,
     auth: :always
+
+  config :ex_aws,
+    s3: [
+      scheme: "https://",
+      host: System.get_env("MINIO_HOST"),
+      port: 443,
+      region: "eu-central-1"
+    ]
 end
 
 config :appsignal, :config,

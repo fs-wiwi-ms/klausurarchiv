@@ -67,7 +67,7 @@ div.container
                 span.has-text-danger = "[#{gettext("Hidden")}] "
               span = "#{if exam.term.type == :winter_term do gettext("Winter term") else gettext("Summer term") end} #{exam.term.year}"
           footer.card-footer
-            a.card-footer-item.has-text-primary(href="https://fsk.uni-muenster.de/klausuren/files/#{exam.filename}")
+            a.card-footer-item.has-text-primary(href="#{attachment_path(@conn, :download, exam.attachment.id)}")
               span.icon
                 i.fas.fa-download
               span = gettext("Download")
