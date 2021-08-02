@@ -3,4 +3,4 @@
 
 set -euo pipefail
 
-"$(dirname "$0")/exec" app mix format
+"$(dirname "$0")/compose" run --no-deps app mix format

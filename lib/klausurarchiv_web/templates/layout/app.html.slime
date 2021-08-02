@@ -74,7 +74,17 @@ html(lang="en")
         span.has-text-weight-bold.is-size5 = gettext("Error") <> ": "
         span = get_flash(@conn, :error)
 
-    section.section.Site-content
+    section.section.pb-4.pt-4
+      div.container
+        article.message.is-danger
+          div.message-header
+            p = gettext("Important notice")
+          div.message-body
+            p = gettext("Due to a security breach, the university server that stores the exams has been locked and you will get an 403 - Forbidden error.")
+            p = gettext("We try to repair the exam archive as soon as possible and make the exams available again.")
+
+
+    section.section.Site-content.pt-4
       = @inner_content
 
     footer.footer
