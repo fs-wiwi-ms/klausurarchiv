@@ -6,7 +6,6 @@ defmodule Klausurarchiv.Uploads.Exam do
   @foreign_key_type :binary_id
 
   schema "exams" do
-    field(:filename, :string)
     field(:published, :boolean, default: false)
 
     belongs_to(:term, Klausurarchiv.Uploads.Term)

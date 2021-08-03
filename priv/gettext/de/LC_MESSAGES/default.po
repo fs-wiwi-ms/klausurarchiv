@@ -20,7 +20,7 @@ msgid "Degree"
 msgstr "Abschluss"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:72
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:76
 msgid "Download"
 msgstr "Download"
 
@@ -53,7 +53,7 @@ msgid "Name"
 msgstr "Name"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:95
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:99
 msgid "No exams found."
 msgstr "Leider keine Klausuren gefunden."
 
@@ -74,6 +74,7 @@ msgstr "Unveröffentlichte Klausuren"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/exam/draft.html.slime:21
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:72
 msgid "Preview"
 msgstr "Preview"
 
@@ -397,7 +398,7 @@ msgstr "Du hast noch keinen Account? Dann registriere dich jetzt!"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/exam/edit.html.slime:2
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:79
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:83
 msgid "Edit exam"
 msgstr "Klausur bearbeiten"
 
@@ -408,7 +409,7 @@ msgid "Hidden"
 msgstr "Versteckt"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:85
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:89
 msgid "Hide exam"
 msgstr "Klausur verbergen"
 
@@ -424,7 +425,7 @@ msgid "Lecture"
 msgstr "Vorlesung"
 
 #, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:89
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:93
 msgid "Publish exam"
 msgstr "Klausuren freischalten"
 

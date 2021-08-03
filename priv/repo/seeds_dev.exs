@@ -10,53 +10,34 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Klausurarchiv.Repo
-alias Klausurarchiv.User
 import Ecto.Query, warn: false
 
-alias Klausurarchiv.Uploads.{Degree, Lecture, Term}
+alias Klausurarchiv.{Repo, User, Attachment}
+alias Klausurarchiv.Uploads.{Degree, Lecture, Term, Exam}
 
-user =
-  User
-  |> where([u], u.email == ^"tbho@tbho.de")
-  |> Repo.one()
+User.create_user(%{
+  "fore_name" => "Tobias",
+  "last_name" => "Hoge",
+  "user_name" => "tbho",
+  "email" => "tbho@example.de",
+  "password" => "Test123!",
+  "password_confirmation" => "Test123!",
+  "role" => "user"
+})
 
-case user do
-  nil ->
-    User.create_user(%{
-      "fore_name" => "Tobias",
-      "last_name" => "Hoge",
-      "user_name" => "tbho",
-      "email" => "tbho@example.de",
-      "password" => "Test123!",
-      "password_confirmation" => "Test123!",
-      "role" => "user"
-    })
+User.create_user(%{
+  "fore_name" => "Admin",
+  "last_name" => "Account",
+  "user_name" => "admin",
+  "email" => "tbho+admin@example.de",
+  "password" => "Test123!",
+  "password_confirmation" => "Test123!",
+  "role" => "admin"
+})
 
-  user ->
-    user
-end
-
-admin =
-  User
-  |> where([u], u.email == ^"tbho+admin@tbho.de")
-  |> Repo.one()
-
-case admin do
-  nil ->
-    User.create_user(%{
-      "fore_name" => "Admin",
-      "last_name" => "Account",
-      "user_name" => "admin",
-      "email" => "tbho+admin@example.de",
-      "password" => "Test123!",
-      "password_confirmation" => "Test123!",
-      "role" => "admin"
-    })
-
-  admin ->
-    admin
-end
+# ---------------------------------------
+# --- Create the six degrees
+# ---------------------------------------
 
 degrees = [
   "WI-Bachelor",
@@ -67,142 +48,95 @@ degrees = [
   "VWL-Master"
 ]
 
+degrees =
+  Enum.map(degrees, fn degree ->
+    %Degree{}
+    |> Degree.changeset(%{"name" => degree, "lectures" => []})
+    |> Repo.insert!()
+  end)
+
+# ---------------------------------------
+# --- Create summer and winter terms
+# ---------------------------------------
+
 terms = [:summer_term, :winter_term]
 
-wi_bachelor_lectures = [
-  "Buchführung und Abschluss",
-  "BWL II",
-  "Communication and Collaboration Systems",
-  "Daten und Wahrscheinlichkeiten",
-  "Datenanalyse und Simulation",
-]
-
-is_master_lectures = [
-  "Business Intelligence: Data Analytics I (Theory)",
-  "Business Intelligence: Data Analytics II (Applications)",
-  "Business Intelligence: Management Information Systems and Data Warehousing",
-  "Business Networks: Information Security",
-  "Business Networks: Interorganizational Systems",
-  "Business Networks: Network Economics",
-]
-
-bwl_bachelor_lectures = [
-  "Betriebliche Finanzwirtschaft",
-  "Bilanzen und Steuern",
-  "Buchführung und Abschluss",
-  "BWL II",
-  "BWL II Englisch",
-  "Corporate Finance"
-]
-
-bwl_master_lectures = [
-  "Advanced Corporate Finance",
-  "Advanced Industrial Marketing",
-  "Advanced Market Research",
-  "Advanced Media Marketing",
-  "Anwendungen des Controlling",
-  "Ausgewählte Kapitel des Accounting I",
-  "Ausgewählte Kapitel des Finance I",
-  "Ausgewählte Kapitel des Finance II"
-]
-
-vwl_bachelor_lectures = [
-  "Allgemeine Steuerlehre",
-  "Angewandte Wirtschaftsforschung: Wirtschaftspolitik und Regulierung",
-  "Außenwirtschaft",
-  "Buchführung und Abschluss",
-  "BWL II",
-  "Customer Management",
-  "Einführung in die VWL",
-]
-
-vwl_master_lectures = [
-  "Aktuelle M&A-Fälle",
-  "Aktuelle Themen der Volkswirtschaftslehre",
-  "Aktuelle wirtschaftspolitische Entwicklungen",
-  "Angewandte Mikroökonometrie",
-  "Arbeitsmarkt und Beschäftigungspolitik",
-  "Aufbaukurs Internationaler Handel"
-]
-
-create_entities_with_preload = fn list ->
-  Enum.map(list, fn {mod, identifier, preload, params} ->
-    case Repo.get_by(mod, identifier) |> Repo.preload(preload) do
-      nil ->
-        mod
-        |> apply(:changeset, [struct(mod), params])
-        |> Repo.insert!()
-
-      entity ->
-        mod
-        |> apply(:changeset, [entity, params])
-        |> Repo.update!()
-    end
-  end)
-end
-
-Enum.map(
-  degrees,
-  &{Degree, [name: &1], [:lectures], %{"name" => &1, "lectures" => []}}
-)
-|> create_entities_with_preload.()
-
-Enum.map(2000..2025, fn year ->
-  Enum.map(terms, fn type ->
-    term =
-      Term
-      |> where([t], t.year == ^year and t.type == ^type)
-      |> Repo.one()
-
-    case term do
-      nil ->
+terms =
+  Enum.reduce(2000..2025, [], fn year, result ->
+    result ++
+      Enum.map(terms, fn type ->
         %Term{}
         |> Term.changeset(%{"year" => year, "type" => type})
         |> Repo.insert!()
-
-      term ->
-        term
-    end
+      end)
   end)
-end)
 
-degree_lectures = [
-  {"WI-Bachelor", wi_bachelor_lectures},
-  {"IS-Master", is_master_lectures},
-  {"BWL-Bachelor", bwl_bachelor_lectures},
-  {"BWL-Master", bwl_master_lectures},
-  {"VWL-Bachelor", vwl_bachelor_lectures},
-  {"VWL-Master", vwl_master_lectures}
+# ---------------------------------------
+# --- Create lectures
+# ---------------------------------------
+
+first = [
+  "Allgemeine",
+  "Umfassende",
+  "Existentielle",
+  "Advanced",
+  "Einführung in die"
 ]
 
-Enum.map(degree_lectures, fn {degree_name, lectures} ->
-  Enum.map(lectures, fn x ->
-    degree = Repo.get_by(Degree, name: degree_name)
+second = ["Bier", "Steuer", "Informatik", "Dille"]
 
-    lecture =
-      Repo.get_by(Lecture, name: x) |> Repo.preload([:degrees, :shortcuts])
+third = ["Lehre", "Research", "Forschung", "Systeme", "Wirtschaft"]
 
-    case lecture do
-      nil ->
-        %Lecture{}
-        |> Lecture.changeset(%{
-          "name" => x,
-          "degrees" => [degree],
-          "shortcuts" => []
-        })
-        |> Repo.insert!()
+lectures =
+  Enum.map(1..10, fn _x ->
+    degrees = Enum.take_random(degrees, Enum.random([1, 2]))
 
-      lecture ->
-        degrees =
-          Enum.reduce(
-            [degree.id] || [],
-            lecture.degrees,
-            &[Repo.get(Degree, &1) | &2]
-          )
+    name =
+      Enum.random(first) <>
+        " " <> Enum.random(second) <> " " <> Enum.random(third)
 
-        lecture
-        |> Lecture.changeset(%{"degrees" => degrees, "shortcuts" => []})
-        |> Repo.update!()
-    end
+    %Lecture{}
+    |> Lecture.changeset(%{
+      "name" => name,
+      "degrees" => degrees,
+      "shortcuts" => []
+    })
+    |> Repo.insert!()
+  end)
+
+# ---------------------------------------
+# --- Create exams
+# ---------------------------------------
+
+Enum.map(lectures, fn lecture ->
+  Enum.map(1..3, fn _x ->
+    term = Enum.random(terms)
+
+    filename =
+      Enum.random(["test_1.pdf", "test_2.pdf", "test_3.pdf", "test_4.pdf"])
+
+    {:ok, attachment} =
+      Attachment.create_attachment(%{
+        "upload" => %Plug.Upload{
+          content_type: "application/pdf",
+          filename: "#{lecture.name}_#{term.type}_#{term.year}.pdf",
+          path: "/app/priv/repo/demo_exam_files/" <> filename
+        }
+      })
+
+    %Exam{}
+    |> Exam.changeset(%{
+      "lecture_id" => lecture.id,
+      "term_id" => term.id,
+      "published" => true,
+      "attachment" => attachment
+    })
+    |> Repo.insert!()
   end)
 end)
+
+# Code.eval_file(
+#     __ENV__.file
+#     |> Path.dirname()
+#     |> Path.join("exams.exs")
+#   )

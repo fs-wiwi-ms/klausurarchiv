@@ -4,7 +4,6 @@ defmodule Klausurarchiv.Attachment do
 
   alias Klausurarchiv.{Repo, Attachment}
 
-  import Ecto.{Query}
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -25,7 +24,7 @@ defmodule Klausurarchiv.Attachment do
   defp changeset(attachment, params) do
     attachment
     |> cast(params, [
-      :upload,
+      :upload
     ])
     |> maybe_parse_attachment()
     |> validate_required([
@@ -38,7 +37,10 @@ defmodule Klausurarchiv.Attachment do
   end
 
   @doc "Returns a presigned URL, which allows to download the attachment"
-  def presigned_attachment_url(%{location: location, file_name: file_name}) do
+  def presigned_attachment_url(
+        %{location: location, file_name: file_name},
+        content_disposition \\ "attachment"
+      ) do
     options = ExAws.Config.new(:s3)
 
     options =
@@ -48,11 +50,17 @@ defmodule Klausurarchiv.Attachment do
         options
       end
 
-      # use inline instead of attachment to preview
-    query_params = [{"response-content-type", "application/pdf"},
-        {"response-content-disposition", ~s(attachment; filename="#{file_name}")}]
+    # use inline instead of attachment to preview
+    query_params = [
+      {"response-content-type", "application/pdf"},
+      {"response-content-disposition",
+       ~s(#{content_disposition}; filename="#{file_name}")}
+    ]
 
-    ExAws.S3.presigned_url(options, :get, bucket(), location, [expires_in: 10, query_params: query_params])
+    ExAws.S3.presigned_url(options, :get, bucket(), location,
+      expires_in: 10,
+      query_params: query_params
+    )
   end
 
   defp delete(%{location: location}), do: delete(location)
@@ -65,31 +73,33 @@ defmodule Klausurarchiv.Attachment do
   end
 
   defp maybe_parse_attachment(
-    %{data: %{__meta__: %{state: :loaded}}, changes: %{upload: _}} = changeset
-  ),
-  do: parse_attachment(changeset)
+         %{data: %{__meta__: %{state: :loaded}}, changes: %{upload: _}} =
+           changeset
+       ),
+       do: parse_attachment(changeset)
 
-defp maybe_parse_attachment(
-    %{data: %{__meta__: %{state: :built}}, changes: %{upload: _}} = changeset
-  ),
-  do: parse_attachment(changeset)
+  defp maybe_parse_attachment(
+         %{data: %{__meta__: %{state: :built}}, changes: %{upload: _}} =
+           changeset
+       ),
+       do: parse_attachment(changeset)
 
-defp maybe_parse_attachment(changeset), do: changeset
+  defp maybe_parse_attachment(changeset), do: changeset
 
-defp parse_attachment(changeset) do
-attachment = get_field(changeset, :upload)
+  defp parse_attachment(changeset) do
+    attachment = get_field(changeset, :upload)
 
-with true <- File.exists?(attachment.path),
-    {:ok, %{size: size}} <- File.stat(attachment.path) do
- changeset
- |> put_change(:content_type, attachment.content_type)
- |> put_change(:file_name, attachment.filename)
- |> put_change(:size, size)
-else
- _other ->
-   add_error(changeset, :upload, "not valid")
-end
-end
+    with true <- File.exists?(attachment.path),
+         {:ok, %{size: size}} <- File.stat(attachment.path) do
+      changeset
+      |> put_change(:content_type, attachment.content_type)
+      |> put_change(:file_name, attachment.filename)
+      |> put_change(:size, size)
+    else
+      _other ->
+        add_error(changeset, :upload, "not valid")
+    end
+  end
 
   defp maybe_generate_id(%{data: %{__meta__: %{state: :built}}} = changeset) do
     put_change(changeset, :id, Ecto.UUID.generate())
@@ -97,11 +107,13 @@ end
 
   defp maybe_generate_id(changeset), do: changeset
 
-
   defp maybe_upload(%{data: %{__meta__: %{state: :built}}} = changeset),
     do: upload_attachment(changeset)
 
-  defp maybe_upload(%{data: %{__meta__: %{state: :loaded}}, changes: %{upload: _}} = changeset) do
+  defp maybe_upload(
+         %{data: %{__meta__: %{state: :loaded}}, changes: %{upload: _}} =
+           changeset
+       ) do
     delete(changeset.data.location)
     upload_attachment(changeset)
   end
@@ -118,7 +130,9 @@ end
       |> generate_path()
 
     bucket()
-    |> ExAws.S3.put_object(dest_path, File.read!(src_path), content_type: content_type)
+    |> ExAws.S3.put_object(dest_path, File.read!(src_path),
+      content_type: content_type
+    )
     |> ExAws.request!()
 
     put_change(changeset, :location, dest_path)

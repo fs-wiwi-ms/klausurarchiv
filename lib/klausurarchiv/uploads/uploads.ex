@@ -120,15 +120,13 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def create_exam(
-        %{"file" => file, "term_id" => term_id, "lecture_id" => lecture_id} =
+        %{"file" => file, "term_id" => _term_id, "lecture_id" => _lecture_id} =
           exam_params
       ) do
-    term = get_term(term_id)
-    lecture = get_lecture(lecture_id)
-
-    {:ok, attachment} = Attachment.create_attachment(%{
-      "upload" => file
-    })
+    {:ok, attachment} =
+      Attachment.create_attachment(%{
+        "upload" => file
+      })
 
     exam_params =
       exam_params

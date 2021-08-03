@@ -111,6 +111,7 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/lectures", LectureController, only: [:show])
 
-    get("/attachments/:id", AttachmentController, :download)
+    get("/attachments/:id/download", AttachmentController, :download)
+    get("/attachments/:id/preview", AttachmentController, :preview)
   end
 end
