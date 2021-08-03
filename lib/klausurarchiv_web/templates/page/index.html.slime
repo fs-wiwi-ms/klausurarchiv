@@ -53,9 +53,7 @@ div.container
       div.box
         h5.subtitle.is-5 =gettext("Hint")
         h6.is-6
-          span = gettext("Please enter the ZIV ID")
-          span.has-text-weight-semibold = gettext"(without @uni-muenster.de)"
-          span = gettext("and the ZIV password when you download a exam. If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
+          span = gettext("If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
           span
             a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
           span .

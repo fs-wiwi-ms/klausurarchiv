@@ -146,7 +146,7 @@ defmodule Klausurarchiv.Uploads do
     # no file upload contained in params
     changeset =
       %Exam{}
-      |> Exam.changeset_create(exam_params)
+      |> Exam.changeset(exam_params)
       |> add_error(:file, "cannot be empty", [])
 
     {:error, changeset}
@@ -154,7 +154,7 @@ defmodule Klausurarchiv.Uploads do
 
   def update_exam(exam, exam_params) do
     exam
-    |> Exam.changeset_create(exam_params)
+    |> Exam.changeset(exam_params)
     |> Repo.update()
   end
 
@@ -166,34 +166,6 @@ defmodule Klausurarchiv.Uploads do
 
   def delete_exam(exam) do
     Repo.delete(exam)
-  end
-
-  # -----------------------------------------------------------------
-  # -- Exam - File Uploader
-  # -----------------------------------------------------------------
-
-  @url "https://fsk.uni-muenster.de/"
-
-  defp upload_file(term, lecture, file) do
-    HTTPoison.start()
-
-    url = @url <> "klausuren/klausur_receiver.php"
-
-    form = [
-      {"jahr", "#{term.year}"},
-      {"semester", "#{term.type}"},
-      {"vorlesung", "#{lecture.name}"},
-      {"upload", "klausurupload"},
-      {:file, file.path}
-    ]
-
-    case HTTPoison.post(url, {:multipart, form}) do
-      {:ok, response} ->
-        {:ok, response.body}
-
-      {:error, exception} ->
-        {:error, HTTPoison.Error.message(exception)}
-    end
   end
 
   # -----------------------------------------------------------------
