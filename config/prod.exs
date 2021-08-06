@@ -44,7 +44,8 @@ config :appsignal, :config,
   otp_app: :klausurarchiv,
   name: "Klausurarchiv",
   env: Mix.env(),
-  active: true
+  active: true,
+  running_in_container: true
 
 config :logger,
   backends: [:console, Sentry.LoggerBackend]
