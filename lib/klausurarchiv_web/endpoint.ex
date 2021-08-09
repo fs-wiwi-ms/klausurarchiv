@@ -9,6 +9,8 @@ defmodule KlausurarchivWeb.Endpoint do
     signing_salt: "5W54z+xr"
   ]
 
+  plug(KlausurarchivWeb.Plugs.WellKnown)
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
