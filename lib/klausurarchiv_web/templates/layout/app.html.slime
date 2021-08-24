@@ -74,17 +74,19 @@ html(lang="en")
         span.has-text-weight-bold.is-size5 = gettext("Error") <> ": "
         span = get_flash(@conn, :error)
 
-    section.section.pb-4.pt-4
-      div.container
-        article.message.is-success
-          div.message-header
-            p = gettext("Important notice")
-          div.message-body
-            p = gettext("Good news everyone! The exam archive is back in normal operation.")
-            p.has-text-danger = gettext("Due to the hotfix of the exam archive, errors may still occur. Please report them so that we can fix them.")
+    / / If some important announcements have to be made uncomment and type in your news!
+    / section.section.pb-4.pt-4
+    /   div.container
+    /     article.message.is-success
+    /       div.message-header
+    /         p = gettext("Important notice")
+    /       div.message-body
+    /         p = gettext("Good news everyone! The exam archive is back in normal operation.")
+    /         p.has-text-danger = gettext("Due to the hotfix of the exam archive, errors may still occur. Please report them so that we can fix them.")
 
 
-    section.section.Site-content.pt-4
+    / Add .pt-4 class to section if announcements are added, to reduce the gap to the previous section
+    section.section.Site-content
       = @inner_content
 
     footer.footer
