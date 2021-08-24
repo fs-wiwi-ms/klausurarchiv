@@ -41,26 +41,4 @@ defmodule KlausurarchivWeb.Authentication do
         end
     end
   end
-
-  def call(conn, type: :api) do
-    with ["Bearer " <> access_token] <- get_req_header(conn, "authorization"),
-         {:ok, session} <- Session.verify_session(access_token, nil) do
-      assign(conn, :session, session)
-    else
-      _other ->
-        conn
-        |> put_status(:unauthorized)
-        |> halt()
-    end
-  end
-
-  def call(conn, type: :api_or_browser, forward_to_login: forward_to_login) do
-    case get_format(conn) do
-      "json" ->
-        call(conn, type: :api)
-
-      "html" ->
-        call(conn, type: :browser, forward_to_login: forward_to_login)
-    end
-  end
 end

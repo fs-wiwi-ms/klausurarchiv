@@ -5,6 +5,7 @@ defmodule Klausurarchiv.User do
   import Ecto.Query, warn: false
 
   alias Klausurarchiv.{User, Repo}
+  alias Klausurarchiv.User.{UserToken}
 
   require Logger
 
@@ -22,8 +23,10 @@ defmodule Klausurarchiv.User do
     field(:role, UserRole, default: :user)
     field(:filter_data, :map, default: %{})
 
+    field(:email_confirmed, :boolean)
+
     has_many(:sessions, Klausurarchiv.User.Session)
-    has_many(:password_reset_tokens, Klausurarchiv.User.PasswordResetToken)
+    has_many(:user_tokens, Klausurarchiv.User.UserToken)
 
     timestamps()
   end
@@ -38,7 +41,8 @@ defmodule Klausurarchiv.User do
       :matriculation_number,
       :password,
       :role,
-      :filter_data
+      :filter_data,
+      :email_confirmed
     ])
   end
 
@@ -46,6 +50,7 @@ defmodule Klausurarchiv.User do
     user
     |> changeset(attrs)
     |> validate_password
+    |> validate_email
     |> validate_required([:email, :fore_name, :last_name])
     |> unique_constraint(:email)
   end
@@ -66,6 +71,13 @@ defmodule Klausurarchiv.User do
     |> validate_format(:password, ~r/[0-9]/, message: "Missing number")
     |> validate_length(:password, min: 8)
     |> put_pass_hash()
+  end
+
+  defp validate_email(changeset) do
+    changeset
+    |> validate_required([:email])
+    |> validate_confirmation(:email, required: true)
+    |> validate_format(:email, ~r/[a-zA-Z0-9+_.-]+@(uni-muenster|wwu)?\.de/, message: "Email must end with @uni-muenster.de or @wwu.de")
   end
 
   defp put_pass_hash(%{valid?: true, changes: %{password: pw}} = changeset) do
@@ -95,9 +107,17 @@ defmodule Klausurarchiv.User do
   end
 
   def create_user(user_params) do
-    %User{}
+    result = %User{}
     |> changeset_create(user_params)
     |> Repo.insert()
+
+    case result do
+      {:ok, user} ->
+        {:ok, _} = UserToken.create_account_confirmation_token(user)
+        result
+      error ->
+        error
+    end
   end
 
   def update_user(user, user_params) do
@@ -111,7 +131,7 @@ defmodule Klausurarchiv.User do
     |> changeset(user_params)
   end
 
-  def create_user_changeset(%Klausurarchiv.User.PasswordResetToken{} = token) do
+  def create_user_changeset(%Klausurarchiv.User.UserToken{} = token) do
     token
     |> Ecto.assoc(:user)
     |> Repo.one()

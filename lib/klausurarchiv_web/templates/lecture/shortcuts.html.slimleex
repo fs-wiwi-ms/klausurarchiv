@@ -13,7 +13,7 @@ div.container
         tbody
           = for lecture <- unreviewed_shortcut_lectures do
             = for shortcut <- lecture.shortcuts do
-              = if !shortcut.published do
+              = if is_nil(shortcut.published) do
                 tr
                   td
                     span.has-text-weight-bold = lecture.name

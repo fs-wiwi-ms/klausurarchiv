@@ -12,8 +12,10 @@ div.field.is-grouped.is-grouped-multiline
   = for shortcut <- @lecture.shortcuts do
     div.control
       div.tags.has-addons
-        = if shortcut.published do
-          span.tag.is-success = shortcut.name
-        - else
-          span.tag.is-warning = shortcut.name
-          span.tag.is-lite = gettext("Under review")
+        = case shortcut.published do
+          - true ->
+            span.tag.is-success = shortcut.name
+          - nil ->
+            span.tag.is-warning = shortcut.name
+            span.tag.is-lite = gettext("Under review")
+          - false ->

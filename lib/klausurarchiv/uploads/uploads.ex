@@ -135,8 +135,7 @@ defmodule Klausurarchiv.Uploads do
       |> Map.put("published", false)
 
     %Exam{}
-    |> Repo.preload([:attachment])
-    |> Exam.changeset(exam_params)
+    |> change_exam(exam_params)
     |> Repo.insert()
   end
 
@@ -144,7 +143,7 @@ defmodule Klausurarchiv.Uploads do
     # no file upload contained in params
     changeset =
       %Exam{}
-      |> Exam.changeset(exam_params)
+      |> change_exam(exam_params)
       |> add_error(:file, "cannot be empty", [])
 
     {:error, changeset}
@@ -152,7 +151,7 @@ defmodule Klausurarchiv.Uploads do
 
   def update_exam(exam, exam_params) do
     exam
-    |> Exam.changeset(exam_params)
+    |> change_exam(exam_params)
     |> Repo.update()
   end
 
@@ -269,7 +268,7 @@ defmodule Klausurarchiv.Uploads do
         lecture_params["shortcuts"]
         |> String.split(",")
         |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
-        |> Enum.map(&%{name: &1, published: false})
+        |> Enum.map(&%{name: &1, published: nil})
       else
         []
       end

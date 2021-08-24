@@ -13,29 +13,25 @@ defmodule KlausurarchivWeb.Router do
 
   pipeline :browser do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: false
     )
   end
 
   pipeline :protected_browser do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: true
     )
   end
 
   pipeline :admins_only do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: true
     )
 
     plug(KlausurarchivWeb.AdminOnly)
-  end
-
-  pipeline :api do
-    plug(:accepts, ["json"])
   end
 
   def set_language(conn, _opts) do
@@ -82,7 +78,14 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through([:unsecure_browser, :protected_browser])
 
-    resources "/sessions", SessionController, only: [:delete]
+    resources("/sessions", SessionController, only: [:delete])
+
+    resources("/account_confirmations", AccountConfirmationController, only: [:new, :create])
+
+    resources("/exams", ExamController, only: [:new, :create])
+
+    get("/attachments/:id/download", AttachmentController, :download)
+    get("/attachments/:id/preview", AttachmentController, :preview)
   end
 
   scope "/public", KlausurarchivWeb, as: :public do
@@ -107,11 +110,8 @@ defmodule KlausurarchivWeb.Router do
     get("/privacy", PageController, :privacy)
     get("/legal", PageController, :legal)
 
-    resources("/exams", ExamController, only: [:new, :create])
-
     resources("/lectures", LectureController, only: [:show])
 
-    get("/attachments/:id/download", AttachmentController, :download)
-    get("/attachments/:id/preview", AttachmentController, :preview)
+    resources("/account_confirmations", AccountConfirmationController, only: [:show])
   end
 end
