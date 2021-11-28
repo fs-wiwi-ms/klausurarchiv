@@ -25,6 +25,15 @@ defmodule KlausurarchivWeb.Router do
     )
   end
 
+  pipeline :confirmed_email do
+    plug(KlausurarchivWeb.Authentication,
+      type: :browser,
+      forward_to_login: true
+    )
+
+    plug(KlausurarchivWeb.ConfirmedEmail)
+  end
+
   pipeline :admins_only do
     plug(KlausurarchivWeb.Authentication,
       type: :browser,
@@ -83,6 +92,11 @@ defmodule KlausurarchivWeb.Router do
     resources("/account_confirmations", AccountConfirmationController, only: [:new, :create])
 
     resources("/exams", ExamController, only: [:new, :create])
+  end
+
+  scope "/", KlausurarchivWeb do
+    # Use the browser stack with user authentification and confirmed email adress
+    pipe_through([:unsecure_browser, :protected_browser, :confirmed_email])
 
     get("/attachments/:id/download", AttachmentController, :download)
     get("/attachments/:id/preview", AttachmentController, :preview)
@@ -113,5 +127,10 @@ defmodule KlausurarchivWeb.Router do
     resources("/lectures", LectureController, only: [:show])
 
     resources("/account_confirmations", AccountConfirmationController, only: [:show])
+  end
+
+  if Mix.env == :dev do
+    # If using Phoenix
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 end

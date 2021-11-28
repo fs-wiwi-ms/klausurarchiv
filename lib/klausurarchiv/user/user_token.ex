@@ -55,7 +55,7 @@ defmodule Klausurarchiv.User.UserToken do
     case token do
       {:ok, token} ->
         user
-        |> Email.password_reset_email(token)
+        |> Email.token_email(token, :reset_password)
         |> Mailer.deliver_now()
 
       _other ->
@@ -69,7 +69,7 @@ defmodule Klausurarchiv.User.UserToken do
     case token do
       {:ok, token} ->
         user
-        |> Email.account_confirmation_email(token)
+        |> Email.token_email(token, :account_confirmation)
         |> Mailer.deliver_now()
 
       _other ->

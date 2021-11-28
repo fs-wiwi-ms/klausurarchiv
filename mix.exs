@@ -44,6 +44,7 @@ defmodule Klausurarchiv.Mixfile do
       {:argon2_elixir, "~> 2.0"},
       {:bamboo_smtp, "~> 4.0"},
       {:bamboo, "~> 2.0"},
+      {:bamboo_phoenix, "~> 1.0.0"},
       {:comeonin, "~> 5.3.0"},
       {:cowboy, "~> 2.0"},
       {:ecto_enum, "~> 1.2"},

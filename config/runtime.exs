@@ -26,7 +26,6 @@ if config_env() == :prod do
   config :klausurarchiv, Klausurarchiv.Mailer,
     adapter: Bamboo.SMTPAdapter,
     server: System.get_env("SMTP_SERVER"),
-    hostname: System.get_env("HOST"),
     port: System.get_env("SMTP_PORT"),
     username: System.get_env("SMTP_USERNAME"),
     password: System.get_env("SMTP_PASSWORD"),

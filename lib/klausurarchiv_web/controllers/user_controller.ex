@@ -2,6 +2,7 @@ defmodule KlausurarchivWeb.UserController do
   use KlausurarchivWeb, :controller
 
   alias Klausurarchiv.User
+  alias Klausurarchiv.User.Session
 
   def new(conn, _params) do
     user_changeset = User.change_user()
@@ -23,9 +24,9 @@ defmodule KlausurarchivWeb.UserController do
 
     case User.create_user(user) do
       {:ok, user} ->
-        conn
-        |> put_flash(:info, gettext("Registration successful! Please login."))
-        |> redirect(to: public_session_path(conn, :new))
+        # conn
+        # |> put_flash(:info, gettext("Registration successful! Please login."))
+        # |> redirect(to: public_session_path(conn, :new))
 
         result = Session.create_session(user, params)
 
@@ -36,9 +37,12 @@ defmodule KlausurarchivWeb.UserController do
 
             conn
             |> put_session(:access_token, session.access_token)
-            |> put_flash(:info, gettext("Logged in."))
+            |> put_flash(:info, gettext("Registration successful! You are now logged in."))
+            |> redirect(to: path)
           _ ->
-            nil
+            conn
+            |> put_flash(:info, gettext("Registration successful! Please login."))
+            |> redirect(to: public_session_path(conn, :new))
         end
 
       {:error, changeset} ->

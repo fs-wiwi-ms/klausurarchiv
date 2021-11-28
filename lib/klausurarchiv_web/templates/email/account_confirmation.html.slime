@@ -1,0 +1,12 @@
+p = "Hi #{@user.fore_name},"
+
+p You can confirm your account by clicking the button below:
+
+a(href="#{account_confirmation_url(@token)}")
+  button Klick!
+
+p If the link does not work copy the following url in your browser and press Enter!
+
+p.strong = account_confirmation_url(@token)
+
+p If you didn't create an account with us, please ignore this.
