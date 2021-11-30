@@ -268,7 +268,7 @@ defmodule Klausurarchiv.Uploads do
         lecture_params["shortcuts"]
         |> String.split(",")
         |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
-        |> Enum.map(&%{name: &1, published: false})
+        |> Enum.map(&%{name: &1, published: nil})
       else
         []
       end
