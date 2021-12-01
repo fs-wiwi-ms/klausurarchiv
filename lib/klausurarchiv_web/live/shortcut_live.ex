@@ -20,6 +20,7 @@ defmodule KlausurarchivWeb.ShortcutLive do
         %{"short_id" => short_id},
         socket
       ) do
+    IO.inspect("approve " <> short_id)
     Uploads.update_shortcut_state(short_id, true)
     lectures = Uploads.get_lectures([:shortcuts])
 
@@ -33,6 +34,7 @@ defmodule KlausurarchivWeb.ShortcutLive do
         %{"short_id" => short_id},
         socket
       ) do
+    IO.inspect("reject " <> short_id)
     Uploads.update_shortcut_state(short_id, false)
     lectures = Uploads.get_lectures([:shortcuts])
 
