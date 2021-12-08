@@ -66,7 +66,7 @@ defmodule KlausurarchivWeb.Router do
       only: [:new, :create, :edit, :update]
     )
 
-    resources("/exams", ExamController, only: [:edit, :update])
+    resources("/exams", ExamController, only: [:edit, :update, :delete])
 
     get("/exams/drafts", ExamController, :draft)
     get("/exams/:id/publish", ExamController, :publish)

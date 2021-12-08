@@ -162,7 +162,10 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def delete_exam(exam) do
-    Repo.delete(exam)
+    with exam <- Repo.preload(exam, [:attachment]) do
+      Repo.delete(exam)
+      Attachment.delete_attachment(exam.attachment)
+    end
   end
 
   # -----------------------------------------------------------------

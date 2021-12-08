@@ -108,4 +108,15 @@ defmodule KlausurarchivWeb.ExamController do
 
     render(conn, "draft.html", unplubished_exams: unplubished_exams)
   end
+
+  def delete(conn, %{"id" => id}) do
+    id
+    |> Uploads.get_exam()
+    |> Uploads.delete_exam()
+
+    unplubished_exams = Uploads.get_unplubished_exams()
+    conn
+    |> put_flash(:success, gettext("Deleted!"))
+    |> render("draft.html", unplubished_exams: unplubished_exams)
+  end
 end
