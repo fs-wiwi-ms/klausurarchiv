@@ -106,6 +106,12 @@ defmodule Klausurarchiv.User do
     Repo.get_by(User, email: email)
   end
 
+  def get_user_by_token(%Klausurarchiv.User.UserToken{} = token) do
+    token
+    |> Ecto.assoc(:user)
+    |> Repo.one()
+  end
+
   def create_user(user_params) do
     result = %User{}
     |> changeset_create(user_params)
@@ -129,13 +135,6 @@ defmodule Klausurarchiv.User do
   def change_user(user \\ %User{}, user_params \\ %{}) do
     user
     |> changeset(user_params)
-  end
-
-  def create_user_changeset(%Klausurarchiv.User.UserToken{} = token) do
-    token
-    |> Ecto.assoc(:user)
-    |> Repo.one()
-    |> changeset(%{})
   end
 
   def change_user_password(user, user_params) do

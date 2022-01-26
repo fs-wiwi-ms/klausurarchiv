@@ -26,7 +26,9 @@ defmodule KlausurarchivWeb.PasswordResetTokenController do
         |> redirect(to: "/")
 
       token ->
-        changeset = User.create_user_changeset(token)
+        changeset = token
+        |> User.get_user_by_token()
+        |> User.change_user()
 
         render(conn, "show.html",
           token: token,

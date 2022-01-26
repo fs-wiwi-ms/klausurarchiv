@@ -37,7 +37,7 @@ defmodule KlausurarchivWeb.UserController do
 
             conn
             |> put_session(:access_token, session.access_token)
-            |> put_flash(:info, gettext("Registration successful! You are now logged in."))
+            |> put_flash(:info, gettext("Registration successful! You are now logged in. Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."))
             |> redirect(to: path)
           _ ->
             conn

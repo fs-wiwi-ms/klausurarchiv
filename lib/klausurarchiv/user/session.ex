@@ -151,11 +151,12 @@ defmodule Klausurarchiv.User.Session do
            User
            |> Repo.get_by(email: email)
            |> Argon2.check_pass(password),
-         {:ok, session} <-
+         %Session{} = session <-
            user
            |> Ecto.build_assoc(:sessions)
            |> changeset(params)
-           |> Repo.insert() do
+           |> Repo.insert!()
+           |> Repo.preload([:user]) do
       {:ok, session}
     else
       {:error, message} ->

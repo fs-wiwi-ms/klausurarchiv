@@ -89,7 +89,8 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/sessions", SessionController, only: [:delete])
 
-    resources("/account_confirmations", AccountConfirmationController, only: [:new, :create])
+    get("/account_confirmations/not_confirmed", AccountConfirmationController, :not_confirmed)
+    get("/account_confirmations/send_confirmation_mail", AccountConfirmationController, :send_confirmation_mail)
 
     resources("/exams", ExamController, only: [:new, :create])
   end
@@ -114,6 +115,8 @@ defmodule KlausurarchivWeb.Router do
       PasswordResetTokenController,
       only: [:new, :create, :show, :update]
     )
+
+    get("/account_confirmations/confirm_mail/:token", AccountConfirmationController, :confirm_mail)
   end
 
   scope "/", KlausurarchivWeb do
@@ -125,8 +128,6 @@ defmodule KlausurarchivWeb.Router do
     get("/legal", PageController, :legal)
 
     resources("/lectures", LectureController, only: [:show])
-
-    resources("/account_confirmations", AccountConfirmationController, only: [:show])
   end
 
   if Mix.env == :dev do

@@ -4,23 +4,37 @@ defmodule KlausurarchivWeb.AccountConfirmationController do
   alias Klausurarchiv.User.UserToken
   alias Klausurarchiv.User
 
-  def show(conn, attrs) do
+  def confirm_mail(conn, %{"token" => token}) do
+    case UserToken.get_valid_token(token) do
+      nil ->
+        conn
+        |> put_flash(:error, gettext("Link is not valid"))
+        |> redirect(to: "/")
+
+      token ->
+      user = User.get_user_by_token(token)
+      |> User.update_user(%{email_confirmed: true})
+
+      {:ok, _token} = UserToken.delete_password_reset_token(token)
+
+      conn
+      |> put_flash(:success, "Your email was confirmed!")
+      |> redirect(to: page_path(conn, :index))
+    end
   end
 
-  def new(conn, attrs) do
+  def not_confirmed(conn, attrs) do
     user =
       conn
       |> get_session(:user_id)
       |> User.get_user()
 
-    conn
-    |> render("new.html",
-        user: user,
-        action: account_confirmation_path(conn, :create)
+    render(conn, "not_confirmed.html",
+        user: user
       )
   end
 
-  def create(conn, attrs) do
+  def send_confirmation_mail(conn, attrs) do
     user =
       conn
       |> get_session(:user_id)

@@ -10,9 +10,9 @@ defmodule KlausurarchivWeb.EmailView do
   end
 
   def account_confirmation_url(token) do
-    System.get_env("HOST") <> KlausurarchivWeb.Router.Helpers.public_password_reset_token_path(
+    System.get_env("HOST") <> KlausurarchivWeb.Router.Helpers.public_account_confirmation_path(
       KlausurarchivWeb.Endpoint,
-      :show,
+      :confirm_mail,
       token.token
     )
   end

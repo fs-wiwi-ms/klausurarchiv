@@ -1,0 +1,8 @@
+div.container
+  h1.title.is-3.has-text-white = gettext "Confirm mail"
+
+  div.box
+    p = gettext("Please click on the link in the email we sent you so that we can verify your email and thus your affiliation with the University of Münster.")
+
+    p.has-text-weight-semibold.label = gettext("You don't have recieved an email yet?")
+    a.button.is-primary.is-outlined(href="#{account_confirmation_path(@conn, :send_confirmation_mail)}") = gettext("Resend mail")

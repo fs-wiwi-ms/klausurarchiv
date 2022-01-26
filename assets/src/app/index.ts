@@ -106,7 +106,7 @@ if (document.readyState !== "loading") {
 // import "./snow.js";
 
 // snowStorm.animationInterval = 50;
-// snowStorm.followMouse = true;
+// snowStorm.followMouse = false;
 // snowStorm.snowStick = false;
 // snowStorm.flakesMax = 200;
 // snowStorm.snowColor = '#eee';
