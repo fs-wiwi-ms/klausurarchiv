@@ -23,10 +23,12 @@ div.container
                   span.icon
                     i.fas.fa-file-upload
                   span =gettext("Publish exams")
+                  span.badge.is-danger = get_unplublished_exams_count()
                 a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts)}")
                   span.icon
                     i.fas.fa-link
                   span =gettext("Manage shortcuts")
+                  span.badge.is-danger = get_unplublished_shortcuts_count()
           - _ ->
 
       / div.box
