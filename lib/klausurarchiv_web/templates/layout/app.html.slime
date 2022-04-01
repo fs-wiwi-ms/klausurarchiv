@@ -22,10 +22,10 @@ html(lang="en")
 
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
-          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Blue.png")}" alt="" height="70")
+          img.image(src="#{static_path(@conn, "/images/OnlyExams.png")}" alt="" height="70")
 
-        a.navbar-item(href="#{page_path(@conn, :index)}")
-          span.has-text-weight-bold.has-text-primary = gettext("Examarchive")
+        / a.navbar-item(href="#{page_path(@conn, :index)}")
+        /   span.has-text-weight-bold.has-text-primary = gettext("Examarchive")
 
         div.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="navMenu")
           span

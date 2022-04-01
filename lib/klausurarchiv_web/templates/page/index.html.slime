@@ -1,6 +1,6 @@
 - user = get_user(@conn)
 div.container
-  h1.title.is-3.has-text-white =gettext("Examarchive")
+  h1.title.is-3.has-text-white =gettext("OnlyExams")
 
   div.columns.is-desktop
     div.column.is-two-thirds-desktop
