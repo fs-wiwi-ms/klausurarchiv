@@ -4083,10 +4083,10 @@ trim-newlines@^3.0.0:
   dependencies:
     glob "^7.1.2"
 
-ts-loader@^9.0.0:
-  version "9.2.3"
-  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.2.3.tgz#dc3b6362a4d4382493cd4f138d345f419656de68"
-  integrity sha512-sEyWiU3JMHBL55CIeC4iqJQadI0U70A5af0kvgbNLHVNz2ACztQg0j/9x10bjjIht8WfFYLKfn4L6tkZ+pu+8Q==
+ts-loader@^9.3.0:
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.3.0.tgz#980f4dbfb60e517179e15e10ed98e454b132159f"
+  integrity sha512-2kLLAdAD+FCKijvGKi9sS0OzoqxLCF3CxHpok7rVgCZ5UldRzH0TkbwG9XECKjBzHsAewntC5oDaI/FwKzEUog==
   dependencies:
     chalk "^4.1.0"
     enhanced-resolve "^5.0.0"
