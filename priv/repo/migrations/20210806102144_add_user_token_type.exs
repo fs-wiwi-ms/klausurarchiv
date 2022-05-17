@@ -5,7 +5,7 @@ defmodule Klausurarchiv.Repo.Migrations.AddUserTokenType do
     UserTokenTypeEnum.create_type()
 
     alter table(:user_tokens) do
-      add(:type, :user_token_type, null: false)
+      add(:type, :user_token_type, default: "password_reset", null: false)
     end
   end
 
