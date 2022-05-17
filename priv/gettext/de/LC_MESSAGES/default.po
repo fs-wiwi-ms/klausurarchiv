@@ -232,7 +232,7 @@ msgstr "Vorlesung bearbeiten"
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/_form.html.slime:3
-#: lib/klausurarchiv_web/templates/session/new.html.slime:7 lib/klausurarchiv_web/templates/user/new.html.slime:28
+#: lib/klausurarchiv_web/templates/session/new.html.slime:7
 msgid "Email"
 msgstr "Email"
 
@@ -570,3 +570,8 @@ msgstr "Du kannst deine Passwort zurücksetzen in dem du auf den folgenden Link 
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:6
 msgid "Confirm email!"
 msgstr "Email bestätigen!"
+
+#, elixir-format
+#: lib/klausurarchiv_web/templates/user/new.html.slime:28
+msgid "University email adress"
+msgstr "Universitätsemailadresse"

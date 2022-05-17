@@ -25,9 +25,9 @@ div.container
       div.columns.mb-0
         div.column
           div.field
-            label.label = gettext("Email")
+            label.label = gettext("University email adress")
             div.control.has-icons-left
-              = text_input(user_form, :email, class: "input", type: "email", placeholder: "test@example.com")
+              = text_input(user_form, :email, class: "input", type: "email", placeholder: "test@uni-muenster.de")
               span.icon.is-left
                   i.fas.fa-envelope
             = error_label(@changeset, :email)
@@ -36,7 +36,7 @@ div.container
           div.field
             label.label = gettext("Repeat email")
             div.control.has-icons-left
-              = text_input(user_form, :email_confirmation, class: "input", type: "email", placeholder: "test@example.com")
+              = text_input(user_form, :email_confirmation, class: "input", type: "email", placeholder: "test@uni-muenster.de")
               span.icon.is-left
                   i.fas.fa-envelope
             = error_label(@changeset, :email_confirmation)

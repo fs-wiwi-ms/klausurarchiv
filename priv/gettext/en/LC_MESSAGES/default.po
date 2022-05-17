@@ -232,7 +232,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/_form.html.slime:3
-#: lib/klausurarchiv_web/templates/session/new.html.slime:7 lib/klausurarchiv_web/templates/user/new.html.slime:28
+#: lib/klausurarchiv_web/templates/session/new.html.slime:7
 msgid "Email"
 msgstr ""
 
@@ -569,4 +569,9 @@ msgstr ""
 #, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:6
 msgid "Confirm email!"
+msgstr ""
+
+#, elixir-format
+#: lib/klausurarchiv_web/templates/user/new.html.slime:28
+msgid "University email adress"
 msgstr ""
