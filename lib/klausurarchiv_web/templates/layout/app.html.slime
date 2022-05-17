@@ -22,10 +22,9 @@ html(lang="en")
 
       div.navbar-brand
         a.navbar-item(href="#{page_path(@conn, :index)}")
-          img.image(src="#{static_path(@conn, "/images/OnlyExams.png")}" alt="" height="70")
-
-        / a.navbar-item(href="#{page_path(@conn, :index)}")
-        /   span.has-text-weight-bold.has-text-primary = gettext("Examarchive")
+          img.image(src="#{static_path(@conn, "/images/Logo_Fachschaft_Blue.png")}" alt="" height="70")
+        a.navbar-item(href="#{page_path(@conn, :index)}")
+          span.has-text-weight-bold.has-text-primary = gettext("Examarchive")
 
         div.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="navMenu")
           span
@@ -74,19 +73,19 @@ html(lang="en")
         span.has-text-weight-bold.is-size5 = gettext("Error") <> ": "
         span = get_flash(@conn, :error)
 
-    / / If some important announcements have to be made uncomment and type in your news!
-    / section.section.pb-4.pt-4
-    /   div.container
-    /     article.message.is-success
-    /       div.message-header
-    /         p = gettext("Important notice")
-    /       div.message-body
-    /         p = gettext("Good news everyone! The exam archive is back in normal operation.")
-    /         p.has-text-danger = gettext("Due to the hotfix of the exam archive, errors may still occur. Please report them so that we can fix them.")
+    / If some important announcements have to be made uncomment and type in your news!
+    section.section.pb-4.pt-4
+      div.container
+        article.message.is-danger
+          div.message-header
+            p = gettext("Important notice")
+          div.message-body
+            p = gettext("We need to confirm that you are a student of the University of Münster from now on.")
+            p.has-text-danger = gettext("Therefore, please create an account (Register) and confirm your mail by clicking the link in the mail.")
 
 
     / Add .pt-4 class to section if announcements are added, to reduce the gap to the previous section
-    section.section.Site-content
+    section.section.Site-content.pt-4
       = @inner_content
 
     footer.footer

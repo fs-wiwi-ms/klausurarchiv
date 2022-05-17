@@ -1,13 +1,14 @@
 ##
 # Assets
 
-FROM node:14-slim AS assets
+FROM node:16-slim AS assets
 
 RUN set -xe; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
       inotify-tools \
       git \
+      python3 make g++ \
     ; \
     rm -rf /var/lib/apt/lists/*
 
