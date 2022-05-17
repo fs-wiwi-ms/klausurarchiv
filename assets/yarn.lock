@@ -868,6 +868,11 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
+"@creativebulma/bulma-badge@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@creativebulma/bulma-badge/-/bulma-badge-1.0.1.tgz#7f1c2ec04020a4d18db1d960a644a052e61de9da"
+  integrity sha512-cTMgxPdTOsAfPqd9wbrvKNUTvnIt+pNgwwO9Xzu6MRUIFlvGRtIVApaV51f3wt0/uI78BpKv5FPAtEJbmSTZOg==
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.3.tgz#90420f9f9c6d3987f176a19a7d8e764271a2f55d"

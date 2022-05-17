@@ -107,14 +107,12 @@ if (document.readyState !== "loading") {
 
 // snowStorm.animationInterval = 50;
 // snowStorm.followMouse = false;
-// snowStorm.snowStick = false;
 // snowStorm.flakesMax = 200;
 // snowStorm.snowColor = '#eee';
 // snowStorm.freezeOnBlur = true;
-// snowStorm.snowStick = true;
-// snowStorm.vMaxX = 2;
+// snowStorm.snowStick = false;
+// snowStorm.vMaxX = 3;
 // snowStorm.vMaxY = 2;
-
 // snowStorm.toggleSnow();
 
 import "./theme.sass";

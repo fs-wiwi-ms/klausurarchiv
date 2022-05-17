@@ -1,4 +1,3 @@
-
 defmodule KlausurarchivWeb.Plugs.WellKnown do
   import Plug.Conn
 
@@ -22,6 +21,8 @@ defmodule KlausurarchivWeb.Plugs.WellKnown do
   end
 
   def handle(conn, "application_status") do
-    Phoenix.Controller.json(conn, %{nr_of_processes: Process.list() |> Enum.count()})
+    Phoenix.Controller.json(conn, %{
+      nr_of_processes: Process.list() |> Enum.count()
+    })
   end
 end

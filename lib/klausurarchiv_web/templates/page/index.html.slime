@@ -23,10 +23,12 @@ div.container
                   span.icon
                     i.fas.fa-file-upload
                   span =gettext("Publish exams")
+                  span.badge.is-danger = get_unplublished_exams_count()
                 a.button.is-danger.is-outlined(href="#{lecture_path(@conn, :shortcuts)}")
                   span.icon
                     i.fas.fa-link
                   span =gettext("Manage shortcuts")
+                  span.badge.is-danger = get_unplublished_shortcuts_count()
           - _ ->
 
       / div.box
@@ -61,7 +63,7 @@ div.container
           br
           span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
           span
-            a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") webmaster@fachschaft-wiwi.ms
+            a.has-text-link.has-text-weight-semibold(href="mailto:admin@fachschaft-wiwi.ms") admin@fachschaft-wiwi.ms
           span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
 
       div.box
