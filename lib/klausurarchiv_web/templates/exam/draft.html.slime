@@ -12,7 +12,10 @@ div.container
         tbody
           = for exam <- @unplubished_exams do
             tr
-              td = exam.lecture.name
+              td
+                a.has-text-black (href="#{lecture_path(@conn, :show, exam.lecture.id)}")
+                  span.has-text-weight-bold = exam.lecture.name
+              / td = exam.lecture.name
               td
                 span.tag = if exam.term.type == :winter_term do "WS" else "SS" end
               td

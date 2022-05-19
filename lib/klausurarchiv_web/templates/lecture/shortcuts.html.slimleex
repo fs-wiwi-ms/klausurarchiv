@@ -16,7 +16,9 @@ div.container
               = if is_nil(shortcut.published) do
                 tr
                   td
-                    span.has-text-weight-bold = lecture.name
+                    a.has-text-black (href="#{lecture_path(@socket, :show, lecture.id)}")
+                      span.has-text-weight-bold = lecture.name
+                    / hier
                   td
                     span = shortcut.name
                   td
