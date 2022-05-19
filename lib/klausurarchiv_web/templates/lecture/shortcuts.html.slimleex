@@ -18,7 +18,6 @@ div.container
                   td
                     a.has-text-black (href="#{lecture_path(@socket, :show, lecture.id)}")
                       span.has-text-weight-bold = lecture.name
-                    / hier
                   td
                     span = shortcut.name
                   td
