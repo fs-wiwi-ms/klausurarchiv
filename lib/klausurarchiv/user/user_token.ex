@@ -42,10 +42,10 @@ defmodule Klausurarchiv.User.UserToken do
   end
 
   def get_valid_token(token) do
-    hr_ago = Token.one_hour_ago()
+    day_ago = Token.one_day_ago()
 
     UserToken
-    |> where([t], t.token == ^token and t.inserted_at >= ^hr_ago)
+    |> where([t], t.token == ^token and t.inserted_at >= ^day_ago)
     |> Repo.one()
   end
 
