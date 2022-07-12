@@ -31,6 +31,10 @@ div.container
                   span.badge.is-danger = get_unplublished_shortcuts_count()
           - _ ->
 
+      div.box
+        / a(href="http://bit.ly/38pzJD0")
+        img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
       /   article.media
