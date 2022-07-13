@@ -32,7 +32,6 @@ div.container
           - _ ->
 
       div.box
-        / a(href="http://bit.ly/38pzJD0")
         img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
 
       / div.box
