@@ -32,7 +32,8 @@ div.container
           - _ ->
 
       div.box
-        img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+        a(href="https://tickets.fachschaft-wiwi.ms/wiwi/SoSe22-Abschluss/")
+          img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
 
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
