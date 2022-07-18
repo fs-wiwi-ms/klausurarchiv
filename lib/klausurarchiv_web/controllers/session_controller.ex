@@ -1,7 +1,7 @@
 defmodule KlausurarchivWeb.SessionController do
   use KlausurarchivWeb, :controller
 
-  alias Klausurarchiv.User.Session
+  alias Klausurarchiv.Users.Session
 
   def new(conn, _params) do
     render(conn, "new.html", %{

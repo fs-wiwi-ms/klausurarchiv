@@ -1,7 +1,7 @@
 defmodule Klausurarchiv.Uploads do
   import Ecto.Query, warn: false
   import Ecto.Changeset, only: [add_error: 4]
-  alias Klausurarchiv.{Repo, Attachment}
+  alias Klausurarchiv.{Repo, Attachment, Email, Users}
 
   alias Klausurarchiv.Uploads.{
     Term,
@@ -142,9 +142,19 @@ defmodule Klausurarchiv.Uploads do
       |> Map.put("attachment", attachment)
       |> Map.put("published", false)
 
-    %Exam{}
-    |> change_exam(exam_params)
-    |> Repo.insert()
+    result =
+      %Exam{}
+      |> change_exam(exam_params)
+      |> Repo.insert()
+
+    if {:ok, exam} = result do
+      exam = Repo.preload(exam, [:term, :lecture])
+      for user <- Users.get_administrator_users do
+        Email.new_exam_uploaded_email(user, exam)
+      end
+    end
+
+    result
   end
 
   def create_exam(exam_params) do

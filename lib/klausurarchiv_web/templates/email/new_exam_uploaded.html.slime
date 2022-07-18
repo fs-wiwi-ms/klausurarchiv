@@ -1,0 +1,14 @@
+p = "Hi #{@user.fore_name},"
+
+p = gettext "A new exam was uploaded to the exam archive:"
+
+p
+  span.strong = gettext("Name:")
+  span = @exam.lecture.name
+
+p
+  span.strong = gettext("Year:")
+  span = @exam.term.year
+
+a(href="#{exam_draft_url()}")
+  button =gettext("Publish exams")

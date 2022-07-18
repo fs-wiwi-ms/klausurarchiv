@@ -260,7 +260,7 @@ msgid "Email or password incorrect."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/user_controller.ex:50
+#: lib/klausurarchiv_web/controllers/user_controller.ex:48
 msgid "Error while creating user!"
 msgstr ""
 
@@ -352,7 +352,7 @@ msgid "Register new user"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/user_controller.ex:44
+#: lib/klausurarchiv_web/controllers/user_controller.ex:42
 msgid "Registration successful! Please login."
 msgstr ""
 
@@ -388,10 +388,10 @@ msgid "Submit"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/admin_only.ex:22
-#: lib/klausurarchiv_web/admin_only.ex:31
-#: lib/klausurarchiv_web/confirmed_email.ex:19
-#: lib/klausurarchiv_web/confirmed_email.ex:30
+#: lib/klausurarchiv_web/admin_only.ex:23
+#: lib/klausurarchiv_web/admin_only.ex:32
+#: lib/klausurarchiv_web/confirmed_email.ex:20
+#: lib/klausurarchiv_web/confirmed_email.ex:31
 msgid "This action is permitted!"
 msgstr ""
 
@@ -521,6 +521,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:8
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.slime:8
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:8
 msgid "If the link does not work copy the following url in your browser and press Enter!"
 msgstr ""
@@ -536,7 +537,7 @@ msgid "Please verify your email to confirm your affiliation with the University 
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/user_controller.ex:40
+#: lib/klausurarchiv_web/controllers/user_controller.ex:38
 msgid "Registration successful! You are now logged in. Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
 msgstr ""
 
@@ -562,6 +563,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:3
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.slime:3
 msgid "You can confirm your examarchive account by clicking the button below:"
 msgstr ""
 
@@ -572,6 +574,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:14
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.slime:14
 msgid "If you didn't create an account with us, please ignore this email."
 msgstr ""
 
@@ -592,6 +595,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:6
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.slime:6
 msgid "Confirm email!"
 msgstr ""
 
@@ -602,6 +606,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:12
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.slime:12
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:12
 msgid "The link is valid only 24 hours."
 msgstr ""

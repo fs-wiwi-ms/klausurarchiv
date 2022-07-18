@@ -91,8 +91,6 @@ defmodule KlausurarchivWeb.Router do
 
     get("/account_confirmations/not_confirmed", AccountConfirmationController, :not_confirmed)
     get("/account_confirmations/send_confirmation_mail", AccountConfirmationController, :send_confirmation_mail)
-
-    resources("/exams", ExamController, only: [:new, :create])
   end
 
   scope "/", KlausurarchivWeb do
@@ -128,6 +126,8 @@ defmodule KlausurarchivWeb.Router do
     get("/legal", PageController, :legal)
 
     resources("/lectures", LectureController, only: [:show])
+
+    resources("/exams", ExamController, only: [:new, :create])
   end
 
   if Mix.env == :dev do
