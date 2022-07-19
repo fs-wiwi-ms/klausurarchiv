@@ -11,7 +11,9 @@ defmodule Klausurarchiv.Application do
       # Start the Ecto repository
       Klausurarchiv.Repo,
       # Start the endpoint when the application starts
-      KlausurarchivWeb.Endpoint
+      KlausurarchivWeb.Endpoint,
+      # Start cron-like service that runs tasks
+      Klausurarchiv.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

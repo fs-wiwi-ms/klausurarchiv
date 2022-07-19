@@ -27,7 +27,7 @@ RUN if [ "$ENV" = "prod" ]; then yarn run deploy; fi
 ##
 # App
 
-FROM elixir:1.11-slim AS app
+FROM elixir:1.12-slim AS app
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
