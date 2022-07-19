@@ -89,8 +89,17 @@ defmodule KlausurarchivWeb.Router do
 
     resources("/sessions", SessionController, only: [:delete])
 
-    get("/account_confirmations/not_confirmed", AccountConfirmationController, :not_confirmed)
-    get("/account_confirmations/send_confirmation_mail", AccountConfirmationController, :send_confirmation_mail)
+    get(
+      "/account_confirmations/not_confirmed",
+      AccountConfirmationController,
+      :not_confirmed
+    )
+
+    get(
+      "/account_confirmations/send_confirmation_mail",
+      AccountConfirmationController,
+      :send_confirmation_mail
+    )
 
     resources("/exams", ExamController, only: [:new, :create])
   end
@@ -116,7 +125,11 @@ defmodule KlausurarchivWeb.Router do
       only: [:new, :create, :show, :update]
     )
 
-    get("/account_confirmations/confirm_mail/:token", AccountConfirmationController, :confirm_mail)
+    get(
+      "/account_confirmations/confirm_mail/:token",
+      AccountConfirmationController,
+      :confirm_mail
+    )
   end
 
   scope "/", KlausurarchivWeb do
@@ -130,7 +143,7 @@ defmodule KlausurarchivWeb.Router do
     resources("/lectures", LectureController, only: [:show])
   end
 
-  if Mix.env == :dev do
+  if Mix.env() == :dev do
     # If using Phoenix
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end

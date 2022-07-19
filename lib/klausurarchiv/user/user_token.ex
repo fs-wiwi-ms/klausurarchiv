@@ -78,11 +78,10 @@ defmodule Klausurarchiv.User.UserToken do
   end
 
   defp create_token(user, type) do
-    token =
-      user
-      |> Ecto.build_assoc(:user_tokens)
-      |> UserToken.changeset(%{type: type})
-      |> Repo.insert()
+    user
+    |> Ecto.build_assoc(:user_tokens)
+    |> UserToken.changeset(%{type: type})
+    |> Repo.insert()
   end
 
   def delete_password_reset_token(token) do

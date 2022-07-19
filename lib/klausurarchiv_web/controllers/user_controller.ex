@@ -14,8 +14,6 @@ defmodule KlausurarchivWeb.UserController do
   end
 
   def create(conn, %{"user" => user}) do
-    format = get_format(conn)
-
     params = %{
       ip: conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
       user_agent: List.first(get_req_header(conn, "user-agent")),
@@ -37,11 +35,20 @@ defmodule KlausurarchivWeb.UserController do
 
             conn
             |> put_session(:access_token, session.access_token)
-            |> put_flash(:info, gettext("Registration successful! You are now logged in. Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."))
+            |> put_flash(
+              :info,
+              gettext(
+                "Registration successful! You are now logged in. Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
+              )
+            )
             |> redirect(to: path)
+
           _ ->
             conn
-            |> put_flash(:info, gettext("Registration successful! Please login."))
+            |> put_flash(
+              :info,
+              gettext("Registration successful! Please login.")
+            )
             |> redirect(to: public_session_path(conn, :new))
         end
 

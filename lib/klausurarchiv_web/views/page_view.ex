@@ -7,7 +7,7 @@ defmodule KlausurarchivWeb.PageView do
     Uploads.get_unplublished_shortcuts_count()
   end
 
-    def get_unplublished_exams_count() do
+  def get_unplublished_exams_count() do
     Uploads.get_unplublished_exams_count()
   end
 end

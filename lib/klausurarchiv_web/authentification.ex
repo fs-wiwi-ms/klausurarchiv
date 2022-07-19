@@ -3,7 +3,7 @@ defmodule KlausurarchivWeb.Authentication do
 
   alias Klausurarchiv.User.Session
   import Plug.Conn
-  import Phoenix.Controller, only: [redirect: 2, put_flash: 3, get_format: 1]
+  import Phoenix.Controller, only: [redirect: 2, put_flash: 3]
 
   @doc false
   def init(opts), do: opts

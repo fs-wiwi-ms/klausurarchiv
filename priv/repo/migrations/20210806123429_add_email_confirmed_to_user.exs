@@ -3,7 +3,7 @@ defmodule Klausurarchiv.Repo.Migrations.AddEmailConfirmedToUser do
 
   def change do
     alter table("users") do
-      add :email_confirmed, :boolean, default: false, null: false
+      add(:email_confirmed, :boolean, default: false, null: false)
     end
   end
 end

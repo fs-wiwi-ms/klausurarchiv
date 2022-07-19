@@ -26,7 +26,13 @@ defmodule KlausurarchivWeb.SessionController do
         if session.user.email_confirmed do
           put_flash(conn, :info, gettext("Logged in."))
         else
-          put_flash(conn, :warning, gettext("Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."))
+          put_flash(
+            conn,
+            :warning,
+            gettext(
+              "Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
+            )
+          )
         end
         |> put_session(:access_token, session.access_token)
         |> redirect(to: path)
