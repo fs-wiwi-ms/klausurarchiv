@@ -8,4 +8,4 @@ function cleanup {
 
 trap cleanup SIGHUP SIGINT
 
-ENV=test "$(dirname "$0")/compose" run app mix ci
+ENV=test "$(dirname "$0")/compose" run --rm app mix ci
