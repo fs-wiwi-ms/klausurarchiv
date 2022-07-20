@@ -19,7 +19,8 @@ User.create_user(%{
   "fore_name" => "Tobias",
   "last_name" => "Hoge",
   "user_name" => "tbho",
-  "email" => "tbho@example.de",
+  "email" => "tbho@uni-muenster.de",
+  "email_confirmation" => "tbho@uni-muenster.de",
   "password" => "Test123!",
   "password_confirmation" => "Test123!",
   "role" => "user"
@@ -29,7 +30,8 @@ User.create_user(%{
   "fore_name" => "Admin",
   "last_name" => "Account",
   "user_name" => "admin",
-  "email" => "tbho+admin@example.de",
+  "email" => "tbho+admin@uni-muenster.de",
+  "email_confirmation" => "tbho+admin@uni-muenster.de",
   "password" => "Test123!",
   "password_confirmation" => "Test123!",
   "role" => "admin"

@@ -16,6 +16,8 @@ services:
       S3_BUCKET: "exam-files"
       AWS_ACCESS_KEY_ID: "accesskey"
       AWS_SECRET_ACCESS_KEY: "secretkey"
+      HOST: "http://localhost:4000/"
+      SMTP_FROM_ADDRESS: "admin@fachschaft-wiwi.ms"
     ports:
       - "4000:4000"
 
@@ -41,11 +43,12 @@ services:
       - "15432:5432"
 
   minio:
-    image: minio/minio:RELEASE.2021-06-17T00-10-46Z
+    image: minio/minio:latest
     entrypoint: "sh"
-    command: "-c 'mkdir -p /data/exam-files && minio server /data'"
+    command: "-c 'mkdir -p /data/exam-files && minio server /data --console-address :9001'"
     ports:
       - "9000:9000"
+      - "9001:9001"
     environment:
       MINIO_ACCESS_KEY: accesskey
       MINIO_SECRET_KEY: secretkey

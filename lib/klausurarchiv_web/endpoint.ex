@@ -5,7 +5,7 @@ defmodule KlausurarchivWeb.Endpoint do
 
   @session_options [
     store: :cookie,
-    key: "_my_app_key",
+    key: "klausurarchiv_session",
     signing_salt: "5W54z+xr"
   ]
 

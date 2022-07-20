@@ -110,13 +110,21 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.preload(preload)
   end
 
+  defp unplubished_exams_query() do
+    Exam
+    |> where([e], e.published == false)
+  end
+
   def get_unplubished_exams() do
-    from(
-      e in Exam,
-      where: e.published == false,
-      preload: [:lecture, :term, :attachment]
-    )
+    unplubished_exams_query()
+    |> preload([e], [:lecture, :term, :attachment])
     |> Repo.all()
+  end
+
+  def get_unplublished_exams_count() do
+    unplubished_exams_query()
+    |> select([e], count(e.id))
+    |> Repo.one()
   end
 
   def create_exam(
@@ -316,6 +324,13 @@ defmodule Klausurarchiv.Uploads do
     Shortcut
     |> Repo.get(id)
     |> Repo.preload(preload)
+  end
+
+  def get_unplublished_shortcuts_count() do
+    Shortcut
+    |> where([s], is_nil(s.published))
+    |> select([s], count(s.id))
+    |> Repo.one()
   end
 
   def update_shortcut_state(shortcut_id, state) do

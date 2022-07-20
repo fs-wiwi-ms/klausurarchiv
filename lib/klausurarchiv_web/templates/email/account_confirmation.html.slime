@@ -1,0 +1,14 @@
+p = "Hi #{@user.fore_name},"
+
+p = gettext "You can confirm your examarchive account by clicking the button below:"
+
+a(href="#{account_confirmation_url(@token)}")
+  button = gettext "Confirm email!"
+
+p = gettext "If the link does not work copy the following url in your browser and press Enter!"
+
+p.strong = account_confirmation_url(@token)
+
+p = gettext "The link is valid only 24 hours."
+
+p = gettext "If you didn't create an account with us, please ignore this email."

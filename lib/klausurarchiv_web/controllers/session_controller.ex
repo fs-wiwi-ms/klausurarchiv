@@ -10,8 +10,6 @@ defmodule KlausurarchivWeb.SessionController do
   end
 
   def create(conn, %{"email" => email, "password" => password} = session) do
-    format = get_format(conn)
-
     params = %{
       ip: conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
       user_agent: List.first(get_req_header(conn, "user-agent")),
@@ -20,17 +18,26 @@ defmodule KlausurarchivWeb.SessionController do
 
     result = Session.create_session(email, password, params)
 
-    case {format, result} do
-      {"html", {:ok, session}} ->
+    case result do
+      {:ok, session} ->
         path = get_session(conn, :redirect_url) || page_path(conn, :index)
         conn = delete_session(conn, :redirect_url)
 
-        conn
+        if session.user.email_confirmed do
+          put_flash(conn, :info, gettext("Logged in."))
+        else
+          put_flash(
+            conn,
+            :warning,
+            gettext(
+              "Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
+            )
+          )
+        end
         |> put_session(:access_token, session.access_token)
-        |> put_flash(:info, gettext("Logged in."))
         |> redirect(to: path)
 
-      {"html", {:error, :not_found}} ->
+      {:error, :not_found} ->
         conn
         |> put_flash(:error, gettext("Email or password incorrect."))
         |> redirect(to: public_session_path(conn, :new))
