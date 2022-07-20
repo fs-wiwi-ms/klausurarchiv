@@ -55,7 +55,7 @@ defmodule Klausurarchiv.Mixfile do
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.2"},
       {:number, "~> 1.0.1"},
-      {:phoenix_ecto, "~> 4.3.0"},
+      {:phoenix_ecto, "~> 4.4.0"},
       {:phoenix_html, "~> 2.14"},
       {:phoenix_live_view, "~> 0.15.0"},
       {:phoenix_pubsub, "~> 2.0"},
