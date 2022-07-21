@@ -5,7 +5,7 @@ defmodule Klausurarchiv.Mixfile do
     [
       app: :klausurarchiv,
       version: "0.0.1",
-      elixir: "~> 1.12.0",
+      elixir: "~> 1.13.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,

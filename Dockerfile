@@ -27,7 +27,7 @@ RUN if [ "$ENV" = "prod" ]; then yarn run deploy; fi
 ##
 # App
 
-FROM elixir:1.12-slim AS app
+FROM elixir:1.13 AS app
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -38,8 +38,8 @@ RUN apt-get update && \
   libssl1.1 \
   ca-certificates \
   build-essential \
-  && \
-  rm -rf /var/lib/apt/lists/*
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for building the application
 ARG ENV=prod
