@@ -77,7 +77,7 @@ FROM debian:buster-slim
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update && \
   apt-get install -y --no-install-recommends \
-  locales openssl && \
+  locales openssl gcc && \
   rm -rf /var/lib/apt/lists/*
 
 # Set LOCALE to UTF8
