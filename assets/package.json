@@ -33,7 +33,7 @@
     "optimize-css-assets-webpack-plugin": "^6.0.0",
     "prettier": "^2.0.0",
     "sass-loader": "^13.0.0",
-    "terser-webpack-plugin": "^5.0.0",
+    "terser-webpack-plugin": "^5.3.5",
     "ts-loader": "^9.0.0",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
