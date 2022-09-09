@@ -48,6 +48,8 @@ defmodule KlausurarchivWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug(Plug.Session, @session_options)
 
+  plug(KlausurarchivWeb.Plugs.PublicIp)
+
   plug(KlausurarchivWeb.Router)
 
   socket "/live", Phoenix.LiveView.Socket,
