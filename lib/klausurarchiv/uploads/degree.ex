@@ -14,7 +14,6 @@ defmodule Klausurarchiv.Uploads.Degree do
       join_through: "degree_lectures",
       on_replace: :delete
     )
-
     timestamps()
   end
 

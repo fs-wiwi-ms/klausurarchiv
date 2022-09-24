@@ -47,4 +47,12 @@ defmodule KlausurarchivWeb.LectureView do
       [selected: Enum.map(degrees, & &1.id)]
     end
   end
+
+  def maybe_get_slug_or_id(lecture) do
+    if ! is_nil(lecture.slug) do
+      lecture.slug
+    else
+      lecture.id
+    end
+  end
 end

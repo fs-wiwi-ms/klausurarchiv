@@ -253,8 +253,16 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lecture(id, preload \\ []) do
-    Lecture
-    |> Repo.get(id)
+    case Ecto.UUID.dump(id) |> IO.inspect do
+      {:ok, _uuid} ->
+        Lecture
+        |> Repo.get(id)
+
+      :error ->
+        IO.inspect "slug " <> id
+        Lecture
+        |> Repo.get_by(slug: id)
+    end
     |> Repo.preload(preload)
   end
 
@@ -305,6 +313,15 @@ defmodule Klausurarchiv.Uploads do
     lecture
     |> Lecture.changeset(lecture_params)
     |> Repo.update()
+  end
+
+  def generate_lecture_slugs() do
+    for lecture <- get_lectures() do
+      lecture
+      |> Repo.preload([:degrees, :shortcuts])
+      |> Lecture.changeset(%{})
+      |> Repo.update()
+    end
   end
 
   def delete_lecture(lecture) do
