@@ -26,7 +26,7 @@
                 =if !lecture.published do
                   span.icon.has-text-danger
                     i.fas.fa-eye-slash
-                span.has-text-primary = "#{lecture.module_number}#{if lecture.module_number do " - " end}#{lecture.name}"
+                span.has-text-primary = "#{lecture.module_number}#{if lecture.module_number do " - " end}#{fetch_preferred_name(lecture, @preferred_locale}"
 
         = if length(lecture.shortcuts) > 0 do
           div.level-right

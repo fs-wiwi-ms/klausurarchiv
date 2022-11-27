@@ -57,6 +57,7 @@ defmodule KlausurarchivWeb.Router do
       intersection
       |> MapSet.to_list()
       |> List.first()
+      |> IO.inspect
       |> Gettext.put_locale()
     end
 

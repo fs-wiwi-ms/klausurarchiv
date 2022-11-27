@@ -55,4 +55,12 @@ defmodule KlausurarchivWeb.LectureView do
       lecture.id
     end
   end
+
+  def fetch_preferred_name(lecture, preferred_locale) do
+    if preferred_locale == "de" do
+      lecture.name_de
+    else
+      lecture.name_en
+    end
+  end
 end
