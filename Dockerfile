@@ -105,5 +105,7 @@ COPY Procfile ./
 
 USER nobody
 
+EXPOSE 4000
+
 ENTRYPOINT ["./bin/klausurarchiv"]
 CMD ["start"]
