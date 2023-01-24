@@ -103,16 +103,16 @@ if (document.readyState !== "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);
 }
 
-import "./snow.js";
+// import "./snow.js";
 
-snowStorm.animationInterval = 50;
-snowStorm.followMouse = false;
-snowStorm.flakesMax = 200;
-snowStorm.snowColor = '#eee';
-snowStorm.freezeOnBlur = true;
-snowStorm.snowStick = false;
-snowStorm.vMaxX = 3;
-snowStorm.vMaxY = 2;
-snowStorm.toggleSnow();
+// snowStorm.animationInterval = 50;
+// snowStorm.followMouse = false;
+// snowStorm.flakesMax = 200;
+// snowStorm.snowColor = '#eee';
+// snowStorm.freezeOnBlur = true;
+// snowStorm.snowStick = false;
+// snowStorm.vMaxX = 3;
+// snowStorm.vMaxY = 2;
+// snowStorm.toggleSnow();
 
 import "./theme.sass";
