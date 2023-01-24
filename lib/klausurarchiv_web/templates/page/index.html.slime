@@ -33,7 +33,7 @@ div.container
 
       div.box
         a(href="https://www.instagram.com/p/Cnv5599NytE/")
-          img.image(src="#{static_path(@conn, "/images/evaluation.jpg")}" alt="")
+          img.image(src="#{static_path(@conn, "/images/evaluation.png")}" alt="")
 
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
