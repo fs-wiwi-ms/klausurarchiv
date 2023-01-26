@@ -9,6 +9,8 @@ defmodule Klausurarchiv.Uploads.Lecture do
     field(:module_number, :string)
     field(:name, :string)
     field(:published, :boolean, default: true)
+    field(:image_name, :string)
+    field(:image_url, :string)
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
 
@@ -27,7 +29,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
   @doc false
   def changeset(lecture, attrs) do
     lecture
-    |> cast(attrs, [:name, :module_number, :published])
+    |> cast(attrs, [:name, :module_number, :published, :image_name, :image_url])
     |> validate_required([:name])
     |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)
