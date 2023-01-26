@@ -60,7 +60,7 @@ div.container
   = if @lecture.image_name do
     div.container
       a(href="#{@lecture.image_url}")
-        img(src="#{static_path(@conn, "/images/#{ @lecture.image_name }")}")
+        img.p-3(src="#{static_path(@conn, "/images/#{ @lecture.image_name }")}")
 
   = if length(@exams) > 0 do
     = for exam <- @exams do
