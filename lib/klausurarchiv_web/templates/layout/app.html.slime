@@ -74,18 +74,18 @@ html(lang="en")
         span = get_flash(@conn, :error)
 
     / If some important announcements have to be made uncomment and type in your news!
-    section.section.pb-4.pt-4
-      div.container
-        article.message.is-danger
-          div.message-header
-            p = gettext("Important notice")
-          div.message-body
-            p = gettext("We need to confirm that you are a student of the University of Münster from now on.")
-            p.has-text-danger = gettext("Therefore, please create an account (Register) and confirm your mail by clicking the link in the mail.")
+    / section.section.pb-4.pt-4
+    /   div.container
+    /     article.message.is-danger
+    /       div.message-header
+    /         p = gettext("Important notice")
+    /       div.message-body
+    /         p = gettext("We need to confirm that you are a student of the University of Münster from now on.")
+    /         p.has-text-danger = gettext("Therefore, please create an account (Register) and confirm your mail by clicking the link in the mail.")
 
 
     / Add .pt-4 class to section if announcements are added, to reduce the gap to the previous section
-    section.section.Site-content.pt-4
+    section.section.Site-content
       = @inner_content
 
     footer.footer
