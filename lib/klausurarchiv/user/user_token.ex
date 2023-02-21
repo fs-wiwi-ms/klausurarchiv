@@ -18,7 +18,7 @@ defmodule Klausurarchiv.Users.UserToken do
     field(:token, :string)
     field(:type, UserTokenTypeEnum, default: :account_confirmation)
 
-    belongs_to(:user, Klausurarchiv.User)
+    belongs_to(:user, Klausurarchiv.Users.User)
 
     timestamps()
   end

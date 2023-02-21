@@ -12,8 +12,8 @@ defmodule KlausurarchivWeb.AccountConfirmationController do
         |> redirect(to: "/")
 
       token ->
-        User.get_user_by_token(token)
-        |> User.update_user(%{email_confirmed: true})
+        Users.get_user_by_token(token)
+        |> Users.update_user(%{email_confirmed: true})
 
         {:ok, _token} = UserToken.delete_password_reset_token(token)
 

@@ -85,7 +85,7 @@ first = [
   "Einführung in die"
 ]
 
-second = ["Bier", "Steuer", "Informatik", "Dille"]
+second = ["Bier", "Steuer", "Informatik", "Dille", "Schnaps", "Baum", "BWL", "Münster", "Osnabrück"]
 
 third = ["Lehre", "Research", "Forschung", "Systeme", "Wirtschaft"]
 

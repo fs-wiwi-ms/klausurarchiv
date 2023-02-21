@@ -140,11 +140,6 @@ msgstr "Klausurarchiv der Fachschaft WiWi der Universität Münster"
 msgid "Hint"
 msgstr "Hinweis"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:68
-#, elixir-autogen, elixir-format
-msgid "If you have any suggestions, errors or other problems regarding the display, please contact:"
-msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"
-
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:98
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
 #, elixir-autogen, elixir-format
@@ -619,3 +614,8 @@ msgstr "Klausur wirklich löschen?"
 #, elixir-autogen, elixir-format
 msgid "Year:"
 msgstr "Jahr:"
+
+#: lib/klausurarchiv_web/templates/page/index.html.slime:68
+#, elixir-autogen, elixir-format, fuzzy
+msgid "If you have any suggestions, errors or other problems regarding the display, please contact: "
+msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"

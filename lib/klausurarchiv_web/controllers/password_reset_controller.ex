@@ -28,8 +28,8 @@ defmodule KlausurarchivWeb.PasswordResetTokenController do
       token ->
         changeset =
           token
-          |> User.get_user_by_token()
-          |> User.change_user()
+          |> Users.get_user_by_token()
+          |> Users.change_user()
 
         render(conn, "show.html",
           token: token,

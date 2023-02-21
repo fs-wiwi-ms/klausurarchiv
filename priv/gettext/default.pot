@@ -152,11 +152,6 @@ msgstr ""
 msgid "Hint"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:68
-#, elixir-autogen, elixir-format
-msgid "If you have any suggestions, errors or other problems regarding the display, please contact:"
-msgstr ""
-
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:98
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
 #, elixir-autogen, elixir-format
@@ -630,4 +625,9 @@ msgstr ""
 #: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:10
 #, elixir-autogen, elixir-format
 msgid "Year:"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/page/index.html.slime:68
+#, elixir-autogen, elixir-format
+msgid "If you have any suggestions, errors or other problems regarding the display, please contact: "
 msgstr ""

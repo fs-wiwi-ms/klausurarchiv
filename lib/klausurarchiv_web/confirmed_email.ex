@@ -15,7 +15,7 @@ defmodule KlausurarchivWeb.ConfirmedEmail do
   @doc false
   def call(conn, _) do
     with user_id when not is_nil(user_id) <- get_session(conn, :user_id),
-         %User{} = user <- User.get_user(user_id) do
+         %User{} = user <- Users.get_user(user_id) do
       if !user.email_confirmed do
         conn
         |> put_flash(:error, gettext("This action is permitted!"))
