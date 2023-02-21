@@ -50,8 +50,10 @@ defmodule KlausurarchivWeb do
         errors =
           Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
             Enum.reduce(opts, msg, fn {key, value}, acc ->
-              if key == :validation do
+              if key == :count do
                 String.replace(acc, "%{#{key}}", to_string(value))
+              else
+                acc
               end
             end)
           end)

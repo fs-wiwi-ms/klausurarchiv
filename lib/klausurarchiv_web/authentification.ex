@@ -3,7 +3,7 @@ defmodule KlausurarchivWeb.Authentication do
 
   alias Klausurarchiv.User.Session
   import Plug.Conn
-  import Phoenix.Controller, only: [redirect: 2, put_flash: 3, get_format: 1]
+  import Phoenix.Controller, only: [redirect: 2, put_flash: 3]
 
   @doc false
   def init(opts), do: opts
@@ -39,28 +39,6 @@ defmodule KlausurarchivWeb.Authentication do
         else
           conn
         end
-    end
-  end
-
-  def call(conn, type: :api) do
-    with ["Bearer " <> access_token] <- get_req_header(conn, "authorization"),
-         {:ok, session} <- Session.verify_session(access_token, nil) do
-      assign(conn, :session, session)
-    else
-      _other ->
-        conn
-        |> put_status(:unauthorized)
-        |> halt()
-    end
-  end
-
-  def call(conn, type: :api_or_browser, forward_to_login: forward_to_login) do
-    case get_format(conn) do
-      "json" ->
-        call(conn, type: :api)
-
-      "html" ->
-        call(conn, type: :browser, forward_to_login: forward_to_login)
     end
   end
 end

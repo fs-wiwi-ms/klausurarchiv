@@ -1,7 +1,7 @@
 defmodule Klausurarchiv.Uploads do
   import Ecto.Query, warn: false
   import Ecto.Changeset, only: [add_error: 4]
-  alias Klausurarchiv.Repo
+  alias Klausurarchiv.{Repo, Attachment}
 
   alias Klausurarchiv.Uploads.{
     Term,
@@ -94,7 +94,7 @@ defmodule Klausurarchiv.Uploads do
     |> where([e, t], e.lecture_id == ^lecture_id)
     |> filter_exams_for_user(user)
     |> order_by([e, t], desc: t.year, desc: t.type)
-    |> preload([e, t], [:term])
+    |> preload([e, t], [:term, :attachment])
     |> Repo.all()
   end
 
@@ -110,44 +110,48 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.preload(preload)
   end
 
+  defp unplubished_exams_query() do
+    Exam
+    |> where([e], e.published == false)
+  end
+
   def get_unplubished_exams() do
-    from(
-      e in Exam,
-      where: e.published == false,
-      preload: [:lecture, :term]
-    )
+    unplubished_exams_query()
+    |> preload([e], [:lecture, :term, :attachment])
     |> Repo.all()
   end
 
+  def get_unplublished_exams_count() do
+    unplubished_exams_query()
+    |> select([e], count(e.id))
+    |> Repo.one()
+  end
+
   def create_exam(
-        %{"file" => file, "term_id" => term_id, "lecture_id" => lecture_id} =
+        %{"file" => file, "term_id" => _term_id, "lecture_id" => _lecture_id} =
           exam_params
       ) do
-    term = get_term(term_id)
-    lecture = get_lecture(lecture_id)
+    {:ok, attachment} =
+      Attachment.create_attachment(%{
+        "upload" => file
+      })
 
-    case upload_file(term, lecture, file) do
-      {:ok, filename} ->
-        exam_params =
-          exam_params
-          |> Map.drop(["file"])
-          |> Map.put("filename", filename)
-          |> Map.put("published", false)
+    exam_params =
+      exam_params
+      |> Map.drop(["file"])
+      |> Map.put("attachment", attachment)
+      |> Map.put("published", false)
 
-        %Exam{}
-        |> Exam.changeset_create(exam_params)
-        |> Repo.insert()
-
-      {:error, _error} ->
-        {:error, "file could not be uploaded"}
-    end
+    %Exam{}
+    |> change_exam(exam_params)
+    |> Repo.insert()
   end
 
   def create_exam(exam_params) do
     # no file upload contained in params
     changeset =
       %Exam{}
-      |> Exam.changeset_create(exam_params)
+      |> change_exam(exam_params)
       |> add_error(:file, "cannot be empty", [])
 
     {:error, changeset}
@@ -155,44 +159,20 @@ defmodule Klausurarchiv.Uploads do
 
   def update_exam(exam, exam_params) do
     exam
-    |> Exam.changeset_create(exam_params)
+    |> change_exam(exam_params)
     |> Repo.update()
   end
 
   def change_exam(exam \\ %Exam{}, attrs \\ %{}) do
     exam
+    |> Repo.preload([:attachment])
     |> Exam.changeset(attrs)
   end
 
   def delete_exam(exam) do
-    Repo.delete(exam)
-  end
-
-  # -----------------------------------------------------------------
-  # -- Exam - File Uploader
-  # -----------------------------------------------------------------
-
-  @url "https://fsk.uni-muenster.de/"
-
-  defp upload_file(term, lecture, file) do
-    HTTPoison.start()
-
-    url = @url <> "klausuren/klausur_receiver.php"
-
-    form = [
-      {"jahr", "#{term.year}"},
-      {"semester", "#{term.type}"},
-      {"vorlesung", "#{lecture.name}"},
-      {"upload", "klausurupload"},
-      {:file, file.path}
-    ]
-
-    case HTTPoison.post(url, {:multipart, form}) do
-      {:ok, response} ->
-        {:ok, response.body}
-
-      {:error, exception} ->
-        {:error, HTTPoison.Error.message(exception)}
+    with exam <- Repo.preload(exam, [:attachment]) do
+      Repo.delete(exam)
+      Attachment.delete_attachment(exam.attachment)
     end
   end
 
@@ -273,8 +253,16 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lecture(id, preload \\ []) do
-    Lecture
-    |> Repo.get(id)
+    case Ecto.UUID.dump(id) |> IO.inspect do
+      {:ok, _uuid} ->
+        Lecture
+        |> Repo.get(id)
+
+      :error ->
+        IO.inspect "slug " <> id
+        Lecture
+        |> Repo.get_by(slug: id)
+    end
     |> Repo.preload(preload)
   end
 
@@ -299,7 +287,7 @@ defmodule Klausurarchiv.Uploads do
         lecture_params["shortcuts"]
         |> String.split(",")
         |> Enum.filter(fn string -> not is_nil(string) && string != "" end)
-        |> Enum.map(&%{name: &1, published: false})
+        |> Enum.map(&%{name: &1, published: nil})
       else
         []
       end
@@ -344,6 +332,13 @@ defmodule Klausurarchiv.Uploads do
     Shortcut
     |> Repo.get(id)
     |> Repo.preload(preload)
+  end
+
+  def get_unplublished_shortcuts_count() do
+    Shortcut
+    |> where([s], is_nil(s.published))
+    |> select([s], count(s.id))
+    |> Repo.one()
   end
 
   def update_shortcut_state(shortcut_id, state) do

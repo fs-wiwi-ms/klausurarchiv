@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # For production, we often load configuration from external
 # sources, such as your system environment. For this reason,
@@ -44,7 +44,8 @@ config :appsignal, :config,
   otp_app: :klausurarchiv,
   name: "Klausurarchiv",
   env: Mix.env(),
-  active: true
+  active: true,
+  running_in_container: true
 
 config :logger,
   backends: [:console, Sentry.LoggerBackend]

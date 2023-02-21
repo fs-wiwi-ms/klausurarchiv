@@ -5,9 +5,11 @@ defmodule KlausurarchivWeb.Endpoint do
 
   @session_options [
     store: :cookie,
-    key: "_my_app_key",
+    key: "klausurarchiv_session",
     signing_salt: "5W54z+xr"
   ]
+
+  plug(KlausurarchivWeb.Plugs.WellKnown)
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -45,6 +47,8 @@ defmodule KlausurarchivWeb.Endpoint do
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   plug(Plug.Session, @session_options)
+
+  plug(KlausurarchivWeb.Plugs.PublicIp)
 
   plug(KlausurarchivWeb.Router)
 

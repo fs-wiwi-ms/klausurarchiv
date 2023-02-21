@@ -3,7 +3,7 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-use Mix.Config
+import Config
 
 # General application configuration
 config :klausurarchiv,
@@ -36,6 +36,16 @@ config :phoenix, :template_engines,
 config :phoenix, :json_library, Jason
 
 config :gettext, :default_locale, "de"
+
+config :ex_aws,
+  json_codec: Jason,
+  region: "eu-central-1"
+
+config :klausurarchiv, Klausurarchiv.Scheduler,
+  jobs: [
+    # Runs every midnight:
+    {"@daily", {Klausurarchiv.User.Session, :clear_stale_session, []}}
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

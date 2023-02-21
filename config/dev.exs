@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :klausurarchiv, Klausurarchiv.Repo,
@@ -39,3 +39,11 @@ config :phoenix, :plug_init_mode, :runtime
 config :klausurarchiv, Klausurarchiv.Mailer, adapter: Bamboo.LocalAdapter
 
 config :slime, :keep_lines, true
+
+config :ex_aws,
+  s3: [
+    scheme: "http://",
+    host: "minio",
+    port: 9000,
+    region: "eu-central-1"
+  ]

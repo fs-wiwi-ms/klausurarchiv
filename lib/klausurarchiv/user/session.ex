@@ -151,11 +151,12 @@ defmodule Klausurarchiv.User.Session do
            User
            |> Repo.get_by(email: email)
            |> Argon2.check_pass(password),
-         {:ok, session} <-
+         %Session{} = session <-
            user
            |> Ecto.build_assoc(:sessions)
            |> changeset(params)
-           |> Repo.insert() do
+           |> Repo.insert!()
+           |> Repo.preload([:user]) do
       {:ok, session}
     else
       {:error, message} ->
@@ -175,5 +176,29 @@ defmodule Klausurarchiv.User.Session do
   @doc "Delete session"
   def delete_session(session) do
     Repo.delete(session)
+  end
+
+  @doc "Clear stale sessions"
+  def clear_stale_session() do
+    Session
+    |> where(
+      [s],
+      s.refresh_token_issued_at <
+        datetime_add(
+          ^NaiveDateTime.utc_now(),
+          -@refresh_token_validity,
+          "second"
+        )
+    )
+    |> or_where(
+      [s],
+      s.access_token_issued_at <
+        datetime_add(
+          ^NaiveDateTime.utc_now(),
+          -@access_token_validity,
+          "second"
+        ) and is_nil(s.refresh_token)
+    )
+    |> Repo.delete_all()
   end
 end

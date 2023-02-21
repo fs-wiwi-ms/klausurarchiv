@@ -4,7 +4,7 @@ declare global {
 
 import "@fortawesome/fontawesome-free/js/all.js";
 import { Socket } from "phoenix"
-import LiveSocket from "phoenix_live_view"
+import { LiveSocket } from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken } })
@@ -106,15 +106,13 @@ if (document.readyState !== "loading") {
 // import "./snow.js";
 
 // snowStorm.animationInterval = 50;
-// snowStorm.followMouse = true;
-// snowStorm.snowStick = false;
+// snowStorm.followMouse = false;
 // snowStorm.flakesMax = 200;
 // snowStorm.snowColor = '#eee';
 // snowStorm.freezeOnBlur = true;
-// snowStorm.snowStick = true;
-// snowStorm.vMaxX = 2;
+// snowStorm.snowStick = false;
+// snowStorm.vMaxX = 3;
 // snowStorm.vMaxY = 2;
-
 // snowStorm.toggleSnow();
 
 import "./theme.sass";

@@ -13,29 +13,34 @@ defmodule KlausurarchivWeb.Router do
 
   pipeline :browser do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: false
     )
   end
 
   pipeline :protected_browser do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: true
     )
+  end
+
+  pipeline :confirmed_email do
+    plug(KlausurarchivWeb.Authentication,
+      type: :browser,
+      forward_to_login: true
+    )
+
+    plug(KlausurarchivWeb.ConfirmedEmail)
   end
 
   pipeline :admins_only do
     plug(KlausurarchivWeb.Authentication,
-      type: :api_or_browser,
+      type: :browser,
       forward_to_login: true
     )
 
     plug(KlausurarchivWeb.AdminOnly)
-  end
-
-  pipeline :api do
-    plug(:accepts, ["json"])
   end
 
   def set_language(conn, _opts) do
@@ -66,7 +71,7 @@ defmodule KlausurarchivWeb.Router do
       only: [:new, :create, :edit, :update]
     )
 
-    resources("/exams", ExamController, only: [:edit, :update])
+    resources("/exams", ExamController, only: [:edit, :update, :delete])
 
     get("/exams/drafts", ExamController, :draft)
     get("/exams/:id/publish", ExamController, :publish)
@@ -82,7 +87,29 @@ defmodule KlausurarchivWeb.Router do
     # Use the browser stack with user authentification
     pipe_through([:unsecure_browser, :protected_browser])
 
-    resources "/sessions", SessionController, only: [:delete]
+    resources("/sessions", SessionController, only: [:delete])
+
+    get(
+      "/account_confirmations/not_confirmed",
+      AccountConfirmationController,
+      :not_confirmed
+    )
+
+    get(
+      "/account_confirmations/send_confirmation_mail",
+      AccountConfirmationController,
+      :send_confirmation_mail
+    )
+
+    resources("/exams", ExamController, only: [:new, :create])
+  end
+
+  scope "/", KlausurarchivWeb do
+    # Use the browser stack with user authentification and confirmed email adress
+    pipe_through([:unsecure_browser, :protected_browser, :confirmed_email])
+
+    get("/attachments/:id/download", AttachmentController, :download)
+    get("/attachments/:id/preview", AttachmentController, :preview)
   end
 
   scope "/public", KlausurarchivWeb, as: :public do
@@ -97,6 +124,12 @@ defmodule KlausurarchivWeb.Router do
       PasswordResetTokenController,
       only: [:new, :create, :show, :update]
     )
+
+    get(
+      "/account_confirmations/confirm_mail/:token",
+      AccountConfirmationController,
+      :confirm_mail
+    )
   end
 
   scope "/", KlausurarchivWeb do
@@ -107,8 +140,11 @@ defmodule KlausurarchivWeb.Router do
     get("/privacy", PageController, :privacy)
     get("/legal", PageController, :legal)
 
-    resources("/exams", ExamController, only: [:new, :create])
-
     resources("/lectures", LectureController, only: [:show])
+  end
+
+  if Mix.env() == :dev do
+    # If using Phoenix
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 end
