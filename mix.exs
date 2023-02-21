@@ -47,6 +47,7 @@ defmodule Klausurarchiv.Mixfile do
       {:bamboo, "~> 2.0"},
       {:comeonin, "~> 5.3.0"},
       {:cowboy, "~> 2.0"},
+      {:ecto_autoslug_field, "~> 3.0"},
       {:ecto_enum, "~> 1.2"},
       {:ex_aws_s3, "~> 2.0"},
       {:ex_aws, "~> 2.0"},

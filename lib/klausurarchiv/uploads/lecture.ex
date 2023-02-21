@@ -2,6 +2,8 @@ defmodule Klausurarchiv.Uploads.Lecture do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Klausurarchiv.Uploads.NameSlug
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
@@ -11,6 +13,8 @@ defmodule Klausurarchiv.Uploads.Lecture do
     field(:published, :boolean, default: true)
     field(:image_name, :string)
     field(:image_url, :string)
+
+    field(:slug, NameSlug.Type)
 
     has_many(:exams, Klausurarchiv.Uploads.Exam)
 
@@ -33,5 +37,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
     |> validate_required([:name])
     |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)
+    |> NameSlug.maybe_generate_slug()
+    |> NameSlug.unique_constraint()
   end
 end

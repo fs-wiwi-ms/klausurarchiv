@@ -22,7 +22,7 @@
         div.level-left
           div.level-item
             h6.subtitle.is-6.has-text-weight-bold
-              a(href="#{lecture_path(@socket, :show, lecture.id)}")
+              a(href="#{lecture_path(@socket, :show, maybe_get_slug_or_id(lecture))}")
                 =if !lecture.published do
                   span.icon.has-text-danger
                     i.fas.fa-eye-slash
