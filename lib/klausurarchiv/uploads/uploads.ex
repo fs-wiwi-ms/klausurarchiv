@@ -315,15 +315,6 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.update()
   end
 
-  def generate_lecture_slugs() do
-    for lecture <- get_lectures() do
-      lecture
-      |> Repo.preload([:degrees, :shortcuts])
-      |> Lecture.changeset(%{})
-      |> Repo.update()
-    end
-  end
-
   def delete_lecture(lecture) do
     Repo.delete(lecture)
   end
