@@ -1,7 +1,7 @@
 defmodule KlausurarchivWeb.LectureLive do
   use Phoenix.LiveView
   import Appsignal.Phoenix.LiveView, only: [instrument: 4]
-  alias Klausurarchiv.{User, Uploads}
+  alias Klausurarchiv.{Users, Uploads}
 
   def mount(_params, %{"filter" => filter, "user" => user}, socket) do
     degrees = Uploads.get_degrees_for_select()
@@ -41,7 +41,7 @@ defmodule KlausurarchivWeb.LectureLive do
       end
 
     if not is_nil(user) do
-      User.update_user(user, %{filter_data: filter})
+      Users.update_user(user, %{filter_data: filter})
     end
 
     instrument(__MODULE__, "submit", socket, fn ->

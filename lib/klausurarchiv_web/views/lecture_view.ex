@@ -49,7 +49,7 @@ defmodule KlausurarchivWeb.LectureView do
   end
 
   def maybe_get_slug_or_id(lecture) do
-    if ! is_nil(lecture.slug) do
+    if !is_nil(lecture.slug) do
       lecture.slug
     else
       lecture.id

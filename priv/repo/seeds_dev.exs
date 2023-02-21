@@ -12,10 +12,10 @@
 
 import Ecto.Query, warn: false
 
-alias Klausurarchiv.{Repo, User, Attachment}
+alias Klausurarchiv.{Repo, Users, Attachment}
 alias Klausurarchiv.Uploads.{Degree, Lecture, Term, Exam}
 
-User.create_user(%{
+Users.create_user(%{
   "fore_name" => "Tobias",
   "last_name" => "Hoge",
   "user_name" => "tbho",
@@ -26,7 +26,7 @@ User.create_user(%{
   "role" => "user"
 })
 
-User.create_user(%{
+Users.create_user(%{
   "fore_name" => "Admin",
   "last_name" => "Account",
   "user_name" => "admin",

@@ -1,7 +1,7 @@
 defmodule KlausurarchivWeb.Authentication do
   @moduledoc "Plug-compliant functions to authenticate requests"
 
-  alias Klausurarchiv.User.Session
+  alias Klausurarchiv.Users.Session
   import Plug.Conn
   import Phoenix.Controller, only: [redirect: 2, put_flash: 3]
 

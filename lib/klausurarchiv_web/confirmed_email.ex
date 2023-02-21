@@ -1,7 +1,8 @@
 defmodule KlausurarchivWeb.ConfirmedEmail do
   @moduledoc "Plug-compliant functions to check if a user is admin"
 
-  alias Klausurarchiv.User
+  alias Klausurarchiv.Users
+  alias Klausurarchiv.Users.User
   import Plug.Conn
   import KlausurarchivWeb.Gettext
 

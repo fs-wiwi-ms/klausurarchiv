@@ -73,7 +73,7 @@ defmodule KlausurarchivWeb do
             nil
 
           session ->
-            Klausurarchiv.User.get_user(session.user_id)
+            Klausurarchiv.Users.get_user(session.user_id)
         end
       end
     end

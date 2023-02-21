@@ -5,7 +5,6 @@ defmodule Klausurarchiv.Repo.Migrations.GenerateSlugs do
   alias Klausurarchiv.Uploads.Lecture
   import Ecto.Query
 
-
   def up do
     lectures =
       Lecture
@@ -20,6 +19,5 @@ defmodule Klausurarchiv.Repo.Migrations.GenerateSlugs do
   end
 
   def down do
-
   end
 end

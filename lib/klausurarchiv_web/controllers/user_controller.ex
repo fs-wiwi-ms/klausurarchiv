@@ -1,11 +1,11 @@
 defmodule KlausurarchivWeb.UserController do
   use KlausurarchivWeb, :controller
 
-  alias Klausurarchiv.User
-  alias Klausurarchiv.User.Session
+  alias Klausurarchiv.Users
+  alias Klausurarchiv.Users.Session
 
   def new(conn, _params) do
-    user_changeset = User.change_user()
+    user_changeset = Users.change_user()
 
     render(conn, "new.html",
       changeset: user_changeset,
@@ -20,7 +20,7 @@ defmodule KlausurarchivWeb.UserController do
       refresh_token: false
     }
 
-    case User.create_user(user) do
+    case Users.create_user(user) do
       {:ok, user} ->
         # conn
         # |> put_flash(:info, gettext("Registration successful! Please login."))

@@ -1,8 +1,8 @@
 defmodule KlausurarchivWeb.AccountConfirmationController do
   use KlausurarchivWeb, :controller
 
-  alias Klausurarchiv.User.UserToken
-  alias Klausurarchiv.User
+  alias Klausurarchiv.Users
+  alias Klausurarchiv.Users.UserToken
 
   def confirm_mail(conn, %{"token" => token}) do
     case UserToken.get_valid_token(token) do
@@ -27,7 +27,7 @@ defmodule KlausurarchivWeb.AccountConfirmationController do
     user =
       conn
       |> get_session(:user_id)
-      |> User.get_user()
+      |> Users.get_user()
 
     render(conn, "not_confirmed.html", user: user)
   end
@@ -36,7 +36,7 @@ defmodule KlausurarchivWeb.AccountConfirmationController do
     user =
       conn
       |> get_session(:user_id)
-      |> User.get_user()
+      |> Users.get_user()
 
     case UserToken.create_account_confirmation_token(user) do
       {:ok, _} ->

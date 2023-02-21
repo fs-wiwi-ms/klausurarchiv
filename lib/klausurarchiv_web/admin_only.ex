@@ -1,7 +1,8 @@
 defmodule KlausurarchivWeb.AdminOnly do
   @moduledoc "Plug-compliant functions to check if a user is admin"
 
-  alias Klausurarchiv.User
+  alias Klausurarchiv.Users
+  alias Klausurarchiv.Users.User
   import Plug.Conn
   import KlausurarchivWeb.Gettext
   import Phoenix.Controller, only: [put_flash: 3, render: 2, put_view: 2]
@@ -12,7 +13,7 @@ defmodule KlausurarchivWeb.AdminOnly do
   @doc false
   def call(conn, _) do
     with user_id when not is_nil(user_id) <- get_session(conn, :user_id),
-         %User{} = user <- User.get_user(user_id) do
+         %User{} = user <- Users.get_user(user_id) do
       case user.role do
         :admin ->
           conn
