@@ -38,6 +38,7 @@ defmodule KlausurarchivWeb.LectureController do
     lecture =
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
+      |> IO.inspect()
 
     case lecture do
       nil ->
@@ -50,7 +51,7 @@ defmodule KlausurarchivWeb.LectureController do
       _ ->
         if lecture.published or (not is_nil(user) and user.role == :admin) do
           exams =
-            lecture_id
+            lecture.id
             |> Uploads.get_exams_for_lecture(user)
 
           lecture_changeset = Uploads.change_lecture(lecture, %{})

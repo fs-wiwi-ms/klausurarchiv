@@ -8,7 +8,13 @@ defmodule Klausurarchiv.Email do
     new_email()
     |> to(user.email)
     |> from(System.get_env("SMTP_FROM_ADDRESS"))
-    |> subject(Gettext.dgettext(KlausurarchivWeb.Gettext, "email", Atom.to_string(layout)))
+    |> subject(
+      Gettext.dgettext(
+        KlausurarchivWeb.Gettext,
+        "email",
+        Atom.to_string(layout)
+      )
+    )
     |> assign(:user, user)
     |> assign(:token, token)
     |> put_text_layout({KlausurarchivWeb.LayoutView, "email.text"})

@@ -1,6 +1,8 @@
 defmodule KlausurarchivWeb.Plugs.WellKnown do
   import Plug.Conn
 
+  @behaviour Plug
+
   def init(opts), do: opts
 
   def call(%Plug.Conn{path_info: [".well-known", route]} = conn, _opts) do

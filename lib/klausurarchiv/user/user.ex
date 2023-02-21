@@ -74,7 +74,9 @@ defmodule Klausurarchiv.Users.User do
     changeset
     |> validate_required([:email])
     |> validate_confirmation(:email, required: true)
-    |> validate_format(:email, ~r/[a-zA-Z0-9+_.-]+@(uni-muenster|wwu)?\.de/, message: "Email must end with @uni-muenster.de or @wwu.de")
+    |> validate_format(:email, ~r/[a-zA-Z0-9+_.-]+@(uni-muenster|wwu)?\.de/,
+      message: "Email must end with @uni-muenster.de or @wwu.de"
+    )
   end
 
   defp put_pass_hash(%{valid?: true, changes: %{password: pw}} = changeset) do

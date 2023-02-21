@@ -11,7 +11,12 @@ defmodule KlausurarchivWeb.SessionController do
 
   def create(conn, %{"email" => email, "password" => password} = session) do
     params = %{
-      ip: conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
+      ip:
+        Map.get(
+          conn.assigns,
+          :ip,
+          conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
+        ),
       user_agent: List.first(get_req_header(conn, "user-agent")),
       refresh_token: session["remember_me"] == "true"
     }
@@ -26,7 +31,13 @@ defmodule KlausurarchivWeb.SessionController do
         if session.user.email_confirmed do
           put_flash(conn, :info, gettext("Logged in."))
         else
-          put_flash(conn, :warning, gettext("Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."))
+          put_flash(
+            conn,
+            :warning,
+            gettext(
+              "Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
+            )
+          )
         end
         |> put_session(:access_token, session.access_token)
         |> redirect(to: path)

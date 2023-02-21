@@ -149,7 +149,8 @@ defmodule Klausurarchiv.Uploads do
 
     if {:ok, exam} = result do
       exam = Repo.preload(exam, [:term, :lecture])
-      for user <- Users.get_administrator_users do
+
+      for user <- Users.get_administrator_users() do
         Email.new_exam_uploaded_email(user, exam)
       end
     end
@@ -180,7 +181,10 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def delete_exam(exam) do
-    Repo.delete(exam)
+    with exam <- Repo.preload(exam, [:attachment]) do
+      Repo.delete(exam)
+      Attachment.delete_attachment(exam.attachment)
+    end
   end
 
   # -----------------------------------------------------------------
@@ -260,8 +264,17 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lecture(id, preload \\ []) do
-    Lecture
-    |> Repo.get(id)
+    case Ecto.UUID.dump(id) |> IO.inspect() do
+      {:ok, _uuid} ->
+        Lecture
+        |> Repo.get(id)
+
+      :error ->
+        IO.inspect("slug " <> id)
+
+        Lecture
+        |> Repo.get_by(slug: id)
+    end
     |> Repo.preload(preload)
   end
 

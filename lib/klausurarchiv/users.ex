@@ -39,14 +39,16 @@ defmodule Klausurarchiv.Users do
   end
 
   def create_user(user_params) do
-    result = %User{}
-    |> User.changeset_create(user_params)
-    |> Repo.insert()
+    result =
+      %User{}
+      |> User.changeset_create(user_params)
+      |> Repo.insert()
 
     case result do
       {:ok, user} ->
         {:ok, _} = UserToken.create_account_confirmation_token(user)
         result
+
       error ->
         error
     end

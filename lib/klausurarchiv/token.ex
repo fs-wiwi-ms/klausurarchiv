@@ -18,12 +18,12 @@ defmodule Klausurarchiv.Token do
     |> DateTime.to_naive()
   end
 
-    @doc "Calculate the time one day ago"
-    def one_day_ago() do
-      DateTime.utc_now()
-      |> DateTime.to_unix()
-      |> Kernel.-(86400)
-      |> DateTime.from_unix!()
-      |> DateTime.to_naive()
-    end
+  @doc "Calculate the time one day ago"
+  def one_day_ago() do
+    DateTime.utc_now()
+    |> DateTime.to_unix()
+    |> Kernel.-(86400)
+    |> DateTime.from_unix!()
+    |> DateTime.to_naive()
+  end
 end
