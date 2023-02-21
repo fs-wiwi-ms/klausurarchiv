@@ -53,7 +53,7 @@ defmodule Klausurarchiv.Mixfile do
       {:ex_aws, "~> 2.0"},
       {:gettext, "~> 0.18"},
       {:hackney, "~> 1.9"},
-      {:httpoison, "~> 1.7"},
+      {:httpoison, "~> 2.0"},
       {:jason, "~> 1.2"},
       {:number, "~> 1.0.1"},
       {:phoenix_ecto, "~> 4.4.0"},
