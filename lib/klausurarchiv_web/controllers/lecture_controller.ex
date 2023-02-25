@@ -38,7 +38,6 @@ defmodule KlausurarchivWeb.LectureController do
     lecture =
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
-      |> IO.inspect()
 
     case lecture do
       nil ->

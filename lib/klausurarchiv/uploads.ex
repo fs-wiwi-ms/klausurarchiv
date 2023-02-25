@@ -151,6 +151,7 @@ defmodule Klausurarchiv.Uploads do
       exam = Repo.preload(exam, [:term, :lecture])
 
       for user <- Users.get_administrator_users() do
+        IO.inspect("Sent mail for new exam to #{user.email}")
         Email.new_exam_uploaded_email(user, exam)
       end
     end
@@ -264,7 +265,7 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lecture(id, preload \\ []) do
-    case Ecto.UUID.dump(id) |> IO.inspect() do
+    case Ecto.UUID.dump(id) do
       {:ok, _uuid} ->
         Lecture
         |> Repo.get(id)
