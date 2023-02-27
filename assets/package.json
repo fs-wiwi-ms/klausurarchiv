@@ -17,7 +17,7 @@
     "compression-webpack-plugin": "^10.0.0",
     "flatpickr": "^4.6.3",
     "phoenix": "^1.4.15",
-    "phoenix_html": "^3.0.0",
+    "phoenix_html": "^3.3.1",
     "phoenix_live_view": "^0.17.0"
   },
   "devDependencies": {
