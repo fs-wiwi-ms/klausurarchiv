@@ -24,7 +24,7 @@ div.container
                   a.button.is-warning.is-small(href="#{attachment_path(@conn, :preview, exam.attachment.id)}")
                     span = gettext("Preview")
                   a.button.is-primary.is-small(href="#{exam_path(@conn, :publish, exam.id)}") = gettext("Publish")
-                  = submit(gettext("Delete"), class: "button is-danger is-small", data: [confirm: gettext("Really delete exam?")])
+                  = submit(gettext("Delete"), class: "button is-danger is-small", onclick: "return confirm('#{gettext("Really delete exam?")}');")
 
   - else
     div.box

@@ -1,7 +1,7 @@
 defmodule KlausurarchivWeb.SessionController do
   use KlausurarchivWeb, :controller
 
-  alias Klausurarchiv.User.Session
+  alias Klausurarchiv.Users.Session
 
   def new(conn, _params) do
     render(conn, "new.html", %{
@@ -11,7 +11,12 @@ defmodule KlausurarchivWeb.SessionController do
 
   def create(conn, %{"email" => email, "password" => password} = session) do
     params = %{
-      ip: conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
+      ip:
+        Map.get(
+          conn.assigns,
+          :ip,
+          conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
+        ),
       user_agent: List.first(get_req_header(conn, "user-agent")),
       refresh_token: session["remember_me"] == "true"
     }

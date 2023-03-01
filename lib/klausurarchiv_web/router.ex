@@ -142,6 +142,8 @@ defmodule KlausurarchivWeb.Router do
     get("/legal", PageController, :legal)
 
     resources("/lectures", LectureController, only: [:show])
+
+    resources("/exams", ExamController, only: [:new, :create])
   end
 
   if Mix.env() == :dev do

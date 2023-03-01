@@ -10,586 +10,624 @@
 msgid ""
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/draft.html.slime:11
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:12
+#, elixir-autogen, elixir-format
 msgid "Actions"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/lecture/_form.html.slime:34
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/_form.html.slime:22
 msgid "Create"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/new.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Create new lecture"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_form.html.slime:3
+#, elixir-autogen, elixir-format
 msgid "Degree"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:81
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:76
 msgid "Download"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:72
+#, elixir-autogen, elixir-format
 msgid "Error"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:9
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:27 lib/klausurarchiv_web/templates/layout/error.html.slime:9
-#: lib/klausurarchiv_web/templates/layout/error.html.slime:28 lib/klausurarchiv_web/templates/page/index.html.slime:3
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:27
+#: lib/klausurarchiv_web/templates/layout/error.html.slime:9
+#: lib/klausurarchiv_web/templates/layout/error.html.slime:28
+#: lib/klausurarchiv_web/templates/page/index.html.slime:3
+#, elixir-autogen, elixir-format
 msgid "Examarchive"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:25
+#, elixir-autogen, elixir-format
 msgid "File"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:8
+#, elixir-autogen, elixir-format
 msgid "Full text search"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/draft.html.slime:8
 #: lib/klausurarchiv_web/templates/lecture/_form.html.slime:16
+#, elixir-autogen, elixir-format
 msgid "Name"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:104
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:99
 msgid "No exams found."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:43
+#, elixir-autogen, elixir-format
 msgid "No lectures found."
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:32
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:30
 msgid "No unplubished exams found."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/draft.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Not published Exams"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:25
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:77
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:24
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:72
 msgid "Preview"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:30
 #: lib/klausurarchiv_web/templates/exam/edit.html.slime:23
+#, elixir-autogen, elixir-format
 msgid "Send"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:58
+#, elixir-autogen, elixir-format
 msgid "Success"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:11
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:9 lib/klausurarchiv_web/templates/exam/edit.html.slime:15
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:9
+#: lib/klausurarchiv_web/templates/exam/edit.html.slime:15
+#, elixir-autogen, elixir-format
 msgid "Term"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/draft.html.slime:10
+#, elixir-autogen, elixir-format
 msgid "Year"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:71
+#, elixir-autogen, elixir-format
 msgid ". If you report errors, please attach a screenshot and description (such as operating system and browser)."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:13
 #: lib/klausurarchiv_web/templates/page/index.html.slime:16
+#, elixir-autogen, elixir-format
 msgid "Admin-Corner"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:75
+#, elixir-autogen, elixir-format
 msgid "Click here to make a new exam available."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:21
+#, elixir-autogen, elixir-format
 msgid "Create lecture"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:74
+#, elixir-autogen, elixir-format
 msgid "Do you miss an exam?"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:6
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:6
+#, elixir-autogen, elixir-format
 msgid "Examarchive of student's council of business school of university of münster"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:60
+#, elixir-autogen, elixir-format
 msgid "Hint"
 msgstr ""
 
-#, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/page/index.html.slime:68
-msgid "If you have any suggestions, errors or other problems regarding the display, please contact:"
-msgstr ""
-
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:98
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:41
+#, elixir-autogen, elixir-format
 msgid "Legal"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:101
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:44
+#, elixir-autogen, elixir-format
 msgid "Privacy"
 msgstr ""
 
-#, elixir-autogen, elixir-format
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:14
 #: lib/klausurarchiv_web/templates/page/index.html.slime:25
+#, elixir-autogen, elixir-format
 msgid "Publish exams"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:7
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:95 lib/klausurarchiv_web/templates/layout/error.html.slime:7
+#: lib/klausurarchiv_web/templates/layout/app.html.slime:95
+#: lib/klausurarchiv_web/templates/layout/error.html.slime:7
 #: lib/klausurarchiv_web/templates/layout/error.html.slime:38
+#, elixir-autogen, elixir-format
 msgid "Student's council of business school of university of münster"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:79
+#, elixir-autogen, elixir-format
 msgid "Upload exam"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:13
-#: lib/klausurarchiv_web/templates/exam/edit.html.slime:17 lib/klausurarchiv_web/templates/lecture/show.html.slime:67
+#: lib/klausurarchiv_web/templates/exam/edit.html.slime:17
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:72
+#, elixir-autogen, elixir-format
 msgid "Summer term"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/new.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Upload a new exam"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:13
-#: lib/klausurarchiv_web/templates/exam/edit.html.slime:17 lib/klausurarchiv_web/templates/lecture/show.html.slime:67
+#: lib/klausurarchiv_web/templates/exam/edit.html.slime:17
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:72
+#, elixir-autogen, elixir-format
 msgid "Winter term"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:106
+#, elixir-autogen, elixir-format
 msgid "Source Code"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:54
+#, elixir-autogen, elixir-format
 msgid "Add Shortcuts"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:47
+#, elixir-autogen, elixir-format
 msgid "Add shortcut"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:15
+#, elixir-autogen, elixir-format
 msgid "All"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/show.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Change password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/password_reset_controller.ex:60
+#, elixir-autogen, elixir-format
 msgid "Could not update password."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/session/new.html.slime:32
 #: lib/klausurarchiv_web/templates/user/new.html.slime:74
+#, elixir-autogen, elixir-format
 msgid "Create Account"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/edit.html.slime:2
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:22
+#, elixir-autogen, elixir-format
 msgid "Edit lecture"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/_form.html.slime:3
 #: lib/klausurarchiv_web/templates/session/new.html.slime:7
+#, elixir-autogen, elixir-format
 msgid "Email"
 msgstr ""
 
+#: lib/klausurarchiv_web/controllers/session_controller.ex:47
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/session_controller.ex:42
 msgid "Email or password incorrect."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/user_controller.ex:57
+#, elixir-autogen, elixir-format
 msgid "Error while creating user!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/session/new.html.slime:27
+#, elixir-autogen, elixir-format
 msgid "Forgot Password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/new.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Forgot password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:52
+#, elixir-autogen, elixir-format
 msgid "Info"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:18
+#, elixir-autogen, elixir-format
 msgid "Last name"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/account_confirmation_controller.ex:11
-#: lib/klausurarchiv_web/controllers/password_reset_controller.ex:25 lib/klausurarchiv_web/controllers/password_reset_controller.ex:55
+#: lib/klausurarchiv_web/controllers/password_reset_controller.ex:25
+#: lib/klausurarchiv_web/controllers/password_reset_controller.ex:55
+#, elixir-autogen, elixir-format
 msgid "Link is not valid"
 msgstr ""
 
+#: lib/klausurarchiv_web/controllers/session_controller.ex:32
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/session_controller.ex:27
 msgid "Logged in."
 msgstr ""
 
+#: lib/klausurarchiv_web/controllers/session_controller.ex:58
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/session_controller.ex:53
 msgid "Logged out!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:44
-#: lib/klausurarchiv_web/templates/session/new.html.slime:2 lib/klausurarchiv_web/templates/session/new.html.slime:25
+#: lib/klausurarchiv_web/templates/session/new.html.slime:2
+#: lib/klausurarchiv_web/templates/session/new.html.slime:25
+#, elixir-autogen, elixir-format
 msgid "Login"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:18
 #: lib/klausurarchiv_web/templates/page/index.html.slime:30
+#, elixir-autogen, elixir-format
 msgid "Manage shortcuts"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:46
+#, elixir-autogen, elixir-format
 msgid "Matriculation number"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_form.html.slime:10
+#, elixir-autogen, elixir-format
 msgid "Module number"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:37
+#, elixir-autogen, elixir-format
 msgid "No unreviewed shortcuts found."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/show.html.slime:7
-#: lib/klausurarchiv_web/templates/session/new.html.slime:14 lib/klausurarchiv_web/templates/user/new.html.slime:57
+#: lib/klausurarchiv_web/templates/session/new.html.slime:14
+#: lib/klausurarchiv_web/templates/user/new.html.slime:57
+#, elixir-autogen, elixir-format
 msgid "Password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/password_reset_controller.ex:50
+#, elixir-autogen, elixir-format
 msgid "Password changed succesful"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_search.html.slimleex:42
+#, elixir-autogen, elixir-format
 msgid "Please specify a filter to search for a lecture."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Register new user"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/user_controller.ex:50
+#, elixir-autogen, elixir-format
 msgid "Registration successful! Please login."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/session/new.html.slime:22
+#, elixir-autogen, elixir-format
 msgid "Remember me"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/show.html.slime:14
 #: lib/klausurarchiv_web/templates/user/new.html.slime:66
+#, elixir-autogen, elixir-format
 msgid "Repeat password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/show.html.slime:22
+#, elixir-autogen, elixir-format
 msgid "Reset password"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/password_reset_token/_form.html.slime:10
+#, elixir-autogen, elixir-format
 msgid "Sent email"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:2
+#, elixir-autogen, elixir-format
 msgid "Shortcuts"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_add_shortcuts.html.slimleex:7
+#, elixir-autogen, elixir-format
 msgid "Submit"
 msgstr ""
 
+#: lib/klausurarchiv_web/admin_only.ex:23
+#: lib/klausurarchiv_web/admin_only.ex:32
+#: lib/klausurarchiv_web/confirmed_email.ex:21
+#: lib/klausurarchiv_web/confirmed_email.ex:36
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/admin_only.ex:22 lib/klausurarchiv_web/admin_only.ex:31
-#: lib/klausurarchiv_web/confirmed_email.ex:20 lib/klausurarchiv_web/confirmed_email.ex:35
 msgid "This action is permitted!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_add_shortcuts.html.slimleex:4
+#, elixir-autogen, elixir-format
 msgid "Type in shortcut..."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/_add_shortcuts.html.slimleex:20
+#, elixir-autogen, elixir-format
 msgid "Under review"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:65
+#, elixir-autogen, elixir-format
 msgid "Warning"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/password_reset_controller.ex:17
+#, elixir-autogen, elixir-format
 msgid "We have sent you a mail"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/session/new.html.slime:31
+#, elixir-autogen, elixir-format
 msgid "You don't have an account yet? Register now!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/edit.html.slime:2
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:83
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:88
+#, elixir-autogen, elixir-format
 msgid "Edit exam"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:5
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:66
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:71
+#, elixir-autogen, elixir-format
 msgid "Hidden"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:94
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:89
 msgid "Hide exam"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:27
+#, elixir-autogen, elixir-format
 msgid "Hide lecture"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:3
-#: lib/klausurarchiv_web/templates/exam/edit.html.slime:7 lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:10
+#: lib/klausurarchiv_web/templates/exam/edit.html.slime:7
+#: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:10
+#, elixir-autogen, elixir-format
 msgid "Lecture"
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/lecture/show.html.slime:98
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/lecture/show.html.slime:93
 msgid "Publish exam"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:31
+#, elixir-autogen, elixir-format
 msgid "Publish lecture"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:9
+#, elixir-autogen, elixir-format
 msgid "Fore name"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/exam/_form.html.slime:26
+#, elixir-autogen, elixir-format
 msgid "No file choosen...."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:47
+#, elixir-autogen, elixir-format
 msgid "Optional"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:63
+#, elixir-autogen, elixir-format
 msgid "Password must have min. 8 characters and contain min. one lower- and uppercase, symbol and number."
 msgstr ""
 
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:26
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/exam/draft.html.slime:25
 msgid "Publish"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/layout/app.html.slime:46
+#, elixir-autogen, elixir-format
 msgid "Register"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:28
+#, elixir-autogen, elixir-format
 msgid "Approve"
 msgstr ""
 
-#, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:80
-msgid "Important notice"
-msgstr ""
-
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:32
+#, elixir-autogen, elixir-format
 msgid "Reject"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/lecture/shortcuts.html.slimleex:11
+#, elixir-autogen, elixir-format
 msgid "Shortcut"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/page/index.html.slime:62
+#, elixir-autogen, elixir-format
 msgid "If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:2
+#, elixir-autogen, elixir-format
 msgid "Confirm mail"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:8
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:8
+#, elixir-autogen, elixir-format
 msgid "If the link does not work copy the following url in your browser and press Enter!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:5
+#, elixir-autogen, elixir-format
 msgid "Please click on the link in the email we sent you so that we can verify your email and thus your affiliation with the University of Münster."
 msgstr ""
 
+#: lib/klausurarchiv_web/controllers/session_controller.ex:37
 #, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/controllers/session_controller.ex:32
 msgid "Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/controllers/user_controller.ex:40
+#, elixir-autogen, elixir-format
 msgid "Registration successful! You are now logged in. Please verify your email to confirm your affiliation with the University of Münster. We have sent you an email with the link for confirmation."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:37
+#, elixir-autogen, elixir-format
 msgid "Repeat email"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:8
+#, elixir-autogen, elixir-format
 msgid "Resend mail"
 msgstr ""
 
-#, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:83
-msgid "Therefore, please create an account (Register) and confirm your mail by clicking the link in the mail."
-msgstr ""
-
-#, elixir-autogen, elixir-format
-#: lib/klausurarchiv_web/templates/layout/app.html.slime:82
-msgid "We need to confirm that you are a student of the University of Münster from now on."
-msgstr ""
-
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:3
+#, elixir-autogen, elixir-format
 msgid "You can confirm your examarchive account by clicking the button below:"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:7
+#, elixir-autogen, elixir-format
 msgid "You don't have recieved an email yet?"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:14
+#, elixir-autogen, elixir-format
 msgid "If you didn't create an account with us, please ignore this email."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:14
+#, elixir-autogen, elixir-format
 msgid "If you didn't try to reset your password, please ignore this email."
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:6
+#, elixir-autogen, elixir-format
 msgid "Reset password!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:3
+#, elixir-autogen, elixir-format
 msgid "You can reset your password by visiting the url below:"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:6
+#, elixir-autogen, elixir-format
 msgid "Confirm email!"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/user/new.html.slime:28
+#, elixir-autogen, elixir-format
 msgid "University email adress"
 msgstr ""
 
-#, elixir-autogen, elixir-format
 #: lib/klausurarchiv_web/templates/email/account_confirmation.html.slime:12
 #: lib/klausurarchiv_web/templates/email/reset_password.html.slime:12
+#, elixir-autogen, elixir-format
 msgid "The link is valid only 24 hours."
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:3
+#, elixir-autogen, elixir-format
+msgid "A new exam was uploaded to the exam archive:"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:27
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr ""
+
+#: lib/klausurarchiv_web/controllers/exam_controller.ex:120
+#, elixir-autogen, elixir-format
+msgid "Deleted!"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/lecture/_form.html.slime:22
+#, elixir-autogen, elixir-format
+msgid "Image name"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/lecture/_form.html.slime:28
+#, elixir-autogen, elixir-format
+msgid "Image url"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:6
+#, elixir-autogen, elixir-format
+msgid "Name:"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/exam/draft.html.slime:27
+#, elixir-autogen, elixir-format
+msgid "Really delete exam?"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:10
+#, elixir-autogen, elixir-format
+msgid "Year:"
+msgstr ""
+
+#: lib/klausurarchiv_web/templates/page/index.html.slime:68
+#, elixir-autogen, elixir-format
+msgid "If you have any suggestions, errors or other problems regarding the display, please contact: "
 msgstr ""

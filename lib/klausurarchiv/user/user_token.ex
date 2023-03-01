@@ -1,4 +1,4 @@
-defmodule Klausurarchiv.User.UserToken do
+defmodule Klausurarchiv.Users.UserToken do
   @moduledoc """
   Represents the database entity password reset tokens, that are emailed to
   users to enable them to reset their passwords.
@@ -8,8 +8,8 @@ defmodule Klausurarchiv.User.UserToken do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Klausurarchiv.{Token, Repo, Mailer}
-  alias Klausurarchiv.User.{UserToken, Email}
+  alias Klausurarchiv.{Token, Repo, Email}
+  alias Klausurarchiv.Users.{UserToken}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -18,7 +18,7 @@ defmodule Klausurarchiv.User.UserToken do
     field(:token, :string)
     field(:type, UserTokenTypeEnum, default: :account_confirmation)
 
-    belongs_to(:user, Klausurarchiv.User)
+    belongs_to(:user, Klausurarchiv.Users.User)
 
     timestamps()
   end
@@ -54,9 +54,7 @@ defmodule Klausurarchiv.User.UserToken do
 
     case token do
       {:ok, token} ->
-        user
-        |> Email.token_email(token, :reset_password)
-        |> Mailer.deliver_now()
+        Email.token_email(user, token, :reset_password)
 
       _other ->
         nil
@@ -68,9 +66,7 @@ defmodule Klausurarchiv.User.UserToken do
 
     case token do
       {:ok, token} ->
-        user
-        |> Email.token_email(token, :account_confirmation)
-        |> Mailer.deliver_now()
+        Email.token_email(user, token, :account_confirmation)
 
       _other ->
         nil

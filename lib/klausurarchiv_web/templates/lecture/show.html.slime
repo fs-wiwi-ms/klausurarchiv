@@ -57,6 +57,11 @@ div.container
         section.modal-card-body
           = live_render(@conn, KlausurarchivWeb.LectureShortcutsLive, session: %{"lecture_id" => @lecture.id,  "user" => user})
 
+  = if @lecture.image_name do
+    div.container
+      a(href="#{@lecture.image_url}")
+        img.p-3(src="#{static_path(@conn, "/images/#{ @lecture.image_name }")}")
+
   = if length(@exams) > 0 do
     = for exam <- @exams do
       div.py-2

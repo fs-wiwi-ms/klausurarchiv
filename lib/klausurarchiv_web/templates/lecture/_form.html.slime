@@ -19,4 +19,16 @@
     = error_label(@changeset, :name)
 
   div.field
+    label.label = gettext("Image name")
+    div.control
+      = text_input(lecture_form, :image_name, class: "input", type: "text")
+    = error_label(@changeset, :image_name)
+
+  div.field
+    label.label = gettext("Image url")
+    div.control
+      = text_input(lecture_form, :image_url, class: "input", type: "text")
+    = error_label(@changeset, :image_url)
+
+  div.field
     = submit gettext("Create"), class: "button is-primary"

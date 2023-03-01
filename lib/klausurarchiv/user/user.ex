@@ -1,11 +1,8 @@
-defmodule Klausurarchiv.User do
+defmodule Klausurarchiv.Users.User do
   use Ecto.Schema
 
   import Ecto.Changeset
   import Ecto.Query, warn: false
-
-  alias Klausurarchiv.{User, Repo}
-  alias Klausurarchiv.User.{UserToken}
 
   require Logger
 
@@ -25,14 +22,14 @@ defmodule Klausurarchiv.User do
 
     field(:email_confirmed, :boolean)
 
-    has_many(:sessions, Klausurarchiv.User.Session)
-    has_many(:user_tokens, Klausurarchiv.User.UserToken)
+    has_many(:sessions, Klausurarchiv.Users.Session)
+    has_many(:user_tokens, Klausurarchiv.Users.UserToken)
 
     timestamps()
   end
 
   @doc false
-  defp changeset(user, attrs) do
+  def changeset(user, attrs) do
     user
     |> cast(attrs, [
       :email,
@@ -46,7 +43,7 @@ defmodule Klausurarchiv.User do
     ])
   end
 
-  defp changeset_create(user, attrs) do
+  def changeset_create(user, attrs) do
     user
     |> changeset(attrs)
     |> validate_password
@@ -55,7 +52,7 @@ defmodule Klausurarchiv.User do
     |> unique_constraint(:email)
   end
 
-  defp changeset_password(user, attrs) do
+  def changeset_password(user, attrs) do
     user
     |> cast(attrs, [:password])
     |> validate_password()
@@ -87,63 +84,4 @@ defmodule Klausurarchiv.User do
   end
 
   defp put_pass_hash(changeset), do: changeset
-
-  # -----------------------------------------------------------------
-  # -- User
-  # -----------------------------------------------------------------
-
-  def get_users() do
-    User
-    |> Repo.all()
-  end
-
-  def get_user(nil), do: nil
-
-  def get_user(id) do
-    User
-    |> Repo.get(id)
-  end
-
-  def get_user_by_email(email) do
-    Repo.get_by(User, email: email)
-  end
-
-  def get_user_by_token(%Klausurarchiv.User.UserToken{} = token) do
-    token
-    |> Ecto.assoc(:user)
-    |> Repo.one()
-  end
-
-  def create_user(user_params) do
-    result =
-      %User{}
-      |> changeset_create(user_params)
-      |> Repo.insert()
-
-    case result do
-      {:ok, user} ->
-        {:ok, _} = UserToken.create_account_confirmation_token(user)
-        result
-
-      error ->
-        error
-    end
-  end
-
-  def update_user(user, user_params) do
-    user
-    |> changeset(user_params)
-    |> Repo.update()
-  end
-
-  def change_user(user \\ %User{}, user_params \\ %{}) do
-    user
-    |> changeset(user_params)
-  end
-
-  def change_user_password(user, user_params) do
-    user
-    |> changeset_password(user_params)
-    |> Repo.update()
-  end
 end

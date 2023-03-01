@@ -32,8 +32,8 @@ div.container
           - _ ->
 
       / div.box
-      /   a(href="https://tickets.fachschaft-wiwi.ms/wiwi/SoSe22-Abschluss/")
-      /     img.image(src="#{static_path(@conn, "/images/semesterabschuss.jpg")}" alt="")
+      /   a(href="https://www.instagram.com/p/Cnv5599NytE/")
+      /     img.image(src="#{static_path(@conn, "/images/evaluation.png")}" alt="")
 
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
@@ -42,7 +42,7 @@ div.container
       /       p.image.is-24x24
       /         img src="#{static_path(@conn, "/images/party-popper.png")}"
       /     div.media-content
-      /       span = gettext("You can create a account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
+      /       span = gettext("You can create an account and your search filter will be saved automatically. It will be loaded automatically the next time you visit the exam archive.")
       /   article.media
       /     figure.media-left
       /       p.image.is-24x24
@@ -65,7 +65,7 @@ div.container
           span .
           br
           br
-          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact:")
+          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact: ")
           span
             a.has-text-link.has-text-weight-semibold(href="mailto:admin@fachschaft-wiwi.ms") admin@fachschaft-wiwi.ms
           span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")

@@ -3,13 +3,13 @@ defmodule KlausurarchivWeb.LectureController do
 
   alias Klausurarchiv.Uploads
   alias Klausurarchiv.Uploads.Lecture
-  alias Klausurarchiv.User
+  alias Klausurarchiv.Users
 
   def shortcuts(conn, %{"id" => lecture_id}) do
     user =
       conn
       |> get_session(:user_id)
-      |> User.get_user()
+      |> Users.get_user()
 
     lecture =
       lecture_id
@@ -24,7 +24,7 @@ defmodule KlausurarchivWeb.LectureController do
     user =
       conn
       |> get_session(:user_id)
-      |> User.get_user()
+      |> Users.get_user()
 
     live_render(conn, KlausurarchivWeb.ShortcutLive, session: %{"user" => user})
   end
@@ -33,12 +33,11 @@ defmodule KlausurarchivWeb.LectureController do
     user =
       conn
       |> get_session(:user_id)
-      |> User.get_user()
+      |> Users.get_user()
 
     lecture =
       lecture_id
       |> Uploads.get_lecture([:shortcuts, :degrees])
-      |> IO.inspect()
 
     case lecture do
       nil ->

@@ -1,7 +1,7 @@
 defmodule Klausurarchiv.Uploads do
   import Ecto.Query, warn: false
   import Ecto.Changeset, only: [add_error: 4]
-  alias Klausurarchiv.{Repo, Attachment}
+  alias Klausurarchiv.{Repo, Attachment, Email, Users}
 
   alias Klausurarchiv.Uploads.{
     Term,
@@ -142,9 +142,21 @@ defmodule Klausurarchiv.Uploads do
       |> Map.put("attachment", attachment)
       |> Map.put("published", false)
 
-    %Exam{}
-    |> change_exam(exam_params)
-    |> Repo.insert()
+    result =
+      %Exam{}
+      |> change_exam(exam_params)
+      |> Repo.insert()
+
+    if {:ok, exam} = result do
+      exam = Repo.preload(exam, [:term, :lecture])
+
+      for user <- Users.get_administrator_users() do
+        IO.inspect("Sent mail for new exam to #{user.email}")
+        Email.new_exam_uploaded_email(user, exam)
+      end
+    end
+
+    result
   end
 
   def create_exam(exam_params) do
@@ -253,13 +265,14 @@ defmodule Klausurarchiv.Uploads do
   end
 
   def get_lecture(id, preload \\ []) do
-    case Ecto.UUID.dump(id) |> IO.inspect do
+    case Ecto.UUID.dump(id) do
       {:ok, _uuid} ->
         Lecture
         |> Repo.get(id)
 
       :error ->
-        IO.inspect "slug " <> id
+        IO.inspect("slug " <> id)
+
         Lecture
         |> Repo.get_by(slug: id)
     end
@@ -313,15 +326,6 @@ defmodule Klausurarchiv.Uploads do
     lecture
     |> Lecture.changeset(lecture_params)
     |> Repo.update()
-  end
-
-  def generate_lecture_slugs() do
-    for lecture <- get_lectures() do
-      lecture
-      |> Repo.preload([:degrees, :shortcuts])
-      |> Lecture.changeset(%{})
-      |> Repo.update()
-    end
   end
 
   def delete_lecture(lecture) do

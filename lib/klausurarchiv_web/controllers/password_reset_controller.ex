@@ -1,15 +1,15 @@
 defmodule KlausurarchivWeb.PasswordResetTokenController do
   use KlausurarchivWeb, :controller
 
-  alias Klausurarchiv.{User}
-  alias Klausurarchiv.User.UserToken
+  alias Klausurarchiv.Users
+  alias Klausurarchiv.Users.{UserToken, User}
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
   def create(conn, %{"email" => email}) do
-    if user = User.get_user_by_email(email) do
+    if user = Users.get_user_by_email(email) do
       UserToken.create_password_reset_token(user)
     end
 
@@ -28,8 +28,8 @@ defmodule KlausurarchivWeb.PasswordResetTokenController do
       token ->
         changeset =
           token
-          |> User.get_user_by_token()
-          |> User.change_user()
+          |> Users.get_user_by_token()
+          |> Users.change_user()
 
         render(conn, "show.html",
           token: token,
@@ -44,7 +44,7 @@ defmodule KlausurarchivWeb.PasswordResetTokenController do
 
     with %UserToken{} <- token,
          user = %User{} <- token.user,
-         {:ok, _user} <- User.change_user_password(user, user_params),
+         {:ok, _user} <- Users.change_user_password(user, user_params),
          {:ok, _token} <- UserToken.delete_password_reset_token(token) do
       conn
       |> put_flash(:info, gettext("Password changed succesful"))

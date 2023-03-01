@@ -1,4 +1,4 @@
-defmodule Klausurarchiv.User.Session do
+defmodule Klausurarchiv.Users.Session do
   @moduledoc """
   Session are used to authenticate users. They are limited regarding their
   validity.
@@ -8,12 +8,11 @@ defmodule Klausurarchiv.User.Session do
   import Ecto.Changeset
 
   alias Klausurarchiv.{
-    User,
     Repo,
     Token
   }
 
-  alias Klausurarchiv.User.Session
+  alias Klausurarchiv.Users.{User, Session}
 
   use Ecto.Schema
 
@@ -31,7 +30,7 @@ defmodule Klausurarchiv.User.Session do
     field(:refresh_token, :string)
     field(:refresh_token_issued_at, :utc_datetime)
 
-    belongs_to(:user, Klausurarchiv.User)
+    belongs_to(:user, Klausurarchiv.Users.User)
 
     timestamps()
   end
@@ -142,7 +141,7 @@ defmodule Klausurarchiv.User.Session do
 
   @doc "Fetches a session"
   def get_session!(id) do
-    Repo.get!(Klausurarchiv.User.Session, id)
+    Repo.get!(Klausurarchiv.Users.Session, id)
   end
 
   @doc "Creates a session for a user identified by email and password"

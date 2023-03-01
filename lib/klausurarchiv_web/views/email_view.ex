@@ -18,4 +18,12 @@ defmodule KlausurarchivWeb.EmailView do
         token.token
       )
   end
+
+  def exam_draft_url() do
+    System.get_env("HOST") <>
+      KlausurarchivWeb.Router.Helpers.exam_path(
+        KlausurarchivWeb.Endpoint,
+        :draft
+      )
+  end
 end
