@@ -31,9 +31,9 @@ div.container
                   span.badge.is-danger = get_unplublished_shortcuts_count()
           - _ ->
 
-      / div.box
-      /   a(href="https://www.instagram.com/p/Cnv5599NytE/")
-      /     img.image(src="#{static_path(@conn, "/images/evaluation.png")}" alt="")
+      div.box
+        a(href="https://tickets.hawercampus.de/?utm_source=klausurarchiv&utm_medium=referral&utm_campaign=klausurarchiv")
+          img.image(src="#{static_path(@conn, "/images/hawercampus.png")}" alt="")
 
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
