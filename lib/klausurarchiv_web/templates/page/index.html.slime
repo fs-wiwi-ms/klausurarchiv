@@ -31,9 +31,9 @@ div.container
                   span.badge.is-danger = get_unplublished_shortcuts_count()
           - _ ->
 
-      div.box
-        a(href="#")
-          img.image(src="#{static_path(@conn, "/images/evaluation_23.jpeg")}" alt="")
+      / div.box
+      /   a(href="#")
+      /     img.image(src="#{static_path(@conn, "/images/evaluation_23.jpeg")}" alt="")
 
       / div.box
       /   h5.subtitle.is-5 =gettext("New features:")
