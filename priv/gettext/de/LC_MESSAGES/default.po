@@ -103,18 +103,13 @@ msgstr "Semester"
 msgid "Year"
 msgstr "Jahr"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:71
-#, elixir-autogen, elixir-format
-msgid ". If you report errors, please attach a screenshot and description (such as operating system and browser)."
-msgstr ". Bei Meldung von Fehlern bitte einen Screenshot und Beschreibung (wie Betriebssystem und Browser) anfügen."
-
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:13
 #: lib/klausurarchiv_web/templates/page/index.html.slime:16
 #, elixir-autogen, elixir-format
 msgid "Admin-Corner"
 msgstr "Admin Ecke"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:75
+#: lib/klausurarchiv_web/templates/page/index.html.slime:68
 #, elixir-autogen, elixir-format
 msgid "Click here to make a new exam available."
 msgstr "Klicke hier, um eine neue Klausur zur Verfügung zu stellen."
@@ -124,7 +119,7 @@ msgstr "Klicke hier, um eine neue Klausur zur Verfügung zu stellen."
 msgid "Create lecture"
 msgstr "Vorlesung erstellen"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:74
+#: lib/klausurarchiv_web/templates/page/index.html.slime:67
 #, elixir-autogen, elixir-format
 msgid "Do you miss an exam?"
 msgstr "Vermisst du eine Klausur?"
@@ -166,7 +161,7 @@ msgstr "Klausuren freischalten"
 msgid "Student's council of business school of university of münster"
 msgstr "Fachschaft WiWi der Universität Münster"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:79
+#: lib/klausurarchiv_web/templates/page/index.html.slime:72
 #, elixir-autogen, elixir-format
 msgid "Upload exam"
 msgstr "Klausur hochladen"
@@ -488,11 +483,6 @@ msgstr "Ablehnen"
 msgid "Shortcut"
 msgstr "Abkürzung"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:62
-#, elixir-autogen, elixir-format
-msgid "If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:"
-msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"
-
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:2
 #, elixir-autogen, elixir-format
 msgid "Confirm mail"
@@ -615,7 +605,7 @@ msgstr "Klausur wirklich löschen?"
 msgid "Year:"
 msgstr "Jahr:"
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:68
-#, elixir-autogen, elixir-format, fuzzy
-msgid "If you have any suggestions, errors or other problems regarding the display, please contact: "
-msgstr "Bei Anregungen, Fehlern und anderen Problemen bezüglich der Anzeige wende dich bitte an:"
+#: lib/klausurarchiv_web/templates/page/index.html.slime:62
+#, elixir-autogen, elixir-format
+msgid "If you have any problems or suggestions, please contact:"
+msgstr "Bei Anregungen, Fehlern und anderen Problemen wende dich bitte an:"

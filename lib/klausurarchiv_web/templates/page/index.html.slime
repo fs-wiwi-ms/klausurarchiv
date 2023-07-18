@@ -58,17 +58,10 @@ div.container
 
       div.box
         h5.subtitle.is-5 =gettext("Hint")
-        h6.is-6
-          span = gettext("If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:")
-          span
-            a.has-text-link.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
-          span .
-          br
-          br
-          span =gettext("If you have any suggestions, errors or other problems regarding the display, please contact: ")
-          span
-            a.has-text-link.has-text-weight-semibold(href="mailto:admin@fachschaft-wiwi.ms") admin@fachschaft-wiwi.ms
-          span =gettext(". If you report errors, please attach a screenshot and description (such as operating system and browser).")
+        h6.is-6.pb-3
+          span = gettext("If you have any problems or suggestions, please contact:")
+        a.button.is-link.is-light.has-text-weight-semibold(href="mailto:gerrit.kruse@fachschaft-wiwi.ms") gerrit.kruse@fachschaft-wiwi.ms
+
 
       div.box
         h5.subtitle.is-5 = gettext("Do you miss an exam?")

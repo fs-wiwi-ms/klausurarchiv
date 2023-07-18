@@ -103,18 +103,13 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:71
-#, elixir-autogen, elixir-format
-msgid ". If you report errors, please attach a screenshot and description (such as operating system and browser)."
-msgstr ""
-
 #: lib/klausurarchiv_web/templates/lecture/show.html.slime:13
 #: lib/klausurarchiv_web/templates/page/index.html.slime:16
 #, elixir-autogen, elixir-format
 msgid "Admin-Corner"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:75
+#: lib/klausurarchiv_web/templates/page/index.html.slime:68
 #, elixir-autogen, elixir-format
 msgid "Click here to make a new exam available."
 msgstr ""
@@ -124,7 +119,7 @@ msgstr ""
 msgid "Create lecture"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:74
+#: lib/klausurarchiv_web/templates/page/index.html.slime:67
 #, elixir-autogen, elixir-format
 msgid "Do you miss an exam?"
 msgstr ""
@@ -166,7 +161,7 @@ msgstr ""
 msgid "Student's council of business school of university of münster"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:79
+#: lib/klausurarchiv_web/templates/page/index.html.slime:72
 #, elixir-autogen, elixir-format
 msgid "Upload exam"
 msgstr ""
@@ -488,11 +483,6 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:62
-#, elixir-autogen, elixir-format
-msgid "If you have any problems or suggestions, please contact the person responsible for the Klausurarchiv:"
-msgstr ""
-
 #: lib/klausurarchiv_web/templates/account_confirmation/not_confirmed.html.slime:2
 #, elixir-autogen, elixir-format
 msgid "Confirm mail"
@@ -601,7 +591,7 @@ msgid "Image url"
 msgstr ""
 
 #: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:6
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Name:"
 msgstr ""
 
@@ -611,11 +601,11 @@ msgid "Really delete exam?"
 msgstr ""
 
 #: lib/klausurarchiv_web/templates/email/new_exam_uploaded.html.slime:10
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Year:"
 msgstr ""
 
-#: lib/klausurarchiv_web/templates/page/index.html.slime:68
-#, elixir-autogen, elixir-format, fuzzy
-msgid "If you have any suggestions, errors or other problems regarding the display, please contact: "
+#: lib/klausurarchiv_web/templates/page/index.html.slime:62
+#, elixir-autogen, elixir-format
+msgid "If you have any problems or suggestions, please contact:"
 msgstr ""
