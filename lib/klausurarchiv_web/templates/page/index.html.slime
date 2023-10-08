@@ -60,7 +60,7 @@ div.container
         h5.subtitle.is-5 =gettext("Hint")
         h6.is-6.pb-3
           span = gettext("If you have any problems or suggestions, please contact:")
-        a.button.is-link.is-light.has-text-weight-semibold(href="mailto:gerrit.kruse@fachschaft-wiwi.ms") gerrit.kruse@fachschaft-wiwi.ms
+        a.button.is-link.is-light.has-text-weight-semibold(href="mailto:klausurarchiv@fachschaft-wiwi.ms") klausurarchiv@fachschaft-wiwi.ms
 
 
       div.box
