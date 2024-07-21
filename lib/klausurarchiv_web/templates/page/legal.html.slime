@@ -18,25 +18,23 @@ div.container
 
 
     div.column
-      h3.subtitle.is-5  Fachschaftsleiter:
-      p Lars Pape
-
+      h3.subtitle.is-5 Fachschaftsleitung:
+      p Paul Brützke
+      p Felix Jonathan Stelte
 
     div.column
-      h3.subtitle.is-5  V.i.S.d.P.:
+      h3.subtitle.is-5 Presserechtliche Verantwortlichkeit:
       p Fachschaftsrat der Fachschaft WiWi
-      p Kontakt über Rasmus Heidemann (Öffentlichkeitsreferent)
+      p Kontakt über Tara Hotes (Öffentlichkeitsreferentin)
       p E-Mail: fachschaft@wiwi.uni-muenster.de
 
+    div.column
+      h3.subtitle.is-5 Online-Redaktion + Technische Umsetzung:
+      p Jonas Reinhard
+      p E-Mail: fachschaft@wiwi.uni-muenster.de
 
     div.column
-      h3.subtitle.is-5  Online-Redaktion + Technische Umsetzung:
-      p WI-AG der Fachschaft WiWi
-      p E-Mail: fachschaft@wi.uni-muenster.de
-
-
-    div.column
-      p Disclaimer
+      h3.subtitle.is-5 Disclaimer
 
       p Bei direkten oder indirekten Verweisen auf fremde Internetseiten („Links“) waren diese zum Zeitpunkt der Linksetzung frei von illegalen Inhalten. Die Fachschaft Wirtschaftswissenschaften hat keinerlei Einfluss auf die aktuelle und zukünftige Gestaltung und auf die Inhalte der gelinkten / verknüpften Seiten. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten / verknüpften Seiten, die nach der Linksetzung verändert wurden.
 
