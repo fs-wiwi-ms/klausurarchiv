@@ -22,4 +22,4 @@ case $env in
 esac
 
 
-docker-compose "$@"
+docker compose "$@"
