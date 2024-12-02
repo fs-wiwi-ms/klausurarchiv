@@ -192,13 +192,22 @@ defmodule Klausurarchiv.Uploads do
   # -- Lecture
   # -----------------------------------------------------------------
 
-  def get_lectures(preload \\ []) do
+  @doc """
+  Returns the list of lecture.
+
+  ## Examples
+
+      iex> list_lecture()
+      [%Lecture{}, ...]
+
+  """
+  def list_lecture(preload \\ []) do
     Lecture
     |> preload(^preload)
     |> Repo.all()
   end
 
-  def filter_lectures(filter, user, preload \\ []) do
+  def list_lecture(filter, user, preload \\ []) do
     query =
       Lecture
       |> join(:inner, [l], ld in assoc(l, :degrees))
@@ -213,9 +222,9 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
-  def filter_lectures_for_user(query, %{role: :admin}), do: query
+  defp filter_lectures_for_user(query, %{role: :admin}), do: query
 
-  def filter_lectures_for_user(query, _user) do
+  defp filter_lectures_for_user(query, _user) do
     where(query, [l, ld], l.published == true)
   end
 
@@ -255,7 +264,7 @@ defmodule Klausurarchiv.Uploads do
     )
   end
 
-  def get_lectures_by_degree(%{id: degree_id}) do
+  def list_lectures_by_degree(%{id: degree_id}) do
     from(
       l in Lecture,
       join: ld in assoc(l, :degrees),
@@ -264,6 +273,20 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.all()
   end
 
+  @doc """
+  Gets a single lecture.
+
+  Raises `Ecto.NoResultsError` if the Lecture does not exist.
+
+  ## Examples
+
+      iex> get_lecture!(123)
+      %Lecture{}
+
+      iex> get_lecture!(456)
+      ** (Ecto.NoResultsError)
+
+  """
   def get_lecture(id, preload \\ []) do
     case Ecto.UUID.dump(id) do
       {:ok, _uuid} ->
@@ -279,7 +302,19 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.preload(preload)
   end
 
-  def create_lecture(lecture_params) do
+    @doc """
+  Creates a lecture.
+
+  ## Examples
+
+      iex> create_lecture(%{field: value})
+      {:ok, %Lecture{}}
+
+      iex> create_lecture(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_lecture(lecture_params  \\ %{}) do
     degrees = Enum.map(lecture_params["degree_ids"] || [], &get_degree(&1))
 
     lecture_params =
@@ -294,7 +329,19 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.insert()
   end
 
-  def update_lecture(lecture, lecture_params) do
+  @doc """
+  Updates a lecture.
+
+  ## Examples
+
+      iex> update_lecture(lecture, %{field: new_value})
+      {:ok, %Lecture{}}
+
+      iex> update_lecture(lecture, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_lecture(%Lecture{} = lecture, lecture_params) do
     shortcuts =
       if lecture_params["shortcuts"] do
         lecture_params["shortcuts"]
@@ -328,23 +375,135 @@ defmodule Klausurarchiv.Uploads do
     |> Repo.update()
   end
 
-  def delete_lecture(lecture) do
+  @doc """
+  Deletes a lecture.
+
+  ## Examples
+
+      iex> delete_lecture(lecture)
+      {:ok, %Lecture{}}
+
+      iex> delete_lecture(lecture)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_lecture(%Lecture{} = lecture) do
     Repo.delete(lecture)
   end
 
-  def change_lecture(lecture \\ %Lecture{}, attrs \\ %{}) do
-    lecture
-    |> Lecture.changeset(attrs)
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking lecture changes.
+
+  ## Examples
+
+      iex> change_lecture(lecture)
+      %Ecto.Changeset{data: %Lecture{}}
+
+  """
+  def change_lecture(%Lecture{} = lecture, attrs \\ %{}) do
+    Lecture.changeset(lecture, attrs)
   end
 
   # -----------------------------------------------------------------
   # -- Shortcuts
   # -----------------------------------------------------------------
 
+  @doc """
+  Returns the list of shortcut.
+
+  ## Examples
+
+      iex> list_shortcut()
+      [%Shortcut{}, ...]
+
+  """
+  def list_shortcut do
+    Repo.all(Shortcut)
+  end
+
+  @doc """
+  Gets a single shortcut.
+
+  Raises `Ecto.NoResultsError` if the Shortcut does not exist.
+
+  ## Examples
+
+      iex> get_shortcut!(123)
+      %Shortcut{}
+
+      iex> get_shortcut!(456)
+      ** (Ecto.NoResultsError)
+
+  """
   def get_shortcut(id, preload \\ []) do
     Shortcut
     |> Repo.get(id)
     |> Repo.preload(preload)
+  end
+
+  @doc """
+  Creates a shortcut.
+
+  ## Examples
+
+      iex> create_shortcut(%{field: value})
+      {:ok, %Shortcut{}}
+
+      iex> create_shortcut(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_shortcut(attrs \\ %{}) do
+    %Shortcut{}
+    |> Shortcut.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a shortcut.
+
+  ## Examples
+
+      iex> update_shortcut(shortcut, %{field: new_value})
+      {:ok, %Shortcut{}}
+
+      iex> update_shortcut(shortcut, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_shortcut(%Shortcut{} = shortcut, attrs) do
+    shortcut
+    |> Shortcut.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a shortcut.
+
+  ## Examples
+
+      iex> delete_shortcut(shortcut)
+      {:ok, %Shortcut{}}
+
+      iex> delete_shortcut(shortcut)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_shortcut(%Shortcut{} = shortcut) do
+    Repo.delete(shortcut)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking shortcut changes.
+
+  ## Examples
+
+      iex> change_shortcut(shortcut)
+      %Ecto.Changeset{data: %Shortcut{}}
+
+  """
+  def change_shortcut(%Shortcut{} = shortcut, attrs \\ %{}) do
+    Shortcut.changeset(shortcut, attrs)
   end
 
   def get_unplublished_shortcuts_count() do

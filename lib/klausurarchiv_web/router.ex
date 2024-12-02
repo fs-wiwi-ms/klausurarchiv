@@ -44,21 +44,7 @@ defmodule KlausurarchivWeb.Router do
   end
 
   def set_language(conn, _opts) do
-    preferred_languages = MapSet.new(conn.private.plug_preferred_locales)
-
-    available_languages =
-      KlausurarchivWeb.Gettext
-      |> Gettext.known_locales()
-      |> MapSet.new()
-
-    intersection = MapSet.intersection(preferred_languages, available_languages)
-
-    if MapSet.size(intersection) > 0 do
-      intersection
-      |> MapSet.to_list()
-      |> List.first()
-      |> Gettext.put_locale()
-    end
+    preferred_languages = conn.private.plug_preferred_locales |> IO.inspect
 
     conn
   end

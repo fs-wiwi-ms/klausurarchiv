@@ -45,6 +45,7 @@ defmodule KlausurarchivWeb do
       import KlausurarchivWeb.ErrorHelpers
       import KlausurarchivWeb.Gettext
       import Phoenix.LiveView.Helpers
+      import KlausurarchivWeb.LiveHelpers
 
       def error_label(changeset, field) do
         errors =

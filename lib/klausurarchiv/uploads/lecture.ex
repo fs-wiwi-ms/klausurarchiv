@@ -20,6 +20,8 @@ defmodule Klausurarchiv.Uploads.Lecture do
 
     has_many(:shortcuts, Klausurarchiv.Uploads.Shortcut, on_replace: :delete)
 
+    embeds_many(:lecture_translations, Klausurarchiv.Uploads.LectureTranslation)
+
     many_to_many(
       :degrees,
       Klausurarchiv.Uploads.Degree,
@@ -34,6 +36,7 @@ defmodule Klausurarchiv.Uploads.Lecture do
   def changeset(lecture, attrs) do
     lecture
     |> cast(attrs, [:name, :module_number, :published, :image_name, :image_url])
+    |> cast_embed(:lecture_translations, required: true)
     |> validate_required([:name])
     |> put_assoc(:shortcuts, attrs["shortcuts"] || lecture.shortcuts)
     |> put_assoc(:degrees, attrs["degrees"] || lecture.degrees)

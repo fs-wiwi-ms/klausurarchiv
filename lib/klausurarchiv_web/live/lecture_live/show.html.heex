@@ -1,0 +1,36 @@
+<h1>Show Lecture</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.lecture_show_path(@socket, :show, @lecture)}>
+    <.live_component
+      module={KlausurarchivWeb.LectureLive.FormComponent}
+      id={@lecture.id}
+      title={@page_title}
+      action={@live_action}
+      lecture={@lecture}
+      return_to={Routes.lecture_show_path(@socket, :show, @lecture)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @lecture.name %>
+  </li>
+
+  <li>
+    <strong>Module number:</strong>
+    <%= @lecture.module_number %>
+  </li>
+
+  <li>
+    <strong>Published:</strong>
+    <%= @lecture.published %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.lecture_show_path(@socket, :edit, @lecture), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.lecture_index_path(@socket, :index) %></span>

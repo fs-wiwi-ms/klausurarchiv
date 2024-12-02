@@ -67,12 +67,12 @@ function initNavBarBurger() {
 
 function initNotifications() {
   (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-      var $notification = $delete.parentNode;
+    var $notification = $delete.parentNode;
 
-      $delete.addEventListener('click', () => {
-        $notification.parentNode.removeChild($notification);
-      });
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
     });
+  });
 }
 
 function initFileInput() {

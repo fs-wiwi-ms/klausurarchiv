@@ -1,0 +1,41 @@
+<h1>Listing Shortcut</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.shortcut_index_path(@socket, :index)}>
+    <.live_component
+      module={KlausurarchivWeb.ShortcutLive.FormComponent}
+      id={@shortcut.id || :new}
+      title={@page_title}
+      action={@live_action}
+      shortcut={@shortcut}
+      return_to={Routes.shortcut_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Published</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="shortcut">
+    <%= for shortcut <- @shortcut_collection do %>
+      <tr id={"shortcut-#{shortcut.id}"}>
+        <td><%= shortcut.name %></td>
+        <td><%= shortcut.published %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.shortcut_show_path(@socket, :show, shortcut) %></span>
+          <span><%= live_patch "Edit", to: Routes.shortcut_index_path(@socket, :edit, shortcut) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: shortcut.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Shortcut", to: Routes.shortcut_index_path(@socket, :new) %></span>

@@ -1,0 +1,43 @@
+<h1>Listing Lecture</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.lecture_index_path(@socket, :index)}>
+    <.live_component
+      module={KlausurarchivWeb.LectureLive.FormComponent}
+      id={@lecture.id || :new}
+      title={@page_title}
+      action={@live_action}
+      lecture={@lecture}
+      return_to={Routes.lecture_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Module number</th>
+      <th>Published</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="lecture">
+    <%= for lecture <- @lecture_collection do %>
+      <tr id={"lecture-#{lecture.id}"}>
+        <td><%= lecture.name %></td>
+        <td><%= lecture.module_number %></td>
+        <td><%= lecture.published %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.lecture_show_path(@socket, :show, lecture) %></span>
+          <span><%= live_patch "Edit", to: Routes.lecture_index_path(@socket, :edit, lecture) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: lecture.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Lecture", to: Routes.lecture_index_path(@socket, :new) %></span>

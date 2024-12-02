@@ -1,0 +1,31 @@
+<h1>Show Shortcut</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.shortcut_show_path(@socket, :show, @shortcut)}>
+    <.live_component
+      module={KlausurarchivWeb.ShortcutLive.FormComponent}
+      id={@shortcut.id}
+      title={@page_title}
+      action={@live_action}
+      shortcut={@shortcut}
+      return_to={Routes.shortcut_show_path(@socket, :show, @shortcut)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @shortcut.name %>
+  </li>
+
+  <li>
+    <strong>Published:</strong>
+    <%= @shortcut.published %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.shortcut_show_path(@socket, :edit, @shortcut), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.shortcut_index_path(@socket, :index) %></span>

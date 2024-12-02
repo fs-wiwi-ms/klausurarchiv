@@ -55,4 +55,15 @@ defmodule KlausurarchivWeb.LectureView do
       lecture.id
     end
   end
+
+  def maybe_get_lecture_translation(lecture) do
+    with false <- is_nil(lecture.slug),
+    translation_string = |> IO.inspect,
+    false <- lecture.slug == translation_string do
+      translation_string
+    else
+      _ ->
+        lecture.name
+    end
+  end
 end
